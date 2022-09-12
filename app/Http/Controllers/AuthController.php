@@ -59,6 +59,8 @@ class AuthController extends Controller
             'userid' => Auth::user()->id,
             'username' => Auth::user()->name,
             'email' => Auth::user()->email,
+            'role_id' => Auth::user()->role_id,
+            'pop_id' => Auth::user()->pop_id,
             'bearer_token' => $token,
             'expires_in' => Auth::factory()->getTTL()
         ], 200);
