@@ -1,24 +1,68 @@
-# Lumen PHP Framework
+# REST API Customer care apps with Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 [![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 [![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+This REST-API was built using Lumen Framework for Customer care application. </br>
+Feature:
+- Register User
+- Login User
+- Logout User
 
-## Official Documentation
+Relation:
+- Users with POP (One to Many) 
+- Users with Role (On to Many)
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Authentication:
+- JWT Auth
 
-## Contributing
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+------------------------------------------------------------------------
+## Endpoints
+User
+</br>`POST:http://localhost:8000/register`
+</br>`POST:http://localhost:8000/login`
+</br>`GET:http://localhost:8000/logout`
 
-## Security Vulnerabilities
+------------------------------------------------------------------------
+## Implementations
+1. Create Postgre or MySQL database</br>
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+2. Clone Repository </br>
+    ```
+    git clone https://github.com/FarhanKurnia/REST-API-CCO-LUMEN.git
+    ```
 
-## License
+3. Install Composer </br>
+    ```
+    composer install
+    ```
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. Install Lumen Generator (optional) </br>
+    ```
+    composer require flipbox/lumen-generator
+    ```
+
+3. Create JWT Secret </br>
+    ```
+    php artisan jwt:secret
+    ```
+
+4. Copy and Set up environment</br>
+    ```
+    cp .env.example .env
+    ```
+
+5. Customize environment (.env) files with DB name that has been created.</br>
+
+6. Migrate and seed table</br>
+    ```
+    php artisan migrate --seed
+    ```
+
+7. Run local server</br>
+    ```
+    php -S localhost:8000 -t public
+    ```
