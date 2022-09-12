@@ -17,6 +17,8 @@ class AuthController extends Controller
 
         $this->validate($request, [
             'name' => 'required|string',
+            'pop_id' => 'required',
+            'role_id' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
         ]);
@@ -24,6 +26,8 @@ class AuthController extends Controller
         try {
             $user = new User;
             $user->name = $request->get('name');
+            $user->pop_id = $request->get('pop_id');
+            $user->role_id = $request->get('role_id');
             $user->email = $request->get('email');
             $user->password = app('hash')->make($request->get('password'));
             $user->save();

@@ -15,8 +15,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var array
      */
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'name', 'email',
+        'name', 'email','pop_id','role_id'
     ];
     /**
      * The attributes excluded from the model's JSON form.
@@ -27,6 +29,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    // Relation User Many to one Role
+    public function role(){
+    	return $this->belongsTo(Role::class);
+    }
+
+    // Relation User Many to one Role
+    public function pop(){
+    	return $this->belongsTo(Pop::class);
+    }
+
+    // JWT Function
     public function getJWTIdentifier()
     {
         return $this->getKey();

@@ -19,10 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->notNullable();
             $table->string('password');
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('pop_id');
 
             //Foreign Key
-            // $table->string('role');
-            // $table->string('POP');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('pop_id')->references('id')->on('pops')->onDelete('cascade');
 
             //optional
             // $table->string('status');
