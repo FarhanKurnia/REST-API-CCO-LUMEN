@@ -29,4 +29,9 @@ class Pop extends Model
     public function users(){
     	return $this->hasMany(User::class);
     }
+
+    // Relation POP one to many BTS
+    public function bts(){
+    	return $this->hasMany(Bts::class);
+    }
 }

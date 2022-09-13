@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PopsTableSeeder::class,
             RolesTableSeeder::class,
             UsersTableSeeder::class,
+            BtsTableSeeder::class,
         ]);
     }
 }

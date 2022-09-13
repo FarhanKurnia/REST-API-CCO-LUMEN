@@ -39,6 +39,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     	return $this->belongsTo(Pop::class);
     }
 
+    // Relation User one to many BTS
+    public function bts(){
+    	return $this->hasMany(Bts::class);
+    }
+
     // JWT Function
     public function getJWTIdentifier()
     {

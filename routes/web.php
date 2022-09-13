@@ -23,3 +23,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('logout', 'AuthController@logout');
   });
 
+$router->get('bts/{id}','BtsController@show');
+$router->get('bts','BtsController@index');
+
+
