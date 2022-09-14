@@ -23,10 +23,22 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   $router->group(['middleware' => 'auth'], function () use ($router) {
     // Matches "/api/logout
     $router->get('logout', 'AuthController@logout');
-    // Matches "/api/bts
+
+    // ==============[Endpoint BTS]==============
+    // Matches "/api/bts -> Show All
     $router->get('bts','BtsController@index');
-    // Matches "/api/bts/1
+    // Matches "/api/bts -> Store 
+    $router->post('bts','BtsController@store');
+    // Matches "/api/bts/1 -> Show One
     $router->get('bts/{id}','BtsController@show');
+    // Matches "/api/bts/1 -> Delete
+    $router->delete('bts/{id}','BtsController@destroy');
+    // Matches "/api/bts -> Update
+    $router->put('bts/{id}','BtsController@update');
+    // ==========================================
+
+    // ==============[Endpoint BTS]==============
+
   });
   
   // Matches "/api/register

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 // namespace App\Http\Middleware;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Destinasi;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bts;
 use Illuminate\Http\Request;
@@ -49,7 +48,36 @@ class BtsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = 'Data created successfully';
+        $status = "success";
+
+        $nama_bts = $request->input('nama_bts');
+        $nama_pic = $request->input('nama_pic');
+        $nomor_pic = $request->input('nomor_pic');
+        $lokasi = $request->input('lokasi');
+        $pop_id = $request->input('pop_id');
+        $kordinat = $request->input('kordinat');
+        $user_id = $request->input('user_id');
+  
+        try {
+            Bts::create([
+                'nama_bts' => $nama_bts,
+                'nama_pic' => $nama_pic,
+                'nomor_pic' => $nomor_pic,
+                'lokasi' => $lokasi,
+                'pop_id' => $pop_id,
+                'kordinat' => $kordinat,
+                'user_id' => $user_id,
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
     }
 
     /**
@@ -94,9 +122,38 @@ class BtsController extends Controller
      * @param  \App\Models\Bts  $bts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bts $bts)
+    public function update(Request $request, $id)
     {
-        //
+        $message = 'Data updated successfully';
+        $status = "success";
+
+        $nama_bts = $request->input('nama_bts');
+        $nama_pic = $request->input('nama_pic');
+        $nomor_pic = $request->input('nomor_pic');
+        $lokasi = $request->input('lokasi');
+        $pop_id = $request->input('pop_id');
+        $kordinat = $request->input('kordinat');
+        $user_id = $request->input('user_id');
+
+        try {
+            Bts::find($id)->update([
+                'nama_bts' => $request->nama_bts,
+                'nama_pic' => $request->nama_pic,
+                'nomor_pic' => $request->nomor_pic,
+                'lokasi' => $request->lokasi,
+                'pop_id' => $request->pop_id,
+                'kordinat' => $request->kordinat,
+                'user_id' => $request->user_id,
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
     }
 
     /**
@@ -105,8 +162,20 @@ class BtsController extends Controller
      * @param  \App\Models\Bts  $bts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bts $bts)
+    public function destroy($id)
     {
-        //
+        $message = 'Data deleted successfully';
+        $status = "success";
+        try {
+            Bts::find($id)->delete();
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
     }
 }
