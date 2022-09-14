@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class BtsController extends Controller
 {
+    // Enable if u neef middleware in controller (not in route)
     // public function __construct()
     // {
     //     $this->middleware('auth');
