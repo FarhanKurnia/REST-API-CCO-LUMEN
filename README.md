@@ -10,10 +10,17 @@ Feature:
 - Register User
 - Login User
 - Logout User
+- Show All BTS
+- Show One BTS
+- Create BTS
+- Update BTS
+- Delete BTS
 
 Relation:
 - Users with POP (One to Many) 
-- Users with Role (On to Many)
+- Users with Role (One to Many)
+- BTS with POP (Many to One)
+- BTS with POP (Many to One)
 
 Authentication:
 - JWT Auth
@@ -21,10 +28,19 @@ Authentication:
 
 ------------------------------------------------------------------------
 ## Endpoints
-User
-</br>`POST:http://localhost:8000/register`
-</br>`POST:http://localhost:8000/login`
-</br>`GET:http://localhost:8000/logout`
+#### User
+</br>`POST:http://localhost:8000/api/register`
+</br>`POST:http://localhost:8000/api/login`
+</br>`GET:http://localhost:8000/api/logout`
+
+
+#### BTS
+</br>`GET:http://localhost:8000/api/bts`
+</br>`POST:http://localhost:8000/api/bts`
+</br>`GET:http://localhost:8000/api/bts/{id}`
+</br>`DELETE:http://localhost:8000/api/bts/{id}`
+</br>`PUT:http://localhost:8000/api/bts/{id}`
+
 
 ------------------------------------------------------------------------
 ## Implementations
