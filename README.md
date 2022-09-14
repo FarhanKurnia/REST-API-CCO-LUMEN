@@ -40,29 +40,29 @@ User
     composer install
     ```
 
-3. Install Lumen Generator (optional) </br>
-    ```
-    composer require flipbox/lumen-generator
-    ```
-
-3. Create JWT Secret </br>
+4. Create JWT Secret </br>
     ```
     php artisan jwt:secret
     ```
 
-4. Copy and Set up environment</br>
+5. Copy and Set up environment</br>
     ```
     cp .env.example .env
     ```
 
-5. Customize environment (.env) files with DB name that has been created.</br>
+6. Customize environment (.env) files with DB name that has been created.</br>
 
-6. Migrate and seed table</br>
+7. Install your extension of PHP (Ubuntu) depend on what the db that you use (optional) </br>
+    ```
+    sudo apt-get install php7.4-pgsql
+    ```
+
+8. Migrate and seed table</br>
     ```
     php artisan migrate --seed
     ```
 
-7. Run local server</br>
+9. Run local server</br>
     ```
     php -S localhost:8000 -t public
     ```
