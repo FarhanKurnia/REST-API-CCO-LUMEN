@@ -21,8 +21,17 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
   // API route group with middleware (authorized)
   $router->group(['middleware' => 'auth'], function () use ($router) {
+    // ==============[Endpoint Auth]==============
     // Matches "/api/logout
     $router->get('logout', 'AuthController@logout');
+    
+    // ==============[Endpoint User]==============
+    // Matches "/api/user/1
+    $router->put('user/{id}', 'UserController@update');
+    // Matches "/api/user/id
+    $router->get('user/{id}', 'UserController@show');
+    // Matches "/api/user
+    $router->get('user', 'UserController@index');
 
     // ==============[Endpoint BTS]==============
     // Matches "/api/bts -> Show All
@@ -45,6 +54,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   $router->post('register', 'AuthController@register');
   // Matches "/api/login
   $router->post('login', 'AuthController@login');
+
+  $router->get('getJWT', 'UserController@getJWT');
 });
 
 
