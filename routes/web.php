@@ -26,12 +26,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('logout', 'AuthController@logout');
     
     // ==============[Endpoint User]==============
-    // Matches "/api/user/1
-    $router->put('user/{id}', 'UserController@update');
-    // Matches "/api/user/id
-    $router->get('user/{id}', 'UserController@show');
     // Matches "/api/user
-    $router->get('user', 'UserController@index');
+    $router->put('user', 'UserController@update');
+    // Matches "/api/user
+    $router->get('user', 'UserController@show');
+    // Matches "/api/user
+    // $router->get('user', 'UserController@index');
 
     // ==============[Endpoint BTS]==============
     // Matches "/api/bts -> Show All
@@ -55,7 +55,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   // Matches "/api/login
   $router->post('login', 'AuthController@login');
 
-  $router->get('getJWT', 'UserController@getJWT');
+
+  // Just testing route to get JWT Payload
+  // $router->get('getJWT', 'UserController@getJWT');
+  // $router->get('profile', 'UserController@profile');
 });
 
 

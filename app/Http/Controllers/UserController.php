@@ -23,25 +23,45 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getJWT()
-    {
-        try {
-            // attempt to verify the credentials and create a token for the user
-            $token = JWTAuth::getToken();
-            $apy = JWTAuth::getPayload($token)->toArray();
-            //return $apy;
-            return response()->json(['id' => $apy['id'], 'name' => $apy['name'], 'role_id' => $apy['role_id']
-            ],200);
-        }catch (\Exception $e) {
-            return response()->json(['message' => 'Failed!'], 409);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-            return response()->json(['token_expired'], 500);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-            return response()->json(['token_invalid'], 500);
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['token_absent' => $e->getMessage()], 500);
-        }
-    }
+    // Testing function only to get ID JWT
+    // public function getJwtId()
+    // {
+    //     try {
+    //         // attempt to verify the credentials and create a token for the user
+    //         $token = JWTAuth::getToken();
+    //         $id_jwt = JWTAuth::getPayload($token)->toArray();
+    //         $id = $id_jwt['id'];
+    //         return $id;
+    //     }catch (\Exception $e) {
+    //         return response()->json(['message' => 'Failed!'], 409);
+    //     } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+    //         return response()->json(['token_expired'], 500);
+    //     } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+    //         return response()->json(['token_invalid'], 500);
+    //     } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+    //         return response()->json(['token_absent' => $e->getMessage()], 500);
+    //     }
+    // }
+
+    // Testing function only to get Payload JWT
+    // public function getJWT()
+    // {
+    //     try {
+    //         // attempt to verify the credentials and create a token for the user
+    //         $token = JWTAuth::getToken();
+    //         $apy = JWTAuth::getPayload($token)->toArray();
+    //         return response()->json(['id' => $apy['id'], 'name' => $apy['name'], 'role_id' => $apy['role_id']
+    //         ],200);
+    //     }catch (\Exception $e) {
+    //         return response()->json(['message' => 'Failed!'], 409);
+    //     } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+    //         return response()->json(['token_expired'], 500);
+    //     } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+    //         return response()->json(['token_invalid'], 500);
+    //     } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+    //         return response()->json(['token_absent' => $e->getMessage()], 500);
+    //     }
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -66,13 +86,35 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * Disable because I use how by JWT
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    // public function show($id)
+    // {
+    //     //
+    //     $message = "Load data User successfully";
+    //     $status = "success";
+    //     $user = User::find($id);
+
+    //     if (!$user) {
+    //         $status = "error";
+    //         $message = "Data User not found";
+    //     }
+
+    //     return response()->json([
+    //         'status' => $status,
+    //         'message' => $message,
+    //         'data' => $user->where('id',$id)->get()], 200);
+    // }
+    
+    // Show data user by ID JWT
+    public function show()
     {
-        //
+        // Take JWT ID as ID in Database
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id = $jwt_id['id'];
         $message = "Load data User successfully";
         $status = "success";
         $user = User::find($id);
@@ -87,6 +129,7 @@ class UserController extends Controller
             'message' => $message,
             'data' => $user->where('id',$id)->get()], 200);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -101,16 +144,19 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * Update User by ID JWT
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $message = 'Data User updated successfully';
         $status = "success";
-
+        // Take JWT ID as ID in Database
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id = $jwt_id['id'];
         $this->validate($request, [
             'name' => 'required|string',
             'pop_id' => 'required',
