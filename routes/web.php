@@ -60,6 +60,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
   // Just testing route to get JWT Payload
-  $router->get('getJWT', 'UserController@getJWT');
+  //   $router->get('getJWT', 'UserController@getJWT');
   // $router->get('profile', 'UserController@profile');
 });
