@@ -5,8 +5,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
-
-
 class UserController extends Controller
 {
     /**
@@ -67,7 +65,7 @@ class UserController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+            'data' => User::where('id',$id)->get()], 200);
     }
 
     // Show data user by ID JWT
@@ -93,13 +91,13 @@ class UserController extends Controller
     }
 
     // Testing function only to get ID JWT
-    // public function getJwtId()
+    // public function getJwt()
     // {
     //     try {
     //         // attempt to verify the credentials and create a token for the user
     //         $token = JWTAuth::getToken();
     //         $id_jwt = JWTAuth::getPayload($token)->toArray();
-    //         $id = $id_jwt['id'];
+    //         $id = $id_jwt['role_id'];
     //         return $id;
     //     }catch (\Exception $e) {
     //         return response()->json(['message' => 'Failed!'], 409);

@@ -24,7 +24,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // ==============[Endpoint Auth]==============
     // Matches "/api/logout
     $router->get('logout', 'AuthController@logout');
-    
+
     // ==============[Endpoint User]==============
     // Matches "/api/user
     $router->put('user', 'UserController@update');
@@ -33,23 +33,26 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // Matches "/api/user
     // $router->get('user', 'UserController@index');
 
-    // ==============[Endpoint BTS]==============
-    // Matches "/api/bts -> Show All
-    $router->get('bts','BtsController@index');
-    // Matches "/api/bts -> Store 
-    $router->post('bts','BtsController@store');
-    // Matches "/api/bts/1 -> Show One
-    $router->get('bts/{id}','BtsController@show');
-    // Matches "/api/bts/1 -> Delete
-    $router->delete('bts/{id}','BtsController@destroy');
-    // Matches "/api/bts -> Update
-    $router->put('bts/{id}','BtsController@update');
+    $router->group(['middleware' => 'role'], function () use ($router) {
+        // ==============[Endpoint BTS]==============
+        // Matches "/api/bts -> Show All
+        $router->get('bts','BtsController@index');
+        // Matches "/api/bts -> Store
+        $router->post('bts','BtsController@store');
+        // Matches "/api/bts/1 -> Show One
+        $router->get('bts/{id}','BtsController@show');
+        // Matches "/api/bts/1 -> Delete
+        $router->delete('bts/{id}','BtsController@destroy');
+        // Matches "/api/bts -> Update
+        $router->put('bts/{id}','BtsController@update');
+    });
     // ==========================================
 
     // ==============[Endpoint BTS]==============
 
+
   });
-  
+
   // Matches "/api/register
   $router->post('register', 'AuthController@register');
   // Matches "/api/login
@@ -57,8 +60,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
   // Just testing route to get JWT Payload
-  // $router->get('getJWT', 'UserController@getJWT');
+  $router->get('getJWT', 'UserController@getJWT');
   // $router->get('profile', 'UserController@profile');
 });
-
-
