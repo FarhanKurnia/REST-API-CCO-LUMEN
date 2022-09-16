@@ -7,14 +7,19 @@
 
 This REST-API was built using Lumen Framework for Customer care application. </br>
 Feature:
-- Register User
-- Login User
-- Logout User
-- Show All BTS
-- Show One BTS
-- Create BTS
-- Update BTS
-- Delete BTS
+1. User
+    - Register User
+    - Login User
+    - Logout User
+    - Show Profile User
+    - Edit Profile User
+
+2. BTS
+    - Show All BTS
+    - Show One BTS
+    - Create BTS
+    - Update BTS
+    - Delete BTS
 
 Relation:
 - Users with POP (One to Many) 

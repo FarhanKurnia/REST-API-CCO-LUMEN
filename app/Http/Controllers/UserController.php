@@ -23,6 +23,75 @@ class UserController extends Controller
         ], 200);
     }
 
+    /**
+     * Update the specified User with JWT ID.
+     * Update User by ID JWT
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $message = 'Data User updated successfully';
+        $status = "success";
+        // Take JWT ID as ID in Database
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id = $jwt_id['id'];
+        $this->validate($request, [
+            'name' => 'required|string',
+            'pop_id' => 'required',
+            'role_id' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+        ]);
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $role_id = $request->input('role_id');
+        $pop_id = $request->input('pop_id');
+
+        try {
+            User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'role_id' => $request->role_id,
+                'pop_id' => $request->pop_id,
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
+    }
+
+    // Show data user by ID JWT
+    public function show()
+    {
+        // Take JWT ID as ID in Database
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id = $jwt_id['id'];
+        $message = "Load data User successfully";
+        $status = "success";
+        $user = User::find($id);
+
+        if (!$user) {
+            $status = "error";
+            $message = "Data User not found";
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+            'data' => $user->where('id',$id)->get()], 200);
+    }
+
     // Testing function only to get ID JWT
     // public function getJwtId()
     // {
@@ -107,29 +176,9 @@ class UserController extends Controller
     //         'message' => $message,
     //         'data' => $user->where('id',$id)->get()], 200);
     // }
-    
-    // Show data user by ID JWT
-    public function show()
-    {
-        // Take JWT ID as ID in Database
-        $token = JWTAuth::getToken();
-        $jwt_id = JWTAuth::getPayload($token)->toArray();
-        $id = $jwt_id['id'];
-        $message = "Load data User successfully";
-        $status = "success";
-        $user = User::find($id);
 
-        if (!$user) {
-            $status = "error";
-            $message = "Data User not found";
-        }
 
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            'data' => $user->where('id',$id)->get()], 200);
-    }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -142,53 +191,7 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     * Update User by ID JWT
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $message = 'Data User updated successfully';
-        $status = "success";
-        // Take JWT ID as ID in Database
-        $token = JWTAuth::getToken();
-        $jwt_id = JWTAuth::getPayload($token)->toArray();
-        $id = $jwt_id['id'];
-        $this->validate($request, [
-            'name' => 'required|string',
-            'pop_id' => 'required',
-            'role_id' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-        ]);
 
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $role_id = $request->input('role_id');
-        $pop_id = $request->input('pop_id');
-
-        try {
-            User::find($id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'role_id' => $request->role_id,
-                'pop_id' => $request->pop_id,
-            ]);
-        } catch (\Throwable $th) {
-            $status = "error";
-            $message = $th->getMessage();
-        }
-
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-        ], 200);
-    }
 
     /**
      * Remove the specified resource from storage.
