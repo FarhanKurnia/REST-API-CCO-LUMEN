@@ -23,14 +23,11 @@ class BtsController extends Controller
      */
     public function index()
     {
-        $bts = Bts::all();
         return response()->json([
             'status' => 'success',
             'message' => 'Load data post successfully',
-            'data' => $bts::with('user','pop')->where('id',$id)->get()], 200);
-
-        //     'data' => $bts->with('user','pop')->where('id',$id)
-        // ], 200);
+            'data' => Bts::all()
+        ], 200);
     }
 
     /**

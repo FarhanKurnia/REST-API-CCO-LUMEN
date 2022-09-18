@@ -59,6 +59,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/keluhan -> Update
         $router->put('keluhan/{id}','KeluhanController@update');
 
+        // ==============[Endpoint Balasan]==============
+        // Matches "/api/balasan -> Index
+        $router->get('balasan','BalasanController@index');
+        // Matches "/api/balasan -> Store
+        $router->post('balasan','BalasanController@store');
+        // Matches "/api/balasan/1 -> Show One
+        $router->get('balasan/{id}','BalasanController@show');
 
   });
 
