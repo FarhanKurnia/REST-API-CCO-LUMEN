@@ -15,22 +15,22 @@ class PopsTableSeeder extends Seeder
     public function run()
     {
         DB::table('pops')->insert([[
-            'id'=> '1',
+            'id_pop'=> '1',
             'pop'=> 'Yogyakarta',
             'created_at' => Carbon::now(),
         ],
         [
-            'id'=> '2',
+            'id_pop'=> '2',
             'pop'=> 'Solo',
             'created_at' => Carbon::now(),
         ],
         [
-            'id'=> '3',
+            'id_pop'=> '3',
             'pop'=> 'Purwokerto',
             'created_at' => Carbon::now(),
         ],
         [
-            'id'=> '4',
+            'id_pop'=> '4',
             'pop'=> 'Tegal',
             'created_at' => Carbon::now(),
         ]]);

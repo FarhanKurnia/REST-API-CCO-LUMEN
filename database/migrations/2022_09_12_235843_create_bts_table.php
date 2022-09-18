@@ -15,7 +15,7 @@ class CreateBtsTable extends Migration
     {
         Schema::create('bts', function (Blueprint $table) {
             //main
-            $table->id();
+            $table->id('id_bts');
             $table->string('nama_bts');
             $table->string('nama_pic');
             $table->string('nomor_pic');
@@ -26,8 +26,8 @@ class CreateBtsTable extends Migration
 
 
             //Foreign Key
-            $table->foreign('pop_id')->references('id')->on('pops')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('pop_id')->references('id_pop')->on('pops')->onDelete('cascade');
+            $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
 
             //optional
             // $table->string('status');

@@ -12,7 +12,7 @@ class Role extends Model
      * @var array
      */
     protected $table = 'roles';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_role';
     protected $fillable = [
         'role',
     ];

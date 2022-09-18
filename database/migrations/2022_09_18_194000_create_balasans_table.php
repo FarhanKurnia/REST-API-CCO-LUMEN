@@ -14,7 +14,7 @@ class CreateBalasansTable extends Migration
     public function up()
     {
         Schema::create('balasans', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_balasan');
             // $table->string('id_balasan');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('keluhan_id');
@@ -24,8 +24,8 @@ class CreateBalasansTable extends Migration
 
             //Foreign Key
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->foreign('keluhan_id')->references('id')->on('keluhans')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('keluhan_id')->references('id_keluhan')->on('keluhans')->onDelete('cascade');
+            $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
             // $table->foreign('balasan_id')->references('id')->on('balasans')->onDelete('cascade');
 
             $table->timestamps();

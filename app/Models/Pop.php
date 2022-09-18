@@ -12,7 +12,7 @@ class Pop extends Model
      * @var array
      */
     protected $table = 'pops';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_pop';
     protected $fillable = [
         'pop',
     ];

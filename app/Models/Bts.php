@@ -12,7 +12,7 @@ class Bts extends Model
      * @var array
      */
     protected $table = 'bts';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_bts';
     protected $fillable = [
         'nama_bts', 'nama_pic', 'nomor_pic', 'lokasi', 'kordinat', 'pop_id', 'user_id',
     ];

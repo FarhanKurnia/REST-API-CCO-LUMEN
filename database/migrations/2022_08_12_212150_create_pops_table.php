@@ -14,7 +14,7 @@ class CreatePopsTable extends Migration
     public function up()
     {
         Schema::create('pops', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_pop');
             $table->enum('pop',['Solo','Yogyakarta', 'Purwokerto', 'Tegal']);
             $table->timestamps();
         });

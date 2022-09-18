@@ -12,7 +12,7 @@ class Keluhan extends Model
      * @var array
      */
     protected $table = 'keluhans';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_keluhan';
     protected $fillable = [
         'id_pelanggan', 'nama_pelanggan', 'nama_pelapor', 'nomor_pelapor', 'nomor_keluhan', 'keluhan', 'status', 'status', 'lampiran', 'pop_id', 'user_id',
     ];
