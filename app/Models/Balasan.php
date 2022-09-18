@@ -9,7 +9,7 @@ class Balasan extends Model
     protected $table = 'balasans';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'balasan','id_keluhan','user_id','lampiran',
+        'balasan','keluhan_id','user_id','lampiran',
     ];
 
     public function keluhan(){

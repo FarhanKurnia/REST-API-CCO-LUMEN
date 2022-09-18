@@ -21,11 +21,27 @@ Feature:
     - Update BTS
     - Delete BTS
 
+3. Keluhan
+    - Show All Keluhan
+    - Show One Keluhan
+    - Create Keluhan
+    - Update keluhan
+    - Delete Keluhan
+
+4. Balasan
+    - Show All Balasan
+    - Show One Balasan
+    - Create Balasan
+
 Relation:
 - Users with POP (One to Many) 
 - Users with Role (One to Many)
 - BTS with POP (Many to One)
-- BTS with POP (Many to One)
+- BTS with User (Many to One)
+- Keluhan with POP (Many to One)
+- Keluhan with User (Many to One)
+- Keluhan with Balasan (One to Many)
+- Balasan with User (Many to One)
 
 Authentication:
 - JWT Auth
@@ -45,6 +61,18 @@ Authentication:
 </br>`GET:http://localhost:8000/api/bts/{id}`
 </br>`DELETE:http://localhost:8000/api/bts/{id}`
 </br>`PUT:http://localhost:8000/api/bts/{id}`
+
+#### Keluhan
+</br>`GET:http://localhost:8000/api/keluhan`
+</br>`POST:http://localhost:8000/api/keluhan`
+</br>`GET:http://localhost:8000/api/keluhan/{id}`
+</br>`DELETE:http://localhost:8000/api/keluhan/{id}`
+</br>`PUT:http://localhost:8000/api/keluhan/{id}`
+
+#### Balasan
+</br>`GET:http://localhost:8000/api/balasan`
+</br>`GET:http://localhost:8000/api/balasan/{id}`
+</br>`POST:http://localhost:8000/api/balasan`
 
 
 ------------------------------------------------------------------------

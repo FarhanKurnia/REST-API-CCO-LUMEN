@@ -47,7 +47,7 @@ class BalasanController extends Controller
         $lampiran = $request->input('lampiran');
 
         try {
-            Review::create([
+            Balasan::create([
                 'user_id' => $user_id,
                 'keluhan_id' => $keluhan_id,
                 'balasan' => $balasan,

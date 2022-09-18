@@ -26,6 +26,7 @@ class BtsController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Load data post successfully',
+
             'data' => Bts::all()
         ], 200);
     }
