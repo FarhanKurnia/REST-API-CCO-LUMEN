@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             BtsTableSeeder::class,
+            KeluhansSeeder::class,
+            BalasansSeeder::class,
+
         ]);
     }
 }

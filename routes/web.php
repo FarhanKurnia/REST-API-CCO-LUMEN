@@ -20,35 +20,44 @@ $router->get('/', function () use ($router) {
 // API route group
 $router->group(['prefix' => 'api'], function () use ($router) {
   // API route group with middleware (authorized)
-  $router->group(['middleware' => 'auth'], function () use ($router) {
-    // ==============[Endpoint Auth]==============
-    // Matches "/api/logout
-    $router->get('logout', 'AuthController@logout');
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        // ==============[Endpoint Auth]==============
+        // Matches "/api/logout
+        $router->get('logout', 'AuthController@logout');
 
-    // ==============[Endpoint User]==============
-    // Matches "/api/user
-    $router->put('user', 'UserController@update');
-    // Matches "/api/user
-    $router->get('user', 'UserController@show');
-    // Matches "/api/user
-    // $router->get('user', 'UserController@index');
+        // ==============[Endpoint User]==============
+        // Matches "/api/user
+        $router->put('user', 'UserController@update');
+        // Matches "/api/user
+        $router->get('user', 'UserController@show');
+        // Matches "/api/user
+        // $router->get('user', 'UserController@index');
 
-    $router->group(['middleware' => 'role'], function () use ($router) {
-        // ==============[Endpoint BTS]==============
-        // Matches "/api/bts -> Show All
-        $router->get('bts','BtsController@index');
-        // Matches "/api/bts -> Store
-        $router->post('bts','BtsController@store');
-        // Matches "/api/bts/1 -> Show One
-        $router->get('bts/{id}','BtsController@show');
-        // Matches "/api/bts/1 -> Delete
-        $router->delete('bts/{id}','BtsController@destroy');
-        // Matches "/api/bts -> Update
-        $router->put('bts/{id}','BtsController@update');
-    });
-    // ==========================================
+        $router->group(['middleware' => 'role'], function () use ($router) {
+            // ==============[Endpoint BTS]==============
+            // Matches "/api/bts -> Show All
+            $router->get('bts','BtsController@index');
+            // Matches "/api/bts -> Store
+            $router->post('bts','BtsController@store');
+            // Matches "/api/bts/1 -> Show One
+            $router->get('bts/{id}','BtsController@show');
+            // Matches "/api/bts/1 -> Delete
+            $router->delete('bts/{id}','BtsController@destroy');
+            // Matches "/api/bts -> Update
+            $router->put('bts/{id}','BtsController@update');
+        });
 
-    // ==============[Endpoint BTS]==============
+        // ==============[Endpoint Keluhan]==============
+        // Matches "/api/keluhan -> Show All
+        $router->get('keluhan','KeluhanController@index');
+        // Matches "/api/keluhan -> Store
+        $router->post('keluhan','KeluhanController@store');
+        // Matches "/api/keluhan/1 -> Show One
+        $router->get('keluhan/{id}','KeluhanController@show');
+        // Matches "/api/keluhan/1 -> Delete
+        $router->delete('keluhan/{id}','KeluhanController@destroy');
+        // Matches "/api/keluhan -> Update
+        $router->put('keluhan/{id}','KeluhanController@update');
 
 
   });

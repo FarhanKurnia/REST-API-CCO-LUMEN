@@ -26,12 +26,17 @@ class Pop extends Model
     // ];
 
     // Relation POP one to many User
-    public function users(){
+    public function user(){
     	return $this->hasMany(User::class);
     }
 
     // Relation POP one to many BTS
     public function bts(){
     	return $this->hasMany(Bts::class);
+    }
+
+    // Relation POP one to many User
+    public function keluhan(){
+    	return $this->hasMany(Keluhan::class);
     }
 }

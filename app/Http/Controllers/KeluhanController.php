@@ -1,21 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-// namespace App\Http\Middleware;
-// use Illuminate\Support\Str;
-// use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Auth;
-use App\Models\Bts;
+
+use App\Models\Keluhan;
 use Illuminate\Http\Request;
-
-class BtsController extends Controller
+class KeluhanController extends Controller
 {
-    // Enable if u neef middleware in controller (not in route)
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,14 +13,11 @@ class BtsController extends Controller
      */
     public function index()
     {
-        $bts = Bts::all();
         return response()->json([
             'status' => 'success',
             'message' => 'Load data post successfully',
-            'data' => $bts::with('user','pop')->where('id',$id)->get()], 200);
-
-        //     'data' => $bts->with('user','pop')->where('id',$id)
-        // ], 200);
+            'data' => Keluhan::all()
+        ], 200);
     }
 
     /**
@@ -54,23 +41,31 @@ class BtsController extends Controller
         $message = 'Data created successfully';
         $status = "success";
 
-        $nama_bts = $request->input('nama_bts');
-        $nama_pic = $request->input('nama_pic');
-        $nomor_pic = $request->input('nomor_pic');
-        $lokasi = $request->input('lokasi');
+        $id_pelanggan = $request->input('id_pelanggan');
+        $nama_pelanggan = $request->input('nama_pelanggan');
+        $nama_pelapor = $request->input('nama_pelapor');
+        $nomor_pelapor = $request->input('nomor_pelapor');
+        $nomor_keluhan = $request->input('nomor_keluhan');
+        $keluhan = $request->input('keluhan');
+        $status_keluhan = $request->input('status');
+        $lampiran = $request->input('lampiran');
         $pop_id = $request->input('pop_id');
-        $kordinat = $request->input('kordinat');
         $user_id = $request->input('user_id');
 
+
         try {
-            Bts::create([
-                'nama_bts' => $nama_bts,
-                'nama_pic' => $nama_pic,
-                'nomor_pic' => $nomor_pic,
-                'lokasi' => $lokasi,
+            Keluhan::create([
+                'id_pelanggan' => $id_pelanggan,
+                'nama_pelanggan' => $nama_pelanggan,
+                'nama_pelapor' => $nama_pelapor,
+                'nomor_pelapor' => $nomor_pelapor,
+                'nomor_keluhan' => $nomor_keluhan,
+                'keluhan' => $keluhan,
+                'status' => $status_keluhan,
+                'lampiran' => $lampiran,
                 'pop_id' => $pop_id,
-                'kordinat' => $kordinat,
                 'user_id' => $user_id,
+
             ]);
         } catch (\Throwable $th) {
             $status = "error";
@@ -86,35 +81,34 @@ class BtsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bts  $bts
+     * @param  \App\Models\Keluhan  $keluhan
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $message = "Load data post successfully";
         $status = "success";
-        $bts = Bts::find($id);
+        $keluhan = Keluhan::find($id);
 
-        if (!$bts) {
+        if (!$keluhan) {
             $status = "error";
-            $message = "Data post not found";
+            $message = "Data keluhan not found";
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $bts::with('user','pop')->where('id',$id)->get()], 200);
-
+            'data' => $keluhan::with('user','balasan')->where('id',$id)->get()], 200);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bts  $bts
+     * @param  \App\Models\Keluhan  $keluhan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bts $bts)
+    public function edit(Keluhan $keluhan)
     {
         //
     }
@@ -123,31 +117,17 @@ class BtsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bts  $bts
+     * @param  \App\Models\Keluhan  $keluhan
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $message = 'Data updated successfully';
+        $message = 'Keluhan berhasil ditutup';
         $status = "success";
 
-        // $nama_bts = $request->input('nama_bts');
-        // $nama_pic = $request->input('nama_pic');
-        // $nomor_pic = $request->input('nomor_pic');
-        // $lokasi = $request->input('lokasi');
-        // $pop_id = $request->input('pop_id');
-        // $kordinat = $request->input('kordinat');
-        // $user_id = $request->input('user_id');
-
         try {
-            Bts::find($id)->update([
-                'nama_bts' => $request->nama_bts,
-                'nama_pic' => $request->nama_pic,
-                'nomor_pic' => $request->nomor_pic,
-                'lokasi' => $request->lokasi,
-                'pop_id' => $request->pop_id,
-                'kordinat' => $request->kordinat,
-                'user_id' => $request->user_id,
+            Keluhan::find($id)->update([
+                'status' => $request->status_keluhan='closed',
             ]);
         } catch (\Throwable $th) {
             $status = "error";
@@ -163,15 +143,15 @@ class BtsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bts  $bts
+     * @param  \App\Models\Keluhan  $keluhan
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $message = 'Data deleted successfully';
+        $message = 'Keluhan berhasil dihapus';
         $status = "success";
         try {
-            Bts::find($id)->delete();
+            Keluhan::find($id)->delete();
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();

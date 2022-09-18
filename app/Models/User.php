@@ -44,6 +44,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     	return $this->hasMany(Bts::class);
     }
 
+    // Relation User one to many BTS
+    public function keluhan(){
+    	return $this->hasMany(Keluhan::class);
+    }
+
+    // Relation User one to many BTS
+    public function balasan(){
+    	return $this->hasMany(Balasan::class);
+    }
+
     // JWT Function
     public function getJWTIdentifier()
     {

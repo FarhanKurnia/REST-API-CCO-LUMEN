@@ -87,7 +87,7 @@ class UserController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $user->where('id',$id)->get()], 200);
+            'data' => $user::with('role','pop')->where('id',$id)->get()], 200);
     }
 
     // Testing function only to get ID JWT
