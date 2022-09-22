@@ -62,7 +62,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
         return response()->json([
-            'userid' => Auth::user()->id,
+            'id_user' => Auth::user()->id_user,
             'username' => Auth::user()->name,
             'email' => Auth::user()->email,
             'role_id' => Auth::user()->role_id,
@@ -79,7 +79,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-      $token = auth()->tokenById(Auth::user()->userid);
+      $token = auth()->tokenById(Auth::user()->id_user);
       try {
         auth()->logout(true);
         return response()->json([
