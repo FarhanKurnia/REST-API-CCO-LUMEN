@@ -87,28 +87,30 @@ class UserController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $user::with('role','pop')->where('id',$id)->get()], 200);
+            'data' => $user::with('role')->where('id',$id)->get()], 200);
+            // 'data' => $user::with('role','pop')->where('id',$id)->get()], 200);
+            // 'data' => $user::with('role.pop')->where('id',$id)->get()], 200);
     }
 
     // Testing function only to get ID JWT
-    // public function getJwt()
-    // {
-    //     try {
-    //         // attempt to verify the credentials and create a token for the user
-    //         $token = JWTAuth::getToken();
-    //         $id_jwt = JWTAuth::getPayload($token)->toArray();
-    //         $id = $id_jwt['role_id'];
-    //         return $id;
-    //     }catch (\Exception $e) {
-    //         return response()->json(['message' => 'Failed!'], 409);
-    //     } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-    //         return response()->json(['token_expired'], 500);
-    //     } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-    //         return response()->json(['token_invalid'], 500);
-    //     } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-    //         return response()->json(['token_absent' => $e->getMessage()], 500);
-    //     }
-    // }
+    public function getJwt()
+    {
+        try {
+            // attempt to verify the credentials and create a token for the user
+            $token = JWTAuth::getToken();
+            $id_jwt = JWTAuth::getPayload($token)->toArray();
+            $id = $id_jwt['role_id'];
+            return $id;
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Failed!'], 409);
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['token_expired'], 500);
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['token_invalid'], 500);
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['token_absent' => $e->getMessage()], 500);
+        }
+    }
 
     // Testing function only to get Payload JWT
     // public function getJWT()

@@ -19,12 +19,13 @@ class CreateRFOKeluhansTable extends Migration
             // $table->string('id_pelanggan');
             // $table->string('nama_pelanggan');
             $table->string('nomor_tiket')->nullable();
-            $table->string('mulai_keluhan');
-            $table->string('selesai_keluhan');
+            $table->timestamp('mulai_keluhan');
+            $table->timestamp('selesai_keluhan');
             // $table->string('durasi');
             $table->string('problem');
             $table->string('action');
             $table->string('status');
+            $table->string('deskripsi');
             $table->string('lampiran_rfo_keluhan')->nullable();
 
             $table->unsignedBigInteger('user_id');
@@ -34,7 +35,7 @@ class CreateRFOKeluhansTable extends Migration
 
             //Foreign Key
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->foreign('keluhan_id')->references('keluhan_id')->on('keluhans')->onDelete('cascade');
+            $table->foreign('keluhan_id')->references('id_keluhan')->on('keluhans')->onDelete('cascade');
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
             // $table->foreign('balasan_id')->references('id')->on('balasans')->onDelete('cascade');
 

@@ -87,11 +87,11 @@ class BtsController extends Controller
      * @param  \App\Models\Bts  $bts
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_bts)
     {
         $message = "Load data post successfully";
         $status = "success";
-        $bts = Bts::find($id);
+        $bts = Bts::find($id_bts);
 
         if (!$bts) {
             $status = "error";
@@ -101,7 +101,7 @@ class BtsController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $bts::with('user','pop')->where('id',$id)->get()], 200);
+            'data' => $bts::with('user')->where('user_id',$id_bts)->get()], 200);
 
 
     }
@@ -128,14 +128,6 @@ class BtsController extends Controller
     {
         $message = 'Data updated successfully';
         $status = "success";
-
-        // $nama_bts = $request->input('nama_bts');
-        // $nama_pic = $request->input('nama_pic');
-        // $nomor_pic = $request->input('nomor_pic');
-        // $lokasi = $request->input('lokasi');
-        // $pop_id = $request->input('pop_id');
-        // $kordinat = $request->input('kordinat');
-        // $user_id = $request->input('user_id');
 
         try {
             Bts::find($id)->update([

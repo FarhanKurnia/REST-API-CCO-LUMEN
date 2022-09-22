@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             BtsTableSeeder::class,
             KeluhansSeeder::class,
             BalasansSeeder::class,
-
+            KeluhansSeeder::class,
         ]);
     }
 }
