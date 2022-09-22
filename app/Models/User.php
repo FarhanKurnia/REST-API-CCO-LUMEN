@@ -31,12 +31,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     // Relation User Many to one Role
     public function role(){
-    	return $this->belongsTo(Role::class);
+    	return $this->belongsTo(Role::class,'role_id');
     }
 
     // Relation User Many to one Role
     public function pop(){
-    	return $this->belongsTo(Pop::class);
+    	return $this->belongsTo(Pop::class,'pop_id');
     }
 
     // Relation User one to many BTS

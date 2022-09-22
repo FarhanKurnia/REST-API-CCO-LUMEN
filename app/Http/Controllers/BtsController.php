@@ -27,7 +27,7 @@ class BtsController extends Controller
             'status' => 'success',
             'message' => 'Load data post successfully',
 
-            'data' => Bts::all()
+            'data' => Bts::with(['user','pop'])->get()
         ], 200);
     }
 
@@ -101,7 +101,9 @@ class BtsController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $bts::with('user')->where('user_id',$id_bts)->get()], 200);
+            // 'data' => $bts::with('user')->get()], 200);
+            'data' => $bts::with(['pop','user','user.role'])->where('pop_id', $id_bts)->where('user_id', $id_bts)->get()], 200);
+            // 'data' => $bts::with('user')->where('user_id',$id_bts)->get()], 200);
 
 
     }

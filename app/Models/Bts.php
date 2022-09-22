@@ -27,11 +27,11 @@ class Bts extends Model
 
     // Relation User Many to one BTS
     public function user(){
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(User::class,'user_id');
     }
 
     // Relation User Many to one BTS
     public function pop(){
-    	return $this->belongsTo(Pop::class);
+    	return $this->belongsTo(Pop::class,'pop_id');
     }
 }

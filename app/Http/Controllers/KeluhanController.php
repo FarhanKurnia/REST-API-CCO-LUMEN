@@ -13,10 +13,13 @@ class KeluhanController extends Controller
      */
     public function index()
     {
+        $data = Keluhan::with('user')->get();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Load data post successfully',
-            'data' => Keluhan::all()
+            // 'data' => Keluhan::all()
+            'data' => $data
         ], 200);
     }
 

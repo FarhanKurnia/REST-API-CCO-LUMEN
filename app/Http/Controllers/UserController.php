@@ -87,7 +87,9 @@ class UserController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $user::with('role')->where('id',$id)->get()], 200);
+            'data' => $user::with(['pop','role'])->where('pop_id', $id)->where('role_id', $id)->get()], 200);
+
+            // 'data' => $user::with('role')->where('role_id',$id)->get()], 200);
             // 'data' => $user::with('role','pop')->where('id',$id)->get()], 200);
             // 'data' => $user::with('role.pop')->where('id',$id)->get()], 200);
     }
