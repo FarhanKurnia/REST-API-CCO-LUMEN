@@ -39,4 +39,9 @@ class Keluhan extends Model
      public function balasan(){
     	return $this->hasMany(Balasan::class);
     }
+
+    // Relation User one to one RFO
+    public function RFO_Keluhan(){
+    	return $this->belongsTo(RFO_Keluhan::class);
+    }
 }
