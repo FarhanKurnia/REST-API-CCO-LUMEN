@@ -87,6 +87,10 @@ class UserController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
+            //querry ini bisa muncul tapi tanpa relasi
+            // 'data' => $user], 200);
+
+            //querry ini bisa dgn relasi malah bikin json kosong
             'data' => $user::with('pop')->where('pop_id', $id_user)->get()], 200);
     }
 
