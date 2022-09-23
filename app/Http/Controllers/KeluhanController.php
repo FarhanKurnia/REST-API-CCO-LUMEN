@@ -19,7 +19,7 @@ class KeluhanController extends Controller
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
-                'message' => 'Load data post successfully',
+                'message' => 'Load data keluhan successfully',
                 'data' => $data
             ], 200);
         }else{
@@ -47,7 +47,7 @@ class KeluhanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $message = 'Data created successfully';
+        $message = 'Data keluhan created successfully';
         $status = "success";
 
         $id_pelanggan = $request->input('id_pelanggan');
@@ -175,7 +175,6 @@ class KeluhanController extends Controller
             $status = "error";
             $message = $th->getMessage();
         }
-
         return response()->json([
             'status' => $status,
             'message' => $message,
