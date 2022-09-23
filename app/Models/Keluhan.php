@@ -27,12 +27,12 @@ class Keluhan extends Model
 
     // Relation User Many to one User
     public function user(){
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(User::class,'user_id');
     }
 
     // Relation User Many to one POP
     public function pop(){
-    	return $this->belongsTo(Pop::class);
+    	return $this->belongsTo(Pop::class, 'pop_id');
     }
 
      // Relation User one to many BTS

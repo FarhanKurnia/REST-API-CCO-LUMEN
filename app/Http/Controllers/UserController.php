@@ -75,6 +75,7 @@ class UserController extends Controller
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_user = $id_jwt['id_user'];
+        $id = $id_user;
         $message = "Load data User successfully";
         $status = "success";
         $user = User::find($id_user);
@@ -91,7 +92,7 @@ class UserController extends Controller
             // 'data' => $user], 200);
 
             //querry ini bisa dgn relasi malah bikin json kosong
-            'data' => $user::with('pop')->where('pop_id', $id_user)->get()], 200);
+            'data' => $user::with(['pop','role'])->where('pop_id', $id)->where('role_id', $id)->get()], 200);
     }
 
     // Testing function only to get ID JWT
@@ -102,7 +103,8 @@ class UserController extends Controller
             $token = JWTAuth::getToken();
             $id_jwt = JWTAuth::getPayload($token)->toArray();
             $id = $id_jwt['id_user'];
-            return $id;
+            return var_dump($id);
+            // return $id;
         }catch (\Exception $e) {
             return response()->json(['message' => 'Failed!'], 409);
         } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {

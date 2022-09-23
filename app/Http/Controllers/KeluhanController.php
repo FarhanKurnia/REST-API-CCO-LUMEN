@@ -13,13 +13,13 @@ class KeluhanController extends Controller
      */
     public function index()
     {
-        $data = Keluhan::with('user')->get();
+        // $data = Keluhan::with('user')->get();
 
         return response()->json([
             'status' => 'success',
             'message' => 'Load data post successfully',
-            // 'data' => Keluhan::all()
-            'data' => $data
+            'data' => Keluhan::all()
+            // 'data' => $data
         ], 200);
     }
 
@@ -89,20 +89,43 @@ class KeluhanController extends Controller
      */
     public function show($id)
     {
-        $message = "Load data post successfully";
-        $status = "success";
-        $keluhan = Keluhan::find($id);
+        {
+            $message = "Load data post successfully";
+            $status = "success";
+            $keluhan = Keluhan::find($id);
+            $keluhan->balasan;
+            $keluhan->user;
+            $keluhan->pop;
 
-        if (!$keluhan) {
-            $status = "error";
-            $message = "Data keluhan not found";
+            if (!$keluhan) {
+                $status = "error";
+                $message = "Data post not found";
+            }
+
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'data' => $keluhan],200);
+                // 'data' => $bts::with('user')->get()], 200);
+                // 'data' => $keluhan->with(['pop','user','user.role'])->get()], 200);
+                // 'data' => $keluhan::with('user')->where('user_id',$id_keluhan)->get()], 200);
+
+
         }
+    //     $message = "Load data post successfully";
+    //     $status = "success";
+    //     $keluhan = Keluhan::find($id_keluhan);
 
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            'data' => $keluhan::with('user','balasan')->where('id',$id)->get()], 200);
+    //     if (!$keluhan) {
+    //         $status = "error";
+    //         $message = "Data keluhan not found";
+    //     }
 
+    //     return response()->json([
+    //         'status' => $status,
+    //         'message' => $message,
+
+    //         'data' => $keluhan->loadMissing('pop')->where('pop_id', $id_keluhan)->get()], 200);
     }
 
     /**

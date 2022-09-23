@@ -40,7 +40,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches "/api/bts -> Store
             $router->post('bts','BtsController@store');
             // Matches "/api/bts/1 -> Show One
-            $router->get('bts/{id_bts}','BtsController@show');
+            $router->get('bts/{id}','BtsController@show');
             // Matches "/api/bts/1 -> Delete
             $router->delete('bts/{id}','BtsController@destroy');
             // Matches "/api/bts -> Update

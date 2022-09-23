@@ -87,11 +87,13 @@ class BtsController extends Controller
      * @param  \App\Models\Bts  $bts
      * @return \Illuminate\Http\Response
      */
-    public function show($id_bts)
+    public function show($id)
     {
         $message = "Load data post successfully";
         $status = "success";
-        $bts = Bts::find($id_bts);
+        $bts = Bts::find($id);
+        $bts->user;
+        $bts->pop;
 
         if (!$bts) {
             $status = "error";
@@ -101,10 +103,10 @@ class BtsController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
+            'data' =>$bts],200);
             // 'data' => $bts::with('user')->get()], 200);
-            'data' => $bts::with(['pop','user','user.role'])->where('pop_id', $id_bts)->where('user_id', $id_bts)->get()], 200);
+            // 'data' => $bts::with(['pop','user','user.role'])->where('pop_id', $id)->where('user_id', $id)->get()], 200);
             // 'data' => $bts::with('user')->where('user_id',$id_bts)->get()], 200);
-
 
     }
 

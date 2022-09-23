@@ -13,10 +13,10 @@ class Balasan extends Model
     ];
 
     public function keluhan(){
-    	return $this->belongsTo(Keluhan::class);
+    	return $this->belongsTo(Keluhan::class,'keluhan_id');
     }
 
     public function user(){
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(User::class,'user_id');
     }
 }
