@@ -14,18 +14,14 @@ class KeluhanController extends Controller
     public function index()
     {
         try{
-
-
-        $data = Keluhan::with('balasan')->get();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Load data post successfully',
-            // 'data' => Keluhan::all()
-            'data' => $data
-        ], 200);
-        }
-        catch (\Throwable $th) {
+            // $data = Keluhan::with('balasan')->get();
+            $data = Keluhan::all();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Load data post successfully',
+                'data' => $data
+            ], 200);
+        }catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
             return response()->json([
@@ -117,8 +113,8 @@ class KeluhanController extends Controller
             return response()->json([
                 'status' => $status,
                 'message' => $message,
-                'data' => $keluhan],200);
-                // 'data' => $bts::with('user')->get()], 200);
+                // 'data' => $keluhan],200);
+                'data' => $keluhan::load('balasan.user')->get()], 200);
                 // 'data' => $keluhan->with(['pop','user','user.role'])->get()], 200);
                 // 'data' => $keluhan::with('user')->where('user_id',$id_keluhan)->get()], 200);
 

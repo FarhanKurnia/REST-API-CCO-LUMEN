@@ -26,8 +26,7 @@ class BtsController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Load data post successfully',
-
-            'data' => Bts::with(['user','pop'])->get()
+            'data' => Bts::with('pop')->get()
         ], 200);
     }
 
@@ -89,25 +88,27 @@ class BtsController extends Controller
      */
     public function show($id)
     {
-        $message = "Load data post successfully";
+        $message = "Data BTS ditemukan";
         $status = "success";
         $bts = Bts::find($id);
-        $bts->user;
-        $bts->pop;
-
         if (!$bts) {
             $status = "error";
-            $message = "Data post not found";
+            $message = "Data BTS tidak ditemukan";
+            return response()->json([
+                'status'=>$status,
+                'mesage' =>$message
+            ],404);
+        }else{
+            $bts->user;
+            $bts->user->role;
+            $bts->user->pop;
+            $bts->pop;
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'data' =>$bts
+            ],200);
         }
-
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            'data' =>$bts],200);
-            // 'data' => $bts::with('user')->get()], 200);
-            // 'data' => $bts::with(['pop','user','user.role'])->where('pop_id', $id)->where('user_id', $id)->get()], 200);
-            // 'data' => $bts::with('user')->where('user_id',$id_bts)->get()], 200);
-
     }
 
     /**
