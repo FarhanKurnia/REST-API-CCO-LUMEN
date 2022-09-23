@@ -37,7 +37,7 @@ class Keluhan extends Model
 
      // Relation User one to many BTS
      public function balasan(){
-    	return $this->hasMany(Balasan::class);
+    	return $this->hasMany(Balasan::class, 'keluhan_id');
     }
 
     // Relation User one to one RFO
