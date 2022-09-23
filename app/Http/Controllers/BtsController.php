@@ -23,11 +23,19 @@ class BtsController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Load data post successfully',
-            'data' => Bts::with('pop')->get()
-        ], 200);
+        $bts = Bts::with('pop')->get();
+        if($bts->isNotEmpty()) {
+            return response()->json([
+                'status' => 'Load data BTS succesfully',
+                'message' => 'success',
+                'data' => $bts
+            ], 200);
+        }else{
+            return response()->json([
+                'status'=>"error",
+                'mesage' =>"Data BTS tidak ditemukan"
+            ],404);
+        }
     }
 
     /**

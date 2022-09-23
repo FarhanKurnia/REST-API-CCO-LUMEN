@@ -95,25 +95,25 @@ class UserController extends Controller
     }
 
     // Testing function only to get ID JWT
-    public function getJwt()
-    {
-        try {
-            // attempt to verify the credentials and create a token for the user
-            $token = JWTAuth::getToken();
-            $id_jwt = JWTAuth::getPayload($token)->toArray();
-            $id = $id_jwt['id_user'];
-            return var_dump($id);
-            // return $id;
-        }catch (\Exception $e) {
-            return response()->json(['message' => 'Failed!'], 409);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-            return response()->json(['token_expired'], 500);
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-            return response()->json(['token_invalid'], 500);
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['token_absent' => $e->getMessage()], 500);
-        }
-    }
+    // public function getJwt()
+    // {
+    //     try {
+    //         // attempt to verify the credentials and create a token for the user
+    //         $token = JWTAuth::getToken();
+    //         $id_jwt = JWTAuth::getPayload($token)->toArray();
+    //         $id = $id_jwt['id_user'];
+    //         return var_dump($id);
+    //         // return $id;
+    //     }catch (\Exception $e) {
+    //         return response()->json(['message' => 'Failed!'], 409);
+    //     } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+    //         return response()->json(['token_expired'], 500);
+    //     } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+    //         return response()->json(['token_invalid'], 500);
+    //     } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+    //         return response()->json(['token_absent' => $e->getMessage()], 500);
+    //     }
+    // }
 
     // Testing function only to get Payload JWT
     // public function getJWT()

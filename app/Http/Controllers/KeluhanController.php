@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Keluhan;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isEmpty;
+
 class KeluhanController extends Controller
 {
     /**
@@ -11,23 +14,19 @@ class KeluhanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        try{
-            // $data = Keluhan::with('balasan')->get();
-            $data = Keluhan::all();
+    public function index(){
+        $data = Keluhan::all();
+        if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
                 'message' => 'Load data post successfully',
                 'data' => $data
             ], 200);
-        }catch (\Throwable $th) {
-            $status = "error";
-            $message = $th->getMessage();
+        }else{
             return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ]);
+                'status'=>"error",
+                'mesage' =>"Data keluhan tidak ditemukan"
+            ],404);
         }
     }
 
@@ -47,8 +46,7 @@ class KeluhanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $message = 'Data created successfully';
         $status = "success";
 
