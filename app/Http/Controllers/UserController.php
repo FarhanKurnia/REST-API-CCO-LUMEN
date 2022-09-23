@@ -75,24 +75,23 @@ class UserController extends Controller
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_user = $id_jwt['id_user'];
-        $id = $id_user;
         $message = "Load data User successfully";
         $status = "success";
         $user = User::find($id_user);
-
         if (!$user) {
             $status = "error";
             $message = "Data User not found";
+            return response()->json([
+                'status' => $status,
+                'message' => $message],404);
+        }else{
+            $user->role;
+            $user->pop;
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'data' => $user], 200);
         }
-
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            //querry ini bisa muncul tapi tanpa relasi
-            // 'data' => $user], 200);
-
-            //querry ini bisa dgn relasi malah bikin json kosong
-            'data' => $user::with(['pop','role'])->where('pop_id', $id)->where('role_id', $id)->get()], 200);
     }
 
     // Testing function only to get ID JWT

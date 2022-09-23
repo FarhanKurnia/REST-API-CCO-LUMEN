@@ -17,7 +17,7 @@ class BalasanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Load data Balasan successfully',
-            'data' => Balasan::all()], 200);
+            'data' => Balasan::with('user')->get()], 200);
     }
 
     /**
@@ -75,16 +75,22 @@ class BalasanController extends Controller
         $message = "Load data post successfully";
         $status = "success";
         $balasan = Balasan::find($id);
-
         if (!$balasan) {
             $status = "error";
             $message = "Data balasan not found";
+            return response()->json([
+                'status' => $status,
+                'message' => $message
+            ], 404);
+        }else{
+            $balasan->user;
+            $balasan->user->role;
+            $balasan->keluhan;
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'data' => $balasan], 200);
         }
-
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            'data' => $balasan::with('user')->where('id',$id)->get()], 200);
     }
 
     /**

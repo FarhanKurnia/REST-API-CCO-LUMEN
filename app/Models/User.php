@@ -51,7 +51,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     // Relation User one to many BTS
     public function balasan(){
-    	return $this->hasMany(Balasan::class, 'user_id');
+    	return $this->hasMany(Balasan::class);
     }
 
     public function RFO_Keluhan(){

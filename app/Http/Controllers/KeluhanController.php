@@ -97,43 +97,30 @@ class KeluhanController extends Controller
      */
     public function show($id)
     {
-        {
-            $message = "Load data post successfully";
-            $status = "success";
-            $keluhan = Keluhan::find($id);
-            $keluhan->balasan;
+        $message = "Data Keluhan ditemukan";
+        $status = "success";
+        $keluhan = Keluhan::find($id);
+        if (!$keluhan) {
+            $status = "error";
+            $message = "Data BTS tidak ditemukan";
+            return response()->json([
+                'status'=>$status,
+                'mesage' =>$message
+            ],404);
+        }else{
             $keluhan->user;
+            $keluhan->user->role;
+            $keluhan->user->pop;
             $keluhan->pop;
-
-            if (!$keluhan) {
-                $status = "error";
-                $message = "Data post not found";
-            }
-
+            $keluhan->balasan;
+            //Masih gagal ambil nested query dari keluhan -> balasan -> user dan role
+            // $keluhan->balasan->user;
             return response()->json([
                 'status' => $status,
                 'message' => $message,
-                // 'data' => $keluhan],200);
-                'data' => $keluhan::load('balasan.user')->get()], 200);
-                // 'data' => $keluhan->with(['pop','user','user.role'])->get()], 200);
-                // 'data' => $keluhan::with('user')->where('user_id',$id_keluhan)->get()], 200);
-
-
+                'data' =>$keluhan
+            ],200);
         }
-    //     $message = "Load data post successfully";
-    //     $status = "success";
-    //     $keluhan = Keluhan::find($id_keluhan);
-
-    //     if (!$keluhan) {
-    //         $status = "error";
-    //         $message = "Data keluhan not found";
-    //     }
-
-    //     return response()->json([
-    //         'status' => $status,
-    //         'message' => $message,
-
-    //         'data' => $keluhan->loadMissing('pop')->where('pop_id', $id_keluhan)->get()], 200);
     }
 
     /**

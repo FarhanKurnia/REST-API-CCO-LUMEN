@@ -16,6 +16,7 @@ class Balasan extends Model
     	return $this->belongsTo(Keluhan::class,'keluhan_id');
     }
 
+    // Relation User Many to one BTS
     public function user(){
     	return $this->belongsTo(User::class,'user_id');
     }
