@@ -18,12 +18,12 @@ class RolesTableSeeder extends Seeder
         DB::table('roles')->insert([[
             'id_role'=> '1',
             'role'=> 'HELPDESK',
-            'created_at' => Carbon::now(),
+            // 'created_at' => Carbon::now(),
         ],
         [
             'id_role'=> '2',
             'name'=> 'NOC',
-            'created_at' => Carbon::now(),
+            // 'created_at' => Carbon::now(),
         ]]);
     }
 }

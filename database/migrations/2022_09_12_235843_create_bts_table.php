@@ -29,10 +29,6 @@ class CreateBtsTable extends Migration
             $table->foreign('pop_id')->references('id_pop')->on('pops')->onDelete('cascade');
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
 
-            //optional
-            // $table->string('status');
-            // $table->timestamp('email_verified_at')->nullable();
-
             $table->timestamps();
         });
     }
