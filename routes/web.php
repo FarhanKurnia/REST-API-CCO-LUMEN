@@ -67,6 +67,26 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/balasan/1 -> Show One
         $router->get('balasan/{id}','BalasanController@show');
 
+         // ==============[Endpoint Keluhan]==============
+        // Matches "/api/keluhan -> Show All
+        $router->get('keluhan','KeluhanController@index');
+        // Matches "/api/keluhan -> Store
+        $router->post('keluhan','KeluhanController@store');
+        // Matches "/api/keluhan/1 -> Show One
+        $router->get('keluhan/{id}','KeluhanController@show');
+        // Matches "/api/keluhan/1 -> Delete
+        $router->delete('keluhan/{id}','KeluhanController@destroy');
+        // Matches "/api/keluhan -> Update
+        $router->put('keluhan/{id}','KeluhanController@update');
+
+        // ==============[Endpoint RFO Keluhan]==============
+        // Matches "/api/balasan -> Index
+        $router->get('rfo-keluhan','RFOKeluhanController@index');
+        // Matches "/api/balasan -> Store
+        $router->post('rfo-keluhan','RFOKeluhanController@store');
+        // Matches "/api/balasan/1 -> Show One
+        $router->get('rfo-keluhan/{id}','RFOKeluhanController@show');
+
   });
 
   // Matches "/api/register

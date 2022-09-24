@@ -87,16 +87,27 @@ class RFOKeluhanController extends Controller
         $message = "Load data post successfully";
         $status = "success";
         $rfo_keluhan = RFO_Keluhan::find($id);
+        $rfo_keluhan->user;
+        $rfo_keluhan->user->role;
+        $rfo_keluhan->user->pop;
+        $rfo_keluhan->keluhan;
+        $rfo_keluhan->keluhan->user;
+        $rfo_keluhan->keluhan->user->role;
+        $rfo_keluhan->keluhan->user->pop;
+        $rfo_keluhan->keluhan->balasan;
+        // Relasi ini kayaknya masih belum bener
+        // $rfo_keluhan->keluhan->balasan->user;
+        // $rfo_keluhan->keluhan->balasan->pop;
 
         if (!$rfo_keluhan) {
             $status = "error";
-            $message = "Data keluhan not found";
+            $message = "Data RFO not found";
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $rfo_keluhan::with('user','keluhan')->where('id',$id)->get()], 200);
+            'data' => $rfo_keluhan], 200);
     }
 
     /**

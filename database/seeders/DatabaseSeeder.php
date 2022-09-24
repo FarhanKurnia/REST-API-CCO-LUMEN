@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RFO_Keluhan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             KeluhansSeeder::class,
             BalasansSeeder::class,
             KeluhansSeeder::class,
+            RFOKeluhanSeeder::class,
         ]);
     }
 }

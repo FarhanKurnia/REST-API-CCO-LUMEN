@@ -42,6 +42,6 @@ class Keluhan extends Model
 
     // Relation User one to one RFO
     public function RFO_Keluhan(){
-    	return $this->belongsTo(RFO_Keluhan::class);
+    	return $this->hasOne(RFO_Keluhan::class,'id_rfo_keluhan');
     }
 }

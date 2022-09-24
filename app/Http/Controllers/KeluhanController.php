@@ -100,7 +100,7 @@ class KeluhanController extends Controller
         $keluhan = Keluhan::find($id);
         if (!$keluhan) {
             $status = "error";
-            $message = "Data BTS tidak ditemukan";
+            $message = "Data Keluhan tidak ditemukan";
             return response()->json([
                 'status'=>$status,
                 'mesage' =>$message
