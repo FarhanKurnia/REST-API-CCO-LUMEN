@@ -17,7 +17,7 @@ class RFOKeluhanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Load data RFO Keluhan successfully',
-            'data' => RFO_Keluhan::all()], 200);
+            'data' => RFO_Keluhan::with('user','user.role','user.pop')->get()], 200);
     }
 
     /**
