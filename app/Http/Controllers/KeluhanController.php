@@ -107,12 +107,13 @@ class KeluhanController extends Controller
             ],404);
         }else{
             $keluhan->user;
-            $keluhan->user->role;
-            $keluhan->user->pop;
-            $keluhan->pop;
-            $keluhan->balasan;
+            // $keluhan->user->role;
+            // $keluhan->user->pop;
+            // $keluhan->pop;
+            // $keluhan->balasan;
             //Masih gagal ambil nested query dari keluhan -> balasan -> user dan role
-            // $keluhan->balasan->user;
+            $keluhan->balasan->user(0);
+            dd($keluhan);
             return response()->json([
                 'status' => $status,
                 'message' => $message,

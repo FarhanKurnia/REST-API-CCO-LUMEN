@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\User;
 use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
@@ -49,6 +51,7 @@ class UserController extends Controller
         $role_id = $request->input('role_id');
         $pop_id = $request->input('pop_id');
 
+    
         try {
             User::find($id)->update([
                 'name' => $request->name,
@@ -62,10 +65,15 @@ class UserController extends Controller
             $message = $th->getMessage();
         }
 
+        $credentials = $request->only(['email', 'password']);
+        if (! $token = Auth::setTTL(7200)->attempt($credentials)) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => User::where('id',$id)->get()], 200);
+            'bearer_token' => $token,
+            'data' => User::where('id_user',$id)->get()], 200);
     }
 
     // Show data user by ID JWT
