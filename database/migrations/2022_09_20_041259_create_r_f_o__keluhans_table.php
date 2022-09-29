@@ -21,7 +21,7 @@ class CreateRFOKeluhansTable extends Migration
             $table->string('nomor_tiket')->nullable();
             $table->timestamp('mulai_keluhan');
             $table->timestamp('selesai_keluhan');
-            // $table->string('durasi');
+            $table->string('durasi')->nullable();
             $table->string('problem');
             $table->string('action');
             $table->string('status');

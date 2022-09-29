@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DateTime;
 use App\Models\RFO_Keluhan;
 use Illuminate\Http\Request;
 
@@ -46,6 +46,9 @@ class RFOKeluhanController extends Controller
         $nomor_tiket = $request->input('nomor_tiket');
         $mulai_keluhan = $request->input('mulai_keluhan');
         $selesai_keluhan = $request->input('selesai_keluhan');
+        $start = new DateTime($mulai_keluhan);//start time
+        $end = new DateTime($selesai_keluhan);//end time
+        $durasi = $start->diff($end);
         $problem = $request->input('problem');
         $action = $request->input('action');
         $status_RFO = $request->input('status');
@@ -60,6 +63,7 @@ class RFOKeluhanController extends Controller
                 'mulai_keluhan' => $mulai_keluhan,
                 'selesai_keluhan' => $selesai_keluhan,
                 'problem' => $problem,
+                'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
                 'action' => $action,
                 'status' => $status_RFO,
                 'deskripsi' => $deskripsi,
