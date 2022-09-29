@@ -15,7 +15,7 @@ class KeluhanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $data = Keluhan::where('status','=','open')->orderBy('created_at', 'DESC')->get();
+        $data = Keluhan::where('status','=','open')->orderBy('created_at', 'DESC')->with('balasan')->get();
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
