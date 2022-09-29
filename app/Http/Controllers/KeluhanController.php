@@ -15,7 +15,23 @@ class KeluhanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $data = Keluhan::all();
+        $data = Keluhan::where('status','=','open')->orderBy('created_at', 'DESC')->get();
+        if($data->isNotEmpty()){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Load data keluhan successfully',
+                'data' => $data
+            ], 200);
+        }else{
+            return response()->json([
+                'status'=>"error",
+                'mesage' =>"Data keluhan tidak ditemukan"
+            ],404);
+        }
+    }
+
+    public function history(){
+        $data = Keluhan::where('status','=','closed')->orderBy('created_at', 'DESC')->paginate(10);
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
