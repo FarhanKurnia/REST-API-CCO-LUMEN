@@ -90,6 +90,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('rfo-keluhan','RFOKeluhanController@store');
         // Matches "/api/balasan/1 -> Show One
         $router->get('rfo-keluhan/{id}','RFOKeluhanController@show');
+        // Matches "/api/balasan/1 -> Update
+        $router->put('rfo-keluhan/{id}','RFOKeluhanController@update');
 
   });
 

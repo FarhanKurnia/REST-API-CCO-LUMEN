@@ -137,16 +137,21 @@ class RFOKeluhanController extends Controller
         $message = 'Data updated successfully';
         $status = "success";
 
+        $start = new DateTime($request->mulai_keluhan);//start time
+        $end = new DateTime($request->selesai_keluhan);//end time
+        $durasi = $start->diff($end);
+
         try {
-            Bts::find($id)->update([
+            RFO_Keluhan::find($id)->update([
                 'user_id' => $request->user_id,
                 'keluhan_id' => $request->keluhan_id,
                 'nomor_tiket' => $request->nomor_tiket,
                 'mulai_keluhan' => $request->mulai_keluhan,
                 'selesai_keluhan' => $request->selesai_keluhan,
+                'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
                 'problem' => $request->problem,
                 'action' => $request->action,
-                'status' => $request->status_RFO,
+                'status' => $request->status,
                 'deskripsi' => $request->deskripsi,
                 'lampiran_rfo_keluhan' => $request->lampiran_rfo_keluhan,
             ]);
