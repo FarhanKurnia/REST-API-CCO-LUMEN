@@ -55,6 +55,9 @@ class KeluhanController extends Controller
         $nama_pelapor = $request->input('nama_pelapor');
         $nomor_pelapor = $request->input('nomor_pelapor');
         $nomor_keluhan = $request->input('nomor_keluhan');
+        $source = $request->input('source');
+        $sosmed = $request->input('sosmed');
+        $email = $request->input('email');
         $keluhan = $request->input('keluhan');
         $status_keluhan = $request->input('status');
         $lampiran = $request->input('lampiran');
@@ -69,6 +72,9 @@ class KeluhanController extends Controller
                 'nama_pelapor' => $nama_pelapor,
                 'nomor_pelapor' => $nomor_pelapor,
                 'nomor_keluhan' => $nomor_keluhan,
+                'source' => $source,
+                'sosmed' => $sosmed,
+                'email' => $email,
                 'keluhan' => $keluhan,
                 'status' => $status_keluhan,
                 'lampiran' => $lampiran,
@@ -107,13 +113,13 @@ class KeluhanController extends Controller
             ],404);
         }else{
             $keluhan->user;
-            // $keluhan->user->role;
-            // $keluhan->user->pop;
-            // $keluhan->pop;
-            // $keluhan->balasan;
+            $keluhan->user->role;
+            $keluhan->user->pop;
+            $keluhan->pop;
+            $keluhan->balasan;
             //Masih gagal ambil nested query dari keluhan -> balasan -> user dan role
-            $keluhan->balasan->user(0);
-            dd($keluhan);
+            // $keluhan->balasan->user(0);
+            // dd($keluhan);
             return response()->json([
                 'status' => $status,
                 'message' => $message,

@@ -14,7 +14,19 @@ class Keluhan extends Model
     protected $table = 'keluhans';
     protected $primaryKey = 'id_keluhan';
     protected $fillable = [
-        'id_pelanggan', 'nama_pelanggan', 'nama_pelapor', 'nomor_pelapor', 'nomor_keluhan', 'keluhan', 'status', 'status', 'lampiran', 'pop_id', 'user_id',
+        'id_pelanggan',
+        'nama_pelanggan',
+        'nama_pelapor',
+        'nomor_pelapor',
+        'nomor_keluhan',
+        'source',
+        'email',
+        'sosmed',
+        'keluhan',
+        'status',
+        'lampiran',
+        'pop_id',
+        'user_id',
     ];
     /**
      * The attributes excluded from the model's JSON form.
