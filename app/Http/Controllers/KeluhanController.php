@@ -128,15 +128,29 @@ class KeluhanController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Keluhan  $keluhan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Keluhan $keluhan)
+    public function update(Request $request, $id)
     {
-        //
+        $message = 'Keluhan berhasil diupdate';
+        $status = "success";
+
+        try {
+            Keluhan::find($id)->update([
+                'pop_id' => $request->pop_id,
+                'nama_pelapor' => $request->nama_pelapor,
+                'nomor_pelapor' => $request->nomor_pelapor,
+                'source' => $request->source,
+                'sosmed' => $request->sosmed,
+                'email' => $request->email,
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
     }
 
     /**
@@ -146,7 +160,7 @@ class KeluhanController extends Controller
      * @param  \App\Models\Keluhan  $keluhan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function close(Request $request, $id)
     {
         $message = 'Keluhan berhasil ditutup';
         $status = "success";
@@ -154,6 +168,26 @@ class KeluhanController extends Controller
         try {
             Keluhan::find($id)->update([
                 'status' => $request->status_keluhan='closed',
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
+    }
+
+    public function open(Request $request, $id)
+    {
+        $message = 'Keluhan berhasil dibuka';
+        $status = "success";
+
+        try {
+            Keluhan::find($id)->update([
+                'status' => $request->status_keluhan='open',
             ]);
         } catch (\Throwable $th) {
             $status = "error";

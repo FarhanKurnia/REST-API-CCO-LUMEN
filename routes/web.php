@@ -78,6 +78,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->delete('keluhan/{id}','KeluhanController@destroy');
         // Matches "/api/keluhan -> Update
         $router->put('keluhan/{id}','KeluhanController@update');
+        // Matches "/api/keluhan -> close
+        $router->put('close/{id}','KeluhanController@close');
+        // Matches "/api/keluhan -> open
+        $router->put('open/{id}','KeluhanController@open');
 
         // ==============[Endpoint RFO Keluhan]==============
         // Matches "/api/balasan -> Index
