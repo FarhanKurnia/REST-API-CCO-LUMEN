@@ -24,8 +24,6 @@ class Keluhan extends Model
         'user_id',
     ];
 
-    protected $with = ['user'];
-
     // Relation Balasan
     public function balasan(){
         return $this->hasMany(Balasan::class,'keluhan_id');
