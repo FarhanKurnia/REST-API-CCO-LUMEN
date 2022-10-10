@@ -71,9 +71,8 @@ class KeluhanController extends Controller
         $nama_pelapor = $request->input('nama_pelapor');
         $nomor_pelapor = $request->input('nomor_pelapor');
         $nomor_keluhan = $request->input('nomor_keluhan');
-        $source = $request->input('source');
-        $sosmed = $request->input('sosmed');
-        $email = $request->input('email');
+        $sumber = $request->input('sumber');
+        $detail_sumber = $request->input('detail_sumber');
         $keluhan = $request->input('keluhan');
         $status_keluhan = $request->input('status');
         $lampiran = $request->input('lampiran');
@@ -88,9 +87,8 @@ class KeluhanController extends Controller
                 'nama_pelapor' => $nama_pelapor,
                 'nomor_pelapor' => $nomor_pelapor,
                 'nomor_keluhan' => $nomor_keluhan,
-                'source' => $source,
-                'sosmed' => $sosmed,
-                'email' => $email,
+                'sumber' => $sumber,
+                'detail_sumber' => $detail_sumber,
                 'keluhan' => $keluhan,
                 'status' => $status_keluhan,
                 'lampiran' => $lampiran,
@@ -149,9 +147,8 @@ class KeluhanController extends Controller
                 'pop_id' => $request->pop_id,
                 'nama_pelapor' => $request->nama_pelapor,
                 'nomor_pelapor' => $request->nomor_pelapor,
-                'source' => $request->source,
-                'sosmed' => $request->sosmed,
-                'email' => $request->email,
+                'sumber' => $request->sumber,
+                'detail_sumber' => $request->detail_sumber,
             ]);
         } catch (\Throwable $th) {
             $status = "error";

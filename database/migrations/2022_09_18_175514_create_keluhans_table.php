@@ -17,9 +17,8 @@ class CreateKeluhansTable extends Migration
             $table->id('id_keluhan');
             // $table->string('nomor_keluhan')->unique();
             $table->string('nomor_keluhan');
-            $table->string('source');
-            $table->string('sosmed')->nullable();
-            $table->string('email')->nullable();
+            $table->string('sumber');
+            $table->string('detail_sumber');
             $table->unsignedBigInteger('pop_id');
             $table->string('id_pelanggan');
             $table->string('nama_pelanggan')->notNullable();
