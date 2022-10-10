@@ -29,6 +29,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    protected $with = ['role','pop'];
+
     // Relation User Many to one Role
     public function role(){
     	return $this->belongsTo(Role::class,'role_id');
@@ -51,7 +53,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     // Relation User one to many BTS
     public function balasan(){
-    	return $this->hasMany(Balasan::class, 'balasan_id');
+    	return $this->hasMany(Balasan::class);
     }
 
     public function RFO_Keluhan(){
