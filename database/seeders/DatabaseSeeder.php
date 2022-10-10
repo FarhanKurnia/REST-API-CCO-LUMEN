@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\RFO_Keluhan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,9 +19,9 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             UsersTableSeeder::class,
             BtsTableSeeder::class,
+            RFOGangguanSeeder::class,
             KeluhansSeeder::class,
             BalasansSeeder::class,
-            KeluhansSeeder::class,
             RFOKeluhanSeeder::class,
         ]);
     }

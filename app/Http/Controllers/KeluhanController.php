@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Keluhan;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isEmpty;
+// use function PHPUnit\Framework\isEmpty;
 
 class KeluhanController extends Controller
 {
@@ -15,7 +15,7 @@ class KeluhanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $data = Keluhan::where('status','=','open')->orderBy('created_at', 'DESC')->with('balasan')->get();
+        $data = Keluhan::where('status','=','open')->orderBy('created_at', 'DESC')->with('pop','balasan')->get();
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
@@ -31,7 +31,7 @@ class KeluhanController extends Controller
     }
 
     public function history(){
-        $data = Keluhan::where('status','=','closed')->orderBy('created_at', 'DESC')->paginate(10);
+        $data = Keluhan::where('status','=','closed')->orderBy('created_at', 'DESC')->with('pop','balasan')->get();;
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',

@@ -95,6 +95,16 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/balasan/1 -> Update
         $router->put('rfo-keluhan/{id}','RFOKeluhanController@update');
 
+        // ==============[Endpoint RFO Keluhan]==============
+        // Matches "/api/balasan -> Index
+        $router->get('rfo-gangguan','RFOGangguanController@index');
+        // Matches "/api/balasan -> Store
+        $router->post('rfo-gangguan','RFOGangguanController@store');
+        // Matches "/api/balasan/1 -> Show One
+        $router->get('rfo-gangguan/{id}','RFOGangguanController@show');
+        // Matches "/api/balasan/1 -> Update
+        $router->put('rfo-gangguan/{id}','RFOGangguanController@update');
+
   });
 
   // Matches "/api/register

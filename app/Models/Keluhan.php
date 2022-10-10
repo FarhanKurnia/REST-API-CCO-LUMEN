@@ -24,6 +24,8 @@ class Keluhan extends Model
         'user_id',
     ];
 
+    protected $with = ['user'];
+
     // Relation Balasan
     public function balasan(){
         return $this->hasMany(Balasan::class,'keluhan_id');
@@ -42,5 +44,9 @@ class Keluhan extends Model
     // Relation RFO
     public function RFO_Keluhan(){
     	return $this->hasOne(RFO_Keluhan::class);
+    }
+
+    public function RFO_Gangguan(){
+    	return $this->belongsTo(RFO_Gangguan::class, 'rfo_gangguan_id');
     }
 }

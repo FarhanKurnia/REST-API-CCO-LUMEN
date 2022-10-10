@@ -60,6 +60,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     	return $this->hasMany(RFO_Keluhan::class);
     }
 
+    public function RFO_Gangguan(){
+    	return $this->hasMany(RFO_Gangguan::class);
+    }
+
     // JWT Function
     public function getJWTIdentifier()
     {
