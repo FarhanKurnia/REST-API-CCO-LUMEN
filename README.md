@@ -53,6 +53,7 @@ Authentication:
 </br>`POST:http://localhost:8000/api/register`
 </br>`POST:http://localhost:8000/api/login`
 </br>`GET:http://localhost:8000/api/logout`
+</br>`GET:http://localhost:8000/api/update`
 
 
 #### BTS
