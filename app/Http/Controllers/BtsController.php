@@ -16,17 +16,12 @@ class BtsController extends Controller
     //     $this->middleware('auth');
     // }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $bts = Bts::with('pop')->get();
         if($bts->isNotEmpty()) {
             return response()->json([
-                'status' => 'Load data BTS succesfully',
+                'status' => 'Data BTS berhasil ditemukan',
                 'message' => 'success',
                 'data' => $bts
             ], 200);
@@ -38,25 +33,9 @@ class BtsController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $message = 'Data created successfully';
+        $message = 'Data BTS berhasil dimasukan';
         $status = "success";
 
         $nama_bts = $request->input('nama_bts');
@@ -88,12 +67,6 @@ class BtsController extends Controller
         ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bts  $bts
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $message = "Data BTS ditemukan";
@@ -119,27 +92,9 @@ class BtsController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bts  $bts
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Bts $bts)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bts  $bts
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $message = 'Data updated successfully';
+        $message = 'Data BTS berhasil diupdate';
         $status = "success";
 
         try {
@@ -163,15 +118,9 @@ class BtsController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Bts  $bts
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $message = 'Data deleted successfully';
+        $message = 'Data BTS berhasil dihapus';
         $status = "success";
         try {
             Bts::find($id)->delete();

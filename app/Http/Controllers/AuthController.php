@@ -51,6 +51,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //set ttl aexpired 
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -58,7 +59,7 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
         $credentials = $request->only(['email', 'password']);
-        if (! $token = Auth::setTTL(7200)->attempt($credentials)) {
+        if (! $token = Auth::setTTL(480)->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
         return response()->json([

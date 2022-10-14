@@ -7,38 +7,17 @@ use Illuminate\Http\Request;
 
 class RFOGangguanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return response()->json([
             'status' => 'success',
-            'message' => 'Load data RFO Keluhan successfully',
+            'message' => 'Data RFO Gangguan berhasil dimuat',
             'data' => RFO_Gangguan::with('user')->get()], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $message = 'RFO Gangguan created successfully';
+        $message = 'Data RFO Gangguan berhasil dibuat';
         $status = "success";
 
         $user_id = $request->input('user_id');
@@ -86,14 +65,14 @@ class RFOGangguanController extends Controller
      */
     public function show($id)
     {
-        $message = "Load data post successfully";
+        $message = "Data RFO Gangguan berhasil dimuat";
         $status = "success";
         $rfo_gangguan = RFO_Gangguan::find($id);
         $rfo_gangguan->user;
         $rfo_gangguan->keluhan;
         if (!$rfo_gangguan) {
             $status = "error";
-            $message = "Data RFO not found";
+            $message = "Data RFO Gangguan tidak ditemukan";
         }
 
         return response()->json([
@@ -102,24 +81,6 @@ class RFOGangguanController extends Controller
             'data' => $rfo_gangguan], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RFOGangguan  $rFOGangguan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RFOGangguan $rFOGangguan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RFO_Gangguan  $rFOGangguan
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $message = 'Data updated successfully';
@@ -153,14 +114,4 @@ class RFOGangguanController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RFOGangguan  $rFOGangguan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(RFOGangguan $rFOGangguan)
-    {
-        //
-    }
 }

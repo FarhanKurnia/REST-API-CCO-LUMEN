@@ -5,21 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Keluhan;
 use Illuminate\Http\Request;
 
-// use function PHPUnit\Framework\isEmpty;
 
 class KeluhanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(){
         $data = Keluhan::where('status','=','open')->orderBy('created_at', 'DESC')->with('pop','balasan')->get();
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
-                'message' => 'Load data keluhan successfully',
+                'message' => 'Data keluhan berhasil ditemukan',
                 'data' => $data
             ], 200);
         }else{
@@ -35,35 +29,19 @@ class KeluhanController extends Controller
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
-                'message' => 'Load data keluhan successfully',
+                'message' => 'Data history keluhan berhasil ditemukan',
                 'data' => $data
             ], 200);
         }else{
             return response()->json([
                 'status'=>"error",
-                'mesage' =>"Data keluhan tidak ditemukan"
+                'mesage' =>"Data history keluhan tidak ditemukan"
             ],404);
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request){
-        $message = 'Data keluhan created successfully';
+        $message = 'Data keluhan berhasil dimasukan';
         $status = "success";
 
         $id_pelanggan = $request->input('id_pelanggan');
@@ -115,7 +93,7 @@ class KeluhanController extends Controller
      */
     public function show($id)
     {
-        $message = "Data Keluhan ditemukan";
+        $message = "Data Keluhan berhasil ditemukan";
         $status = "success";
         $keluhan = Keluhan::find($id);
         if (!$keluhan) {
@@ -139,7 +117,7 @@ class KeluhanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $message = 'Keluhan berhasil diupdate';
+        $message = 'Data keluhan berhasil diupdate';
         $status = "success";
 
         try {
@@ -161,16 +139,9 @@ class KeluhanController extends Controller
         ], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Keluhan  $keluhan
-     * @return \Illuminate\Http\Response
-     */
     public function close(Request $request, $id)
     {
-        $message = 'Keluhan berhasil ditutup';
+        $message = 'Data keluhan berhasil ditutup';
         $status = "success";
 
         try {
@@ -190,7 +161,7 @@ class KeluhanController extends Controller
 
     public function open(Request $request, $id)
     {
-        $message = 'Keluhan berhasil dibuka';
+        $message = 'Data keluhan berhasil dibuka';
         $status = "success";
 
         try {
@@ -208,15 +179,9 @@ class KeluhanController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Keluhan  $keluhan
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $message = 'Keluhan berhasil dihapus';
+        $message = 'Data keluhan berhasil dihapus';
         $status = "success";
         try {
             Keluhan::find($id)->delete();
