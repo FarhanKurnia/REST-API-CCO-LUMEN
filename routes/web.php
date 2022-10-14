@@ -105,6 +105,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/balasan/1 -> Update
         $router->put('rfo-gangguan/{id}','RFOGangguanController@update');
 
+        // ==============[Endpoint Role]==============
+        // Matches "/api/role -> Index
+        $router->get('role','RoleController@index');
+
+        // ==============[Endpoint Role]==============
+        // Matches "/api/pop -> Index
+        $router->get('pop','POPController@index');
+
   });
 
   // Matches "/api/register
