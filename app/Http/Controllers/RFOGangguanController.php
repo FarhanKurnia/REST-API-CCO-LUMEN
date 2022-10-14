@@ -68,13 +68,13 @@ class RFOGangguanController extends Controller
         $message = "Data RFO Gangguan berhasil dimuat";
         $status = "success";
         $rfo_gangguan = RFO_Gangguan::find($id);
-        $rfo_gangguan->user;
-        $rfo_gangguan->keluhan;
+        
         if (!$rfo_gangguan) {
             $status = "error";
             $message = "Data RFO Gangguan tidak ditemukan";
         }
-
+        $rfo_gangguan->user;
+        $rfo_gangguan->keluhan;
         return response()->json([
             'status' => $status,
             'message' => $message,

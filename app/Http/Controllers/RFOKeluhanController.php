@@ -12,7 +12,7 @@ class RFOKeluhanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Load data RFO Keluhan successfully',
-            'data' => RFO_Keluhan::with('user','user.role','user.pop')->get()], 200);
+            'data' => RFO_Keluhan::with('user','user.role','user.pop','keluhan')->get()], 200);
     }
 
     public function store(Request $request)
@@ -64,6 +64,13 @@ class RFOKeluhanController extends Controller
         $message = "Load data post successfully";
         $status = "success";
         $rfo_keluhan = RFO_Keluhan::find($id);
+        
+
+        if (!$rfo_keluhan) {
+            $status = "error";
+            $message = "Data RFO not found";
+        }
+
         $rfo_keluhan->user;
         $rfo_keluhan->user->role;
         $rfo_keluhan->user->pop;
@@ -75,12 +82,6 @@ class RFOKeluhanController extends Controller
         // Relasi ini kayaknya masih belum bener
         // $rfo_keluhan->keluhan->balasan->user;
         // $rfo_keluhan->keluhan->balasan->pop;
-
-        if (!$rfo_keluhan) {
-            $status = "error";
-            $message = "Data RFO not found";
-        }
-
         return response()->json([
             'status' => $status,
             'message' => $message,

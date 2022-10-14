@@ -56,6 +56,7 @@ class KeluhanController extends Controller
         $lampiran = $request->input('lampiran');
         $pop_id = $request->input('pop_id');
         $user_id = $request->input('user_id');
+        $rfo_gangguan_id = $request->input('rfo_gangguan_id');
 
 
         try {
@@ -72,7 +73,7 @@ class KeluhanController extends Controller
                 'lampiran' => $lampiran,
                 'pop_id' => $pop_id,
                 'user_id' => $user_id,
-
+                'rfo_gangguan_id'> $rfo_gangguan_id,
             ]);
         } catch (\Throwable $th) {
             $status = "error";
@@ -127,6 +128,7 @@ class KeluhanController extends Controller
                 'nomor_pelapor' => $request->nomor_pelapor,
                 'sumber' => $request->sumber,
                 'detail_sumber' => $request->detail_sumber,
+                'rfo_gangguan_id'> $request->rfo_gangguan_id,
             ]);
         } catch (\Throwable $th) {
             $status = "error";

@@ -57,7 +57,7 @@ class KeluhansSeeder extends Seeder
             'pop_id' => '2',
             'user_id' => '1',
             'created_at' => Carbon::now(),
-            'rfo_gangguan_id' => null,
+            'rfo_gangguan_id' => 1,
         ],
         [
             'id_pelanggan' => '45678901',
@@ -72,7 +72,7 @@ class KeluhansSeeder extends Seeder
             'pop_id' => '2',
             'user_id' => '2',
             'created_at' => Carbon::now(),
-            'rfo_gangguan_id' => null,
+            'rfo_gangguan_id' => 1,
         ]
     ]);
     }
