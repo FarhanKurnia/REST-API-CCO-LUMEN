@@ -13,7 +13,7 @@ class Role
         $token = JWTAuth::getToken();
         $jwt_id = JWTAuth::getPayload($token)->toArray();
         $role = $jwt_id['role_id'];
-        if (!!!$role == 0) {
+        if (!$role == 0) {
             return response()->json([
                 'status' => 'Unauthorized',
                 'message' => 'You are not Admin'], 403);
