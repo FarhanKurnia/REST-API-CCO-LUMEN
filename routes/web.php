@@ -84,6 +84,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->put('open/{id}','KeluhanController@open');
         // Matches "/api/keluhan -> history
         $router->get('history','KeluhanController@history');
+        // Matches "/api/keluhan -> search history
+        $router->post('search-history','KeluhanController@search');
 
         // ==============[Endpoint RFO Keluhan]==============
         // Matches "/api/balasan -> Index

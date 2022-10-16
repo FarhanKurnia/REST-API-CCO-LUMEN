@@ -44,6 +44,50 @@ class KeluhanController extends Controller
         }
     }
 
+    public function search(Request $request)
+	{
+        $search = $request->input('search');
+        // Fungsi ini berhasil namun pencarian terbatas hanya Nama Pelanggan
+        // $data = Keluhan::where('status','closed')
+        // ->where('nama_pelanggan', 'iLIKE', "%{$search}%")
+        // ->orWhere('nomor_pelapor', 'iLIKE', "%{$search}%")
+        // ->get();
+
+        // Fungsi ini berhasil melakukan pencarian lengkap yang statusnya closed
+        $data = Keluhan::where([
+            ['status', 'closed'],
+            ['id_pelanggan', 'iLIKE', "%{$search}%"],
+        ])->orwhere([
+            ['status', 'closed'],
+            ['nama_pelanggan', 'iLIKE', "%{$search}%"],
+        ])->orwhere([
+            ['status', 'closed'],
+            ['nama_pelapor', 'iLIKE', "%{$search}%"],
+        ])->orwhere([
+            ['status', 'closed'],
+            ['nomor_pelapor', 'iLIKE', "%{$search}%"],
+        ])->orwhere([
+            ['status', 'closed'],
+            ['nomor_keluhan', 'iLIKE', "%{$search}%"],
+        ])->orwhere([
+            ['status', 'closed'],
+            ['keluhan', 'iLIKE', "%{$search}%"],
+        ])->paginate(10);
+
+        if($data->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data history keluhan tidak ditemukan',
+            ], 404);
+        }else{
+            return response()->json([
+                'status' => 'succes',
+                'message' => 'Data history keluhan berhasil ditemukan',
+                'data' => $data
+            ], 200);
+        }
+    }
+
     public function store(Request $request){
         $message = 'Data keluhan berhasil dimasukan';
         $status = "success";
