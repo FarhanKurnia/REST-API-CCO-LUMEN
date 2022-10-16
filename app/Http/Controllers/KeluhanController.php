@@ -29,7 +29,7 @@ class KeluhanController extends Controller
     }
 
     public function history(){
-        $data = Keluhan::where('status','=','closed')->orderBy('created_at', 'DESC')->with('pop','balasan')->get();;
+        $data = Keluhan::where('status','=','closed')->orderBy('created_at', 'DESC')->with('pop','balasan')->paginate(10);;
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
