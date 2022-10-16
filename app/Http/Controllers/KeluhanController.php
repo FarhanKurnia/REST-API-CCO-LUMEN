@@ -10,10 +10,18 @@ use Illuminate\Http\Request;
 class KeluhanController extends Controller
 {
     public function index(){
-        $data = Keluhan::where('status','=','open')->orWhere(function ($query) {
-            $query->where('status', '=', 'closed')
-                  ->where('updated_at', 'LIKE', '%'.Carbon::now()->format('Y-m-d').'%');
-        })->orderBy('created_at', 'DESC')->with('pop','balasan')->get();
+        $today = Carbon::now()->format('Y-m-d');
+        $data = Keluhan::where('status','open')
+        ->orwhere([
+            ['status','closed'],
+            ['updated_at','iLIKE', "%{$today}%"],
+        ])
+        // Fungsi ini terlalu panjang
+        // ->orWhere(function ($query) {
+        //     $query->where('status', '=', 'closed')
+        //           ->where('updated_at', 'LIKE', '%'.Carbon::now()->format('Y-m-d').'%');
+        // })
+        ->orderBy('created_at', 'DESC')->with('pop','balasan')->get();
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
