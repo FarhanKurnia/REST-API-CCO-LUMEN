@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Carbon;
 use App\Models\Keluhan;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,10 @@ use Illuminate\Http\Request;
 class KeluhanController extends Controller
 {
     public function index(){
-        $data = Keluhan::where('status','=','open')->orderBy('created_at', 'DESC')->with('pop','balasan')->get();
+        $data = Keluhan::where('status','=','open')->orWhere(function ($query) {
+            $query->where('status', '=', 'closed')
+                  ->where('updated_at', 'LIKE', '%'.Carbon::now()->format('Y-m-d').'%');
+        })->orderBy('created_at', 'DESC')->with('pop','balasan')->get();
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
@@ -86,12 +90,6 @@ class KeluhanController extends Controller
         ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Keluhan  $keluhan
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $message = "Data Keluhan berhasil ditemukan";
