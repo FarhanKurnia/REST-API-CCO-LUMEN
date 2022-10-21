@@ -80,17 +80,17 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/bts/1 -> Show One
         $router->get('bts/{id}','BtsController@show');
 
-        // ==============[Endpoint Keluhan]==============
-        // Matches "/api/keluhan -> Show All
-        $router->get('keluhan','KeluhanController@index');
-        // Matches "/api/keluhan -> Store
-        $router->post('keluhan','KeluhanController@store');
-        // Matches "/api/keluhan/1 -> Show One
-        $router->get('keluhan/{id}','KeluhanController@show');
-        // Matches "/api/keluhan/1 -> Delete
-        $router->delete('keluhan/{id}','KeluhanController@destroy');
-        // Matches "/api/keluhan -> Update
-        $router->put('keluhan/{id}','KeluhanController@update');
+        // // ==============[Endpoint Keluhan]==============
+        // // Matches "/api/keluhan -> Show All
+        // $router->get('keluhan','KeluhanController@index');
+        // // Matches "/api/keluhan -> Store
+        // $router->post('keluhan','KeluhanController@store');
+        // // Matches "/api/keluhan/1 -> Show One
+        // $router->get('keluhan/{id}','KeluhanController@show');
+        // // Matches "/api/keluhan/1 -> Delete
+        // $router->delete('keluhan/{id}','KeluhanController@destroy');
+        // // Matches "/api/keluhan -> Update
+        // $router->put('keluhan/{id}','KeluhanController@update');
 
         // ==============[Endpoint Balasan]==============
         // Matches "/api/balasan -> Index
@@ -139,6 +139,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('rfo-gangguan/{id}','RFOGangguanController@show');
         // Matches "/api/balasan/1 -> Update
         $router->put('rfo-gangguan/{id}','RFOGangguanController@update');
+        // Matches "/api/keluhan -> search history
+        $router->post('search-RFOGangguan','RFOGangguanController@search');
 
 
 

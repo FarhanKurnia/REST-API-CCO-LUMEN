@@ -76,7 +76,7 @@ class KeluhanController extends Controller
             ['nomor_pelapor', 'iLIKE', "%{$search}%"],
         ])->orwhere([
             ['status', 'closed'],
-            ['nomor_keluhan', 'iLIKE', "%{$search}%"],
+            ['nomor_keluhan', $search],
         ])->orwhere([
             ['status', 'closed'],
             ['keluhan', 'iLIKE', "%{$search}%"],

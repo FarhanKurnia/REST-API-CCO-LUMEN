@@ -68,7 +68,7 @@ class RFOGangguanController extends Controller
         $message = "Data RFO Gangguan berhasil dimuat";
         $status = "success";
         $rfo_gangguan = RFO_Gangguan::find($id);
-        
+
         if (!$rfo_gangguan) {
             $status = "error";
             $message = "Data RFO Gangguan tidak ditemukan";
@@ -112,6 +112,33 @@ class RFOGangguanController extends Controller
             'status' => $status,
             'message' => $message,
         ], 200);
+    }
+
+    public function search(Request $request)
+	{
+        $search = $request->input('search');
+        // Fungsi ini berhasil namun pencarian terbatas hanya Nama Pelanggan
+        // $data = Keluhan::where('status','closed')
+        // ->where('nama_pelanggan', 'iLIKE', "%{$search}%")
+        // ->orWhere('nomor_pelapor', 'iLIKE', "%{$search}%")
+        // ->get();
+
+        // Fungsi ini berhasil melakukan pencarian lengkap yang statusnya closed
+        $data = RFO_Gangguan::where(
+            'nomor_rfo_gangguan', $search)->orwhere('problem', 'iLIKE', "%{$search}%")->orwhere('nomor_tiket', $search)->paginate(10);
+
+        if($data->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data history keluhan tidak ditemukan',
+            ], 404);
+        }else{
+            return response()->json([
+                'status' => 'succes',
+                'message' => 'Data history keluhan berhasil ditemukan',
+                'data' => $data
+            ], 200);
+        }
     }
 
 }
