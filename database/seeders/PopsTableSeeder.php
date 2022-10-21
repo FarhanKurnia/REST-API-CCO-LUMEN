@@ -28,11 +28,6 @@ class PopsTableSeeder extends Seeder
             'id_pop'=> '3',
             'pop'=> 'Purwokerto',
             // 'created_at' => Carbon::now(),
-        ],
-        [
-            'id_pop'=> '4',
-            'pop'=> 'Tegal',
-            // 'created_at' => Carbon::now(),
         ]]);
     }
 }

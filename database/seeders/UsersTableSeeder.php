@@ -45,6 +45,14 @@ class UsersTableSeeder extends Seeder
             'email'=> 'nocsl@gmail.com',
             'password'=>app('hash')->make('rahasia'),
             'created_at' => Carbon::now(),
+        ],
+        [
+            'name'=> 'Admin',
+            'pop_id' => '1',
+            'role_id' => '0',
+            'email'=> 'admin@gmail.com',
+            'password'=>app('hash')->make('rahasia'),
+            'created_at' => Carbon::now(),
         ]]);
     }
 }

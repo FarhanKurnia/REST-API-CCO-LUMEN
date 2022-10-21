@@ -14,6 +14,7 @@ class Pop extends Model
     protected $table = 'pops';
     protected $primaryKey = 'id_pop';
     protected $fillable = [
+        'id_pop',
         'pop',
     ];
     /**

@@ -21,31 +21,56 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
   // API route group with middleware (authorized)
     $router->group(['middleware' => 'auth'], function () use ($router) {
-        // ==============[Endpoint Auth]==============
-        // Matches "/api/logout
-        $router->get('logout', 'AuthController@logout');
-
-        // ==============[Endpoint User]==============
-        // Matches "/api/user
-        $router->put('user', 'UserController@update');
-        // Matches "/api/user
-        $router->get('user', 'UserController@show');
-        // Matches "/api/user
-        // $router->get('user', 'UserController@index');
-
+        // API route group with middleware (Admin)
         $router->group(['middleware' => 'role'], function () use ($router) {
-            // ==============[Endpoint BTS]==============
-            // Matches "/api/bts -> Show All
-            $router->get('bts','BtsController@index');
+            // ==============[Endpoint BTS Admin]==============
             // Matches "/api/bts -> Store
             $router->post('bts','BtsController@store');
             // Matches "/api/bts/1 -> Show One
-            $router->get('bts/{id}','BtsController@show');
-            // Matches "/api/bts/1 -> Delete
             $router->delete('bts/{id}','BtsController@destroy');
-            // Matches "/api/bts -> Update
+            // Matches "/api/bts/1 -> Update
             $router->put('bts/{id}','BtsController@update');
+
+            // ==============[Endpoint Role]==============
+            // Matches "/api/role -> Store
+            $router->post('role','RoleController@store');
+            // Matches "/api/role -> Index
+            $router->get('role','RoleController@index');
+            // Matches "/api/role/id -> Show One
+            $router->get('role/{id}','RoleController@show');
+            // Matches "/api/role/id -> Update
+            $router->put('role/{id}','RoleController@update');
+            // Matches "/api/role/id -> Delete
+            $router->delete('role/{id}','RoleController@destroy');
+
+            // ==============[Endpoint POP]==============
+            // Matches "/api/pop -> Index
+            $router->get('pop','POPController@index');
+
+            // ==============[Endpoint User]==============
+            // Matches "/api/user
+            $router->get('user', 'UserController@index');
+            // Matches "/api/user
+            $router->put('user/{id}', 'UserController@edit');
+            // Matches "/api/user
+            $router->delete('user/{id}', 'UserController@destroy');
         });
+        // API route group with middleware (All Role: Admin || Helpdesk || NOC)
+        // ==============[Endpoint Auth]==============
+            // Matches "/api/logout
+            $router->get('logout', 'AuthController@logout');
+
+        // ==============[Endpoint User]==============
+        // Matches "/api/profile
+        $router->put('profile', 'UserController@update');
+        // Matches "/api/profile
+        $router->get('profile', 'UserController@show');
+
+        // ==============[Endpoint BTS]==============
+        // Matches "/api/bts -> Show All
+        $router->get('bts','BtsController@index');
+        // Matches "/api/bts/1 -> Show One
+        $router->get('bts/{id}','BtsController@show');
 
         // ==============[Endpoint Keluhan]==============
         // Matches "/api/keluhan -> Show All
@@ -97,7 +122,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/balasan/1 -> Update
         $router->put('rfo-keluhan/{id}','RFOKeluhanController@update');
 
-        // ==============[Endpoint RFO Keluhan]==============
+        // ==============[Endpoint RFO Gangguan]==============
         // Matches "/api/balasan -> Index
         $router->get('rfo-gangguan','RFOGangguanController@index');
         // Matches "/api/balasan -> Store
@@ -107,13 +132,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/balasan/1 -> Update
         $router->put('rfo-gangguan/{id}','RFOGangguanController@update');
 
-        // ==============[Endpoint Role]==============
-        // Matches "/api/role -> Index
-        $router->get('role','RoleController@index');
 
-        // ==============[Endpoint Role]==============
-        // Matches "/api/pop -> Index
-        $router->get('pop','POPController@index');
 
   });
 

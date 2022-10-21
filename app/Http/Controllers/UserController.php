@@ -23,12 +23,38 @@ class UserController extends Controller
         ], 200);
     }
 
-    /**
-     * Update the specified User with JWT ID.
-     * Update User by ID JWT
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function edit(Request $request, $id)
+    {
+        $message = 'Data User updated successfully';
+        $status = "success";
+        $this->validate($request, [
+            'name' => 'required|string',
+            'pop_id' => 'required',
+            'role_id' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        try {
+            User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role_id' => $request->role_id,
+                'pop_id' => $request->pop_id,
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+            return response()->json([
+                'status' => $status,
+                'message' => $message], 404);
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+            'data' => User::where('id_user',$id)->get()], 200);
+    }
+
     public function update(Request $request)
     {
         $message = 'Data User updated successfully';
@@ -45,13 +71,6 @@ class UserController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $role_id = $request->input('role_id');
-        $pop_id = $request->input('pop_id');
-
-    
         try {
             User::find($id)->update([
                 'name' => $request->name,
@@ -63,6 +82,9 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            return response()->json([
+                'status' => $status,
+                'message' => $message], 404);
         }
 
         $credentials = $request->only(['email', 'password']);
@@ -100,6 +122,26 @@ class UserController extends Controller
                 'message' => $message,
                 'data' => $user], 200);
         }
+    }
+
+    public function destroy($id)
+    {
+        $message = 'Data User berhasil dihapus';
+        $status = "success";
+        try {
+            User::find($id)->delete();
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+            return response()->json([
+                'status' => $status,
+                'message' => $message], 404);
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
     }
 
     // Testing function only to get ID JWT
@@ -189,29 +231,4 @@ class UserController extends Controller
     // }
 
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
