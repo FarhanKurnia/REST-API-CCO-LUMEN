@@ -17,9 +17,9 @@ Feature:
 2. BTS
     - Show All BTS
     - Show One BTS
-    - Create BTS
-    - Update BTS
-    - Delete BTS
+    - Create BTS (Admin only)
+    - Update BTS (Admin only)
+    - Delete BTS (Admin only)
 
 3. Keluhan
     - Show All Keluhan
@@ -27,11 +27,52 @@ Feature:
     - Create Keluhan
     - Update keluhan
     - Delete Keluhan
+    - Close Keluhan
+    - Reopen Keluhan
+    - Search History Keluhan
 
 4. Balasan
     - Show All Balasan
     - Show One Balasan
     - Create Balasan
+
+5. POP
+    - Show All POP (Admin only)
+    - Show One POP (Admin only)
+    - Create POP (Admin only)
+    - Update POP (Admin only)
+    - Delete POP (Admin only)
+
+6. Role
+    - Show All Role (Admin only)
+    - Show One Role (Admin only)
+    - Create Role (Admin only)
+    - Update Role (Admin only)
+    - Delete Role (Admin only)
+
+7. Sumber Keluhan
+    - Show All Sumber Keluhan (Admin only)
+    - Show One Sumber Keluhan (Admin only)
+    - Create Sumber Keluhan (Admin only)
+    - Update Sumber Keluhan (Admin only)
+    - Delete Sumber Keluhan (Admin only)
+
+8. User
+    - Show All User (Admin only)
+    - Show One User (Admin only)
+    - Update User (Admin only)
+    - Delete User (Admin only)
+
+9. RFO Gangguan
+    - Show All RFO Gangguan
+    - Show One RFO Gangguan 
+    - Update RFO Gangguan 
+    - Search RFO Gangguan 
+    
+9. RFO Keluhan
+    - Show All RFO Keluhan 
+    - Show One RFO Keluhan 
+    - Update RFO Keluhan 
 
 
 ![ERD](Images/erd.png "ERD")
@@ -49,6 +90,10 @@ Relation:
 
 Authentication:
 - JWT Auth
+
+Middleware:
+- Admin
+- NOC & Helpdesk
 
 
 ------------------------------------------------------------------------
