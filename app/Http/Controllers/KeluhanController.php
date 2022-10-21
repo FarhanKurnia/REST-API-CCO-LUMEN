@@ -105,7 +105,7 @@ class KeluhanController extends Controller
         $nama_pelapor = $request->input('nama_pelapor');
         $nomor_pelapor = $request->input('nomor_pelapor');
         $nomor_keluhan = $request->input('nomor_keluhan');
-        $sumber = $request->input('sumber');
+        $sumber_id = $request->input('sumber_id');
         $detail_sumber = $request->input('detail_sumber');
         $keluhan = $request->input('keluhan');
         $status_keluhan = $request->input('status');
@@ -122,7 +122,7 @@ class KeluhanController extends Controller
                 'nama_pelapor' => $nama_pelapor,
                 'nomor_pelapor' => $nomor_pelapor,
                 'nomor_keluhan' => $nomor_keluhan,
-                'sumber' => $sumber,
+                'sumber_id' => $sumber_id,
                 'detail_sumber' => $detail_sumber,
                 'keluhan' => $keluhan,
                 'status' => $status_keluhan,
@@ -176,7 +176,7 @@ class KeluhanController extends Controller
                 'pop_id' => $request->pop_id,
                 'nama_pelapor' => $request->nama_pelapor,
                 'nomor_pelapor' => $request->nomor_pelapor,
-                'sumber' => $request->sumber,
+                'sumber_id' => $request->sumber_id,
                 'detail_sumber' => $request->detail_sumber,
                 'rfo_gangguan_id'> $request->rfo_gangguan_id,
             ]);

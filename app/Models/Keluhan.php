@@ -14,7 +14,7 @@ class Keluhan extends Model
         'nama_pelapor',
         'nomor_pelapor',
         'nomor_keluhan',
-        'sumber',
+        'sumber_id',
         'detail_sumber',
         'keluhan',
         'status',
@@ -24,6 +24,8 @@ class Keluhan extends Model
         'rfo_gangguan_id',
     ];
 
+    protected $with = ['sumber'];
+
     // Relation Balasan
     public function balasan(){
         return $this->hasMany(Balasan::class,'keluhan_id');
@@ -32,6 +34,11 @@ class Keluhan extends Model
     // Relation User
     public function user(){
     	return $this->belongsTo(User::class,'user_id');
+    }
+
+    // Relation User
+    public function sumber(){
+    	return $this->belongsTo(SumberKeluhan::class,'sumber_id');
     }
 
     // Relation POP

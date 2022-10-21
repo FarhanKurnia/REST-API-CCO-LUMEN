@@ -17,7 +17,7 @@ class CreateKeluhansTable extends Migration
             $table->id('id_keluhan');
             // $table->string('nomor_keluhan')->unique();
             $table->string('nomor_keluhan');
-            $table->string('sumber');
+            $table->unsignedBigInteger('sumber_id');
             $table->string('detail_sumber');
             $table->unsignedBigInteger('pop_id');
             $table->string('id_pelanggan');
@@ -36,6 +36,7 @@ class CreateKeluhansTable extends Migration
             $table->foreign('pop_id')->references('id_pop')->on('pops')->onDelete('cascade');
             $table->foreign('rfo_gangguan_id')->references('id_rfo_gangguan')->on('r_f_o_gangguans')->onDelete('cascade');
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('sumber_id')->references('id_sumber')->on('sumber_keluhans')->onDelete('cascade');
 
             //optional
             $table->timestamps();
