@@ -44,8 +44,16 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->delete('role/{id}','RoleController@destroy');
 
             // ==============[Endpoint POP]==============
+            // Matches "/api/pop -> Store
+            $router->post('pop','POPController@store');
             // Matches "/api/pop -> Index
             $router->get('pop','POPController@index');
+            // Matches "/api/pop/id -> Show One
+            $router->get('pop/{id}','POPController@show');
+            // Matches "/api/pop/id -> Update
+            $router->put('pop/{id}','POPController@update');
+            // Matches "/api/pop/id -> Delete
+            $router->delete('pop/{id}','POPController@destroy');
 
             // ==============[Endpoint User]==============
             // Matches "/api/user

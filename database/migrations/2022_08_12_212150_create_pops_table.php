@@ -16,7 +16,7 @@ class CreatePopsTable extends Migration
         Schema::create('pops', function (Blueprint $table) {
             $table->id('id_pop');
             $table->string('pop');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 
