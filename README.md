@@ -33,6 +33,10 @@ Feature:
     - Show One Balasan
     - Create Balasan
 
+
+![ERD](Images/erd.png "ERD")
+
+
 Relation:
 - Users with POP (One to Many) 
 - Users with Role (One to Many)
