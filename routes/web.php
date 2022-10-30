@@ -34,8 +34,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // ==============[Endpoint Role]==============
             // Matches "/api/role -> Store
             $router->post('role','RoleController@store');
-            // Matches "/api/role -> Index
-            $router->get('role','RoleController@index');
+            // // Matches "/api/role -> Index
+            // $router->get('role','RoleController@index');
             // Matches "/api/role/id -> Show One
             $router->get('role/{id}','RoleController@show');
             // Matches "/api/role/id -> Update
@@ -46,8 +46,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // ==============[Endpoint POP]==============
             // Matches "/api/pop -> Store
             $router->post('pop','POPController@store');
-            // Matches "/api/pop -> Index
-            $router->get('pop','POPController@index');
+            // // Matches "/api/pop -> Index
+            // $router->get('pop','POPController@index');
             // Matches "/api/pop/id -> Show One
             $router->get('pop/{id}','POPController@show');
             // Matches "/api/pop/id -> Update
@@ -168,4 +168,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   // Just testing route to get JWT Payload
     $router->get('getJWT', 'UserController@getJWT');
   // $router->get('profile', 'UserController@profile');
+  // Matches "/api/role -> Index
+  $router->get('role','RoleController@index');
+  // Matches "/api/pop -> Index
+  $router->get('pop','POPController@index');
 });
