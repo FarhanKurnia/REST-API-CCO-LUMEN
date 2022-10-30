@@ -158,6 +158,7 @@ class KeluhanController extends Controller
             $keluhan->user;
             $keluhan->pop;
             $keluhan->balasan;
+            $keluhan->RFO_Keluhan;
             return response()->json([
                 'status' => $status,
                 'message' => $message,

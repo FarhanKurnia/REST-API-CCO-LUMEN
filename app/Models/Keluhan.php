@@ -48,7 +48,7 @@ class Keluhan extends Model
 
     // Relation RFO
     public function RFO_Keluhan(){
-    	return $this->hasOne(RFO_Keluhan::class);
+    	return $this->hasOne(RFO_Keluhan::class,'keluhan_id');
     }
 
     public function RFO_Gangguan(){
