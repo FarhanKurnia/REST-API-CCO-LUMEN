@@ -239,6 +239,10 @@ class KeluhanController extends Controller
         try {
             Keluhan::find($id)->update([
                 'status' => $request->status_keluhan='open',
+                // Revisi: Buat ID RFO Gangguan dan RFO Keluhan delete
+                // 'rfo_gangguan_id'=>$request->rfo_gangguan_id=null,
+                // 'rfo_keluhan_id'=>$request->rfo_gangguan_id=null,
+
             ]);
         } catch (\Throwable $th) {
             $status = "error";
