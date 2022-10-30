@@ -154,6 +154,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->put('rfo-gangguan/{id}','RFOGangguanController@update');
         // Matches "/api/keluhan -> search history
         $router->post('search-RFOGangguan','RFOGangguanController@search');
+        // Matches "/api/balasan/1 -> Update
+        $router->put('keluhan-rfo-gangguan/{id}','KeluhanController@updateKeluhanRFOGangguan');
+        
 
 
 

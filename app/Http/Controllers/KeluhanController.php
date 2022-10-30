@@ -21,7 +21,7 @@ class KeluhanController extends Controller
         //     $query->where('status', '=', 'closed')
         //           ->where('updated_at', 'LIKE', '%'.Carbon::now()->format('Y-m-d').'%');
         // })
-        ->orderBy('created_at', 'DESC')->with('pop','balasan')->get();
+        ->orderBy('created_at', 'DESC')->with('pop','balasan','RFO_Gangguan','RFO_Keluhan')->get();
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
@@ -158,7 +158,6 @@ class KeluhanController extends Controller
             $keluhan->user;
             $keluhan->pop;
             $keluhan->balasan;
-            $keluhan->RFO_Keluhan;
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -200,6 +199,26 @@ class KeluhanController extends Controller
         try {
             Keluhan::find($id)->update([
                 'status' => $request->status_keluhan='closed',
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
+    }
+
+    public function updateKeluhanRFOGangguan(Request $request, $id)
+    {
+        $message = 'Data keluhan RFO Gangguan berhasil diupdate';
+        $status = "success";
+
+        try {
+            Keluhan::find($id)->update([
+                'rfo_gangguan_id' => $request->rfo_gangguan_id,
             ]);
         } catch (\Throwable $th) {
             $status = "error";
