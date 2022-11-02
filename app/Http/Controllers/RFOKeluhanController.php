@@ -21,7 +21,6 @@ class RFOKeluhanController extends Controller
         $status = "success";
 
         $user_id = $request->input('user_id');
-        // $keluhan_id = $request->input('keluhan_id');
         $nomor_tiket = $request->input('nomor_tiket');
         $mulai_keluhan = $request->input('mulai_keluhan');
         $selesai_keluhan = $request->input('selesai_keluhan');
@@ -79,9 +78,6 @@ class RFOKeluhanController extends Controller
         $rfo_keluhan->keluhan->user->role;
         $rfo_keluhan->keluhan->user->pop;
         $rfo_keluhan->keluhan->balasan;
-        // Relasi ini kayaknya masih belum bener
-        // $rfo_keluhan->keluhan->balasan->user;
-        // $rfo_keluhan->keluhan->balasan->pop;
         return response()->json([
             'status' => $status,
             'message' => $message,
