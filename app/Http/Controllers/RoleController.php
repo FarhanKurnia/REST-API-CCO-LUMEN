@@ -7,12 +7,21 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    public function index()
+    public function indexPublic()
     {
         return response()->json([
             'status' => 'success',
             'message' => 'Load data Balasan successfully',
-            'data' => Role::get()], 200);
+            'data' => Role::where('role','!=',"ADMIN")->get()], 200);
+    }
+
+    public function index()
+    {
+        $data = Role::get();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Load data Balasan successfully',
+            'data' => $data], 200);
     }
 
     public function store(Request $request)

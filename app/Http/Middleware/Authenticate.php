@@ -37,9 +37,10 @@ class Authenticate
     {
         if ($this->auth->guard($guard)->guest()) {
             // return response('Unauthorized', 401);
-            return response('Please login first', 401);
+            return response()->json([
+                'status' => 'Unauthenticated',
+                'message' => 'Please login first'], 401);
         }
-
         return $next($request);
     }
 }

@@ -47,7 +47,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches "/api/role -> Store
             $router->post('role','RoleController@store');
             // // Matches "/api/role -> Index
-            // $router->get('role','RoleController@index');
+            $router->get('role','RoleController@index');
             // Matches "/api/role/id -> Show One
             $router->get('role/{id}','RoleController@show');
             // Matches "/api/role/id -> Update
@@ -184,7 +184,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('getJWT', 'UserController@getJWT');
   // $router->get('profile', 'UserController@profile');
   // Matches "/api/role -> Index
-  $router->get('role','RoleController@index');
+  $router->get('role/public','RoleController@indexPublic');
   // Matches "/api/pop -> Index
   $router->get('pop','POPController@index');
 });
