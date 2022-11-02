@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
             PopsTableSeeder::class,
             UsersTableSeeder::class,
             BtsTableSeeder::class,
+            RFOKeluhanSeeder::class,
             RFOGangguanSeeder::class,
             KeluhansSeeder::class,
             BalasansSeeder::class,
-            RFOKeluhanSeeder::class,
             ShiftSeeder::class,
         ]);
     }

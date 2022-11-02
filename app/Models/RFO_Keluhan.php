@@ -14,11 +14,11 @@ class RFO_Keluhan extends Model
     protected $table = 'r_f_o__keluhans';
     protected $primaryKey = 'id_rfo_keluhan';
     protected $fillable = [
-        'nomor_tiket', 'mulai_keluhan', 'selesai_keluhan', 'problem', 'action', 'status','deskripsi','durasi', 'lampiran_rfo_keluhan', 'user_id', 'keluhan_id',
+        'nomor_tiket', 'mulai_keluhan', 'selesai_keluhan', 'problem', 'action', 'status','deskripsi','durasi', 'lampiran_rfo_keluhan', 'user_id',
     ];
 
     public function keluhan(){
-    	return $this->belongsTo(Keluhan::class, 'keluhan_id');
+        return $this->hasOne(Keluhan::class,'rfo_keluhan_id');
     }
 
     public function user(){

@@ -21,7 +21,7 @@ class RFOKeluhanController extends Controller
         $status = "success";
 
         $user_id = $request->input('user_id');
-        $keluhan_id = $request->input('keluhan_id');
+        // $keluhan_id = $request->input('keluhan_id');
         $nomor_tiket = $request->input('nomor_tiket');
         $mulai_keluhan = $request->input('mulai_keluhan');
         $selesai_keluhan = $request->input('selesai_keluhan');
@@ -37,7 +37,7 @@ class RFOKeluhanController extends Controller
         try {
             RFO_Keluhan::create([
                 'user_id' => $user_id,
-                'keluhan_id' => $keluhan_id,
+                // 'keluhan_id' => $keluhan_id,
                 'nomor_tiket' => $nomor_tiket,
                 'mulai_keluhan' => $mulai_keluhan,
                 'selesai_keluhan' => $selesai_keluhan,
@@ -64,7 +64,7 @@ class RFOKeluhanController extends Controller
         $message = "Load data post successfully";
         $status = "success";
         $rfo_keluhan = RFO_Keluhan::find($id);
-        
+
 
         if (!$rfo_keluhan) {
             $status = "error";
@@ -118,7 +118,7 @@ class RFOKeluhanController extends Controller
         try {
             RFO_Keluhan::find($id)->update([
                 'user_id' => $request->user_id,
-                'keluhan_id' => $request->keluhan_id,
+                // 'keluhan_id' => $request->keluhan_id,
                 'nomor_tiket' => $request->nomor_tiket,
                 'mulai_keluhan' => $request->mulai_keluhan,
                 'selesai_keluhan' => $request->selesai_keluhan,

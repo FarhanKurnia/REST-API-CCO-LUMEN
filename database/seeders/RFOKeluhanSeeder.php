@@ -15,7 +15,7 @@ class RFOKeluhanSeeder extends Seeder
     public function run()
     {
         DB::table('r_f_o__keluhans')->insert([[
-            'keluhan_id' => '3',
+            // 'keluhan_id' => '3',
             'user_id' => '1',
             'nomor_tiket' => '12345678',
             'mulai_keluhan' => Carbon::now(),
@@ -27,7 +27,7 @@ class RFOKeluhanSeeder extends Seeder
             'created_at' => Carbon::now(),
         ],
         [
-            'keluhan_id' => '4',
+            // 'keluhan_id' => '4',
             'user_id' => '1',
             'nomor_tiket' => '23456789',
             'mulai_keluhan' => Carbon::now(),

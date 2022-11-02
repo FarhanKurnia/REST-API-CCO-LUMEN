@@ -113,6 +113,7 @@ class KeluhanController extends Controller
         $pop_id = $request->input('pop_id');
         $user_id = $request->input('user_id');
         $rfo_gangguan_id = $request->input('rfo_gangguan_id');
+        $rfo_keluhan_id = $request->input('rfo_keluhan_id');
 
 
         try {
@@ -130,6 +131,7 @@ class KeluhanController extends Controller
                 'pop_id' => $pop_id,
                 'user_id' => $user_id,
                 'rfo_gangguan_id'> $rfo_gangguan_id,
+                'rfo_keluhan_id'> $rfo_keluhan_id,
             ]);
         } catch (\Throwable $th) {
             $status = "error";
@@ -158,6 +160,8 @@ class KeluhanController extends Controller
             $keluhan->user;
             $keluhan->pop;
             $keluhan->balasan;
+            $keluhan->rfo_keluhan;
+            $keluhan->rfo_gangguan;
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -178,7 +182,6 @@ class KeluhanController extends Controller
                 'nomor_pelapor' => $request->nomor_pelapor,
                 'sumber_id' => $request->sumber_id,
                 'detail_sumber' => $request->detail_sumber,
-                'rfo_gangguan_id'> $request->rfo_gangguan_id,
             ]);
         } catch (\Throwable $th) {
             $status = "error";

@@ -22,6 +22,7 @@ class Keluhan extends Model
         'pop_id',
         'user_id',
         'rfo_gangguan_id',
+        'rfo_keluhan_id',
     ];
 
     protected $with = ['sumber'];
@@ -46,11 +47,12 @@ class Keluhan extends Model
     	return $this->belongsTo(Pop::class, 'pop_id');
     }
 
-    // Relation RFO
+    // Relation RFO Keluhan
     public function RFO_Keluhan(){
-    	return $this->hasOne(RFO_Keluhan::class,'keluhan_id');
+    	return $this->belongsTo(RFO_Keluhan::class, 'rfo_keluhan_id');
     }
 
+    // Relation RFO Gangguan
     public function RFO_Gangguan(){
     	return $this->belongsTo(RFO_Gangguan::class, 'rfo_gangguan_id');
     }

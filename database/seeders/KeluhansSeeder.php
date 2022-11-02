@@ -28,6 +28,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '2',
@@ -43,6 +44,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '3',
@@ -58,6 +60,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => 1,
         ],
         [
             'id_pelanggan' => '4',
@@ -73,6 +76,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => 2,
         ],
         [
             'id_pelanggan' => '5',
@@ -88,6 +92,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '6',
@@ -103,6 +108,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '7',
@@ -118,6 +124,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '8',
@@ -133,6 +140,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '9',
@@ -148,6 +156,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '10',
@@ -163,6 +172,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => null,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '11',
@@ -178,6 +188,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '12',
@@ -193,6 +204,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '13',
@@ -208,6 +220,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 1,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '14',
@@ -223,6 +236,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '15',
@@ -238,7 +252,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
-
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '16',
@@ -254,6 +268,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '17',
@@ -269,6 +284,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '18',
@@ -284,6 +300,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '19',
@@ -299,6 +316,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ],
         [
             'id_pelanggan' => '20',
@@ -314,6 +332,7 @@ class KeluhansSeeder extends Seeder
             'user_id' => 2,
             'created_at' => Carbon::now(),
             'rfo_gangguan_id' => 1,
+            'rfo_keluhan_id' => null,
         ]
     ]);
     }

@@ -15,7 +15,7 @@ class CreateRFOKeluhansTable extends Migration
     {
         Schema::create('r_f_o__keluhans', function (Blueprint $table) {
             $table->id('id_rfo_keluhan');
-            $table->unsignedBigInteger('keluhan_id');
+            // $table->unsignedBigInteger('keluhan_id');
             // $table->string('id_pelanggan');
             // $table->string('nama_pelanggan');
             $table->string('nomor_tiket')->nullable();
@@ -35,7 +35,7 @@ class CreateRFOKeluhansTable extends Migration
 
             //Foreign Key
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->foreign('keluhan_id')->references('id_keluhan')->on('keluhans')->onDelete('cascade');
+            // $table->foreign('keluhan_id')->references('id_keluhan')->on('keluhans')->onDelete('cascade');
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
             // $table->foreign('balasan_id')->references('id')->on('balasans')->onDelete('cascade');
 

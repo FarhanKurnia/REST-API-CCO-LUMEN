@@ -29,12 +29,15 @@ class CreateKeluhansTable extends Migration
             $table->string('lampiran')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('rfo_gangguan_id')->nullable();
+            $table->unsignedBigInteger('rfo_keluhan_id')->nullable();
+
 
 
             //Foreign Key
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('pop_id')->references('id_pop')->on('pops')->onDelete('cascade');
             $table->foreign('rfo_gangguan_id')->references('id_rfo_gangguan')->on('r_f_o_gangguans')->onDelete('cascade');
+            $table->foreign('rfo_keluhan_id')->references('id_rfo_keluhan')->on('r_f_o__keluhans')->onDelete('cascade');
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
             $table->foreign('sumber_id')->references('id_sumber')->on('sumber_keluhans')->onDelete('cascade');
 
