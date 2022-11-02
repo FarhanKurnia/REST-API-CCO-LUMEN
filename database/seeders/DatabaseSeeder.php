@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             KeluhansSeeder::class,
             BalasansSeeder::class,
             RFOKeluhanSeeder::class,
+            ShiftSeeder::class,
         ]);
     }
 }

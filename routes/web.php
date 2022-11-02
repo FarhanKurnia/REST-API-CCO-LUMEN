@@ -23,6 +23,18 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['middleware' => 'auth'], function () use ($router) {
         // API route group with middleware (Admin)
         $router->group(['middleware' => 'role'], function () use ($router) {
+            // ==============[Endpoint POP]==============
+            // Matches "/api/pop -> Store
+            $router->post('shift','ShiftController@store');
+            // // Matches "/api/pop -> Index
+            $router->get('shift','ShiftController@index');
+            // Matches "/api/pop/id -> Show One
+            $router->get('shift/{id}','ShiftController@show');
+            // Matches "/api/pop/id -> Update
+            $router->put('shift/{id}','ShiftController@update');
+            // Matches "/api/pop/id -> Delete
+            $router->delete('shift/{id}','ShiftController@destroy');
+
             // ==============[Endpoint BTS Admin]==============
             // Matches "/api/bts -> Store
             $router->post('bts','BtsController@store');
@@ -156,7 +168,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('search-RFOGangguan','RFOGangguanController@search');
         // Matches "/api/balasan/1 -> Update
         $router->put('keluhan-rfo-gangguan/{id}','KeluhanController@updateKeluhanRFOGangguan');
-        
+
 
 
 
