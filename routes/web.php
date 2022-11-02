@@ -90,8 +90,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         });
         // API route group with middleware (All Role: Admin || Helpdesk || NOC)
         // ==============[Endpoint Auth]==============
-            // Matches "/api/logout
-            $router->get('logout', 'AuthController@logout');
+        // Matches "/api/logout
+        $router->get('logout', 'AuthController@logout');
 
         // ==============[Endpoint User]==============
         // Matches "/api/profile
@@ -154,6 +154,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('rfo-keluhan/{id}','RFOKeluhanController@show');
         // Matches "/api/balasan/1 -> Update
         $router->put('rfo-keluhan/{id}','RFOKeluhanController@update');
+        // Matches "/api/balasan/1 -> Delete
+        $router->delete('rfo-keluhan/{id}','RFOKeluhanController@destroy');
 
         // ==============[Endpoint RFO Gangguan]==============
         // Matches "/api/balasan -> Index
@@ -168,23 +170,21 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('search-RFOGangguan','RFOGangguanController@search');
         // Matches "/api/balasan/1 -> Update
         $router->put('keluhan-rfo-gangguan/{id}','KeluhanController@updateKeluhanRFOGangguan');
-
-
-
-
+        // Matches "/api/balasan/1 -> Delete
+        $router->delete('rfo-gangguan/{id}','RFOGangguanController@destroy');
   });
 
+  // ==============[Endpoint Public]==============
   // Matches "/api/register
   $router->post('register', 'AuthController@register');
   // Matches "/api/login
   $router->post('login', 'AuthController@login');
-
-
-  // Just testing route to get JWT Payload
-    $router->get('getJWT', 'UserController@getJWT');
-  // $router->get('profile', 'UserController@profile');
   // Matches "/api/role -> Index
-  $router->get('role/public','RoleController@indexPublic');
+  $router->get('role-public','RoleController@indexPublic');
   // Matches "/api/pop -> Index
   $router->get('pop','POPController@index');
+
+  // ==============[Endpoint Debug]==============
+  // Just testing route to get JWT Payload
+  $router->get('getJWT', 'UserController@getJWT');
 });

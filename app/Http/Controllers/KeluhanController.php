@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Support\Carbon;
 use App\Models\Keluhan;
+use App\Models\RFO_Gangguan;
+use App\Models\RFO_Keluhan;
 use Illuminate\Http\Request;
 
 
@@ -149,24 +151,29 @@ class KeluhanController extends Controller
         $message = "Data Keluhan berhasil ditemukan";
         $status = "success";
         $keluhan = Keluhan::find($id);
-        if (!$keluhan) {
+        try {
+            if (!$keluhan) {
+                $status = "error";
+                $message = "Data Keluhan tidak ditemukan";
+                return response()->json([
+                    'status'=>$status,
+                    'mesage' =>$message
+                ],404);
+            }else{
+                $keluhan->user;
+                $keluhan->pop;
+                $keluhan->balasan;
+                $keluhan->rfo_keluhan;
+                $keluhan->rfo_gangguan;
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message,
+                    'data' =>$keluhan,
+                ],200);
+            }
+        } catch (\Throwable $th) {
             $status = "error";
-            $message = "Data Keluhan tidak ditemukan";
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
-        }else{
-            $keluhan->user;
-            $keluhan->pop;
-            $keluhan->balasan;
-            $keluhan->rfo_keluhan;
-            $keluhan->rfo_gangguan;
-            return response()->json([
-                'status' => $status,
-                'message' => $message,
-                'data' =>$keluhan,
-            ],200);
+            $message = $th->getMessage();
         }
     }
 
@@ -234,18 +241,14 @@ class KeluhanController extends Controller
         ], 200);
     }
 
-    public function open(Request $request, $id)
+    public function updateKeluhanRFOKeluhan(Request $request, $id)
     {
-        $message = 'Data keluhan berhasil dibuka';
+        $message = 'Data keluhan RFO Keluhan berhasil diupdate';
         $status = "success";
 
         try {
             Keluhan::find($id)->update([
-                'status' => $request->status_keluhan='open',
-                // Revisi: Buat ID RFO Gangguan dan RFO Keluhan delete
-                // 'rfo_gangguan_id'=>$request->rfo_gangguan_id=null,
-                // 'rfo_keluhan_id'=>$request->rfo_gangguan_id=null,
-
+                'rfo_keluhan_id' => $request->rfo_keluhan_id,
             ]);
         } catch (\Throwable $th) {
             $status = "error";
@@ -256,6 +259,60 @@ class KeluhanController extends Controller
             'status' => $status,
             'message' => $message,
         ], 200);
+    }
+
+
+    public function open(Request $request, $id)
+    {
+        $message = 'Data keluhan berhasil dibuka';
+        $status = "success";
+        $keluhan = Keluhan::find($id);
+        if (!empty($keluhan)){
+            try {
+                $keluhan->update([
+                    'status' => $request->status_keluhan='open',
+                    'rfo_gangguan_id' => $request->rfo_gangguan=null,
+                    'rfo_keluhan_id' => $request->rfo_keluhan=null,
+                ]);
+            } catch (\Throwable $th) {
+                $status = "error";
+                $message = $th->getMessage();
+            }
+        }else{
+            $message = 'Data keluhan tidak ditemukan';
+            $status = "success";
+        }
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
+        // Fungsi DB Transacsion ini masih gagal wqwqwq
+        // Revisi: Buat ID RFO Gangguan dan RFO Keluhan delete
+        // 'rfo_gangguan_id'=>$request->rfo_gangguan_id=null,
+        // 'rfo_keluhan_id'=>$request->rfo_gangguan_id=null,
+        // $rfo_gangguan = $keluhan["rfo_gangguan_id"];
+        // $RFOGangguan = RFO_Gangguan::find($rfo_gangguan);
+        // $RFOKeluhan = RFO_Keluhan::find($rfo_keluhan);
+        // dd($RFOKeluhan);
+        // DB::beginTransaction();
+        // try {
+        //     $keluhan = Keluhan::find($id);
+        //     $keluhan->update([
+        //         'status' => $request->status_keluhan='open',
+
+        //     ]);
+        //     $rfo_keluhan = $keluhan["rfo_keluhan_id"];
+        //     if(!empty($rfo_keluhan)){
+        //         RFO_Keluhan::find($rfo_keluhan)->delete();
+        //     }
+
+        //     DB::commit();
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     $status = "error";
+        //     $message = $e->getMessage();
+        // }
+
     }
 
     public function destroy($id)

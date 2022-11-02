@@ -72,13 +72,17 @@ class RFOGangguanController extends Controller
         if (!$rfo_gangguan) {
             $status = "error";
             $message = "Data RFO Gangguan tidak ditemukan";
+            return response()->json([
+                'status' => $status,
+                'message' => $message], 404);
+        }else{
+            $rfo_gangguan->user;
+            $rfo_gangguan->keluhan;
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'data' => $rfo_gangguan], 200);
         }
-        $rfo_gangguan->user;
-        $rfo_gangguan->keluhan;
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            'data' => $rfo_gangguan], 200);
     }
 
     public function update(Request $request, $id)
@@ -141,4 +145,19 @@ class RFOGangguanController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        $message = 'Data RFO Gangguan berhasil dihapus';
+        $status = "success";
+        try {
+            RFO_Gangguan::find($id)->delete();
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
+    }
 }

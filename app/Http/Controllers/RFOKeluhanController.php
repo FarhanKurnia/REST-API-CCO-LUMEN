@@ -63,13 +63,13 @@ class RFOKeluhanController extends Controller
         $message = "Load data post successfully";
         $status = "success";
         $rfo_keluhan = RFO_Keluhan::find($id);
-
-
         if (!$rfo_keluhan) {
             $status = "error";
             $message = "Data RFO not found";
-        }
-
+            return response()->json([
+                'status' => $status,
+                'message' => $message], 404);
+        }else{
         $rfo_keluhan->user;
         $rfo_keluhan->user->role;
         $rfo_keluhan->user->pop;
@@ -82,6 +82,7 @@ class RFOKeluhanController extends Controller
             'status' => $status,
             'message' => $message,
             'data' => $rfo_keluhan], 200);
+        }
     }
 
     /**
@@ -142,8 +143,19 @@ class RFOKeluhanController extends Controller
      * @param  \App\Models\RFO_Keluhan  $rFO_Keluhan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RFO_Keluhan $rFO_Keluhan)
+    public function destroy($id)
     {
-        //
+        $message = 'Data RFO Keluhan berhasil dihapus';
+        $status = "success";
+        try {
+            RFO_Keluhan::find($id)->delete();
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
     }
 }
