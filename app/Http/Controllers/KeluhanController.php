@@ -105,7 +105,7 @@ class KeluhanController extends Controller
         // #T051102212345
         // # = hashtag   
         // T = Trouble
-        // time() = DD-MM-YYYY
+        // date() = YYYY-MM-DD
         // Random Interger = 5 Digit
 
         $id_pelanggan = $request->input('id_pelanggan');
