@@ -18,6 +18,7 @@ class CreateRFOKeluhansTable extends Migration
             // $table->unsignedBigInteger('keluhan_id');
             // $table->string('id_pelanggan');
             // $table->string('nama_pelanggan');
+            $table->string('nomor_rfo_keluhan')->nullable();
             $table->string('nomor_tiket')->nullable();
             $table->timestamp('mulai_keluhan');
             $table->timestamp('selesai_keluhan');

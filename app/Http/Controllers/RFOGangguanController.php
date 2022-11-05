@@ -19,9 +19,16 @@ class RFOGangguanController extends Controller
     {
         $message = 'Data RFO Gangguan berhasil dibuat';
         $status = "success";
+        // Format: 
+        // #RFO-S051102212345
+        // # = hashtag   
+        // T = Trouble
+        // date() = YYYY-MM-DD
+        // Random Interger = 5 Digit
 
         $user_id = $request->input('user_id');
         $nomor_tiket = $request->input('nomor_tiket');
+        $nomor_rfo_gangguan = '#RFO-G'.date("Ymd").rand( 100 , 999 );
         $mulai_gangguan = $request->input('mulai_gangguan');
         $selesai_gangguan = $request->input('selesai_gangguan');
         $start = new DateTime($mulai_gangguan);//start time
@@ -44,6 +51,7 @@ class RFOGangguanController extends Controller
                 'action' => $action,
                 'status' => $status_RFO,
                 'deskripsi' => $deskripsi,
+                'nomor_rfo_gangguan' => $nomor_rfo_gangguan,
                 'lampiran_rfo_gangguan' => $lampiran_rfo_gangguan,
             ]);
         } catch (\Throwable $th) {

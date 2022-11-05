@@ -20,8 +20,16 @@ class RFOKeluhanController extends Controller
         $message = 'RFO Keluhan created successfully';
         $status = "success";
 
+        // Format: 
+        // #RFO-S051102212345
+        // # = hashtag   
+        // T = Trouble
+        // date() = YYYY-MM-DD
+        // Random Interger = 5 Digit
+
         $user_id = $request->input('user_id');
         $nomor_tiket = $request->input('nomor_tiket');
+        $nomor_rfo_keluhan = '#RFO-S'.date("Ymd").rand( 10000 , 99999 );
         $mulai_keluhan = $request->input('mulai_keluhan');
         $selesai_keluhan = $request->input('selesai_keluhan');
         $start = new DateTime($mulai_keluhan);//start time
@@ -38,6 +46,7 @@ class RFOKeluhanController extends Controller
                 'user_id' => $user_id,
                 // 'keluhan_id' => $keluhan_id,
                 'nomor_tiket' => $nomor_tiket,
+                'nomor_rfo_keluhan' => $nomor_rfo_keluhan,
                 'mulai_keluhan' => $mulai_keluhan,
                 'selesai_keluhan' => $selesai_keluhan,
                 'problem' => $problem,
