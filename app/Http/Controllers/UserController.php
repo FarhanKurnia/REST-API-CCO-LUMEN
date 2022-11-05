@@ -59,47 +59,17 @@ class UserController extends Controller
     }
 
     public function updateAvatar(Request $request) {
-        $message = 'Data User updated successfully';
+        $message = 'Profile picture updated successfully';
         $status = "success";
-        // Take JWT ID as ID in Database
-        $token = JWTAuth::getToken();
-        $jwt_id = JWTAuth::getPayload($token)->toArray();
-        $id = $jwt_id['id_user'];
-        // $this->validate($request, [
-        //     'avatar' => 'required|image',
-        //     'name' => 'required|string',
-        //     // 'password' => 'required|confirmed',
-        // ]);
-        // $avatar = null;
-        
-        if(Request()->hasFile('avatar')) {
-            $avatar = Str::random(34);
-            $request->file('avatar')->move(storage_path('avatar'), $avatar);
-          }
-        
-        // $user = User::where('id_user', $id)->first();
+        $this->validate($request, [
+                'avatar' => 'file',
+        ]);
         try {
-            $user = User::find($id);
-            if ($user) {
-                $current_avatar_path = storage_path('avatar') . '/' . $user->avatar;
-                if (file_exists($current_avatar_path)) {
-                    unlink($current_avatar_path);
-                }
-                if(!empty($request->avatar)){
-                    $user->avatar = $avatar;
-                }
-                $user->name = $request->name;
-                $user->password = Hash::make($request->password);
-                $user->save();
-            }else{
-                $user = new User;
-                $user->id_user = $id;
-                
-                $user->avatar = $avatar;
-                $user->name = $request->name;
-                $user->password = Hash::make($request->password);
-                $user->save();
-            }
+            $user = Auth::user();
+            $avatarName = time().'_'.$user->name.'_avatar'.'.'.request()->avatar->getClientOriginalExtension();
+            $request->avatar->move('avatar',$avatarName);
+            $user->avatar = url('avatar'.'/'.$avatarName);
+            $user->save();
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
@@ -110,7 +80,8 @@ class UserController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $user], 200);
+            'data' => $user,
+        ], 200);
     }
 
     public function updateProfile(Request $request)
@@ -122,16 +93,8 @@ class UserController extends Controller
         $jwt_id = JWTAuth::getPayload($token)->toArray();
         $id = $jwt_id['id_user'];
 
-        // $this->validate($request, [
-        //     'name' => 'required|string',
-        //     'pop_id' => 'required',
-        //     'role_id' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required|confirmed',
-        // ]);
-
         try {
-            $user = User::find($id)->update([
+            User::find($id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),

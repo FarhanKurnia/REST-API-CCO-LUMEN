@@ -99,7 +99,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // Matches "/api/profile
         $router->put('profile', 'UserController@updateProfile');
         // Matches "/api/profile
-        $router->put('profileAvatar', 'UserController@updateAvatar');
+        $router->post('profileAvatar', 'UserController@updateAvatar');
         // Matches "/api/profile
         $router->get('profile', 'UserController@profile');
 
