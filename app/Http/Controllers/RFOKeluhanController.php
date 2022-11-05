@@ -34,7 +34,7 @@ class RFOKeluhanController extends Controller
         $lampiran_rfo_keluhan = $request->input('lampiran_rfo_keluhan');
 
         try {
-            RFO_Keluhan::create([
+            $RFO_Keluhan = RFO_Keluhan::create([
                 'user_id' => $user_id,
                 // 'keluhan_id' => $keluhan_id,
                 'nomor_tiket' => $nomor_tiket,
@@ -51,11 +51,11 @@ class RFOKeluhanController extends Controller
             $status = "error";
             $message = $th->getMessage();
         }
-
+        $RFO_Keluhan_id = $RFO_Keluhan->id_rfo_keluhan;
         return response([
             'status' => $status,
             'message' => $message,
-        ], 200);
+            'id_rfo_keluhan' => $RFO_Keluhan_id], 200);
     }
 
     public function show($id)
@@ -70,14 +70,14 @@ class RFOKeluhanController extends Controller
                 'status' => $status,
                 'message' => $message], 404);
         }else{
-        $rfo_keluhan->user;
-        $rfo_keluhan->user->role;
-        $rfo_keluhan->user->pop;
-        $rfo_keluhan->keluhan;
-        $rfo_keluhan->keluhan->user;
-        $rfo_keluhan->keluhan->user->role;
-        $rfo_keluhan->keluhan->user->pop;
-        $rfo_keluhan->keluhan->balasan;
+            $rfo_keluhan->user;
+            $rfo_keluhan->user->role;
+            $rfo_keluhan->user->pop;
+            $rfo_keluhan->keluhan;
+            $rfo_keluhan->keluhan->user;
+            $rfo_keluhan->keluhan->user->role;
+            $rfo_keluhan->keluhan->user->pop;
+            $rfo_keluhan->keluhan->balasan;
         return response()->json([
             'status' => $status,
             'message' => $message,

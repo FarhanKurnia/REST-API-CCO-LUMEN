@@ -64,8 +64,15 @@ class UserController extends Controller
         $token = JWTAuth::getToken();
         $jwt_id = JWTAuth::getPayload($token)->toArray();
         $id = $jwt_id['id_user'];
+
+        // Ganti Avatar
+        // $avatar = Str::random(34);
+        // $request->file('avatar')->move(storage_path('avatar'), $avatar);
+        // $user_profile = User::where('id_user', Auth::user()->$id)->first();
+
         $this->validate($request, [
             'name' => 'required|string',
+            // 'avatar' => 'required|image',
             'pop_id' => 'required',
             'role_id' => 'required',
             'email' => 'required|email',
