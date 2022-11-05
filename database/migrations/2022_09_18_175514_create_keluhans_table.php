@@ -15,7 +15,6 @@ class CreateKeluhansTable extends Migration
     {
         Schema::create('keluhans', function (Blueprint $table) {
             $table->id('id_keluhan');
-            // $table->string('nomor_keluhan')->unique();
             $table->string('nomor_keluhan');
             $table->unsignedBigInteger('sumber_id');
             $table->string('detail_sumber');

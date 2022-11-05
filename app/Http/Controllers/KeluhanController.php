@@ -101,22 +101,27 @@ class KeluhanController extends Controller
     public function store(Request $request){
         $message = 'Data keluhan berhasil dimasukan';
         $status = "success";
+        // Format: 
+        // #T051102212345
+        // # = hashtag   
+        // T = Trouble
+        // time() = DD-MM-YYYY
+        // Random Interger = 5 Digit
 
         $id_pelanggan = $request->input('id_pelanggan');
         $nama_pelanggan = $request->input('nama_pelanggan');
         $nama_pelapor = $request->input('nama_pelapor');
         $nomor_pelapor = $request->input('nomor_pelapor');
-        $nomor_keluhan = $request->input('nomor_keluhan');
+        $nomor_keluhan = '#T'.date("Ymd").rand( 10000 , 99999 );
         $sumber_id = $request->input('sumber_id');
         $detail_sumber = $request->input('detail_sumber');
         $keluhan = $request->input('keluhan');
         $status_keluhan = $request->input('status');
-        $lampiran = $request->input('lampiran');
         $pop_id = $request->input('pop_id');
         $user_id = $request->input('user_id');
         $rfo_gangguan_id = $request->input('rfo_gangguan_id');
         $rfo_keluhan_id = $request->input('rfo_keluhan_id');
-
+        $lampiran = $request->input('lampiran');
 
         try {
             Keluhan::create([
@@ -132,6 +137,8 @@ class KeluhanController extends Controller
                 'lampiran' => $lampiran,
                 'pop_id' => $pop_id,
                 'user_id' => $user_id,
+                // 'lampiran'=> implode("|",$lampiran),
+                'lampiran'=> $lampiran,
                 'rfo_gangguan_id'> $rfo_gangguan_id,
                 'rfo_keluhan_id'> $rfo_keluhan_id,
             ]);
