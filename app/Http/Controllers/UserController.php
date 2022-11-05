@@ -23,7 +23,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function edit(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $message = 'Data User updated successfully';
         $status = "success";
@@ -48,14 +48,15 @@ class UserController extends Controller
                 'status' => $status,
                 'message' => $message], 404);
         }
-
         return response()->json([
             'status' => $status,
             'message' => $message,
             'data' => User::where('id_user',$id)->get()], 200);
     }
 
-    public function update(Request $request)
+    
+
+    public function updateProfile(Request $request)
     {
         $message = 'Data User updated successfully';
         $status = "success";
@@ -99,7 +100,7 @@ class UserController extends Controller
     }
 
     // Show data user by ID JWT
-    public function show()
+    public function profile()
     {
         // Take JWT ID as ID in Database
         $token = JWTAuth::getToken();
@@ -108,6 +109,27 @@ class UserController extends Controller
         $message = "Load data User successfully";
         $status = "success";
         $user = User::find($id_user);
+        if (!$user) {
+            $status = "error";
+            $message = "Data User not found";
+            return response()->json([
+                'status' => $status,
+                'message' => $message],404);
+        }else{
+            $user->role;
+            $user->pop;
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'data' => $user], 200);
+        }
+    }
+
+    // Show data user by ID JWT
+    public function show($id){
+        $message = "Data BTS ditemukan";
+        $status = "success";
+        $user = User::find($id);
         if (!$user) {
             $status = "error";
             $message = "Data User not found";
@@ -206,29 +228,6 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     * Disable because I use how by JWT
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     //
-    //     $message = "Load data User successfully";
-    //     $status = "success";
-    //     $user = User::find($id);
-
-    //     if (!$user) {
-    //         $status = "error";
-    //         $message = "Data User not found";
-    //     }
-
-    //     return response()->json([
-    //         'status' => $status,
-    //         'message' => $message,
-    //         'data' => $user->where('id',$id)->get()], 200);
-    // }
-
+   
 
 }

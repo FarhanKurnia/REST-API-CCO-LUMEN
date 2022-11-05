@@ -80,11 +80,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->delete('sumber-keluhan/{id}','SumberKeluhanController@destroy');
 
 
-            // ==============[Endpoint User]==============
+            // ==============[Endpoint User Admin]==============
             // Matches "/api/user
             $router->get('user', 'UserController@index');
             // Matches "/api/user
-            $router->put('user/{id}', 'UserController@edit');
+            $router->get('user/{id}', 'UserController@show');
+            // Matches "/api/user
+            $router->put('user/{id}', 'UserController@update');
             // Matches "/api/user
             $router->delete('user/{id}', 'UserController@destroy');
         });
@@ -95,9 +97,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
         // ==============[Endpoint User]==============
         // Matches "/api/profile
-        $router->put('profile', 'UserController@update');
+        $router->put('profile', 'UserController@updateProfile');
         // Matches "/api/profile
-        $router->get('profile', 'UserController@show');
+        $router->get('profile', 'UserController@profile');
 
         // ==============[Endpoint BTS]==============
         // Matches "/api/bts -> Show All
@@ -156,6 +158,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->put('rfo-keluhan/{id}','RFOKeluhanController@update');
         // Matches "/api/balasan/1 -> Delete
         $router->delete('rfo-keluhan/{id}','RFOKeluhanController@destroy');
+        // Matches "/api/balasan/1 -> Update
+        $router->put('keluhan-rfo-keluhan/{id}','KeluhanController@updateKeluhanRFOKeluhan');
 
         // ==============[Endpoint RFO Gangguan]==============
         // Matches "/api/balasan -> Index
