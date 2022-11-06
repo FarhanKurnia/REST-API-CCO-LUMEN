@@ -12,7 +12,7 @@ class BalasanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Load data Balasan successfully',
-            'data' => Balasan::with('user')->get()], 200);
+            'data' => Balasan::with('user','lampiranbalasan')->get()], 200);
     }
 
     public function store(Request $request)
@@ -59,6 +59,7 @@ class BalasanController extends Controller
             $balasan->user;
             $balasan->user->role;
             $balasan->keluhan;
+            $balasan->lampiranbalasan;
             return response()->json([
                 'status' => $status,
                 'message' => $message,

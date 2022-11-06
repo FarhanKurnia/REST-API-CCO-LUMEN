@@ -128,6 +128,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('balasan','BalasanController@store');
         // Matches "/api/balasan/1 -> Show One
         $router->get('balasan/{id}','BalasanController@show');
+        $router->post('lampiran-balasan','LampiranBalasanController@store');
+        // Matches "/api/keluhan -> search history
+        $router->get('lampiran-balasan','LampiranBalasanController@index');
 
          // ==============[Endpoint Keluhan]==============
         // Matches "/api/keluhan -> Show All
