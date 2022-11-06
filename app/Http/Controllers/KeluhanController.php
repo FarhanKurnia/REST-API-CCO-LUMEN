@@ -23,7 +23,7 @@ class KeluhanController extends Controller
         //     $query->where('status', '=', 'closed')
         //           ->where('updated_at', 'LIKE', '%'.Carbon::now()->format('Y-m-d').'%');
         // })
-        ->orderBy('created_at', 'DESC')->with('pop','balasan','RFO_Gangguan','RFO_Keluhan')->get();
+        ->orderBy('created_at', 'DESC')->with('pop','balasan','RFO_Gangguan','RFO_Keluhan','lampirankeluhan')->get();
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'success',
@@ -101,9 +101,9 @@ class KeluhanController extends Controller
     public function store(Request $request){
         $message = 'Data keluhan berhasil dimasukan';
         $status = "success";
-        // Format: 
+        // Format:
         // #T051102212345
-        // # = hashtag   
+        // # = hashtag
         // T = Trouble
         // date() = YYYY-MM-DD
         // Random Interger = 5 Digit
@@ -170,6 +170,7 @@ class KeluhanController extends Controller
                 $keluhan->user;
                 $keluhan->pop;
                 $keluhan->balasan;
+                $keluhan->lampirankeluhan;
                 $keluhan->rfo_keluhan;
                 $keluhan->rfo_gangguan;
                 return response()->json([
@@ -181,6 +182,10 @@ class KeluhanController extends Controller
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+            ], 200);
         }
     }
 

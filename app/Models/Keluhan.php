@@ -32,6 +32,10 @@ class Keluhan extends Model
         return $this->hasMany(Balasan::class,'keluhan_id');
     }
 
+    public function lampirankeluhan(){
+        return $this->hasMany(Lampiran_Keluhan::class,'keluhan_id');
+    }
+
     // Relation User
     public function user(){
     	return $this->belongsTo(User::class,'user_id');
