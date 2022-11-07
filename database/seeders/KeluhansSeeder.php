@@ -26,7 +26,7 @@ class KeluhansSeeder extends Seeder
             'status' => 'open',
             'pop_id' => 1,
             'user_id' => 1,
-            'created_at' => Carbon::now(),
+            'created_at' => Carbon::now('Asia/Jakarta'),
             'rfo_gangguan_id' => 1,
             'rfo_keluhan_id' => null,
         ],
