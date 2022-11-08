@@ -30,7 +30,6 @@ class BalasanController extends Controller
                 'user_id' => $user_id,
                 'keluhan_id' => $keluhan_id,
                 'balasan' => $balasan,
-                'lampiran' => $lampiran,
             ]);
         } catch (\Throwable $th) {
             $status = "error";
