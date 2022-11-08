@@ -121,7 +121,6 @@ class KeluhanController extends Controller
         $user_id = $request->input('user_id');
         $rfo_gangguan_id = $request->input('rfo_gangguan_id');
         $rfo_keluhan_id = $request->input('rfo_keluhan_id');
-        $lampiran = $request->input('lampiran');
 
         try {
             Keluhan::create([
@@ -137,8 +136,6 @@ class KeluhanController extends Controller
                 'lampiran' => $lampiran,
                 'pop_id' => $pop_id,
                 'user_id' => $user_id,
-                // 'lampiran'=> implode("|",$lampiran),
-                // 'lampiran'=> $lampiran,
                 'rfo_gangguan_id'> $rfo_gangguan_id,
                 'rfo_keluhan_id'> $rfo_keluhan_id,
             ]);
