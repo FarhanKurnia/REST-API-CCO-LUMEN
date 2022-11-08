@@ -13,4 +13,9 @@ class Shift extends Model
         'mulai',
         'selesai',
     ];
+
+    // Relation User one to many BTS
+    public function laporan(){
+    	return $this->hasMany(Laporan::class);
+    }
 }

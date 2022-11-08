@@ -47,6 +47,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     // Relation User one to many BTS
+    public function laporan(){
+    	return $this->hasMany(Laporan::class);
+    }
+
+    // Relation User one to many BTS
     public function keluhan(){
     	return $this->hasMany(Keluhan::class);
     }

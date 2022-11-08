@@ -16,7 +16,6 @@ class CreateBalasansTable extends Migration
         Schema::create('balasans', function (Blueprint $table) {
             $table->id('id_balasan');
             $table->string('balasan');
-            $table->string('lampiran')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('keluhan_id');
 

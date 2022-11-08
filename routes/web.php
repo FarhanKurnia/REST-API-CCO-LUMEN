@@ -189,6 +189,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         // ==============[Endpoint Statistik]==============
         $router->get('statistik','Statistik@index');
         $router->post('statistik-range','Statistik@statistik_range');
+
+        // ==============[Endpoint Statistik]==============
+        $router->get('laporan','LaporanController@index');
+        $router->get('laporan/{id}','LaporanController@show');
+        $router->post('laporan','LaporanController@store');
   });
 
   // ==============[Endpoint Public]==============

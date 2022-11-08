@@ -138,7 +138,7 @@ class KeluhanController extends Controller
                 'pop_id' => $pop_id,
                 'user_id' => $user_id,
                 // 'lampiran'=> implode("|",$lampiran),
-                'lampiran'=> $lampiran,
+                // 'lampiran'=> $lampiran,
                 'rfo_gangguan_id'> $rfo_gangguan_id,
                 'rfo_keluhan_id'> $rfo_keluhan_id,
             ]);

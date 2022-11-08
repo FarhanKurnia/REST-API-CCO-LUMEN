@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lampiran_Balasan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,6 +26,9 @@ class DatabaseSeeder extends Seeder
             KeluhansSeeder::class,
             BalasansSeeder::class,
             ShiftSeeder::class,
+            LaporanSeeder::class,
+            LampiranBalasanSeeder::class,
+            LampiranKeluhanSeeder::class,
         ]);
     }
 }
