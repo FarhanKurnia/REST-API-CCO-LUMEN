@@ -23,7 +23,6 @@ class BalasanController extends Controller
         $user_id = $request->input('user_id');
         $keluhan_id = $request->input('keluhan_id');
         $balasan = $request->input('balasan');
-        $lampiran = $request->input('lampiran');
 
         try {
             Balasan::create([
