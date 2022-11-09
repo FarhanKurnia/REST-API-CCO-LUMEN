@@ -6,7 +6,11 @@ use App\Models\Keluhan;
 use DateTime;
 use App\Models\Laporan;
 use App\Models\RFO_Gangguan;
+use App\Models\User;
+use Tymon\JWTAuth\Facades\JWTAuth; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LaporanController extends Controller
 {
@@ -122,6 +126,54 @@ class LaporanController extends Controller
     public function edit(Laporan $laporan)
     {
         //
+    }
+    public function userLaporan()
+    {
+        $token = JWTAuth::getToken();
+        $id_jwt = JWTAuth::getPayload($token)->toArray();
+        $pop_id = $id_jwt['pop_id'];
+
+        $message = "Data User Helpdesk dan NOC berhasil ditemukan";
+        $status = "success";
+        $helpdesk = User::where([
+            ['pop_id',$pop_id],
+            ['role_id',1],
+            ])->get();
+        $noc = User::where([
+            ['pop_id',$pop_id],
+            ['role_id',2],
+            ])->get();
+        if (!$helpdesk) {
+            $status = "success";
+            $message = "Data User Helpdesk tidak ditemukan dan data User NOC ditemukan";
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'user' => [
+                    'noc' => $noc,
+                ]
+            ], 200);
+        }elseif(!$noc){
+            $status = "success";
+            $message = "Data User NOC tidak ditemukan dan data User Helpdesk ditemukan";
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'user' => [
+                    'helpdesk' => $helpdesk,
+                ]
+            ], 200);
+        }
+        else{
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'user' => [
+                    'helpdesk' => $helpdesk,
+                    'noc' => $noc,
+                ]
+            ], 200);
+        }
     }
 
     // Fungsi untuk get keluhan laporan dengan request: tanggal, mulai dan selesai
