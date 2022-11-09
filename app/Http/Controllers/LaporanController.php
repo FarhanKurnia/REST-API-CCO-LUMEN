@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Carbon;
+use App\Models\Keluhan;
+use DateTime;
 use App\Models\Laporan;
+use App\Models\RFO_Gangguan;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -119,6 +122,56 @@ class LaporanController extends Controller
     public function edit(Laporan $laporan)
     {
         //
+    }
+
+    // Fungsi untuk get keluhan laporan dengan request: tanggal, mulai dan selesai
+    public function keluhanLaporan(Request $request){
+        $tanggal1 = $request->input('tanggal');
+        $tanggal2 = '';
+        $shift = $request->input('shift');
+        $mulai = '';
+        $selesai = '';
+        $pop_id = $request->input('pop_id');
+        if($shift == 1){
+            $tanggal2 = $tanggal1;
+            $t1=mktime(8, 00, 00, 0, 0, 0);
+            $t2=mktime(16, 30, 00, 0, 0, 0);
+            $mulai = date('H:i:s',$t1);
+            $selesai = date('H:i:s',$t2);
+        }elseif($shift == 2){
+            $ymd = DateTime::createFromFormat('Y-m-d', $tanggal1);
+            $y2 = $ymd->format('Y');
+            $m2 = $ymd->format('m');
+            $d2 = $ymd->format('d');
+            $d2++;
+            $t1=mktime(16, 30, 00, 0, 0, 0);
+            $t2=mktime(00, 30, 00, $m2, $d2, $y2);
+            $mulai = date('H:i:s',$t1);
+            $selesai = date('H:i:s',$t2);
+            $tanggal2 = date('Y-m-d',$t2);
+        }
+        $total_keluhan = Keluhan::where('pop_id',$pop_id)->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
+        $keluhan = Keluhan::with('pop','rfo_keluhan')->where('pop_id',$pop_id)->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
+        $total_rfo_gangguan = RFO_Gangguan::with('keluhan')->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
+        $rfo_gangguan = RFO_Gangguan::with('keluhan')->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
+
+        if($keluhan->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data keluhan tidak ditemukan',
+            ], 404);
+        }else{
+            return response()->json([
+                'status' => 'succes',
+                'message' => 'Data keluhan berhasil ditemukan',
+                'data' => [
+                    'total_keluhan'=> $total_keluhan,
+                    'keluhan'=>$keluhan,
+                    'total_rfo_gangguan'=> $total_rfo_gangguan,
+                    'rfo_gangguan' => $rfo_gangguan,
+                ]
+            ], 200);
+        }
     }
 
     /**

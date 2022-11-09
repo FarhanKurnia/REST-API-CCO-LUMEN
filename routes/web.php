@@ -194,6 +194,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->get('laporan','LaporanController@index');
         $router->get('laporan/{id}','LaporanController@show');
         $router->post('laporan','LaporanController@store');
+        $router->post('laporan-keluhan','LaporanController@keluhanLaporan');
   });
 
   // ==============[Endpoint Public]==============

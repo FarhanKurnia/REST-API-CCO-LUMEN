@@ -133,7 +133,6 @@ class KeluhanController extends Controller
                 'detail_sumber' => $detail_sumber,
                 'keluhan' => $keluhan,
                 'status' => $status_keluhan,
-                'lampiran' => $lampiran,
                 'pop_id' => $pop_id,
                 'user_id' => $user_id,
                 'rfo_gangguan_id'> $rfo_gangguan_id,
