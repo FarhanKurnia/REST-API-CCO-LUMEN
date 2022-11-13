@@ -12,7 +12,7 @@ class Balasan extends Model
         'balasan','keluhan_id','user_id','lampiran',
     ];
 
-    protected $with = ['user'];
+    protected $with = ['user','lampiranbalasan'];
 
     public function keluhan(){
     	return $this->belongsTo(Keluhan::class,'keluhan_id');
