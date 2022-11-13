@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('http://localhost:8000/avatar/user.png');
             $table->string('email')->unique()->notNullable();
             $table->string('password');
+            $table->enum('status',['aktif','non-aktif'])->default('aktif');;
+            $table->boolean('verifikasi')->default('false');
+            $table->string('token_verifikasi')->nullable();
+            $table->string('otp')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('pop_id');
 

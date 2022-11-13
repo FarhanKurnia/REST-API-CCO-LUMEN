@@ -82,6 +82,7 @@ $app->middleware([
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'role' => \App\Http\Middleware\Role::class,
+    'verifikasi' => \App\Http\Middleware\Verifikasi::class,
 ]);
 
 /*

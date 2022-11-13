@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'users';
     protected $primaryKey = 'id_user';
     protected $fillable = [
-        'name', 'avatar', 'email','pop_id','role_id'
+        'name', 'avatar', 'email','pop_id','role_id','status','verifikasi','token_verifikasi','otp',
     ];
     /**
      * The attributes excluded from the model's JSON form.
@@ -80,6 +80,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [
             'id_user' => $this->id_user,
             'name' => $this->name,
+            'verifikasi' => $this->verifikasi,
             'role_id' => $this->role_id,
             'pop_id' => $this->pop_id,
         ];

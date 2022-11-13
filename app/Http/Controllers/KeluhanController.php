@@ -123,7 +123,7 @@ class KeluhanController extends Controller
         $rfo_keluhan_id = $request->input('rfo_keluhan_id');
 
         try {
-            Keluhan::create([
+            $keluhan = Keluhan::create([
                 'id_pelanggan' => $id_pelanggan,
                 'nama_pelanggan' => $nama_pelanggan,
                 'nama_pelapor' => $nama_pelapor,
@@ -146,6 +146,7 @@ class KeluhanController extends Controller
         return response([
             'status' => $status,
             'message' => $message,
+            'id_keluhan' => $keluhan->id_keluhan,
         ], 200);
     }
 

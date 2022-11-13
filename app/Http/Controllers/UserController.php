@@ -39,7 +39,7 @@ class UserController extends Controller
         ]);
 
         try {
-            User::find($id)->update([
+            $user = User::find($id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'role_id' => $request->role_id,
@@ -55,7 +55,7 @@ class UserController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => User::where('id_user',$id)->get()], 200);
+            'data' => $user], 200);
     }
 
     public function updateAvatar(Request $request) {
@@ -247,6 +247,6 @@ class UserController extends Controller
         //
     }
 
-   
+
 
 }

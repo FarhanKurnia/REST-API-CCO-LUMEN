@@ -25,7 +25,7 @@ class BalasanController extends Controller
         $balasan = $request->input('balasan');
 
         try {
-            Balasan::create([
+            $balasan = Balasan::create([
                 'user_id' => $user_id,
                 'keluhan_id' => $keluhan_id,
                 'balasan' => $balasan,
@@ -38,6 +38,7 @@ class BalasanController extends Controller
         return response([
             'status' => $status,
             'message' => $message,
+            'id_balasan' => $balasan->id_balasan,
         ], 200);
     }
 
