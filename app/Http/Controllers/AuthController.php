@@ -47,6 +47,66 @@ class AuthController extends Controller
 
    }
 
+   public function lupaPassword(Request $request)
+   {
+        $otp = $request->get('otp');
+        $password = $request->get('password');
+        $user = User::where('otp',$otp)->count();
+        if($user>0){
+            try{
+                User::where('otp',$otp)->update([
+                    'password'=>app('hash')->make($password),
+                    'otp' => null,
+                ]);
+                return response()->json([
+                    'status' => 'Success',
+                    'message' => 'Password berhasil diubah',
+                    ], 200);
+            } catch (\Throwable $th) {
+                $status = "Gagal";
+                $message = $th->getMessage();
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message], 404);
+            }
+        }else{
+            return response()->json([
+                'status' => 'Gagal',
+                'message' => 'Password gagal diubah',], 404);
+        }
+
+
+   }
+
+
+
+   public function requestOTP(Request $request)
+   {
+    $token_OTP = Str::random(12);
+    $email = $request->get('email');
+    $user = User::where('email',$email)->count();
+
+    if($user>0){
+        try{
+            User::where('email',$email)->update(['otp'=>$token_OTP]);
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'OTP berhasil dibuat',
+                'otp' => $token_OTP], 200);
+        } catch (\Throwable $th) {
+            $status = "Gagal";
+            $message = $th->getMessage();
+            return response()->json([
+                'status' => $status,
+                'message' => $message], 404);
+        }
+    }else{
+        return response()->json([
+            'status' => 'Gagal',
+            'message' => 'Data yang dimasukan tidak valid',], 404);
+    }
+   }
+
    public function Verifikasi(Request $request)
    {
     $token_verifikasi = $request->get('token');
@@ -67,7 +127,7 @@ class AuthController extends Controller
     }else{
         return response()->json([
             'status' => 'Gagal',
-            'message' => 'Akun tidak ditemukan',], 404);
+            'message' => 'Data yang dimasukan tidak valid',], 404);
     }
    }
 
