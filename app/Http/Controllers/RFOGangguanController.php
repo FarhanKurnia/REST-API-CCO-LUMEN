@@ -128,7 +128,7 @@ class RFOGangguanController extends Controller
 
     public function search(Request $request)
 	{
-        $search = $request->input('search');
+        $keyword = $request->get('keyword');
         // Fungsi ini berhasil namun pencarian terbatas hanya Nama Pelanggan
         // $data = Keluhan::where('status','closed')
         // ->where('nama_pelanggan', 'iLIKE', "%{$search}%")
@@ -137,7 +137,7 @@ class RFOGangguanController extends Controller
 
         // Fungsi ini berhasil melakukan pencarian lengkap yang statusnya closed
         $data = RFO_Gangguan::where(
-            'nomor_rfo_gangguan', $search)->orwhere('problem', 'iLIKE', "%{$search}%")->orwhere('nomor_tiket', $search)->paginate(10);
+            'nomor_rfo_gangguan', $keyword)->orwhere('problem', 'iLIKE', "%{$keyword}%")->orwhere('nomor_tiket', $keyword)->paginate(10);
 
         if($data->isEmpty()){
             return response()->json([
