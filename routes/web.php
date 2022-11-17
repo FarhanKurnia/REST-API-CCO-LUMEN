@@ -214,6 +214,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   $router->get('pop','POPController@index');
   // Matches "/api/login
   $router->post('login', 'AuthController@login');
+  // kirim email
+  Route::get('/email','MailController@index');
+
+
+
+
+
 
   // ==============[Endpoint Debug]==============
   // Just testing route to get JWT Payload

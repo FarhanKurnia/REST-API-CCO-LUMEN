@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\ForgetPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use App\Mail\Verification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\View;
+
 
 class AuthController extends Controller
 {
@@ -39,6 +44,15 @@ class AuthController extends Controller
             $user->password = app('hash')->make($request->get('password'));
             $user->save();
 
+            $name = $user->name;
+            $email = $user->email;
+            $token = $user->token_verifikasi;
+            $data = [
+                'title' => 'Email Verification',
+                'name' => $name,
+                'url' => url('api/verification/?token='.$token),
+            ];
+            Mail::to($email)->send(new Verification($data));
             return response()->json(['user' => $user, 'message' => 'Successfully created!'], 201);
 
         } catch (\Exception $e) {
@@ -89,6 +103,11 @@ class AuthController extends Controller
     if($user>0){
         try{
             User::where('email',$email)->update(['otp'=>$token_OTP]);
+            $data = [
+                'title' => 'Email Forget Password',
+                'otp' => $token_OTP,
+            ];
+            Mail::to($email)->send(new ForgetPassword($data));
             return response()->json([
                 'status' => 'Success',
                 'message' => 'OTP berhasil dibuat',
