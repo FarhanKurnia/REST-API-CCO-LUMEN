@@ -56,7 +56,7 @@ class KeluhanController extends Controller
 
     public function search(Request $request)
 	{
-        $search = $request->input('search');
+        $keyword = $request->get('keyword');
         // Fungsi ini berhasil namun pencarian terbatas hanya Nama Pelanggan
         // $data = Keluhan::where('status','closed')
         // ->where('nama_pelanggan', 'iLIKE', "%{$search}%")
@@ -66,22 +66,22 @@ class KeluhanController extends Controller
         // Fungsi ini berhasil melakukan pencarian lengkap yang statusnya closed
         $data = Keluhan::where([
             ['status', 'closed'],
-            ['id_pelanggan', 'iLIKE', "%{$search}%"],
+            ['id_pelanggan', 'LIKE', "%{$keyword}%"],
         ])->orwhere([
             ['status', 'closed'],
-            ['nama_pelanggan', 'iLIKE', "%{$search}%"],
+            ['nama_pelanggan', 'iLIKE', "%{$keyword}%"],
         ])->orwhere([
             ['status', 'closed'],
-            ['nama_pelapor', 'iLIKE', "%{$search}%"],
+            ['nama_pelapor', 'iLIKE', "%{$keyword}%"],
         ])->orwhere([
             ['status', 'closed'],
-            ['nomor_pelapor', 'iLIKE', "%{$search}%"],
+            ['nomor_pelapor', 'iLIKE', "%{$keyword}%"],
         ])->orwhere([
             ['status', 'closed'],
-            ['nomor_keluhan', $search],
+            ['nomor_keluhan', $keyword],
         ])->orwhere([
             ['status', 'closed'],
-            ['keluhan', 'iLIKE', "%{$search}%"],
+            ['keluhan', 'iLIKE', "%{$keyword}%"],
         ])->paginate(10);
 
         if($data->isEmpty()){
