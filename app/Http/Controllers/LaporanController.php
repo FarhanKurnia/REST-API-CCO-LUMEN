@@ -7,7 +7,7 @@ use DateTime;
 use App\Models\Laporan;
 use App\Models\RFO_Gangguan;
 use App\Models\User;
-use Tymon\JWTAuth\Facades\JWTAuth; 
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -106,6 +106,7 @@ class LaporanController extends Controller
                 'mesage' =>$message
             ],404);
         }else{
+            $laporan->shift;
             $laporan->user;
             $laporan->role;
             $laporan->pop;
@@ -176,7 +177,7 @@ class LaporanController extends Controller
         }
     }
 
-    // Fungsi untuk get keluhan laporan dengan request: tanggal, mulai dan selesai
+    // Fungsi untuk get keluhan laporan dengan request: tanggal, shift dan pop
     public function keluhanLaporan(Request $request){
         $tanggal1 = $request->input('tanggal');
         $tanggal2 = '';
@@ -198,6 +199,17 @@ class LaporanController extends Controller
             $d2++;
             $t1=mktime(16, 30, 00, 0, 0, 0);
             $t2=mktime(00, 30, 00, $m2, $d2, $y2);
+            $mulai = date('H:i:s',$t1);
+            $selesai = date('H:i:s',$t2);
+            $tanggal2 = date('Y-m-d',$t2);
+        }elseif($shift == 3){
+            $ymd = DateTime::createFromFormat('Y-m-d', $tanggal1);
+            $y2 = $ymd->format('Y');
+            $m2 = $ymd->format('m');
+            $d2 = $ymd->format('d');
+            $d2++;
+            $t1=mktime(00, 30, 00, 0, 0, 0);
+            $t2=mktime(8, 30, 00, $m2, $d2, $y2);
             $mulai = date('H:i:s',$t1);
             $selesai = date('H:i:s',$t2);
             $tanggal2 = date('Y-m-d',$t2);
