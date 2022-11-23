@@ -24,6 +24,7 @@ class CreateKeluhansTable extends Migration
             $table->string('nama_pelapor');
             $table->string('nomor_pelapor');
             $table->string('keluhan');
+            $table->string('sentimen_analisis')->nullable();
             $table->enum('status',['open','closed']);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('rfo_gangguan_id')->nullable();

@@ -21,6 +21,7 @@ class Keluhan extends Model
         'lampiran',
         'pop_id',
         'user_id',
+        'sentimen_analisis',
         'rfo_gangguan_id',
         'rfo_keluhan_id',
     ];

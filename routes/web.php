@@ -191,7 +191,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
             // ==============[Endpoint Statistik]==============
             $router->get('statistik','Statistik@index');
-            $router->post('statistik-range','Statistik@statistik_range');
+            $router->get('statistik-range','Statistik@statistik_range');
 
             // ==============[Endpoint Laporan]==============
             $router->get('laporan','LaporanController@index');
@@ -215,7 +215,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   // Matches "/api/login
   $router->post('login', 'AuthController@login');
   // kirim email
-  Route::get('/email','MailController@index');
+  $router->get('/email','MailController@index');
 
 
 

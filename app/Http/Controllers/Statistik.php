@@ -424,184 +424,228 @@ class Statistik extends Controller
             'status' => 'success',
             'message' => 'Data keluhan berhasil ditemukan',
             'all' => [
-                'all_pop' =>[
+                [
+                    'Nama' => 'Semua POP',
                     'Semua_Keluhan' => $all_case,
                     'Semua_Keluhan_Closed' => $all_case_closed,
                     'Semua_Keluhan_Open' => $all_case_opened,
                     'Semua_RFO_Keluhan' => $all_rfo_keluhan,
                     'Semua_RFO_Gangguan' => $all_rfo_gangguan,
                 ],
-                'jogja' => [
-                    'Semua_Keluhan_Jogja' => $all_case_jogja,
-                    'Semua_Keluhan_Closed_Jogja' => $all_case_closed_jogja,
-                    'Semua_Keluhan_Open_Jogja' => $all_case_opened_jogja,
+                [
+                    'Nama' => 'Yogyakarta',
+                    'Semua_Keluhan' => $all_case_jogja,
+                    'Semua_Keluhan_Closed' => $all_case_closed_jogja,
+                    'Semua_Keluhan_Open' => $all_case_opened_jogja,
                 ],
-                'solo' => [
-                    'Semua_Keluhan_Solo' => $all_case_solo,
-                    'Semua_Keluhan_Closed_Solo' => $all_case_closed_solo,
-                    'Semua_Keluhan_Open_Solo' => $all_case_opened_solo,
+                [
+                    'Nama' => 'Surakarta',
+                    'Semua_Keluhan' => $all_case_solo,
+                    'Semua_Keluhan_Closed' => $all_case_closed_solo,
+                    'Semua_Keluhan_Open' => $all_case_opened_solo,
                 ],
-                'purwokerto' => [
-                    'Semua_Keluhan_Purwokerto' => $all_case_purwokerto,
-                    'Semua_Keluhan_Closed_Purwokerto' => $all_case_closed_purwokerto,
-                    'Semua_Keluhan_Open_Purwokerto' => $all_case_opened_purwokerto,
+                [
+                    'Nama' => 'Purwokerto',
+                    'Semua_Keluhan' => $all_case_purwokerto,
+                    'Semua_Keluhan_Closed' => $all_case_closed_purwokerto,
+                    'Semua_Keluhan_Open' => $all_case_opened_purwokerto,
                 ],
             ],
             'today' => [
-                'all_pop' =>[
-                    'Semua_Keluhan_Hari_ini' => $all_case_today,
-                    'Semua_Keluhan_Closed_Hari_ini' => $all_case_closed_today,
-                    'Semua_Keluhan_Open_Hari_ini' => $all_case_opened_today,
-                    'Semua_RFO_Keluhan_Hari_ini' => $all_rfo_keluhan_today,
-                    'Semua_RFO_Gangguan_Hari_ini' => $all_rfo_gangguan_today,
+                [
+                    'Nama' => 'Semua POP',
+                    'Semua_Keluhan' => $all_case_today,
+                    'Semua_Keluhan_Closed' => $all_case_closed_today,
+                    'Semua_Keluhan_Open' => $all_case_opened_today,
+                    'Semua_RFO_Keluhan' => $all_rfo_keluhan_today,
+                    'Semua_RFO_Gangguan' => $all_rfo_gangguan_today,
                 ],
-                'jogja'=>[
-                    'Semua_Keluhan_Jogja_Hari_ini' => $all_case_jogja_today,
-                    'Semua_Keluhan_Closed_Jogja_Hari_ini' => $all_case_closed_jogja_today,
-                    'Semua_Keluhan_Open_Jogja_Hari_ini' => $all_case_opened_jogja_today,
+                [
+                    'Nama' => 'Yogyakarta',
+                    'Semua_Keluhan' => $all_case_jogja_today,
+                    'Semua_Keluhan_Closed' => $all_case_closed_jogja_today,
+                    'Semua_Keluhan_Open' => $all_case_opened_jogja_today,
                 ],
-                'solo'=>[
-                    'Semua_Keluhan_Solo_Hari_ini' => $all_case_solo_today,
-                    'Semua_Keluhan_Closed_Hari_ini' => $all_case_closed_solo_today,
-                    'Semua_Keluhan_Open_Hari_ini' => $all_case_opened_solo_today,
+                [
+                    'Nama' => 'Surakarta',
+                    'Semua_Keluhan' => $all_case_solo_today,
+                    'Semua_Keluhan_Closed' => $all_case_closed_solo_today,
+                    'Semua_Keluhan_Open' => $all_case_opened_solo_today,
                 ],
-                'purwokerto'=>[
-                    'Semua_Keluhan_Purwokerto_Hari_ini' => $all_case_purwokerto_today,
-                    'Semua_Keluhan_Closed_Hari_ini' => $all_case_closed_purwokerto_today,
-                    'Semua_Keluhan_Open_Hari_ini' => $all_case_opened_purwokerto_today,
+                [
+                    'Nama' => 'Purwokerto',
+                    'Semua_Keluhan' => $all_case_purwokerto_today,
+                    'Semua_Keluhan_Closed' => $all_case_closed_purwokerto_today,
+                    'Semua_Keluhan_Open' => $all_case_opened_purwokerto_today,
                 ],
 
             ],
             'yesterday' => [
-                'all_pop' =>[
-                    'Semua_Keluhan_Kemarin' => $all_case_yesterday,
-                    'Semua_Keluhan_Closed_Kemarin' => $all_case_closed_yesterday,
-                    'Semua_Keluhan_Open_Kemarin' => $all_case_opened_yesterday,
-                    'Semua_RFO_Keluhan_Kemarin' => $all_rfo_keluhan_yesterday,
-                    'Semua_RFO_Gangguan_Kemarin' => $all_rfo_gangguan_yesterday,
+                [
+                    'Nama' => 'Semua POP',
+                    'Semua_Keluhan' => $all_case_yesterday,
+                    'Semua_Keluhan_Closed' => $all_case_closed_yesterday,
+                    'Semua_Keluhan_Open' => $all_case_opened_yesterday,
+                    'Semua_RFO_Keluhan' => $all_rfo_keluhan_yesterday,
+                    'Semua_RFO_Gangguan' => $all_rfo_gangguan_yesterday,
                 ],
-                'jogja'=>[
-                    'Semua_Keluhan_Jogja_Kemarin' => $all_case_jogja_yesterday,
-                    'Semua_Keluhan_Closed_Jogja_Kemarin' => $all_case_closed_jogja_yesterday,
-                    'Semua_Keluhan_Open_Jogja_Kemarin' => $all_case_opened_jogja_yesterday,
+                [
+                    'Nama' => 'Yogyakarta',
+                    'Semua_Keluhan' => $all_case_jogja_yesterday,
+                    'Semua_Keluhan_Closed' => $all_case_closed_jogja_yesterday,
+                    'Semua_Keluhan_Open' => $all_case_opened_jogja_yesterday,
                 ],
-                'solo'=>[
-                    'Semua_Keluhan_Solo_Kemarin' => $all_case_solo_yesterday,
-                    'Semua_Keluhan_Closed_Solo_Kemarin' => $all_case_closed_solo_yesterday,
-                    'Semua_Keluhan_Open_Solo_Kemarin' => $all_case_opened_solo_yesterday,
+                [
+                    'Nama' => 'Surakarta',
+                    'Semua_Keluhan' => $all_case_solo_yesterday,
+                    'Semua_Keluhan_Closed' => $all_case_closed_solo_yesterday,
+                    'Semua_Keluhan_Open' => $all_case_opened_solo_yesterday,
                 ],
-                'purwokerto'=>[
-                    'Semua_Keluhan_Purwokerto_Kemarin' => $all_case_purwokerto_yesterday,
-                    'Semua_Keluhan_Closed_Purwokerto_Kemarin' => $all_case_closed_purwokerto_yesterday,
-                    'Semua_Keluhan_Open_Purwokerto_Kemarin' => $all_case_opened_purwokerto_yesterday,
+                [
+                    'Nama' => 'Purwokerto',
+                    'Semua_Keluhan' => $all_case_purwokerto_yesterday,
+                    'Semua_Keluhan_Closed' => $all_case_closed_purwokerto_yesterday,
+                    'Semua_Keluhan_Open' => $all_case_opened_purwokerto_yesterday,
                 ],
             ],
             'a_week_ago' => [
-                'all_pop' =>[
-                    'Semua_Keluhan_Seminggu_Kemarin' => $all_case_a_week_ago,
-                    'Semua_Keluhan_Closed_Seminggu_Kemarin' => $all_case_closed_a_week_ago,
-                    'Semua_Keluhan_Open_Seminggu_Kemarin' => $all_case_opened_a_week_ago,
-                    'Semua_RFO_Keluhan_Seminggu_Kemarin' => $all_rfo_keluhan_a_week_ago,
-                    'Semua_RFO_Gangguan_Seminggu_Kemarin' => $all_rfo_gangguan_a_week_ago,
+                [
+                    'Nama' => 'Semua POP',
+                    'Semua_Keluhan' => $all_case_a_week_ago,
+                    'Semua_Keluhan_Closed' => $all_case_closed_a_week_ago,
+                    'Semua_Keluhan_Open' => $all_case_opened_a_week_ago,
+                    'Semua_RFO_Keluhan' => $all_rfo_keluhan_a_week_ago,
+                    'Semua_RFO_Gangguan' => $all_rfo_gangguan_a_week_ago,
                 ],
-                'jogja'=>[
-                    'Semua_Keluhan_Jogja_Seminggu_Kemarin' => $all_case_jogja_a_week_ago,
-                    'Semua_Keluhan_Closed_Jogja_Seminggu_Kemarin' => $all_case_closed_jogja_a_week_ago,
-                    'Semua_Keluhan_Open_Jogja_Seminggu_Kemarin' => $all_case_opened_jogja_a_week_ago,
+                [
+                    'Nama' => 'Yogyakarta',
+                    'Semua_Keluhan' => $all_case_jogja_a_week_ago,
+                    'Semua_Keluhan_Closed' => $all_case_closed_jogja_a_week_ago,
+                    'Semua_Keluhan_Open' => $all_case_opened_jogja_a_week_ago,
                 ],
-                'solo'=>[
-                    'Semua_Keluhan_Solo_Seminggu_Kemarin' => $all_case_solo_a_week_ago,
-                    'Semua_Keluhan_Closed_Solo_Seminggu_Kemarin' => $all_case_closed_solo_a_week_ago,
-                    'Semua_Keluhan_Open_Solo_Seminggu_Kemarin' => $all_case_opened_solo_a_week_ago,
+                [
+                    'Nama' => 'Surakarta',
+                    'Semua_Keluhan' => $all_case_solo_a_week_ago,
+                    'Semua_Keluhan_Closed' => $all_case_closed_solo_a_week_ago,
+                    'Semua_Keluhan_Open' => $all_case_opened_solo_a_week_ago,
                 ],
-                'purwokerto'=>[
-                    'Semua_Keluhan_Purwokerto_Seminggu_Kemarin' => $all_case_purwokerto_a_week_ago,
-                    'Semua_Keluhan_Closed_Purwokerto_Seminggu_Kemarin' => $all_case_closed_purwokerto_a_week_ago,
-                    'Semua_Keluhan_Open_Purwokerto_Seminggu_Kemarin' => $all_case_opened_purwokerto_a_week_ago,
+                [
+                    'Nama' => 'Purwokerto',
+                    'Semua_Keluhan' => $all_case_purwokerto_a_week_ago,
+                    'Semua_Keluhan_Closed' => $all_case_closed_purwokerto_a_week_ago,
+                    'Semua_Keluhan_Open' => $all_case_opened_purwokerto_a_week_ago,
                 ],
             ],
             'this_month'=> [
-                'all_pop' =>[
-                    'Semua_Keluhan_Sebulan' => $all_case_this_month,
-                    'Semua_Keluhan_Sebulan_Jogja' => $all_case_jogja_this_month,
-                    'Semua_Keluhan_Sebulan_Solo' => $all_case_solo_this_month,
-                    'Semua_Keluhan_Sebulan_Purwokerto' => $all_case_purwokerto_this_month,
-                    'Semua_RFO_Keluhan_Sebulan' => $all_rfo_keluhan_this_month,
-                    'Semua_RFO_Gangguan_Sebulan' => $all_rfo_gangguan_this_month,
+                [
+                    'Nama' => 'Semua Keluhan Sebulan',
+                    'Total' => $all_case_this_month,
+                ],
+                [
+                    'Nama' => 'Semua Keluhan Sebulan Yogyakarta',
+                    'Total' => $all_case_jogja_this_month,
+                ],
+                [
+                    'Nama' => 'Semua Keluhan Sebulan Surakarta',
+                    'Total' => $all_case_solo_this_month,
+                ],
+                [
+                    'Nama' => 'Semua Keluhan Sebulan Purwokerto',
+                    'Total' => $all_case_purwokerto_this_month,
+                ],
+                [
+                    'Nama' => 'Semua RFO Keluhan Sebulan',
+                    'Total' => $all_rfo_keluhan_this_month,
+                ],
+                [
+                    'Nama' => 'Semua RFO Gangguan Sebulan',
+                    'Total' => $all_rfo_gangguan_this_month,
                 ],
             ],
             'this_year'=> [
-                'Januari' => [
-                    'all_pop' => $all_case_januari,
-                    'jogja' => $all_case_januari_jogja,
-                    'solo' => $all_case_januari_solo,
-                    'purwokerto' => $all_case_januari_purwokerto
+                [
+                    'Nama' => 'Januari',
+                    'Semua POP' => $all_case_januari,
+                    'Yogyakarta' => $all_case_januari_jogja,
+                    'Surakarta' => $all_case_januari_solo,
+                    'Purwokerto' => $all_case_januari_purwokerto
                 ],
-                'Februari' => [
-                    'all_pop' => $all_case_februari,
-                    'jogja' => $all_case_februari_jogja,
-                    'solo' => $all_case_februari_solo,
-                    'purwokerto' => $all_case_februari_purwokerto
+                [
+                    'Nama' => 'Februari',
+                    'Semua POP' => $all_case_februari,
+                    'Yogyakarta' => $all_case_februari_jogja,
+                    'Surakarta' => $all_case_februari_solo,
+                    'Purwokerto' => $all_case_februari_purwokerto
                 ],
-                'Maret' => [
-                    'all_pop' => $all_case_maret,
-                    'jogja' => $all_case_maret_jogja,
-                    'solo' => $all_case_maret_solo,
-                    'purwokerto' => $all_case_maret_purwokerto
+                [
+                    'Nama' => 'Maret',
+                    'Semua POP' => $all_case_maret,
+                    'Yogyakarta' => $all_case_maret_jogja,
+                    'Surakarta' => $all_case_maret_solo,
+                    'Purwokerto' => $all_case_maret_purwokerto
                 ],
-                'April' => [
-                    'all_pop' => $all_case_april,
-                    'jogja' => $all_case_april_jogja,
-                    'solo' => $all_case_april_solo,
-                    'purwokerto' => $all_case_april_purwokerto
+                [
+                    'Nama' => 'April',
+                    'Semua POP' => $all_case_april,
+                    'Yogyakarta' => $all_case_april_jogja,
+                    'Surakarta' => $all_case_april_solo,
+                    'Purwokerto' => $all_case_april_purwokerto
                 ],
-                'Mei' => [
-                    'all_pop' => $all_case_mei,
-                    'jogja' => $all_case_mei_jogja,
-                    'solo' => $all_case_mei_solo,
-                    'purwokerto' => $all_case_mei_purwokerto
+                [
+                    'Nama' => 'April',
+                    'Semua POP' => $all_case_mei,
+                    'Yogyakarta' => $all_case_mei_jogja,
+                    'Surakarta' => $all_case_mei_solo,
+                    'Purwokerto' => $all_case_mei_purwokerto
                 ],
-                'Juni' => [
-                    'all_pop' => $all_case_juni,
-                    'jogja' => $all_case_juni_jogja,
-                    'solo' => $all_case_juni_solo,
-                    'purwokerto' => $all_case_juni_purwokerto
+                [
+                    'Nama' => 'Juni',
+                    'Semua POP' => $all_case_juni,
+                    'Yogyakarta' => $all_case_juni_jogja,
+                    'Surakarta' => $all_case_juni_solo,
+                    'Purwokerto' => $all_case_juni_purwokerto
                 ],
-                'Juli' => [
-                    'all_pop' => $all_case_juli,
-                    'jogja' => $all_case_juli_jogja,
-                    'solo' => $all_case_juli_solo,
-                    'purwokerto' => $all_case_juli_purwokerto
+                [
+                    'Nama' => 'Juli',
+                    'Semua POP' => $all_case_juli,
+                    'Yogyakarta' => $all_case_juli_jogja,
+                    'Surakarta' => $all_case_juli_solo,
+                    'Purwokerto' => $all_case_juli_purwokerto
                 ],
-                'Agustus' => [
-                    'all_pop' => $all_case_agustus,
-                    'jogja' => $all_case_agustus_jogja,
-                    'solo' => $all_case_agustus_solo,
-                    'purwokerto' => $all_case_agustus_purwokerto
+                [
+                    'Nama' => 'Agustus',
+                    'Semua POP' => $all_case_agustus,
+                    'Yogyakarta' => $all_case_agustus_jogja,
+                    'Surakarta' => $all_case_agustus_solo,
+                    'Purwokerto' => $all_case_agustus_purwokerto
                 ],
-                'September' => [
-                    'all_pop' => $all_case_september,
-                    'jogja' => $all_case_september_jogja,
-                    'solo' => $all_case_september_solo,
-                    'purwokerto' => $all_case_september_purwokerto
+                [
+                    'Nama' => 'September',
+                    'Semua POP' => $all_case_september,
+                    'Yogyakarta' => $all_case_september_jogja,
+                    'Surakarta' => $all_case_september_solo,
+                    'Purwokerto' => $all_case_september_purwokerto
                 ],
-                'Oktober' => [
-                    'all_pop' => $all_case_oktober,
-                    'jogja' => $all_case_oktober_jogja,
-                    'solo' => $all_case_oktober_solo,
-                    'purwokerto' => $all_case_oktober_purwokerto
+                [
+                    'Nama' => 'Oktober',
+                    'Semua POP' => $all_case_oktober,
+                    'Yogyakarta' => $all_case_oktober_jogja,
+                    'Surakarta' => $all_case_oktober_solo,
+                    'Purwokerto' => $all_case_oktober_purwokerto
                 ],
-                'November' => [
-                    'all_pop' => $all_case_november,
-                    'jogja' => $all_case_november_jogja,
-                    'solo' => $all_case_november_solo,
-                    'purwokerto' => $all_case_november_purwokerto
+                [
+                    'Nama' => 'November',
+                    'Semua POP' => $all_case_november,
+                    'Yogyakarta' => $all_case_november_jogja,
+                    'Surakarta' => $all_case_november_solo,
+                    'Purwokerto' => $all_case_november_purwokerto
                 ],
-                'Desember' => [
-                    'all_pop' => $all_case_desember,
-                    'jogja' => $all_case_desember_jogja,
-                    'solo' => $all_case_desember_solo,
-                    'purwokerto' => $all_case_desember_purwokerto],
+                [
+                    'Nama' => 'Desember',
+                    'Semua POP' => $all_case_desember,
+                    'Yogyakarta' => $all_case_desember_jogja,
+                    'Surakarta' => $all_case_desember_solo,
+                    'Purwokerto' => $all_case_desember_purwokerto],
             ],
         ],200);
     }
@@ -611,8 +655,8 @@ class Statistik extends Controller
         $keluhan = new Keluhan;
         $rfo_gangguan = new RFO_Gangguan();
 
-        $dari = $request->input('dari');
-        $sampai = $request->input('sampai');
+        $dari = $request->get('dari');
+        $sampai = $request->get('sampai');
         $range_keluhan_all = $keluhan->whereBetween('created_at', [$dari, $sampai])->count();
         $range_keluhan_jogja = $keluhan->where('pop_id',1)->whereBetween('created_at', [$dari, $sampai])->count();
         $range_keluhan_solo = $keluhan->where('pop_id',2)->whereBetween('created_at', [$dari, $sampai])->count();

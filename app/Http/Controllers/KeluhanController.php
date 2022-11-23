@@ -121,6 +121,7 @@ class KeluhanController extends Controller
         $user_id = $request->input('user_id');
         $rfo_gangguan_id = $request->input('rfo_gangguan_id');
         $rfo_keluhan_id = $request->input('rfo_keluhan_id');
+        $sentimen_analisis = $request->input('sentimen_analisis');
 
         try {
             $keluhan = Keluhan::create([
@@ -135,8 +136,9 @@ class KeluhanController extends Controller
                 'status' => $status_keluhan,
                 'pop_id' => $pop_id,
                 'user_id' => $user_id,
-                'rfo_gangguan_id'> $rfo_gangguan_id,
-                'rfo_keluhan_id'> $rfo_keluhan_id,
+                'rfo_gangguan_id'=> $rfo_gangguan_id,
+                'rfo_keluhan_id'=> $rfo_keluhan_id,
+                'sentimen_analisis'=>$sentimen_analisis,
             ]);
         } catch (\Throwable $th) {
             $status = "error";
@@ -146,7 +148,7 @@ class KeluhanController extends Controller
         return response([
             'status' => $status,
             'message' => $message,
-            'id_keluhan' => $keluhan->id_keluhan,
+            'id_keluhan' => $keluhan,
         ], 200);
     }
 
