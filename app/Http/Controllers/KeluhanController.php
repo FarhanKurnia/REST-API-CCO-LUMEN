@@ -142,7 +142,11 @@ class KeluhanController extends Controller
                 'rfo_keluhan_id'=> $rfo_keluhan_id,
                 'sentimen_analisis'=>$sentimen_analisis,
             ]);
-            event(new KeluhanEvent('Test Notifikasi Push Tambah Keluhan'));
+            event(new KeluhanEvent([
+                'id'=>'1',
+                'title'=>'Berhasil menambang keluhan',
+                'desc'=>'Test Notifikasi Push Tambah Keluhan'
+            ]));
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
