@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use DB;
+
+use App\Events\KeluhanEvent;
 use Illuminate\Support\Carbon;
 use App\Models\Keluhan;
 use App\Models\RFO_Gangguan;
@@ -140,6 +142,7 @@ class KeluhanController extends Controller
                 'rfo_keluhan_id'=> $rfo_keluhan_id,
                 'sentimen_analisis'=>$sentimen_analisis,
             ]);
+            event(new KeluhanEvent('Test Notifikasi Push Tambah Keluhan'));
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
