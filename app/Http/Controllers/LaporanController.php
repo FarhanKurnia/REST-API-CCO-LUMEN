@@ -56,8 +56,8 @@ class LaporanController extends Controller
         $petugas = $request->input('petugas');
         $user_id = $request->input('user_id');
         // 1 file
-        $lampiran_lamporan = $request->file('lampiran_lamporan');
-        if($request->hasFile('lampiran_lamporan')){
+        $lampiran_lamporan = $request->file('lampiran_laporan');
+        if($request->hasFile('lampiran_laporan')){
             $nomor_laporan = 'REF-ID-'.date('Ymd').$pop_id.$shift_id.rand( 100 , 999 );
             $new_name = $nomor_laporan.'.'.$lampiran_lamporan->getClientOriginalExtension();
             $lampiran_lamporan->move('laporan',$new_name);
