@@ -53,7 +53,8 @@ class LaporanController extends Controller
         $tanggal = $request->input('tanggal');
         $shift_id = $request->input('shift_id');
         $pop_id = $request->input('pop_id');
-        $petugas = $request->input('petugas');
+        $noc = $request->input('noc');
+        $helpdesk = $request->input('helpdesk');
         $user_id = $request->input('user_id');
         // 1 file
         $lampiran_laporan = $request->file('lampiran_laporan');
@@ -67,7 +68,8 @@ class LaporanController extends Controller
                     'tanggal' => $tanggal,
                     'shift_id' => $shift_id,
                     'pop_id' => $pop_id,
-                    'petugas' => $petugas,
+                    'noc' => $noc,
+                    'helpdesk' => $helpdesk,
                     'user_id' => $user_id,
                     'lampiran_laporan' => url('laporan'.'/'.$new_name),
                 ]);

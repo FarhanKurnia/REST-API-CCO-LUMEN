@@ -21,7 +21,8 @@ class LaporanSeeder extends Seeder
             'shift_id' => 1,
             'pop_id' => 1,
             'user_id' => 1,
-            'petugas' => 'Farhan, Kurnia, Ragil',
+            'noc' => 'Farhan, Kurnia, Ragil',
+            'helpdesk' => 'Farhan, Kurnia, Ragil',
             'lampiran_laporan' => "http://localhost:8000/laporan/REF-ID-2022110921631.pdf",
         ],
         [
@@ -30,7 +31,8 @@ class LaporanSeeder extends Seeder
             'shift_id' => 2,
             'pop_id' => 1,
             'user_id' => 2,
-            'petugas' => 'Syahputra, Tedy, Afif',
+            'noc' => 'Syahputra, Tedy, Afif',
+            'helpdesk' => 'Farhan, Kurnia, Ragil',
             'lampiran_laporan' => "http://localhost:8000/laporan/REF-ID-2022110921631.pdf",
         ],
         [
@@ -39,7 +41,8 @@ class LaporanSeeder extends Seeder
             'shift_id' => 1,
             'pop_id' => 2,
             'user_id' => 3,
-            'petugas' => 'Ridho, Alfiano, Ahmad',
+            'noc' => 'Ridho, Alfiano, Ahmad',
+            'helpdesk' => 'Farhan, Kurnia, Ragil',
             'lampiran_laporan' => "http://localhost:8000/laporan/REF-ID-2022110921631.pdf",
         ],
         [
@@ -48,7 +51,8 @@ class LaporanSeeder extends Seeder
             'shift_id' => 2,
             'pop_id' => 2,
             'user_id' => 4,
-            'petugas' => 'Ramdhan, Rizki, Afif',
+            'noc' => 'Ramdhan, Rizki, Afif',
+            'helpdesk' => 'Farhan, Kurnia, Ragil',
             'lampiran_laporan' => "http://localhost:8000/laporan/REF-ID-2022110921631.pdf",
         ]]);
     }

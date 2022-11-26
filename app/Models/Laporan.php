@@ -14,7 +14,8 @@ class Laporan extends Model
         'shift_id',
         'pop_id',
         'user_id',
-        'petugas',
+        'noc',
+        'helpdesk',
         'lampiran_laporan',
     ];
      // Relation User Many to one BTS

@@ -19,7 +19,8 @@ class CreateLaporansTable extends Migration
             $table->date('tanggal');
             $table->unsignedBigInteger('shift_id');
             $table->unsignedBigInteger('pop_id');
-            $table->string('petugas');
+            $table->string('noc');
+            $table->string('helpdesk');
             $table->unsignedBigInteger('user_id');
             $table->string('lampiran_laporan');
             $table->timestamps();
