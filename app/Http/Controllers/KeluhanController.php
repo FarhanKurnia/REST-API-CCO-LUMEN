@@ -6,6 +6,7 @@ use DB;
 use App\Events\KeluhanEvent;
 use Illuminate\Support\Carbon;
 use App\Models\Keluhan;
+
 use App\Models\RFO_Gangguan;
 use App\Models\RFO_Keluhan;
 use Illuminate\Http\Request;
@@ -103,6 +104,9 @@ class KeluhanController extends Controller
     public function store(Request $request){
         $message = 'Data keluhan berhasil dimasukan';
         $status = "success";
+
+
+
         // Format:
         // #T051102212345
         // # = hashtag
@@ -147,6 +151,18 @@ class KeluhanController extends Controller
                 'title'=>'Berhasil menambang keluhan',
                 'desc'=>'Test Notifikasi Push Tambah Keluhan'
             ]));
+            $beamsClient = new \Pusher\PushNotifications\PushNotifications(array(
+                "instanceId" => "a81f4de8-8096-4cc9-a1d0-5c92138936f1",
+                "secretKey" => "0E05168334D97E19A34BDACEA392DEF4648170ED7CF07C3B966E2F5EC059068A",
+              ));
+              $publishResponse = $beamsClient->publishToInterests(
+                array("hello"),
+                array("web" => array("notification" => array(
+                  "title" => "Hello",
+                  "body" => "Hello, World!",
+                  "deep_link" => "https://www.pusher.com",
+                )),
+              ));
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
