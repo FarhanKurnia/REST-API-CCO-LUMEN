@@ -25,9 +25,7 @@ class CreateRFOKeluhansTable extends Migration
             $table->string('durasi')->nullable();
             $table->string('problem');
             $table->string('action');
-            $table->string('status');
             $table->string('deskripsi');
-            $table->string('lampiran_rfo_keluhan')->nullable();
 
             $table->unsignedBigInteger('user_id');
             // $table->unsignedBigInteger('role_id');

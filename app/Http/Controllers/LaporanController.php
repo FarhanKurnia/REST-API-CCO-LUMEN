@@ -216,7 +216,8 @@ class LaporanController extends Controller
             $selesai = date('H:i:s',$t2);
             $tanggal2 = date('Y-m-d',$t2);
         }
-        $total_keluhan = Keluhan::where('pop_id',$pop_id)->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
+        $total_keluhan_open = Keluhan::where([['pop_id',$pop_id],['status','open']])->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
+        $total_keluhan_closed = Keluhan::where([['pop_id',$pop_id],['status','closed']])->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
         $keluhan = Keluhan::with('pop','rfo_keluhan')->where('pop_id',$pop_id)->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
         $total_rfo_gangguan = RFO_Gangguan::with('keluhan')->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
         $rfo_gangguan = RFO_Gangguan::with('keluhan')->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
@@ -231,9 +232,10 @@ class LaporanController extends Controller
                 'status' => 'succes',
                 'message' => 'Data keluhan berhasil ditemukan',
                 'data' => [
-                    'total_keluhan'=> $total_keluhan,
-                    'keluhan'=>$keluhan,
+                    'total_keluhan_open'=> $total_keluhan_open,
+                    'total_keluhan_closed'=> $total_keluhan_closed,
                     'total_rfo_gangguan'=> $total_rfo_gangguan,
+                    'keluhan'=>$keluhan,
                     'rfo_gangguan' => $rfo_gangguan,
                 ]
             ], 200);

@@ -18,7 +18,6 @@ class RFO_Gangguan extends Model
         'selesai_gangguan',
         'nomor_tiket',
         'durasi',
-        'lampiran_rfo_gangguan',
         'user_id',
     ];
 

@@ -14,7 +14,7 @@ class RFO_Keluhan extends Model
     protected $table = 'r_f_o__keluhans';
     protected $primaryKey = 'id_rfo_keluhan';
     protected $fillable = [
-        'nomor_rfo_keluhan','nomor_tiket', 'mulai_keluhan', 'selesai_keluhan', 'problem', 'action', 'status','deskripsi','durasi', 'lampiran_rfo_keluhan', 'user_id',
+        'nomor_rfo_keluhan','nomor_tiket', 'mulai_keluhan', 'selesai_keluhan', 'problem', 'action','deskripsi','durasi', 'user_id',
     ];
 
     public function keluhan(){

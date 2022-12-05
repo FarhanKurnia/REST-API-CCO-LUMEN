@@ -19,9 +19,9 @@ class RFOGangguanController extends Controller
     {
         $message = 'Data RFO Gangguan berhasil dibuat';
         $status = "success";
-        // Format: 
+        // Format:
         // #RFO-S051102212345
-        // # = hashtag   
+        // # = hashtag
         // T = Trouble
         // date() = YYYY-MM-DD
         // Random Interger = 5 Digit
@@ -30,15 +30,14 @@ class RFOGangguanController extends Controller
         $nomor_tiket = $request->input('nomor_tiket');
         $nomor_rfo_gangguan = '#RFO-G'.date("Ymd").rand( 100 , 999 );
         $mulai_gangguan = $request->input('mulai_gangguan');
-        $selesai_gangguan = $request->input('selesai_gangguan');
-        $start = new DateTime($mulai_gangguan);//start time
-        $end = new DateTime($selesai_gangguan);//end time
-        $durasi = $start->diff($end);
+        // $selesai_gangguan = $request->input('selesai_gangguan');
+        // $start = new DateTime($mulai_gangguan);//start time
+        // $end = new DateTime($selesai_gangguan);//end time
+        // $durasi = $start->diff($end);
         $problem = $request->input('problem');
         $action = $request->input('action');
         $status_RFO = $request->input('status');
         $deskripsi = $request->input('deskripsi');
-        $lampiran_rfo_gangguan = $request->input('lampiran_rfo_gangguan');
 
         try {
             RFO_Gangguan::create([
@@ -47,12 +46,11 @@ class RFOGangguanController extends Controller
                 'mulai_gangguan' => $mulai_gangguan,
                 'selesai_gangguan' => $selesai_gangguan,
                 'problem' => $problem,
-                'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
+                // 'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
                 'action' => $action,
                 'status' => $status_RFO,
                 'deskripsi' => $deskripsi,
                 'nomor_rfo_gangguan' => $nomor_rfo_gangguan,
-                'lampiran_rfo_gangguan' => $lampiran_rfo_gangguan,
             ]);
         } catch (\Throwable $th) {
             $status = "error";
@@ -60,6 +58,30 @@ class RFOGangguanController extends Controller
         }
 
         return response([
+            'status' => $status,
+            'message' => $message,
+        ], 200);
+    }
+
+    public function close(Request $request, $id)
+    {
+        $message = 'Data RFO Gangguan berhasil ditutup';
+        $status = "success";
+        $selesai_gangguan = $request->input('selesai_gangguan');
+        // $start = new DateTime($mulai_gangguan);//start time
+        // $end = new DateTime($selesai_gangguan);//end time
+        // $durasi = $start->diff($end);
+
+        try {
+            RFO_Gangguan::find($id)->update([
+                'status' => $request->status='closed',
+                'selesai_gangguan' => $selesai_gangguan,
+            ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+        return response()->json([
             'status' => $status,
             'message' => $message,
         ], 200);

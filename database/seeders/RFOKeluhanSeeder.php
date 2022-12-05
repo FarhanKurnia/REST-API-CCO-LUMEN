@@ -22,7 +22,6 @@ class RFOKeluhanSeeder extends Seeder
             'selesai_keluhan' => Carbon::now(),
             'problem' => 'Koneksi tidak bisa digunakan' ,
             'action' => 'Reconfigure Access point',
-            'status' => 'closed',
             'deskripsi' => 'Normal',
             'created_at' => Carbon::now(),
         ],
@@ -34,7 +33,6 @@ class RFOKeluhanSeeder extends Seeder
             'selesai_keluhan' => Carbon::now(),
             'problem' => 'Koneksi lambat' ,
             'action' => 'Sinyal antenna belum kuat',
-            'status' => 'closed',
             'deskripsi' => 'Sudah dibuatkan tiket pelaporan',
             'created_at' => Carbon::now(),
         ]]);

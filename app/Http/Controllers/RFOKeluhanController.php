@@ -20,9 +20,9 @@ class RFOKeluhanController extends Controller
         $message = 'RFO Keluhan created successfully';
         $status = "success";
 
-        // Format: 
+        // Format:
         // #RFO-S051102212345
-        // # = hashtag   
+        // # = hashtag
         // T = Trouble
         // date() = YYYY-MM-DD
         // Random Interger = 5 Digit
@@ -37,9 +37,7 @@ class RFOKeluhanController extends Controller
         $durasi = $start->diff($end);
         $problem = $request->input('problem');
         $action = $request->input('action');
-        $status_RFO = $request->input('status');
         $deskripsi = $request->input('deskripsi');
-        $lampiran_rfo_keluhan = $request->input('lampiran_rfo_keluhan');
 
         try {
             $RFO_Keluhan = RFO_Keluhan::create([
@@ -52,9 +50,7 @@ class RFOKeluhanController extends Controller
                 'problem' => $problem,
                 'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
                 'action' => $action,
-                'status' => $status_RFO,
                 'deskripsi' => $deskripsi,
-                'lampiran_rfo_keluhan' => $lampiran_rfo_keluhan,
             ]);
         } catch (\Throwable $th) {
             $status = "error";

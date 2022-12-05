@@ -188,6 +188,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->put('keluhan-rfo-gangguan/{id}','KeluhanController@updateKeluhanRFOGangguan');
             // Matches "/api/balasan/1 -> Delete
             $router->delete('rfo-gangguan/{id}','RFOGangguanController@destroy');
+            // Matches "/api/keluhan -> close
+            $router->put('close-rfo-gangguan/{id}','RFOGangguanController@close');
 
             // ==============[Endpoint Statistik]==============
             $router->get('statistik','Statistik@index');

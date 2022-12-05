@@ -21,12 +21,11 @@ class CreateRFOGangguansTable extends Migration
             $table->string('deskripsi');
             $table->string('status');
             $table->timestamp('mulai_gangguan');
-            $table->timestamp('selesai_gangguan');
+            $table->timestamp('selesai_gangguan')->nullable();
             $table->string('nomor_tiket')->nullable();
             $table->string('durasi')->nullable();
 
 
-            $table->string('lampiran_rfo_gangguan')->nullable();
             $table->unsignedBigInteger('user_id');
 
             //Foreign Key
