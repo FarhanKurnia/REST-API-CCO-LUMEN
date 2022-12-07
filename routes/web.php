@@ -201,6 +201,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->post('laporan','LaporanController@store');
             $router->post('laporan-keluhan','LaporanController@keluhanLaporan');
             $router->get('laporan-user','LaporanController@userLaporan');
+
+            // ==============[Endpoint Notifikasi]==============
+            $router->get('notifikasi','NotifikasiController@getNotifikasiAllRead');
+            $router->post('read-notifikasi','NotifikasiController@read');
         });
 
     // ==============[Endpoint Public Verified]==============
