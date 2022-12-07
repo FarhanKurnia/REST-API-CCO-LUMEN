@@ -18,9 +18,11 @@ class CreateNotifikasisTable extends Migration
             $table->string('judul');
             $table->string('detail');
             $table->unsignedBigInteger('user_id_notif')->nullable();
+            $table->unsignedBigInteger('pop_id');
             $table->string('url')->nullable();
             $table->timestamps();
 
+            $table->foreign('pop_id')->references('id_pop')->on('pops')->onDelete('cascade');
             $table->foreign('user_id_notif')->references('id_user')->on('users')->onDelete('cascade');
         });
     }

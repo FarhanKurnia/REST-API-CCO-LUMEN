@@ -45,4 +45,8 @@ class Pop extends Model
     public function laporan(){
         return $this->hasMany(Laporan::class);
     }
+
+    public function notifikasi(){
+    	return $this->hasMany(Notifikasi::class);
+    }
 }

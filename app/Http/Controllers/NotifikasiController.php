@@ -34,7 +34,7 @@ class NotifikasiController extends Controller
     $token = JWTAuth::getToken();
     $id_jwt = JWTAuth::getPayload($token)->toArray();
     $id_user = $id_jwt['id_user'];
-
+    $id_pop = $id_jwt['pop_id'];
     // $notifikasi = Notifikasi::leftjoin('notifikasi__reads','notifikasi__reads.notifikasi_id','=','notifikasis.id_notifikasi')
     //     // ->where('notifikasis.user_id_notif', null)
     //     // ->orwhere('notifikasi__reads.user_id', null)
@@ -51,9 +51,11 @@ class NotifikasiController extends Controller
     //     ->get();
 
     $notifikasi = DB::select( DB::raw("SELECT * FROM notifikasis n
+    JOIN pops p ON (n.pop_id = p.id_pop)
     LEFT JOIN notifikasi__reads nr ON (nr.notifikasi_id = n.id_notifikasi)
     WHERE (n.user_id_notif IS NULL)
     AND (nr.user_id = '$id_user' OR nr.user_id IS NULL)
+    AND (n.pop_id = $id_pop)
     ORDER BY n.created_at DESC"));
     return response()->json([
         'status' => 'Data Notifikasi berhasil ditemukan',
