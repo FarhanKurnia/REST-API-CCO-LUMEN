@@ -146,10 +146,13 @@ class KeluhanController extends Controller
                 'rfo_keluhan_id'=> $rfo_keluhan_id,
                 'sentimen_analisis'=>$sentimen_analisis,
             ]);
+            $id_keluhan = $keluhan['id_keluhan'];
+            // dd($id_keluhan);
             event(new KeluhanEvent([
                 'id'=>'1',
                 'title'=>'Berhasil menambang keluhan',
-                'desc'=>'Test Notifikasi Push Tambah Keluhan'
+                'desc'=>'Test Notifikasi Push Tambah Keluhan',
+                "deep_link" => url('/api/keluhan/'.$id_keluhan),
             ]));
             $beamsClient = new \Pusher\PushNotifications\PushNotifications(array(
                 "instanceId" => "a81f4de8-8096-4cc9-a1d0-5c92138936f1",
@@ -160,7 +163,7 @@ class KeluhanController extends Controller
                 array("web" => array("notification" => array(
                   "title" => "Hello",
                   "body" => "Hello, World!",
-                  "deep_link" => "https://www.pusher.com",
+                  "deep_link" => url('/api/keluhan/'.$id_keluhan),
                 )),
               ));
         } catch (\Throwable $th) {

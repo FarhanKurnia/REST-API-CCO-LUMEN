@@ -76,6 +76,23 @@ class NotifikasiController extends Controller
         // }
     }
 
+    public function getNotifikasi()
+    {
+        $token = JWTAuth::getToken();
+        $id_jwt = JWTAuth::getPayload($token)->toArray();
+        $id_user = $id_jwt['id_user'];
+        $id_pop = $id_jwt['pop_id'];
+
+        $notifikasi = Notifikasi::where('pop_id',$id_pop)->with('notifikasi_read','pop')->get();
+        // $notif = $notifikasi->notifikasi_read;
+        // dd($notif);
+        return response()->json([
+            'status' => 'Data Notifikasi berhasil dimuat',
+            'message' => 'success',
+            'data' => $notifikasi
+        ], 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
