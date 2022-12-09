@@ -159,7 +159,7 @@ class KeluhanController extends Controller
                 "secretKey" => "0E05168334D97E19A34BDACEA392DEF4648170ED7CF07C3B966E2F5EC059068A",
               ));
               $publishResponse = $beamsClient->publishToInterests(
-                array("Keluhan Baru"),
+                array("Keluhan_Baru"),
                 array("web" => array("notification" => array(
                   "title" => "Keluhan_Baru",
                   "body" => "Terdapat keluhan baru",
