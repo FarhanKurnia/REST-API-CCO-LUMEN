@@ -150,7 +150,7 @@ class KeluhanController extends Controller
             // dd($id_keluhan);
             event(new KeluhanEvent([
                 'id'=>'1',
-                'title'=>'Berhasil menambang keluhan',
+                'title'=>'Berhasil menambah keluhan',
                 'desc'=>'Test Notifikasi Push Tambah Keluhan',
                 "deep_link" => url('/api/keluhan/'.$id_keluhan),
             ]));
