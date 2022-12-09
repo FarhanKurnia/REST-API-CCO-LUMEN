@@ -17,11 +17,13 @@ class CreateNotifikasisTable extends Migration
             $table->id('id_notifikasi');
             $table->string('judul');
             $table->string('detail');
+            $table->unsignedBigInteger('keluhan_id')->nullable();
             $table->unsignedBigInteger('user_id_notif')->nullable();
             $table->unsignedBigInteger('pop_id');
-            $table->string('url')->nullable();
+            $table->string('deep_link')->nullable();
             $table->timestamps();
 
+            $table->foreign('keluhan_id')->references('id_keluhan')->on('keluhans')->onDelete('cascade');
             $table->foreign('pop_id')->references('id_pop')->on('pops')->onDelete('cascade');
             $table->foreign('user_id_notif')->references('id_user')->on('users')->onDelete('cascade');
         });

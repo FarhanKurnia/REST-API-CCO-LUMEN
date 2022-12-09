@@ -111,6 +111,7 @@ class NotifikasiController extends Controller
      */
     public function read(Request $request)
     {
+        
         $message = 'Notifikasi berhasil dibaca';
         $status = "success";
 
@@ -122,6 +123,8 @@ class NotifikasiController extends Controller
         //'is_read', 'notifikasi_id', 'user_id',
         $is_read = true;
         $notifikasi_id = $request->input('notifikasi_id');
+        // $notifikasi = Notifikasi::with('keluhan');
+        // dd($notifikasi);
 
         // try {
             $notifikasi_cek = Notifikasi_Read::where([
@@ -153,6 +156,36 @@ class NotifikasiController extends Controller
 
         
     }
+
+    public function store(Request $request){
+        $message = 'Data keluhan berhasil dimasukan';
+        $status = "success";
+
+        $keluhan_id = $request->input('keluhan_id');
+        $pop_id = $request->input('pop_id');
+
+
+        try {
+            $notifikasi = Notifikasi::create([
+                'judul' => 'Update baru',
+                'detail' => 'Terdapat update terbaru',
+                'keluhan_id' => $keluhan_id,
+                'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
+                'user_id_notif' => null,
+                'pop_id' => $pop_id,
+                ]);
+        } catch (\Throwable $th) {
+            $status = "error";
+            $message = $th->getMessage();
+        }
+
+        return response([
+            'status' => $status,
+            'message' => $message,
+            'notifikasi' => $notifikasi,
+        ], 200);
+    }
+
 
     /**
      * Display the specified resource.

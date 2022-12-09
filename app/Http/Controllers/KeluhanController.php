@@ -159,10 +159,10 @@ class KeluhanController extends Controller
                 "secretKey" => "0E05168334D97E19A34BDACEA392DEF4648170ED7CF07C3B966E2F5EC059068A",
               ));
               $publishResponse = $beamsClient->publishToInterests(
-                array("hello"),
+                array("Keluhan Baru"),
                 array("web" => array("notification" => array(
-                  "title" => "Hello",
-                  "body" => "Hello, World!",
+                  "title" => "Keluhan Baru",
+                  "body" => "Terdapat keluhan baru",
                 //   "deep_link" => url('/api/keluhan/'.$id_keluhan),
                   "deep_link" => 'http://localhost:3000/dashboard/detail/'.$id_keluhan,
                 )),

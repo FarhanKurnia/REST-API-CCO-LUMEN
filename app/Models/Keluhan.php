@@ -61,4 +61,8 @@ class Keluhan extends Model
     public function RFO_Gangguan(){
     	return $this->belongsTo(RFO_Gangguan::class, 'rfo_gangguan_id');
     }
+
+    public function notifikasi(){
+    	return $this->hasMany(Notifikasi::class,'keluhan_id');
+    }
 }
