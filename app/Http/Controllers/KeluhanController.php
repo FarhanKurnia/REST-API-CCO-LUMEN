@@ -162,7 +162,7 @@ class KeluhanController extends Controller
                 array("Keluhan_Baru"),
                 array("web" => array("notification" => array(
                   "title" => "Keluhan_Baru",
-                  "body" => "Terdapat keluhan baru",
+                  "body" => "Terdapat_keluhan_baru",
                 //   "deep_link" => url('/api/keluhan/'.$id_keluhan),
                   "deep_link" => 'http://localhost:3000/dashboard/detail/'.$id_keluhan,
                 )),
