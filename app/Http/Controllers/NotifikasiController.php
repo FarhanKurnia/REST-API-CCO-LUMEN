@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Models\User;
 use App\Models\Notifikasi;
 use App\Models\Notifikasi_Read;
 use Illuminate\Http\Request;
@@ -109,6 +110,13 @@ class NotifikasiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function read_all(Request $request)
+    {
+
+        
+    }
+    
     public function read(Request $request)
     {
         
@@ -183,6 +191,46 @@ class NotifikasiController extends Controller
             'status' => $status,
             'message' => $message,
             'notifikasi' => $notifikasi,
+        ], 200);
+    }
+
+    public function store_all(Request $request){
+        $token = JWTAuth::getToken();
+        $id_jwt = JWTAuth::getPayload($token)->toArray();
+        $id_pop = $id_jwt['pop_id'];
+        $message = 'Data keluhan berhasil dimasukan';
+        $status = "success";
+
+        // $keluhan_id = $request->input('keluhan_id');
+        // $pop_id = $request->input('pop_id');
+        $notifikasi_id = 1;
+        $user = User::where('pop_id',$id_pop)->get();
+        $list_user[] = [];
+        foreach ($user as $index => $users) {
+            $list_user[$index] = $users['id_user'];
+        }
+        foreach ($list_user as $index => $id_user) {
+            $notifikasi_cek = Notifikasi_Read::where([
+                ['notifikasi_id',$notifikasi_id],
+                ['user_id',$id_user],
+            ])->first();
+            if($notifikasi_cek == null){
+            $notifikasi_read = Notifikasi_Read::create([
+                'notifikasi_id' => $notifikasi_id,
+                'is_read' => false,
+                'user_id' => $id_user,
+            ]);
+            }else{
+            return response([
+                'status' => 'Error',
+                'message' => 'Notifikasi sudah dibuat',]);
+            }       
+        }
+
+        return response([
+            'status' => $status,
+            'message' => $message,
+            // 'User' => $notifikasi_read,
         ], 200);
     }
 
