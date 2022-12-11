@@ -164,7 +164,7 @@ class KeluhanController extends Controller
                   "title" => "update keluhan",
                   "body" => "terdapat update keluhan terbaru",
                 //   "deep_link" => url('/api/keluhan/'.$id_keluhan),
-                  "deep_link" => 'localhost:3000/dashboard/detail/'.$id_keluhan,
+                  "deep_link" => 'https://localhost:3000/dashboard/detail/'.$id_keluhan,
                 )),
               ));
         } catch (\Throwable $th) {
