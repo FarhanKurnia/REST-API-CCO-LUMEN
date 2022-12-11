@@ -101,10 +101,7 @@ class NotifikasiController extends Controller
         $id_user = $id_jwt['id_user'];
         // $id_pop = $id_jwt['pop_id'];
 
-        $notifikasi = Notifikasi_Read::where([
-            ['user_id',$id_user],
-            ['is_read',false]
-            ])->with('notifikasi')->get();
+        $notifikasi = Notifikasi_Read::where('user_id',$id_user)->with('notifikasi')->get();
         // $notif = $notifikasi->notifikasi_read;
         // dd($notif);
         return response()->json([
