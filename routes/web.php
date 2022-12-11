@@ -205,6 +205,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // ==============[Endpoint Notifikasi]==============
             $router->get('notifikasi','NotifikasiController@getNotifikasiAllRead');
             $router->get('notifikasi2','NotifikasiController@getNotifikasi');
+            $router->get('notifikasi3','NotifikasiController@getNotifikasiAll');
             $router->post('read-notifikasi','NotifikasiController@read');
             $router->post('notifikasi2','NotifikasiController@store');
             $router->post('storeall-notifikasi','NotifikasiController@store_all');

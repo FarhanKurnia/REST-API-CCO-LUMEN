@@ -94,6 +94,27 @@ class NotifikasiController extends Controller
         ], 200);
     }
 
+    public function getNotifikasiAll()
+    {
+        $token = JWTAuth::getToken();
+        $id_jwt = JWTAuth::getPayload($token)->toArray();
+        $id_user = $id_jwt['id_user'];
+        // $id_pop = $id_jwt['pop_id'];
+
+        $notifikasi = Notifikasi_Read::where([
+            ['user_id',$id_user],
+            ['is_read',false]
+            ])->with('notifikasi')->get();
+        // $notif = $notifikasi->notifikasi_read;
+        // dd($notif);
+        return response()->json([
+            'status' => 'Data Notifikasi berhasil dimuat',
+            'message' => 'success',
+            'data' => $notifikasi
+        ], 200);
+    }
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -113,7 +134,7 @@ class NotifikasiController extends Controller
 
     public function read_all(Request $request)
     {
-
+        
         
     }
     
