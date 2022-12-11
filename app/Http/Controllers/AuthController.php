@@ -50,7 +50,10 @@ class AuthController extends Controller
             $data = [
                 'title' => 'Email Verification',
                 'name' => $name,
-                'url' => url('api/verification/?token='.$token),
+                // url backend
+                // 'url' => url('api/verification/?token='.$token),
+                // url frontend
+                'url' => 'http://localhost:3000/verification/?token='.$token,
             ];
             Mail::to($email)->send(new Verification($data));
             return response()->json(['user' => $user, 'message' => 'Successfully created!'], 201);
@@ -88,11 +91,7 @@ class AuthController extends Controller
                 'status' => 'Gagal',
                 'message' => 'Password gagal diubah',], 404);
         }
-
-
    }
-
-
 
    public function requestOTP(Request $request)
    {

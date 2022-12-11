@@ -30,13 +30,8 @@ class Verification extends Mailable
      */
     public function build()
     {
-        return $this->from('sender@gmail.com')
-                    ->markdown('email-verification')
+        return $this->markdown('email-verification')
                     ->subject('Verification Account')
                     ->with('data', $this->data);
-                    // ->attach(public_path('/img/a.png'), [
-                    //     'as'    => 'a.png',
-                    //     'mime'  => 'image/png',
-                    // ]);
     }
 }

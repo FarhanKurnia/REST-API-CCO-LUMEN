@@ -30,13 +30,8 @@ class ForgetPassword extends Mailable
      */
     public function build()
     {
-        return $this->from('sender@gmail.com')
-                    ->markdown('email-forget-password')
+        return $this->markdown('email-forget-password')
                     ->subject('Request Forget Password')
                     ->with('data', $this->data);
-                    // ->attach(public_path('/img/a.png'), [
-                    //     'as'    => 'a.png',
-                    //     'mime'  => 'image/png',
-                    // ]);
     }
 }
