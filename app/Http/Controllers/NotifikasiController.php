@@ -203,7 +203,7 @@ class NotifikasiController extends Controller
 
         // $keluhan_id = $request->input('keluhan_id');
         // $pop_id = $request->input('pop_id');
-        $notifikasi_id = 1;
+        $notifikasi_id = $request->input('notifikasi_id');
         $user = User::where('pop_id',$id_pop)->get();
         $list_user[] = [];
         foreach ($user as $index => $users) {
