@@ -56,11 +56,12 @@ class RFOKeluhanController extends Controller
             $status = "error";
             $message = $th->getMessage();
         }
-        $RFO_Keluhan_id = $RFO_Keluhan->id_rfo_keluhan;
+        // $RFO_Keluhan_id = $RFO_Keluhan->id_rfo_keluhan;
         return response([
             'status' => $status,
             'message' => $message,
-            'id_rfo_keluhan' => $RFO_Keluhan_id], 200);
+            // 'id_rfo_keluhan' => $RFO_Keluhan_id
+        ], 200);
     }
 
     public function show($id)

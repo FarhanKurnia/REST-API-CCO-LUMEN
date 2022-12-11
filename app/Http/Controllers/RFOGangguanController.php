@@ -30,7 +30,7 @@ class RFOGangguanController extends Controller
         $nomor_tiket = $request->input('nomor_tiket');
         $nomor_rfo_gangguan = '#RFO-G'.date("Ymd").rand( 100 , 999 );
         $mulai_gangguan = $request->input('mulai_gangguan');
-        // $selesai_gangguan = $request->input('selesai_gangguan');
+        $selesai_gangguan = $request->input('selesai_gangguan');
         // $start = new DateTime($mulai_gangguan);//start time
         // $end = new DateTime($selesai_gangguan);//end time
         // $durasi = $start->diff($end);
