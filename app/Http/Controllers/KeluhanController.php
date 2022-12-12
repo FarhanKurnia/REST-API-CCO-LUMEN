@@ -150,8 +150,8 @@ class KeluhanController extends Controller
             // dd($id_keluhan);
             event(new KeluhanEvent([
                 'id'=>'1',
-                'title'=>'Berhasil menambah keluhan',
-                'desc'=>'Test Notifikasi Push Tambah Keluhan',
+                'title'=>'Keluhan Baru',
+                'desc'=>'Terdapat keluhan baru',
                 // "deep_link" => 'localhost:3000/dashboard/detail/'.$id_keluhan,
             ]));
             $beamsClient = new \Pusher\PushNotifications\PushNotifications(array(
@@ -161,8 +161,8 @@ class KeluhanController extends Controller
               $publishResponse = $beamsClient->publishToInterests(
                 array("update"),
                 array("web" => array("notification" => array(
-                  "title" => "update keluhan",
-                  "body" => "terdapat update keluhan terbaru",
+                  "title" => "Keluhan baru",
+                  "body" => "Terdapat update keluhan terbaru",
                 //   "deep_link" => url('/api/keluhan/'.$id_keluhan),
                   "deep_link" => "http://localhost:3000/dashboard/detail/".$id_keluhan,
                 )),
