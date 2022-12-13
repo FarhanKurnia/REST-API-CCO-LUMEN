@@ -14,11 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Index function for get all report
     public function index()
     {
         return response()->json([
@@ -27,36 +23,20 @@ class LaporanController extends Controller
             'data' => Laporan::with('user','pop','shift')->orderBy('created_at', 'DESC')->get()], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Store daily report function
     public function store(Request $request)
     {
         $this->validate($request, [
             'lampiran_laporan.*' => 'mimes:doc,pdf,docx|max:5000'
         ]);
-        $message = 'Laporan berhasil dimasukan';
-        $status = "success";
+
         $tanggal = $request->input('tanggal');
         $shift_id = $request->input('shift_id');
         $pop_id = $request->input('pop_id');
         $noc = $request->input('noc');
         $helpdesk = $request->input('helpdesk');
         $user_id = $request->input('user_id');
-        // 1 file
+        // Request 1 file for attachment
         $lampiran_laporan = $request->file('lampiran_laporan');
         if($request->hasFile('lampiran_laporan')){
             $nomor_laporan = 'REF-ID-'.date('Ymd').$pop_id.$shift_id.rand( 100 , 999 );
@@ -73,71 +53,58 @@ class LaporanController extends Controller
                     'user_id' => $user_id,
                     'lampiran_laporan' => url('laporan'.'/'.$new_name),
                 ]);
+                $message = 'Report added successfully';
+                $status = 'Success';
+                $http_code = 200;
             } catch (\Throwable $th) {
-                $status = "error";
+                $status = 'Error';
                 $message = $th->getMessage();
+                $http_code = 404;
             }
-            return response([
-                'status' => $status,
-                'message' => $message,
-            ], 200);
         }else{
-            return response([
-                'status' => 'error',
-                'message' => 'harap sertakan attachment laporan',
-            ], 400);
+            $message = 'Please add report attachment';
+            $status = 'Error';
+            $http_code = 404;
         }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ],$http_code);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Laporan  $laporan
-     * @return \Illuminate\Http\Response
-     */
+    // Show detail report function
     public function show($id)
     {
-        $message = "Laporan ditemukan";
-        $status = "success";
         $laporan = Laporan::find($id);
         if (!$laporan) {
-            $status = "error";
-            $message = "Laporan tidak ditemukan";
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $status = 'Error';
+            $message = 'Report not found';
+            $http_code = 404;
         }else{
             $laporan->shift;
             $laporan->user;
             $laporan->role;
             $laporan->pop;
-            return response()->json([
-                'status' => $status,
-                'message' => $message,
-                'data' =>$laporan
-            ],200);
+            $status = 'Success';
+            $message = 'Report found';
+            $http_code = 200;
         }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+            'data' => $laporan
+        ],$http_code);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Laporan  $laporan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Laporan $laporan)
-    {
-        //
-    }
+    // Get all user for input daily report
     public function userLaporan()
     {
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $pop_id = $id_jwt['pop_id'];
 
-        $message = "Data User Helpdesk dan NOC berhasil ditemukan";
-        $status = "success";
         $helpdesk = User::where([
             ['pop_id',$pop_id],
             ['role_id',1],
@@ -147,8 +114,8 @@ class LaporanController extends Controller
             ['role_id',2],
             ])->get();
         if (!$helpdesk) {
-            $status = "success";
-            $message = "Data User Helpdesk tidak ditemukan dan data User NOC ditemukan";
+            $status = 'Success';
+            $message = 'Data User Helpdesk not found and data User NOC has been found';
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -157,8 +124,8 @@ class LaporanController extends Controller
                 ]
             ], 200);
         }elseif(!$noc){
-            $status = "success";
-            $message = "Data User NOC tidak ditemukan dan data User Helpdesk ditemukan";
+            $status = 'Success';
+            $message = 'Data User NOC not found and data User Helpdesk has been found';
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -168,6 +135,8 @@ class LaporanController extends Controller
             ], 200);
         }
         else{
+            $message = 'Data User Helpdesk and NOC has been found';
+            $status = 'Success';
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -179,7 +148,7 @@ class LaporanController extends Controller
         }
     }
 
-    // Fungsi untuk get keluhan laporan dengan request: tanggal, shift dan pop
+    // Get Keluhan for daily report with request: date, shift and pop
     public function keluhanLaporan(Request $request){
         $tanggal1 = $request->input('tanggal');
         $tanggal2 = '';
@@ -243,28 +212,5 @@ class LaporanController extends Controller
                 ]
             ], 200);
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Laporan  $laporan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Laporan $laporan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Laporan  $laporan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Laporan $laporan)
-    {
-        //
     }
 }
