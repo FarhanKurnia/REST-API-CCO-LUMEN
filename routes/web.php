@@ -28,8 +28,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 // ==============[Endpoint POP]==============
                 // Matches "/api/pop -> Store
                 $router->post('shift','ShiftController@store');
-                // // Matches "/api/pop -> Index
-                $router->get('shift','ShiftController@index');
+                // // // Matches "/api/pop -> Index
+                // $router->get('shift','ShiftController@index');
                 // Matches "/api/pop/id -> Show One
                 $router->get('shift/{id}','ShiftController@show');
                 // Matches "/api/pop/id -> Update
@@ -195,6 +195,15 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->get('statistik','Statistik@index');
             $router->get('statistik-range','Statistik@statistik_range');
 
+            // ==============[Endpoint POP]==============
+            // Matches "/api/pop -> Index
+            $router->get('sumber-keluhan','SumberKeluhanController@index');
+
+            // ==============[Endpoint POP]==============
+            // Matches "/api/pop -> Index
+            $router->get('shift','ShiftController@index');
+
+
             // ==============[Endpoint Laporan]==============
             $router->get('laporan','LaporanController@index');
             $router->get('laporan/{id}','LaporanController@show');
@@ -233,8 +242,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   $router->post('login', 'AuthController@login');
   // kirim email
   $router->get('/email','MailController@index');
-  // Matches "/api/pop -> Index
-  $router->get('sumber-keluhan','SumberKeluhanController@index');
 
 
 
