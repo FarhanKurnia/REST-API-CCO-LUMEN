@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class LampiranBalasanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Index function for get all lampiran balasan
     public function index()
     {
         return response()->json([
@@ -20,28 +16,11 @@ class LampiranBalasanController extends Controller
             'data' => Lampiran_Balasan::get()], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Store lampiran balasan function
     public function store(Request $request)
     {
-        $message = "Lampiran berhasil ditambahkan";
-        $status = "success";
         $this->validate($request, [
-                'path.*' => 'mimes:doc,pdf,docx,zip,jpeg,jpg,png,mp4|max:5000'
+                'path.*' => 'mimes:doc,excel,pdf,docx,zip,jpeg,jpg,png,mp4,wav,mp3|max:5000'
         ]);
         try {
             $balasan_id = $request->input('balasan_id');
@@ -54,58 +33,17 @@ class LampiranBalasanController extends Controller
                 $lampiranbalasan->balasan_id = $balasan_id;
                 $lampiranbalasan->save();
             }
+            $message = 'Attachment balasan added successfully';
+            $status = 'Success';
+            $http_code = 200;
         }catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Lampiran_Balasan  $lampiran_Balasan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Lampiran_Balasan $lampiran_Balasan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Lampiran_Balasan  $lampiran_Balasan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lampiran_Balasan $lampiran_Balasan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Lampiran_Balasan  $lampiran_Balasan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Lampiran_Balasan $lampiran_Balasan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Lampiran_Balasan  $lampiran_Balasan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Lampiran_Balasan $lampiran_Balasan)
-    {
-        //
+        ], $http_code);
     }
 }
