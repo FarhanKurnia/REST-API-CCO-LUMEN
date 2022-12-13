@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->notNullable();
             $table->string('password');
             $table->enum('status',['aktif','non-aktif'])->default('aktif');;
+            $table->boolean('online');
             $table->boolean('verifikasi')->default('false');
             $table->string('token_verifikasi')->nullable();
             $table->string('otp')->nullable();

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
+
 
 
 class AuthController extends Controller
@@ -40,6 +42,7 @@ class AuthController extends Controller
             $user->pop_id = $request->get('pop_id');
             $user->role_id = $request->get('role_id');
             $user->email = $request->get('email');
+            $user->online = false;
             $user->token_verifikasi = Str::random(128);
             $user->password = app('hash')->make($request->get('password'));
             $user->save();
@@ -167,12 +170,17 @@ class AuthController extends Controller
             return response()->json(['status' => 'Unauthorized','message'=>'data email atau password tidak valid'], 401);
         }
         $verifikasi = Auth::user()->verifikasi;
+        $id_user = Auth::user()->id_user;
         if($verifikasi==true){
+            $user = User::find($id_user)->update([
+                'online' => true,
+            ]);
             return response()->json([
                 'id_user' => Auth::user()->id_user,
                 'username' => Auth::user()->name,
                 'email' => Auth::user()->email,
                 'role_id' => Auth::user()->role_id,
+                'online' => $user,
                 'pop_id' => Auth::user()->pop_id,
                 'bearer_token' => $token,
                 'expires_in' => Auth::factory()->getTTL()
@@ -193,7 +201,12 @@ class AuthController extends Controller
     public function logout()
     {
       $token = auth()->tokenById(Auth::user()->id_user);
+      $jwt_id = JWTAuth::getPayload($token)->toArray();
+      $id_user = $jwt_id['id_user'];
       try {
+        $user = User::find($id_user)->update([
+            'online' => false,
+        ]);
         auth()->logout(true);
         return response()->json([
             'status' => 'success',

@@ -63,7 +63,7 @@ class NotifikasiController extends Controller
         $id_pop = $id_jwt['pop_id'];
     
         $notifikasi_id = $request->input('notifikasi_id');
-        $user = User::where('pop_id',$id_pop)->get();
+        $user = User::where([['pop_id',$id_pop],['online',true]])->get();
         $list_user[] = [];
         foreach ($user as $index => $users) {
             $list_user[$index] = $users['id_user'];
