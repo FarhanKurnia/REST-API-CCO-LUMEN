@@ -8,18 +8,20 @@ use App\Events\KeluhanEvent;
 
 class BalasanController extends Controller
 {
+    // Index function to get All Balasan with user and attachment
     public function index()
     {
         return response()->json([
-            'status' => 'success',
+            'status' => 'Success',
             'message' => 'Load data Balasan successfully',
             'data' => Balasan::with('user','lampiranbalasan')->get()], 200);
     }
 
+    // Store balasan function
     public function store(Request $request)
     {
         $message = 'Balasan created successfully';
-        $status = "success";
+        $status = "Success";
 
         $user_id = $request->input('user_id');
         $keluhan_id = $request->input('keluhan_id');
@@ -63,13 +65,14 @@ class BalasanController extends Controller
         ], 200);
     }
 
+    // Show function to get one balasan
     public function show($id)
     {
-        $message = "Load data post successfully";
-        $status = "success";
+        $message = "Show data balasan successfully";
+        $status = "Success";
         $balasan = Balasan::find($id);
         if (!$balasan) {
-            $status = "error";
+            $status = "Failed";
             $message = "Data balasan not found";
             return response()->json([
                 'status' => $status,

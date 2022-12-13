@@ -116,8 +116,8 @@ class AuthController extends Controller
         }
     }else{
         return response()->json([
-            'status' => 'Gagal',
-            'message' => 'Data yang dimasukan tidak valid',], 404);
+            'status' => 'Failed',
+            'message' => 'Invalid data',], 404);
     }
    }
 
