@@ -61,7 +61,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => '2',
             'status' => 'aktif',
             'online' => false,
-            'verifikasi' => false,
+            'verifikasi' => true,
             'token_verifikasi' => null,
             'avatar' => 'http://localhost:8000/avatar/user.png',
             'email'=> 'nocsl@citra.net.id',
