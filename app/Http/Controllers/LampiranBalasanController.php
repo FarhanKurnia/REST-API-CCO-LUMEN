@@ -11,7 +11,7 @@ class LampiranBalasanController extends Controller
     public function index()
     {
         return response()->json([
-            'status' => 'success',
+            'status' => 'Success',
             'message' => 'Load data Lampiran successfully',
             'data' => Lampiran_Balasan::get()], 200);
     }
@@ -37,7 +37,7 @@ class LampiranBalasanController extends Controller
             $status = 'Success';
             $http_code = 200;
         }catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
         }
