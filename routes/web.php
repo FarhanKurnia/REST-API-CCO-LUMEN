@@ -250,7 +250,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   // ==============[Endpoint Debug]==============
   // Just testing route to get JWT Payload
   $router->get('getJWT', 'UserController@getJWT');
-  $router->get('/verification','AuthController@verifikasi');
+  $router->get('/verification','AuthController@verification');
   $router->get('/otp','AuthController@requestOTP');
-  $router->get('/lupa-password','AuthController@lupaPassword');
+  $router->get('/forget-password','AuthController@forgetPassword');
 });

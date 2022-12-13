@@ -16,16 +16,7 @@ use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
 class AuthController extends Controller
 {
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    /**
-     * Register Function
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Register account function
     public function register(Request $request)
     {
         $this->validate($request, [
@@ -67,7 +58,8 @@ class AuthController extends Controller
 
    }
 
-   public function lupaPassword(Request $request)
+   // Forget password function
+   public function forgetPassword(Request $request)
    {
         $otp = $request->get('otp');
         $password = $request->get('password');
@@ -83,7 +75,7 @@ class AuthController extends Controller
                     'message' => 'Password berhasil diubah',
                     ], 200);
             } catch (\Throwable $th) {
-                $status = "Gagal";
+                $status = "Error";
                 $message = $th->getMessage();
                 return response()->json([
                     'status' => $status,
@@ -96,6 +88,7 @@ class AuthController extends Controller
         }
    }
 
+   // Request OTP (One Time Password) for forget password
    public function requestOTP(Request $request)
    {
     $token_OTP = Str::random(12);
@@ -112,10 +105,10 @@ class AuthController extends Controller
             Mail::to($email)->send(new ForgetPassword($data));
             return response()->json([
                 'status' => 'Success',
-                'message' => 'OTP berhasil dibuat',
+                'message' => 'OTP created successfully',
                 'otp' => $token_OTP], 200);
         } catch (\Throwable $th) {
-            $status = "Gagal";
+            $status = "Error";
             $message = $th->getMessage();
             return response()->json([
                 'status' => $status,
@@ -128,7 +121,8 @@ class AuthController extends Controller
     }
    }
 
-   public function Verifikasi(Request $request)
+   // Verification Account after register
+   public function verification(Request $request)
    {
     $token_verifikasi = $request->get('token');
     $user = User::where('token_verifikasi',$token_verifikasi)->count();
@@ -136,10 +130,10 @@ class AuthController extends Controller
         try{
             User::where('token_verifikasi',$token_verifikasi)->update(['verifikasi'=>true]);
             return response()->json([
-                'status' => 'Verifikasi sukses',
-                'message' => 'Akunmu sudah diverifikasi'], 200);
+                'status' => 'Success',
+                'message' => 'Account verification has been successful'], 200);
         } catch (\Throwable $th) {
-            $status = "Gagal";
+            $status = "Error";
             $message = $th->getMessage();
             return response()->json([
                 'status' => $status,
@@ -147,17 +141,12 @@ class AuthController extends Controller
         }
     }else{
         return response()->json([
-            'status' => 'Gagal',
-            'message' => 'Data yang dimasukan tidak valid',], 404);
+            'status' => 'Error',
+            'message' => 'Invalid data',], 404);
     }
    }
 
-    /**
-     * Login Function
-     *
-     * @return \Illuminate\Http\Response
-     */
-    //set ttl aexpired
+    // Login function with JWT
     public function login(Request $request)
     {
         $this->validate($request, [
@@ -167,7 +156,7 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
         if (! $token = Auth::setTTL(480)->attempt($credentials)) {
-            return response()->json(['status' => 'Unauthorized','message'=>'data email atau password tidak valid'], 401);
+            return response()->json(['status' => 'Unauthorized','message'=>'Invalid email or password'], 401);
         }
         $verifikasi = Auth::user()->verifikasi;
         $id_user = Auth::user()->id_user;
@@ -187,17 +176,13 @@ class AuthController extends Controller
             ], 200);
         }else{
             return response()->json([
-                'status' => 'error',
-                'message' => 'Harap lakukan verifikasi akun'
+                'status' => 'Failed',
+                'message' => 'Account has not been verified, please verify your account'
             ],404);
         }
     }
 
-    /**
-     * Logout Function
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Logout function with JWT token
     public function logout()
     {
       $token = auth()->tokenById(Auth::user()->id_user);
@@ -209,12 +194,12 @@ class AuthController extends Controller
         ]);
         auth()->logout(true);
         return response()->json([
-            'status' => 'success',
+            'status' => 'Success',
             'message' => 'User logged out successfully'
         ]);
       } catch (\Exception $e) {
         return response()->json([
-            'status' => 'failed',
+            'status' => 'Failed',
             'message' => 'Sorry, the user cannot be logged out'
         ]);
       }
