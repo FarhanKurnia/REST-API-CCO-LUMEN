@@ -12,7 +12,7 @@ class LampiranBalasanController extends Controller
     {
         return response()->json([
             'status' => 'Success',
-            'message' => 'Load data Lampiran successfully',
+            'message' => 'Load data Lampiran Balasan successfully',
             'data' => Lampiran_Balasan::get()], 200);
     }
 
