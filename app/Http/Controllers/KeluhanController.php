@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 
 class KeluhanController extends Controller
 {
+    // Index function for get all complaint with status open
     public function index(){
         $today = Carbon::now()->format('Y-m-d');
         $data = Keluhan::where('status','open')
@@ -21,52 +22,44 @@ class KeluhanController extends Controller
             ['status','closed'],
             ['updated_at','iLIKE', "%{$today}%"],
         ])
-        // Fungsi ini terlalu panjang
-        // ->orWhere(function ($query) {
-        //     $query->where('status', '=', 'closed')
-        //           ->where('updated_at', 'LIKE', '%'.Carbon::now()->format('Y-m-d').'%');
-        // })
-        ->orderBy('created_at', 'DESC')->with('pop','balasan','RFO_Gangguan','RFO_Keluhan','lampirankeluhan')->get();
+        ->orderBy('created_at', 'DESC')
+        ->with('pop','balasan','RFO_Gangguan','RFO_Keluhan','lampirankeluhan')
+        ->get();
         if($data->isNotEmpty()){
             return response()->json([
-                'status' => 'success',
-                'message' => 'Data keluhan berhasil ditemukan',
+                'status' => 'Success',
+                'message' => 'Load data Keluhan successfully',
                 'data' => $data
             ], 200);
         }else{
             return response()->json([
                 'status'=>"error",
-                'mesage' =>"Data keluhan tidak ditemukan"
+                'mesage' =>"Data Keluhan not found"
             ],404);
         }
     }
 
+    // History function to check complaint that has been closed in that session
     public function history(){
         $data = Keluhan::where('status','=','closed')->orderBy('created_at', 'DESC')->with('pop','balasan')->paginate(10);;
         if($data->isNotEmpty()){
             return response()->json([
-                'status' => 'success',
-                'message' => 'Data history keluhan berhasil ditemukan',
+                'status' => 'Success',
+                'message' => 'Data history keluhan found',
                 'data' => $data
             ], 200);
         }else{
             return response()->json([
-                'status'=>"error",
-                'mesage' =>"Data history keluhan tidak ditemukan"
+                'status'=>'Error',
+                'mesage' =>'Data history keluhan not found'
             ],404);
         }
     }
 
+    // Search keluhan function that has been closed with keyword
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
-        // Fungsi ini berhasil namun pencarian terbatas hanya Nama Pelanggan
-        // $data = Keluhan::where('status','closed')
-        // ->where('nama_pelanggan', 'iLIKE', "%{$search}%")
-        // ->orWhere('nomor_pelapor', 'iLIKE', "%{$search}%")
-        // ->get();
-
-        // Fungsi ini berhasil melakukan pencarian lengkap yang statusnya closed
         $data = Keluhan::where([
             ['status', 'closed'],
             ['id_pelanggan', 'LIKE', "%{$keyword}%"],
@@ -90,29 +83,21 @@ class KeluhanController extends Controller
         if($data->isEmpty()){
             return response()->json([
                 'status' => 'error',
-                'message' => 'Data history keluhan tidak ditemukan',
+                'message' => 'Data history keluhan not found',
             ], 404);
         }else{
             return response()->json([
-                'status' => 'succes',
-                'message' => 'Data history keluhan berhasil ditemukan',
+                'status' => 'success',
+                'message' => 'Data history keluhan found',
                 'data' => $data
             ], 200);
         }
     }
 
+    // Store keluhan function
     public function store(Request $request){
-        $message = 'Data keluhan berhasil dimasukan';
-        $status = "success";
-
-
-
-        // Format:
-        // #T051102212345
-        // # = hashtag
-        // T = Trouble
-        // date() = YYYY-MM-DD
-        // Random Interger = 5 Digit
+        $message = 'Data keluhan added successfully';
+        $status = 'Success';
 
         $id_pelanggan = $request->input('id_pelanggan');
         $nama_pelanggan = $request->input('nama_pelanggan');
@@ -147,12 +132,10 @@ class KeluhanController extends Controller
                 'sentimen_analisis'=>$sentimen_analisis,
             ]);
             $id_keluhan = $keluhan['id_keluhan'];
-            // dd($id_keluhan);
             event(new KeluhanEvent([
                 'id'=>'1',
                 'title'=>'Keluhan Baru',
                 'desc'=>'Terdapat keluhan baru',
-                // "deep_link" => 'localhost:3000/dashboard/detail/'.$id_keluhan,
             ]));
             $beamsClient = new \Pusher\PushNotifications\PushNotifications(array(
                 "instanceId" => "a81f4de8-8096-4cc9-a1d0-5c92138936f1",
@@ -163,7 +146,9 @@ class KeluhanController extends Controller
                 array("web" => array("notification" => array(
                   "title" => "Keluhan baru",
                   "body" => "Terdapat update keluhan terbaru",
-                //   "deep_link" => url('/api/keluhan/'.$id_keluhan),
+                  // url backend
+                  // "deep_link" => url('/api/keluhan/'.$id_keluhan),
+                  // url frontend
                   "deep_link" => "http://localhost:3000/dashboard/detail/".$id_keluhan,
                 )),
               ));
@@ -179,15 +164,16 @@ class KeluhanController extends Controller
         ], 200);
     }
 
+    // Show keluhan function with balasan
     public function show($id)
     {
-        $message = "Data Keluhan berhasil ditemukan";
-        $status = "success";
+        $message = "Data Keluhan found";
+        $status = 'Success';
         $keluhan = Keluhan::find($id);
         try {
             if (!$keluhan) {
                 $status = "error";
-                $message = "Data Keluhan tidak ditemukan";
+                $message = "Data Keluhan not found";
                 return response()->json([
                     'status'=>$status,
                     'mesage' =>$message
@@ -206,7 +192,7 @@ class KeluhanController extends Controller
                 ],200);
             }
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = "Error";
             $message = $th->getMessage();
             return response()->json([
                 'status' => $status,
@@ -215,10 +201,11 @@ class KeluhanController extends Controller
         }
     }
 
+    // Update keluhan function
     public function update(Request $request, $id)
     {
-        $message = 'Data keluhan berhasil diupdate';
-        $status = "success";
+        $message = 'Data keluhan updated successfully';
+        $status = 'Success';
 
         try {
             Keluhan::find($id)->update([
@@ -229,7 +216,7 @@ class KeluhanController extends Controller
                 'detail_sumber' => $request->detail_sumber,
             ]);
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = "Error";
             $message = $th->getMessage();
         }
 
@@ -239,10 +226,11 @@ class KeluhanController extends Controller
         ], 200);
     }
 
+    // Close Keluhan function 
     public function close(Request $request, $id)
     {
-        $message = 'Data keluhan berhasil ditutup';
-        $status = "success";
+        $message = 'Data keluhan successfully closed';
+        $status = 'Success';
 
         try {
             Keluhan::find($id)->update([
@@ -259,9 +247,10 @@ class KeluhanController extends Controller
         ], 200);
     }
 
+    // Update RFO Gangguan function when keluhan has been closed
     public function updateKeluhanRFOGangguan(Request $request, $id)
     {
-        $message = 'Data keluhan RFO Gangguan berhasil diupdate';
+        $message = 'Data keluhan RFO Gangguan successfully updated';
         $status = "success";
 
         try {
@@ -279,9 +268,10 @@ class KeluhanController extends Controller
         ], 200);
     }
 
+    // Update RFO Keluhan function when keluhan has been closed
     public function updateKeluhanRFOKeluhan(Request $request, $id)
     {
-        $message = 'Data keluhan RFO Keluhan berhasil diupdate';
+        $message = 'Data keluhan RFO Keluhan updated successfully';
         $status = "success";
 
         try {
@@ -299,11 +289,9 @@ class KeluhanController extends Controller
         ], 200);
     }
 
-
+    // Re-open function for keluhan that has been closed
     public function open(Request $request, $id)
     {
-        $message = 'Data keluhan berhasil dibuka';
-        $status = "success";
         $keluhan = Keluhan::find($id);
         if (!empty($keluhan)){
             try {
@@ -312,60 +300,41 @@ class KeluhanController extends Controller
                     'rfo_gangguan_id' => $request->rfo_gangguan=null,
                     'rfo_keluhan_id' => $request->rfo_keluhan=null,
                 ]);
+                $message = 'Data keluhan re-opened successfully';
+                $status = 'Success';
+                $http_code = 200;
             } catch (\Throwable $th) {
-                $status = "error";
+                $status = "Error";
                 $message = $th->getMessage();
             }
         }else{
-            $message = 'Data keluhan tidak ditemukan';
-            $status = "success";
+            $message = 'Data keluhan not found';
+            $status = 'Error';
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
-        // Fungsi DB Transacsion ini masih gagal wqwqwq
-        // Revisi: Buat ID RFO Gangguan dan RFO Keluhan delete
-        // 'rfo_gangguan_id'=>$request->rfo_gangguan_id=null,
-        // 'rfo_keluhan_id'=>$request->rfo_gangguan_id=null,
-        // $rfo_gangguan = $keluhan["rfo_gangguan_id"];
-        // $RFOGangguan = RFO_Gangguan::find($rfo_gangguan);
-        // $RFOKeluhan = RFO_Keluhan::find($rfo_keluhan);
-        // dd($RFOKeluhan);
-        // DB::beginTransaction();
-        // try {
-        //     $keluhan = Keluhan::find($id);
-        //     $keluhan->update([
-        //         'status' => $request->status_keluhan='open',
-
-        //     ]);
-        //     $rfo_keluhan = $keluhan["rfo_keluhan_id"];
-        //     if(!empty($rfo_keluhan)){
-        //         RFO_Keluhan::find($rfo_keluhan)->delete();
-        //     }
-
-        //     DB::commit();
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     $status = "error";
-        //     $message = $e->getMessage();
-        // }
-
+        ], $http_code);
     }
 
+    // Delete Keluhan function
     public function destroy($id)
     {
-        $message = 'Data keluhan berhasil dihapus';
-        $status = "success";
         try {
             Keluhan::find($id)->delete();
+            $message = 'Data keluhan has been deleted';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
+
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 }
