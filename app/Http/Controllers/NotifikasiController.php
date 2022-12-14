@@ -17,7 +17,7 @@ class NotifikasiController extends Controller
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_user = $id_jwt['id_user'];
-    
+
         $notifikasi = Notifikasi_Read::where('user_id',$id_user)->with('notifikasi')->get();
         return response()->json([
             'status' => 'Data Notifikasi berhasil dimuat',
@@ -25,12 +25,12 @@ class NotifikasiController extends Controller
             'data' => $notifikasi
         ], 200);
     }
-    
+
     // Add Notification
     public function store(Request $request){
         $keluhan_id = $request->input('keluhan_id');
         $pop_id = $request->input('pop_id');
-    
+
         try {
             $notifikasi = Notifikasi::create([
                 'judul' => 'Update baru',
@@ -48,20 +48,20 @@ class NotifikasiController extends Controller
             $message = $th->getMessage();
             $http_code = 404;
         }
-    
+
         return response([
             'status' => $status,
             'message' => $message,
             'notifikasi' => $notifikasi,
         ], $http_code);
     }
-    
+
     // Broadcast Notification
     public function broadcast(Request $request){
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_pop = $id_jwt['pop_id'];
-    
+
         $notifikasi_id = $request->input('notifikasi_id');
         $user = User::where([['pop_id',$id_pop],['online',true]])->get();
         $list_user[] = [];
@@ -88,14 +88,14 @@ class NotifikasiController extends Controller
                     $message = 'Notifikasi sudah dibroadcast';
                     $status = 'Error';
                     $http_code = 404;
-                }       
+                }
             }
         }else{
             $message = 'Notifikasi tidak ditemukan';
             $status = 'Error';
             $http_code = 404;
         }
-    
+
         return response()->json([
             'status' => $status,
             'message' => $message,
@@ -119,17 +119,19 @@ class NotifikasiController extends Controller
                     $http_code = 200;
                 } else{
                     $message = 'Notifikasi sudah dibaca';
-                    $status = "Error";
+                    $status = 'Failed';
                     $http_code = 404;
                 }
             }else{
                 $message = 'Notifikasi tidak ditemukan';
-                $status = "Error";
+                $status = 'Error';
                 $http_code = 404;
             }
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
+
         }
 
         return response()->json([
@@ -162,7 +164,7 @@ class NotifikasiController extends Controller
                 ]);
             }
             $status = 'Success';
-            $message = 'Notifikasi berhasil dibaca semua'; 
+            $message = 'Notifikasi berhasil dibaca semua';
             $http_code = 200;
         }else{
             $status = 'Error';
@@ -175,133 +177,4 @@ class NotifikasiController extends Controller
             'message' => $message,
         ], $http_code);
     }
-
-    // Sementara tidak digunakan
-    // public function getNotifikasiAllRead()
-    // {
-    //     //         FROM notification n
-    //     //          JOIN category c ON (n.category_id = c.id)
-    //     //          LEFT JOIN notification_read nr ON (nr.notification_id = n.id)
-    //     // WHERE (n.user_id = 'eko' OR n.user_id IS NULL)
-    //     //   AND (nr.user_id = 'eko' OR nr.user_id IS NULL)
-    //     // ORDER BY n.create_at DESC;
-
-    // //     $productCategory = Product::where('id', $productId)
-    // // ->leftJoin('category', 'product.category', '=', 'category.id')
-    // // ->select('product.id','category.name')->first();
-
-    // // ->leftjoin('category','category.product_id','=','products.id')
-
-    // // Take JWT ID as ID in Database
-    // $token = JWTAuth::getToken();
-    // $id_jwt = JWTAuth::getPayload($token)->toArray();
-    // $id_user = $id_jwt['id_user'];
-    // $id_pop = $id_jwt['pop_id'];
-    // // $notifikasi = Notifikasi::leftjoin('notifikasi__reads','notifikasi__reads.notifikasi_id','=','notifikasis.id_notifikasi')
-    // //     // ->where('notifikasis.user_id_notif', null)
-    // //     // ->orwhere('notifikasi__reads.user_id', null)
-    // //     // ->where('notifikasis.user_id_notif', null)
-    // //     // ->orwhere('notifikasi__reads.user_id', $id_user)
-    // //     ->where([
-    // //         ['notifikasis.user_id_notif', null],
-    // //         ['notifikasi__reads.user_id', null]
-    // //         ])
-    // //     ->orwhere([
-    // //         ['notifikasis.user_id_notif', null],
-    // //         ['notifikasi__reads.user_id', $id_user]
-    // //     ])
-    // //     ->get();
-
-    // $notifikasi = DB::select( DB::raw("SELECT * FROM notifikasis n
-    // JOIN pops p ON (n.pop_id = p.id_pop)
-    // LEFT JOIN notifikasi__reads nr ON (nr.notifikasi_id = n.id_notifikasi)
-    // WHERE (n.user_id_notif IS NULL)
-    // AND (nr.user_id = '$id_user' OR nr.user_id IS NULL)
-    // AND (n.pop_id = $id_pop)
-    // ORDER BY n.created_at DESC"));
-    // return response()->json([
-    //     'status' => 'Data Notifikasi berhasil ditemukan',
-    //     'message' => 'success',
-    //     'data' => $notifikasi
-    // ], 200);
-    //     // if($notifikasi->isNotEmpty()) {
-    //     //     return response()->json([
-    //     //         'status' => 'Data Notifikasi berhasil ditemukan',
-    //     //         'message' => 'success',
-    //     //         'data' => $notifikasi
-    //     //     ], 200);
-    //     // }else{
-    //     //     return response()->json([
-    //     //         'status'=>"error",
-    //     //         'mesage' =>"Data Notifikasi tidak ditemukan"
-    //     //     ],404);
-    //     // }
-    // }
-
-    //Sementara tidak digunakan
-    // public function getNotifikasi()
-    // {
-    //     $token = JWTAuth::getToken();
-    //     $id_jwt = JWTAuth::getPayload($token)->toArray();
-    //     $id_user = $id_jwt['id_user'];
-    //     $id_pop = $id_jwt['pop_id'];
-
-    //     $notifikasi = Notifikasi::where('pop_id',$id_pop)->with('notifikasi_read','pop')->get();
-    //     // $notif = $notifikasi->notifikasi_read;
-    //     // dd($notif);
-    //     return response()->json([
-    //         'status' => 'Data Notifikasi berhasil dimuat',
-    //         'message' => 'success',
-    //         'data' => $notifikasi
-    //     ], 200);
-    // }
-    
-    // public function read(Request $request)
-    // {
-        
-    //     $message = 'Notifikasi berhasil dibaca';
-    //     $status = "success";
-
-    //      // Take JWT ID as ID in Database
-    //     $token = JWTAuth::getToken();
-    //     $id_jwt = JWTAuth::getPayload($token)->toArray();
-    //     $id_user = $id_jwt['id_user'];
-        
-    //     //'is_read', 'notifikasi_id', 'user_id',
-    //     $is_read = true;
-    //     $notifikasi_id = $request->input('notifikasi_id');
-    //     // $notifikasi = Notifikasi::with('keluhan');
-    //     // dd($notifikasi);
-
-    //     // try {
-    //         $notifikasi_cek = Notifikasi_Read::where([
-    //             ['notifikasi_id',$notifikasi_id],
-    //             ['user_id',$id_user],
-    //         ])->first();
-    //         // dd($notifikasi_cek);
-    //         if($notifikasi_cek == null){
-    //             $notifikasi_read = Notifikasi_Read::create([
-    //                 'notifikasi_id' => $notifikasi_id,
-    //                 'is_read' => $is_read,
-    //                 'user_id' => $id_user,
-    //             ]);
-    //             return response([
-    //                 'status' => $status,
-    //                 'message' => $message,
-    //                 'notifikasi_read' => $notifikasi_read,
-    //             ], 200);  
-    //         }else{
-    //             return response([
-    //                 'status' => 'Error',
-    //                 'message' => 'Notifikasi sudah dibaca',]);
-    //         }    
-            
-    //     // } catch (\Throwable $th) {
-    //     //     $status = "error";
-    //     //     $message = $th->getMessage();
-    //     // }
-
-        
-    // }
-
 }

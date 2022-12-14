@@ -33,9 +33,6 @@ class BtsController extends Controller
     // Store BTS function
     public function store(Request $request)
     {
-        $message = 'BTS added successfully';
-        $status = 'Success';
-
         $nama_bts = $request->input('nama_bts');
         $nama_pic = $request->input('nama_pic');
         $nomor_pic = $request->input('nomor_pic');
@@ -54,22 +51,24 @@ class BtsController extends Controller
                 'kordinat' => $kordinat,
                 'user_id' => $user_id,
             ]);
+            $message = 'BTS added successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = 'Failed';
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
     // Show BTS function
     public function show($id)
     {
-        $message = "BTS found";
-        $status = "Success";
         $bts = Bts::find($id);
         if (!$bts) {
             $status = "Error";
@@ -83,6 +82,8 @@ class BtsController extends Controller
             $bts->user->role;
             $bts->user->pop;
             $bts->pop;
+            $message = "BTS found";
+            $status = "Success";
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -94,9 +95,6 @@ class BtsController extends Controller
     // Update BTS function
     public function update(Request $request, $id)
     {
-        $message = 'BTS updated successfully';
-        $status = 'Success';
-
         try {
             Bts::find($id)->update([
                 'nama_bts' => $request->nama_bts,
@@ -107,15 +105,19 @@ class BtsController extends Controller
                 'kordinat' => $request->kordinat,
                 'user_id' => $request->user_id,
             ]);
+            $message = 'BTS updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
     // Delete BTS function

@@ -7,19 +7,18 @@ use Illuminate\Http\Request;
 
 class POPController extends Controller
 {
+    // Index function to get All POP
     public function index()
     {
         return response()->json([
             'status' => 'success',
-            'message' => 'Load data Balasan successfully',
+            'message' => 'Load POP successfully',
             'data' => POP::get()], 200);
     }
 
+    // Store POP function
     public function store(Request $request)
     {
-        $message = 'Data Role berhasil dimasukan';
-        $status = "success";
-
         $id_pop = $request->input('id_pop');
         $pop = $request->input('pop');
 
@@ -28,84 +27,85 @@ class POPController extends Controller
                 'id_pop' => $id_pop,
                 'pop' => $pop,
             ]);
+            $message = 'Data Role berhasil dimasukan';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
 
         return response([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
+    // Show POP function
     public function show($id)
     {
-        $message = "Data POP ditemukan";
-        $status = "success";
+
         $pop = POP::find($id);
         if (!$pop) {
             $status = "error";
             $message = "Data POP tidak ditemukan";
+            $http_code = 404;
             return response()->json([
                 'status'=>$status,
                 'mesage' =>$message
-            ],404);
+            ],$http_code);
         }else{
+            $message = 'Data POP ditemukan';
+            $status = 'Success';
+            $http_code = 200;
             return response()->json([
                 'status' => $status,
                 'message' => $message,
                 'data' =>$pop
-            ],200);
+            ],$http_code);
         }
     }
 
+    // Update POP function
     public function update(Request $request, $id)
     {
-        $message = 'Data POP berhasil diupdate';
-        $status = "success";
-
         try {
             POP::find($id)->update([
                 'id_pop' => $request->id_pop,
                 'pop' => $request->pop,
             ]);
+            $message = 'POP updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
+    // Delete POP function
     public function destroy($id)
     {
-        $message = 'Data POP berhasil dihapus';
-        $status = "success";
         try {
             POP::find($id)->delete();
+            $message = 'POP deleted successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 }

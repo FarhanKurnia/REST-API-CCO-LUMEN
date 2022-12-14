@@ -96,8 +96,7 @@ class KeluhanController extends Controller
 
     // Store keluhan function
     public function store(Request $request){
-        $message = 'Data keluhan added successfully';
-        $status = 'Success';
+
 
         $id_pelanggan = $request->input('id_pelanggan');
         $nama_pelanggan = $request->input('nama_pelanggan');
@@ -131,6 +130,9 @@ class KeluhanController extends Controller
                 'rfo_keluhan_id'=> $rfo_keluhan_id,
                 'sentimen_analisis'=>$sentimen_analisis,
             ]);
+            $message = 'Data keluhan added successfully';
+            $status = 'Success';
+            $http_code = 200;
             $id_keluhan = $keluhan['id_keluhan'];
             event(new KeluhanEvent([
                 'id'=>'1',
@@ -152,28 +154,29 @@ class KeluhanController extends Controller
                   "deep_link" => "http://localhost:3000/dashboard/detail/".$id_keluhan,
                 )),
               ));
+
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response([
             'status' => $status,
             'message' => $message,
             'id_keluhan' => $keluhan,
-        ], 200);
+        ], $http_code);
     }
 
     // Show keluhan function with balasan
     public function show($id)
     {
-        $message = "Data Keluhan found";
-        $status = 'Success';
+
         $keluhan = Keluhan::find($id);
         try {
             if (!$keluhan) {
-                $status = "error";
-                $message = "Data Keluhan not found";
+                $status = 'Failed';
+                $message = 'Data Keluhan not found';
                 return response()->json([
                     'status'=>$status,
                     'mesage' =>$message
@@ -185,6 +188,8 @@ class KeluhanController extends Controller
                 $keluhan->lampirankeluhan;
                 $keluhan->rfo_keluhan;
                 $keluhan->rfo_gangguan;
+                $message = 'Data Keluhan found';
+                $status = 'Success';
                 return response()->json([
                     'status' => $status,
                     'message' => $message,
@@ -197,16 +202,13 @@ class KeluhanController extends Controller
             return response()->json([
                 'status' => $status,
                 'message' => $message,
-            ], 200);
+            ], 404);
         }
     }
 
     // Update keluhan function
     public function update(Request $request, $id)
     {
-        $message = 'Data keluhan updated successfully';
-        $status = 'Success';
-
         try {
             Keluhan::find($id)->update([
                 'pop_id' => $request->pop_id,
@@ -215,78 +217,88 @@ class KeluhanController extends Controller
                 'sumber_id' => $request->sumber_id,
                 'detail_sumber' => $request->detail_sumber,
             ]);
+            $message = 'Data keluhan updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "Error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
-    // Close Keluhan function 
+    // Close Keluhan function
     public function close(Request $request, $id)
     {
-        $message = 'Data keluhan successfully closed';
-        $status = 'Success';
-
         try {
             Keluhan::find($id)->update([
                 'status' => $request->status_keluhan='closed',
             ]);
+            $message = 'Data keluhan successfully closed';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
     // Update RFO Gangguan function when keluhan has been closed
     public function updateKeluhanRFOGangguan(Request $request, $id)
     {
-        $message = 'Data keluhan RFO Gangguan successfully updated';
-        $status = "success";
-
         try {
             Keluhan::find($id)->update([
                 'rfo_gangguan_id' => $request->rfo_gangguan_id,
             ]);
+            $message = 'Data keluhan RFO Gangguan successfully updated';
+            $status = "success";
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
     // Update RFO Keluhan function when keluhan has been closed
     public function updateKeluhanRFOKeluhan(Request $request, $id)
     {
-        $message = 'Data keluhan RFO Keluhan updated successfully';
-        $status = "success";
+
 
         try {
             Keluhan::find($id)->update([
                 'rfo_keluhan_id' => $request->rfo_keluhan_id,
             ]);
+            $message = 'Data keluhan RFO Keluhan updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 200;
+
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
     // Re-open function for keluhan that has been closed
@@ -306,6 +318,7 @@ class KeluhanController extends Controller
             } catch (\Throwable $th) {
                 $status = "Error";
                 $message = $th->getMessage();
+                $http_code = 404;
             }
         }else{
             $message = 'Data keluhan not found';
