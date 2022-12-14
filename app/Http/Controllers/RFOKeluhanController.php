@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class RFOKeluhanController extends Controller
 {
+    // Index function to get All RFO Keluhan
     public function index()
     {
         return response()->json([
@@ -17,9 +18,6 @@ class RFOKeluhanController extends Controller
 
     public function store(Request $request)
     {
-        $message = 'RFO Keluhan created successfully';
-        $status = "success";
-
         // Format:
         // #RFO-S051102212345
         // # = hashtag
@@ -52,18 +50,23 @@ class RFOKeluhanController extends Controller
                 'action' => $action,
                 'deskripsi' => $deskripsi,
             ]);
+            $message = 'Data RFO Keluhan added successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
         $RFO_Keluhan_id = $RFO_Keluhan->id_rfo_keluhan;
         return response([
             'status' => $status,
             'message' => $message,
             'id_rfo_keluhan' => $RFO_Keluhan_id
-        ], 200);
+        ], $http_code);
     }
 
+    // Show detail RFO Gangguan function
     public function show($id)
     {
         $message = "Load data post successfully";
