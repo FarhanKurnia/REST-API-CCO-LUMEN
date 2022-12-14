@@ -54,7 +54,7 @@ class BalasanController extends Controller
                 )),
               ));
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
         }
 
@@ -68,25 +68,27 @@ class BalasanController extends Controller
     // Show function to get one balasan
     public function show($id)
     {
-        $message = "Show data balasan successfully";
-        $status = "Success";
         $balasan = Balasan::find($id);
         if (!$balasan) {
             $status = "Failed";
             $message = "Data balasan not found";
+            $http_code = 404;
             return response()->json([
                 'status' => $status,
                 'message' => $message
-            ], 404);
+            ], $http_code);
         }else{
             $balasan->user;
             $balasan->user->role;
             $balasan->keluhan;
             $balasan->lampiranbalasan;
+            $message = 'Show data balasan successfully';
+            $status = 'Success';
+            $http_code = 200;
             return response()->json([
                 'status' => $status,
                 'message' => $message,
-                'data' => $balasan], 200);
+                'data' => $balasan], $http_code);
         }
     }
 }
