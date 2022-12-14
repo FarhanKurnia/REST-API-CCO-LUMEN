@@ -121,18 +121,20 @@ class BtsController extends Controller
     // Delete BTS function
     public function destroy($id)
     {
-        $message = 'BTS deleted successfully';
-        $status = 'Success';
         try {
             Bts::find($id)->delete();
+            $message = 'BTS deleted successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "Error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 }
