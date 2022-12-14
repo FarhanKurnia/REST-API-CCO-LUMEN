@@ -7,18 +7,19 @@ use Illuminate\Http\Request;
 
 class RFOGangguanController extends Controller
 {
+    // Index function to get All RFO Gangguan
     public function index()
     {
         return response()->json([
-            'status' => 'success',
-            'message' => 'Data RFO Gangguan berhasil dimuat',
+            'status' => 'Success',
+            'message' => 'Load Data RFO Gangguan succesfully',
             'data' => RFO_Gangguan::with('user')->get()], 200);
     }
 
+    // Store RFO Gangguan function
     public function store(Request $request)
     {
-        $message = 'Data RFO Gangguan berhasil dibuat';
-        $status = "success";
+
         // Format:
         // #RFO-S051102212345
         // # = hashtag
@@ -52,21 +53,24 @@ class RFOGangguanController extends Controller
                 'deskripsi' => $deskripsi,
                 'nomor_rfo_gangguan' => $nomor_rfo_gangguan,
             ]);
+            $message = 'Data RFO Gangguan berhasil dibuat';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
+    // Close RFO (Reason For Outage) Gangguan function if there is internet connection interruption
     public function close(Request $request, $id)
     {
-        $message = 'Data RFO Gangguan berhasil ditutup';
-        $status = "success";
         $selesai_gangguan = $request->input('selesai_gangguan');
         // $start = new DateTime($mulai_gangguan);//start time
         // $end = new DateTime($selesai_gangguan);//end time
@@ -77,49 +81,47 @@ class RFOGangguanController extends Controller
                 'status' => $request->status='closed',
                 'selesai_gangguan' => $selesai_gangguan,
             ]);
+            $message = 'RFO Gangguan closed successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RFO_Gangguan  $rFOGangguan
-     * @return \Illuminate\Http\Response
-     */
+    // Show detail RFO Gangguan function
     public function show($id)
     {
-        $message = "Data RFO Gangguan berhasil dimuat";
-        $status = "success";
         $rfo_gangguan = RFO_Gangguan::find($id);
-
         if (!$rfo_gangguan) {
-            $status = "error";
-            $message = "Data RFO Gangguan tidak ditemukan";
+            $status = 'Error';
+            $message = 'Show detail RFO Gangguan failed';
+            $http_code = 404;
             return response()->json([
                 'status' => $status,
-                'message' => $message], 404);
+                'message' => $message], $http_code);
         }else{
             $rfo_gangguan->user;
             $rfo_gangguan->keluhan;
+            $message = 'Show detail RFO Gangguan successfully';
+            $status = 'Success';
+            $http_code = 200;
             return response()->json([
                 'status' => $status,
                 'message' => $message,
-                'data' => $rfo_gangguan], 200);
+                'data' => $rfo_gangguan], $http_code);
         }
     }
 
+    // Update RFO Gangguan function
     public function update(Request $request, $id)
     {
-        $message = 'Data updated successfully';
-        $status = "success";
-
         $start = new DateTime($request->mulai_gangguan);//start time
         $end = new DateTime($request->selesai_gangguan);//end time
         $durasi = $start->diff($end);
@@ -137,57 +139,64 @@ class RFOGangguanController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'lampiran_rfo_gangguan' => $request->lampiran_rfo_gangguan,
             ]);
+            $message = 'Data updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
+    // Update RFO Gangguan function with keeyword and closed status
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
-        // Fungsi ini berhasil namun pencarian terbatas hanya Nama Pelanggan
-        // $data = Keluhan::where('status','closed')
-        // ->where('nama_pelanggan', 'iLIKE', "%{$search}%")
-        // ->orWhere('nomor_pelapor', 'iLIKE', "%{$search}%")
-        // ->get();
-
-        // Fungsi ini berhasil melakukan pencarian lengkap yang statusnya closed
         $data = RFO_Gangguan::where(
             'nomor_rfo_gangguan', $keyword)->orwhere('problem', 'iLIKE', "%{$keyword}%")->orwhere('nomor_tiket', $keyword)->paginate(10);
 
         if($data->isEmpty()){
+            $message = 'Data history keluhan not found';
+            $status = 'Error';
+            $http_code = 404;
             return response()->json([
-                'status' => 'error',
-                'message' => 'Data history keluhan tidak ditemukan',
-            ], 404);
+                'status' => $status,
+                'message' => $message,
+            ], $http_code);
         }else{
+            $message = 'Data history keluhan has found';
+            $status = 'Success';
+            $http_code = 404;
             return response()->json([
-                'status' => 'succes',
-                'message' => 'Data history keluhan berhasil ditemukan',
+                'status' => $status,
+                'message' => $message,
                 'data' => $data
-            ], 200);
+            ], $http_code);
         }
     }
 
+    // Delete RFO Gangguan function
     public function destroy($id)
     {
-        $message = 'Data RFO Gangguan berhasil dihapus';
-        $status = "success";
         try {
             RFO_Gangguan::find($id)->delete();
+            $message = 'RFO Gangguan deleted successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 }
