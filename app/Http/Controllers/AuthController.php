@@ -50,10 +50,15 @@ class AuthController extends Controller
                 'url' => 'http://localhost:3000/verification/?token='.$token,
             ];
             Mail::to($email)->send(new Verification($data));
-            return response()->json(['user' => $user, 'message' => 'Successfully created!'], 201);
+            return response()->json([
+                'user' => $user, 
+                'status' => 'Success',
+                'message' => 'Successfully created!'], 201);
 
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed!'], 409);
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Failed register account!'], 409);
         }
 
    }
@@ -72,7 +77,7 @@ class AuthController extends Controller
                 ]);
                 return response()->json([
                     'status' => 'Success',
-                    'message' => 'Password berhasil diubah',
+                    'message' => 'Updated password successfully',
                     ], 200);
             } catch (\Throwable $th) {
                 $status = "Error";
@@ -83,8 +88,8 @@ class AuthController extends Controller
             }
         }else{
             return response()->json([
-                'status' => 'Gagal',
-                'message' => 'Password gagal diubah',], 404);
+                'status' => 'Error',
+                'message' => 'Failed change password',], 404);
         }
    }
 
@@ -116,7 +121,7 @@ class AuthController extends Controller
         }
     }else{
         return response()->json([
-            'status' => 'Failed',
+            'status' => 'Error',
             'message' => 'Invalid data',], 404);
     }
    }
@@ -176,7 +181,7 @@ class AuthController extends Controller
             ], 200);
         }else{
             return response()->json([
-                'status' => 'Failed',
+                'status' => 'Error',
                 'message' => 'Account has not been verified, please verify your account'
             ],404);
         }
@@ -199,7 +204,7 @@ class AuthController extends Controller
         ]);
       } catch (\Exception $e) {
         return response()->json([
-            'status' => 'Failed',
+            'status' => 'Error',
             'message' => 'Sorry, the user cannot be logged out'
         ]);
       }
