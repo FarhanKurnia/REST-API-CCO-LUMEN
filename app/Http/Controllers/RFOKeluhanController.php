@@ -55,7 +55,7 @@ class RFOKeluhanController extends Controller
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "Error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
         }
@@ -70,11 +70,10 @@ class RFOKeluhanController extends Controller
     // Show detail RFO Gangguan function
     public function show($id)
     {
-
         $rfo_keluhan = RFO_Keluhan::find($id);
         if (!$rfo_keluhan) {
-            $status = "Error";
-            $message = "Data RFO Gangguan not found";
+            $status = 'Error';
+            $message = 'Data RFO Gangguan not found';
             return response()->json([
                 'status' => $status,
                 'message' => $message], 404);
@@ -87,8 +86,8 @@ class RFOKeluhanController extends Controller
             $rfo_keluhan->keluhan->user->role;
             $rfo_keluhan->keluhan->user->pop;
             $rfo_keluhan->keluhan->balasan;
-            $message = "Data RFO Gangguan has found";
-            $status = "Success";
+            $message = 'Data RFO Gangguan has found';
+            $status = 'Success';
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -99,8 +98,6 @@ class RFOKeluhanController extends Controller
     // Update RFO Keluhan function
     public function update(Request $request, $id)
     {
-
-
         $start = new DateTime($request->mulai_keluhan);//start time
         $end = new DateTime($request->selesai_keluhan);//end time
         $durasi = $start->diff($end);
@@ -137,14 +134,13 @@ class RFOKeluhanController extends Controller
     // Delete RFO Gangguan function
     public function destroy($id)
     {
-
         try {
             RFO_Keluhan::find($id)->delete();
             $message = 'RFO Keluhan deleted successfully';
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
         }

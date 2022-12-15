@@ -11,8 +11,8 @@ class POPController extends Controller
     public function index()
     {
         return response()->json([
-            'status' => 'success',
-            'message' => 'Load POP successfully',
+            'status' => 'Success',
+            'message' => 'Load all data POP successfully',
             'data' => POP::get()], 200);
     }
 
@@ -27,7 +27,7 @@ class POPController extends Controller
                 'id_pop' => $id_pop,
                 'pop' => $pop,
             ]);
-            $message = 'Data Role berhasil dimasukan';
+            $message = 'POP added successfully';
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
@@ -45,18 +45,17 @@ class POPController extends Controller
     // Show POP function
     public function show($id)
     {
-
         $pop = POP::find($id);
         if (!$pop) {
-            $status = "error";
-            $message = "Data POP tidak ditemukan";
+            $status = 'Error';
+            $message = 'POP not found';
             $http_code = 404;
             return response()->json([
                 'status'=>$status,
                 'mesage' =>$message
             ],$http_code);
         }else{
-            $message = 'Data POP ditemukan';
+            $message = 'POP has found';
             $status = 'Success';
             $http_code = 200;
             return response()->json([

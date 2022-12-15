@@ -7,19 +7,18 @@ use Illuminate\Http\Request;
 
 class SumberKeluhanController extends Controller
 {
+    // Index function for get all shift time for daily report
     public function index()
     {
         return response()->json([
-            'status' => 'success',
-            'message' => 'Data Sumber keluhan berhasil dimuat',
+            'status' => 'Success',
+            'message' => 'Load source complaint successfully',
             'data' => SumberKeluhan::get()], 200);
     }
 
+    // Store source complaint
     public function store(Request $request)
     {
-        $message = 'Data Sumber Keluhan berhasil dimasukan';
-        $status = "success";
-
         $id_sumber = $request->input('id_sumber');
         $sumber = $request->input('sumber');
 
@@ -28,34 +27,34 @@ class SumberKeluhanController extends Controller
                 'id_sumber' => $id_sumber,
                 'sumber' => $sumber,
             ]);
+            $message = 'Data Sumber Keluhan berhasil dimasukan';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
-
-        return response([
-            'status' => $status,
-            'message' => $message,
-        ], 200);
+        return response()->json([
+            'status'=>$status,
+            'mesage' =>$message
+        ],$http_code);
     }
 
+    // Show source complaint
     public function show($id)
     {
-        $message = "Data Sumber Keluhan berhasil ditemukan";
-        $status = "success";
         $sumber = SumberKeluhan::find($id);
         if (!$sumber) {
-            $status = "error";
-            $message = "Data Sumber Keluhan tidak ditemukan";
+            $status = 'Error';
+            $message = 'Source complaint not found';
             return response()->json([
                 'status'=>$status,
                 'mesage' =>$message
             ],404);
         }else{
+            $message = 'Source complaint has found';
+            $status = 'Success';
             return response()->json([
                 'status' => $status,
                 'message' => $message,
@@ -64,49 +63,46 @@ class SumberKeluhanController extends Controller
         }
     }
 
+    // Update source complaint
     public function update(Request $request, $id)
     {
-        $message = 'Data Sumber Keluhan berhasil ditemukan';
-        $status = "success";
-
         try {
             SumberKeluhan::find($id)->update([
                 'id_sumber' => $request->id_sumber,
                 'sumber' => $request->sumber,
             ]);
+            $message = 'Source complaint updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
+    // Delete source complaint
     public function destroy($id)
     {
-        $message = 'Data sumber keluhan berhasil dihapus';
-        $status = "success";
         try {
             SumberKeluhan::find($id)->delete();
+            $message = 'Deleted source complaint successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 }
