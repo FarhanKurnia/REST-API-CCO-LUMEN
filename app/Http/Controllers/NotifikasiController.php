@@ -20,8 +20,8 @@ class NotifikasiController extends Controller
 
         $notifikasi = Notifikasi_Read::where('user_id',$id_user)->with('notifikasi')->get();
         return response()->json([
-            'status' => 'Data Notifikasi berhasil dimuat',
-            'message' => 'Success',
+            'status' => 'Success',
+            'message' => 'Notification loaded successfully',
             'data' => $notifikasi
         ], 200);
     }
@@ -40,8 +40,8 @@ class NotifikasiController extends Controller
                 'user_id_notif' => null,
                 'pop_id' => $pop_id,
             ]);
-            $message = 'Data keluhan berhasil dimasukan';
             $status = 'Success';
+            $message = 'Notification added successfully';
             $http_code = 200;
         } catch (\Throwable $th) {
             $status = 'Error';
@@ -81,17 +81,17 @@ class NotifikasiController extends Controller
                         'is_read' => false,
                         'user_id' => $id_user,
                     ]);
-                    $message = 'Notifikasi berhasil dibroadcast';
+                    $message = 'Notification broadcasted successfully';
                     $status = 'Success';
                     $http_code = 200;
                 }else{
-                    $message = 'Notifikasi sudah dibroadcast';
+                    $message = 'Notification broadcasted unsuccessfully';
                     $status = 'Error';
                     $http_code = 404;
                 }
             }
         }else{
-            $message = 'Notifikasi tidak ditemukan';
+            $message = 'Notification not found';
             $status = 'Error';
             $http_code = 404;
         }
@@ -114,16 +114,16 @@ class NotifikasiController extends Controller
                     $notifikasi->update([
                         'is_read' => true,
                     ]);
-                    $message = 'Notifikasi berhasil diread';
-                    $status = "Success";
+                    $message = 'Notification read successfully';
+                    $status = 'Success';
                     $http_code = 200;
                 } else{
-                    $message = 'Notifikasi sudah dibaca';
-                    $status = 'Failed';
+                    $message = 'Notification has been read';
+                    $status = 'Error';
                     $http_code = 404;
                 }
             }else{
-                $message = 'Notifikasi tidak ditemukan';
+                $message = 'Notification not found';
                 $status = 'Error';
                 $http_code = 404;
             }
@@ -140,7 +140,7 @@ class NotifikasiController extends Controller
         ], $http_code);
     }
 
-    // Read all notification by JTW Token
+    // Read all notification by JWT Token
     public function read_all()
     {
         $token = JWTAuth::getToken();
@@ -164,11 +164,11 @@ class NotifikasiController extends Controller
                 ]);
             }
             $status = 'Success';
-            $message = 'Notifikasi berhasil dibaca semua';
+            $message = 'Notification has been read succesfully';
             $http_code = 200;
         }else{
             $status = 'Error';
-            $message = 'Notifikasi sudah dibaca semua';
+            $message = 'Notification has been read unsuccesfully';
             $http_code = 404;
         }
 
