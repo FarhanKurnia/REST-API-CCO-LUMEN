@@ -16,6 +16,7 @@ class RFOKeluhanController extends Controller
             'data' => RFO_Keluhan::with('user','user.role','user.pop','keluhan')->get()], 200);
     }
 
+    // Store RFO Keluhan function
     public function store(Request $request)
     {
         // Format:
@@ -54,7 +55,7 @@ class RFOKeluhanController extends Controller
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = "Error";
             $message = $th->getMessage();
             $http_code = 404;
         }
@@ -69,12 +70,11 @@ class RFOKeluhanController extends Controller
     // Show detail RFO Gangguan function
     public function show($id)
     {
-        $message = "Load data post successfully";
-        $status = "success";
+
         $rfo_keluhan = RFO_Keluhan::find($id);
         if (!$rfo_keluhan) {
-            $status = "error";
-            $message = "Data RFO not found";
+            $status = "Error";
+            $message = "Data RFO Gangguan not found";
             return response()->json([
                 'status' => $status,
                 'message' => $message], 404);
@@ -87,35 +87,19 @@ class RFOKeluhanController extends Controller
             $rfo_keluhan->keluhan->user->role;
             $rfo_keluhan->keluhan->user->pop;
             $rfo_keluhan->keluhan->balasan;
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-            'data' => $rfo_keluhan], 200);
+            $message = "Data RFO Gangguan has found";
+            $status = "Success";
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+                'data' => $rfo_keluhan], 200);
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RFO_Keluhan  $rFO_Keluhan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RFO_Keluhan $rFO_Keluhan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RFO_Keluhan  $rFO_Keluhan
-     * @return \Illuminate\Http\Response
-     */
+    // Update RFO Keluhan function
     public function update(Request $request, $id)
     {
-        $message = 'Data updated successfully';
-        $status = "success";
+
 
         $start = new DateTime($request->mulai_keluhan);//start time
         $end = new DateTime($request->selesai_keluhan);//end time
@@ -135,36 +119,38 @@ class RFOKeluhanController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'lampiran_rfo_keluhan' => $request->lampiran_rfo_keluhan,
             ]);
+            $message = 'Data RFO keluhan updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RFO_Keluhan  $rFO_Keluhan
-     * @return \Illuminate\Http\Response
-     */
+    // Delete RFO Gangguan function
     public function destroy($id)
     {
-        $message = 'Data RFO Keluhan berhasil dihapus';
-        $status = "success";
+
         try {
             RFO_Keluhan::find($id)->delete();
+            $message = 'RFO Keluhan deleted successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 }

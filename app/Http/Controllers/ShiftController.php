@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class ShiftController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Index function for get all shift time for daily report
     public function index()
     {
         return response()->json([
@@ -20,31 +16,12 @@ class ShiftController extends Controller
             'data' => Shift::get()], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Store Shift function
     public function store(Request $request)
     {
-        $message = 'Data Shift berhasil dimasukan';
-        $status = "success";
-
         $shift = $request->input('shift');
         $mulai = $request->input('mulai');
         $selesai = $request->input('selesai');
-
 
         try {
             Shift::create([
@@ -53,106 +30,81 @@ class ShiftController extends Controller
                 'selesai' => $selesai,
 
             ]);
+            $message = 'Data Shift updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
 
         return response([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Shift  $shift
-     * @return \Illuminate\Http\Response
-     */
+
+    // Show Shift function
     public function show($id)
     {
-        $message = "Data Shift ditemukan";
-        $status = "success";
         $shift = Shift::find($id);
         if (!$shift) {
-            $status = "error";
-            $message = "Data Shift tidak ditemukan";
+            $status = 'Error';
+            $message = 'Data Shift not found';
+            $http_code = 404;
             return response()->json([
                 'status'=>$status,
                 'mesage' =>$message
-            ],404);
+            ],$http_code);
         }else{
+            $message = 'Data Shift has found';
+            $status = 'Success';
+            $http_code = 200;
             return response()->json([
                 'status' => $status,
                 'message' => $message,
                 'data' =>$status
-            ],200);
+            ],$http_code);
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Shift  $shift
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Shift $shift)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shift  $shift
-     * @return \Illuminate\Http\Response
-     */
+    // Update Shift function
     public function update(Request $request, $id)
     {
-        $message = 'Data Shift berhasil diupdate';
-        $status = "success";
-
         try {
             Shift::find($id)->update([
                 'shift' => $request->shift,
                 'mulai' => $request->mulai,
                 'selesai' => $request->selesai,
             ]);
+            $message = 'Data Shift updated successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
-            return response()->json([
-                'status'=>$status,
-                'mesage' =>$message
-            ],404);
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Shift  $shift
-     * @return \Illuminate\Http\Response
-     */
+    // Delete Shift function
     public function destroy($id)
     {
-        $message = 'Data Shift berhasil dihapus';
-        $status = "success";
         try {
             Shift::find($id)->delete();
+            $message = 'Data Shift deleted successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = "error";
             $message = $th->getMessage();
+            $http_code = 404;
             return response()->json([
                 'status'=>$status,
                 'mesage' =>$message
@@ -162,6 +114,6 @@ class ShiftController extends Controller
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], 200);
+        ], $http_code);
     }
 }
