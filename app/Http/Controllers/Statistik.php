@@ -11,8 +11,8 @@ use App\Models\RFO_Keluhan;
 
 class Statistik extends Controller
 {
+    // Index function for serve all statistic in dashboard statistic
     public function index(){
-        // $plot = Carbon::create($this_year, $this_month);
         $today = Carbon::today()->format('Y-m-d');
         $yesterday = Carbon::yesterday()->format('Y-m-d');
         $a_week_ago = Carbon::today()->addWeek(-1);
@@ -30,7 +30,6 @@ class Statistik extends Controller
         $oktober = Carbon::create($this_year, 10)->format('Y-m');
         $november = Carbon::create($this_year, 11)->format('Y-m');
         $desember = Carbon::create($this_year, 12)->format('Y-m');
-        // dd($this_month);
 
         // Object
         $keluhan = new Keluhan;
@@ -421,8 +420,8 @@ class Statistik extends Controller
             ])->count();
 
         return response()->json([
-            'status' => 'success',
-            'message' => 'Data keluhan berhasil ditemukan',
+            'status' => 'Success',
+            'message' => 'Data Statistic has found',
             'all' => [
                 [
                     'Nama' => 'Semua POP',
@@ -650,6 +649,7 @@ class Statistik extends Controller
         ],200);
     }
 
+    // Get statistic based on range from and to
     public function statistik_range(Request $request){
         // Object
         $keluhan = new Keluhan;
@@ -665,8 +665,8 @@ class Statistik extends Controller
 
         if($range_keluhan_all>0){
             return response()->json([
-                'status' => 'success',
-                'message' => 'Data statistik berhasil ditemukan',
+                'status' => 'Success',
+                'message' => 'Data Statistic has found',
                 'data' => [
                     'all_pop' => $range_keluhan_all,
                     'jogja' => $range_keluhan_jogja,
@@ -677,8 +677,8 @@ class Statistik extends Controller
             ], 200);
         }else{
             return response()->json([
-                'status'=>"error",
-                'mesage' =>"Data statistik tidak ditemukan"
+                'status'=>'Error',
+                'message' =>'Data Statistic not found'
             ],404);
         }
     }
