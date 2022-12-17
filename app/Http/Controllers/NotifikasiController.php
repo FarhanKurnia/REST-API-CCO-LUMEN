@@ -94,13 +94,16 @@ class NotifikasiController extends Controller
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_pop = $id_jwt['pop_id'];
+        $id_user = $id_jwt['id_user'];
 
         $notifikasi_id = $request->input('notifikasi_id');
-        $user = User::where([['pop_id',$id_pop],['online',true]])->get();
+        $user = User::where([['pop_id',$id_pop],['online',true],['id_user','!=',$id_user]])->get();
         $list_user[] = [];
+
         foreach ($user as $index => $users) {
             $list_user[$index] = $users['id_user'];
         }
+
         $id_notfikasi_cek = Notifikasi::find($notifikasi_id);
         if($id_notfikasi_cek != null){
             foreach ($list_user as $index => $id_user) {

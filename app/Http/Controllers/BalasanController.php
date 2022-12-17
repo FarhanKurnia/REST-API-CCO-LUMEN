@@ -36,7 +36,6 @@ class BalasanController extends Controller
             $keluhan = Keluhan::where('id_keluhan',$keluhan_id)->get();
             $id_pelanggan = $keluhan[0]->id_pelanggan;
             $nama_pelanggan = $keluhan[0]->nama_pelanggan;
-            // dd($nama_pelanggan);
             event(new KeluhanEvent([
                 'id'=>'1',
                 'title'=>'Balasan baru',
