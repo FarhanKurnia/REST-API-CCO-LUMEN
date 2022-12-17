@@ -105,7 +105,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
             // ==============[Endpoint User]==============
             // Matches "/api/profile
-            $router->put('profile', 'UserController@updateProfile');
+            // $router->put('profile', 'UserController@updateProfile');
+            $router->put('change-password', 'UserController@changePassword');
             // Matches "/api/profile
             $router->post('profileAvatar', 'UserController@updateAvatar');
             // Matches "/api/profile

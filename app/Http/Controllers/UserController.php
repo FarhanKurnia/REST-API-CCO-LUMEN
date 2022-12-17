@@ -23,7 +23,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    // Update user 
+    // Update user by admin
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -85,21 +85,20 @@ class UserController extends Controller
         }
     }
 
-    // Update profile function
-    public function updateProfile(Request $request)
+    // Change password function
+    public function changePassword(Request $request)
     {
         // Take JWT ID as ID in Database
         $token = JWTAuth::getToken();
         $jwt_id = JWTAuth::getPayload($token)->toArray();
         $id = $jwt_id['id_user'];
-
+        
         try {
             User::find($id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-            $message = 'Profile updated successfully';
+            auth()->logout(true);
+            $message = 'Password updated successfully. Please re-login';
             $status = 'Success';
         } catch (\Throwable $th) {
             $status = 'Error';
@@ -108,17 +107,10 @@ class UserController extends Controller
                 'status' => $status,
                 'message' => $message], 404);
         }
-
-        // Create cridential new token JWT 
-        $credentials = $request->only(['email', 'password']);
-        if (! $token = Auth::setTTL(7200)->attempt($credentials)) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
+        
         return response()->json([
             'status' => $status,
-            'message' => $message,
-            'bearer_token' => $token,
-            'data' => User::where('id_user',$id)->get()], 200);
+            'message' => $message,], 200);
     }
 
     // Get profile user by ID JWT
@@ -126,6 +118,7 @@ class UserController extends Controller
     {
         // Take JWT ID as ID in Database
         $token = JWTAuth::getToken();
+        dd($token);
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_user = $id_jwt['id_user'];
 
@@ -144,6 +137,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => $status,
                 'message' => $message,
+                'bearer_token' => $token=JWTAuth::getToken(),
                 'data' => $user], 200);
         }
     }
