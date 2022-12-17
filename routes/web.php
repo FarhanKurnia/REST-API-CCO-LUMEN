@@ -49,7 +49,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 // Matches "/api/role -> Store
                 $router->post('role','RoleController@store');
                 // // Matches "/api/role -> Index
-                $router->get('role','RoleController@index');
+                // $router->get('role','RoleController@index');
                 // Matches "/api/role/id -> Show One
                 $router->get('role/{id}','RoleController@show');
                 // Matches "/api/role/id -> Update
@@ -93,10 +93,15 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 $router->delete('user/{id}', 'UserController@destroy');
             });
 
+
             // API route group with middleware (All Role: Admin || Helpdesk || NOC)
             // ==============[Endpoint Auth]==============
             // Matches "/api/logout
             $router->get('logout', 'AuthController@logout');
+
+            // ==============[Endpoint Role]==============
+            // Matches "/api/role -> Index
+            $router->get('role','RoleController@index');
 
             // ==============[Endpoint User]==============
             // Matches "/api/profile
