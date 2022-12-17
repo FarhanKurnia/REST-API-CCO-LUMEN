@@ -147,7 +147,7 @@ class KeluhanController extends Controller
                 array("update"),
                 array("web" => array("notification" => array(
                   "title" => "Keluhan baru",
-                  "body" => "Terdapat update keluhan terbaru",
+                  "body" => "Terdapat keluhan baru  ".$id_pelanggan.' - '.$nama_pelanggan,
                   // url backend
                   // "deep_link" => url('/api/keluhan/'.$id_keluhan),
                   // url frontend
@@ -156,7 +156,7 @@ class KeluhanController extends Controller
               ));
 
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
         }
@@ -175,7 +175,7 @@ class KeluhanController extends Controller
         $keluhan = Keluhan::find($id);
         try {
             if (!$keluhan) {
-                $status = 'Failed';
+                $status = 'Error';
                 $message = 'Data Keluhan not found';
                 return response()->json([
                     'status'=>$status,
@@ -197,7 +197,7 @@ class KeluhanController extends Controller
                 ],200);
             }
         } catch (\Throwable $th) {
-            $status = "Error";
+            $status = 'Error';
             $message = $th->getMessage();
             return response()->json([
                 'status' => $status,
@@ -243,7 +243,7 @@ class KeluhanController extends Controller
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
         }
@@ -340,7 +340,7 @@ class KeluhanController extends Controller
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
 

@@ -20,8 +20,6 @@ class BalasanController extends Controller
     // Store balasan function
     public function store(Request $request)
     {
-        $message = 'Balasan created successfully';
-        $status = "Success";
 
         $user_id = $request->input('user_id');
         $keluhan_id = $request->input('keluhan_id');
@@ -53,16 +51,20 @@ class BalasanController extends Controller
                   "deep_link" => "http://localhost:3000/dashboard/detail/".$id_keluhan,
                 )),
               ));
+            $message = 'Balasan created successfully';
+            $status = 'Success';
+            $http_code = 200;
         } catch (\Throwable $th) {
             $status = 'Error';
             $message = $th->getMessage();
+            $http_code = 404;
         }
 
         return response([
             'status' => $status,
             'message' => $message,
             'id_balasan' => $balasan->id_balasan,
-        ], 200);
+        ], $http_code);
     }
 
     // Show function to get one balasan

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Keluhan;
 use DB;
 use App\Models\User;
 use App\Models\Notifikasi;
@@ -28,13 +29,24 @@ class NotifikasiController extends Controller
 
     // Add Notification
     public function store(Request $request){
+        $token = JWTAuth::getToken();
+        $id_jwt = JWTAuth::getPayload($token)->toArray();
+        $id_user = $id_jwt['id_user'];
+
         $keluhan_id = $request->input('keluhan_id');
         $pop_id = $request->input('pop_id');
+        $keluhan = Keluhan::where('id_keluhan',$keluhan_id)->get();
+        $user = User::where('id_user',$id_user)->get();
+        $nama_user = $user[0]->name;
+        $id_pelanggan = $keluhan[0]->id_pelanggan;
+        $nama_pelanggan = $keluhan[0]->nama_pelanggan;
 
+        // dd($nama_user);
         try {
             $notifikasi = Notifikasi::create([
-                'judul' => 'Update baru',
-                'detail' => 'Terdapat update terbaru',
+                'judul' => 'Update '.$id_pelanggan.' - '.$nama_pelanggan,
+                'detail' => 'Terdapat update terbaru untuk keluhan '
+                .$id_pelanggan.' - '.$nama_pelanggan.' oleh '.$nama_user,
                 'keluhan_id' => $keluhan_id,
                 'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
                 'user_id_notif' => null,

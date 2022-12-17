@@ -15,7 +15,7 @@ class LampiranKeluhanController extends Controller
             'message' => 'Load data Lampiran successfully',
             'data' => Lampiran_Keluhan::get()], 200);
     }
-    
+
     // Store lampiran keluhan function
     public function store(Request $request)
     {
@@ -37,7 +37,7 @@ class LampiranKeluhanController extends Controller
             $status = 'Success';
             $http_code = 200;
         }catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
         }
