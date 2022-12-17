@@ -164,6 +164,9 @@ class KeluhanController extends Controller
         return response([
             'status' => $status,
             'message' => $message,
+            // response for differently response for keluhan or balasan
+            // 0 for keluhan and 1 for balasan 
+            'id_response' => 0,
             'id_keluhan' => $keluhan,
         ], $http_code);
     }

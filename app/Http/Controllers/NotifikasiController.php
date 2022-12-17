@@ -35,23 +35,44 @@ class NotifikasiController extends Controller
 
         $keluhan_id = $request->input('keluhan_id');
         $pop_id = $request->input('pop_id');
+        $id_response = $request->input('id_response');
+
         $keluhan = Keluhan::where('id_keluhan',$keluhan_id)->get();
         $user = User::where('id_user',$id_user)->get();
         $nama_user = $user[0]->name;
         $id_pelanggan = $keluhan[0]->id_pelanggan;
         $nama_pelanggan = $keluhan[0]->nama_pelanggan;
 
-        // dd($nama_user);
         try {
-            $notifikasi = Notifikasi::create([
-                'judul' => 'Update '.$id_pelanggan.' - '.$nama_pelanggan,
-                'detail' => 'Terdapat update terbaru untuk keluhan '
-                .$id_pelanggan.' - '.$nama_pelanggan.' oleh '.$nama_user,
-                'keluhan_id' => $keluhan_id,
-                'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
-                'user_id_notif' => null,
-                'pop_id' => $pop_id,
-            ]);
+            // Keluhan Notification
+            if ($id_response == 0) {
+                $notifikasi = Notifikasi::create([
+                    'judul' => 'Keluhan baru '.$id_pelanggan.' - '.$nama_pelanggan,
+                    'detail' => 'Terdapat keluhan baru a.n pelanggan  '
+                    .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
+                    'keluhan_id' => $keluhan_id,
+                    'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
+                    'user_id_notif' => null,
+                    'pop_id' => $pop_id,
+                ]);
+            }
+            // Balasan Notification
+            elseif ($id_response == 1) {
+                $notifikasi = Notifikasi::create([
+                    'judul' => 'Balasan baru '.$id_pelanggan.' - '.$nama_pelanggan,
+                    'detail' => 'Terdapat balasan terbaru untuk keluhan a.n pelanggan  '
+                    .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
+                    'keluhan_id' => $keluhan_id,
+                    'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
+                    'user_id_notif' => null,
+                    'pop_id' => $pop_id,
+                ]);
+            }else{
+                return response([
+                    'status' => 'Error',
+                    'message' => 'Invalid ID response',
+                ], 404);
+            }
             $status = 'Success';
             $message = 'Notification added successfully';
             $http_code = 200;

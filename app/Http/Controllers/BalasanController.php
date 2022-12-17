@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balasan;
+use App\Models\Keluhan;
 use Illuminate\Http\Request;
 use App\Events\KeluhanEvent;
 
@@ -32,6 +33,10 @@ class BalasanController extends Controller
                 'balasan' => $balasan,
             ]);
             $id_keluhan = $balasan['keluhan_id'];
+            $keluhan = Keluhan::where('id_keluhan',$keluhan_id)->get();
+            $id_pelanggan = $keluhan[0]->id_pelanggan;
+            $nama_pelanggan = $keluhan[0]->nama_pelanggan;
+            // dd($nama_pelanggan);
             event(new KeluhanEvent([
                 'id'=>'1',
                 'title'=>'Balasan baru',
@@ -46,7 +51,7 @@ class BalasanController extends Controller
                 array("update"),
                 array("web" => array("notification" => array(
                   "title" => "Balasan baru",
-                  "body" => "Terdapat update balasan terbaru",
+                  "body" => "Terdapat balasan baru  ".$id_pelanggan.' - '.$nama_pelanggan,
                 //   "deep_link" => url('/api/keluhan/'.$id_keluhan),
                   "deep_link" => "http://localhost:3000/dashboard/detail/".$id_keluhan,
                 )),
@@ -63,7 +68,11 @@ class BalasanController extends Controller
         return response([
             'status' => $status,
             'message' => $message,
+            // response for differently response for keluhan or balasan
+            // 0 for keluhan and 1 for balasan 
+            'id_response' => 1,
             'id_balasan' => $balasan->id_balasan,
+            'id_keluhan' => $keluhan,
         ], $http_code);
     }
 
