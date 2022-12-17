@@ -23,7 +23,7 @@ class CreateKeluhansTable extends Migration
             $table->string('nama_pelanggan')->notNullable();
             $table->string('nama_pelapor');
             $table->string('nomor_pelapor');
-            $table->string('keluhan');
+            $table->string('keluhan',4000);
             $table->string('sentimen_analisis')->nullable();
             $table->enum('status',['open','closed']);
             $table->unsignedBigInteger('user_id');
