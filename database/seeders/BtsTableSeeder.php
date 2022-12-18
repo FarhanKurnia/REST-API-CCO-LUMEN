@@ -22,6 +22,7 @@ class BtsTableSeeder extends Seeder
             'kordinat' => '-34656987. -34567893',
             'pop_id' => '1',
             'user_id' => '1',
+            'deskripsi' => 'Ada Genset nya',
             'created_at' => Carbon::now(),
         ],
         [
@@ -32,6 +33,7 @@ class BtsTableSeeder extends Seeder
             'kordinat' => '-346654379. -34567893',
             'pop_id' => '2',
             'user_id' => '2',
+            'deskripsi' => 'Tidak ada Genset nya',
             'created_at' => Carbon::now(),
         ]]);
     }

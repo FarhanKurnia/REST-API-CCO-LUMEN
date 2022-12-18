@@ -23,6 +23,8 @@ class CreateBtsTable extends Migration
             $table->unsignedBigInteger('pop_id');
             $table->unsignedBigInteger('user_id');
             $table->string('kordinat');
+            $table->string('deskripsi')->nullable();
+
 
 
             //Foreign Key

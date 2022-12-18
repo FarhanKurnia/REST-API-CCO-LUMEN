@@ -40,6 +40,7 @@ class BtsController extends Controller
         $pop_id = $request->input('pop_id');
         $kordinat = $request->input('kordinat');
         $user_id = $request->input('user_id');
+        $deskripsi = $request->input('deskripsi');
 
         try {
             Bts::create([
@@ -50,6 +51,7 @@ class BtsController extends Controller
                 'pop_id' => $pop_id,
                 'kordinat' => $kordinat,
                 'user_id' => $user_id,
+                'deskripsi' => $deskripsi,
             ]);
             $message = 'BTS added successfully';
             $status = 'Success';
@@ -104,12 +106,13 @@ class BtsController extends Controller
                 'pop_id' => $request->pop_id,
                 'kordinat' => $request->kordinat,
                 'user_id' => $request->user_id,
+                'deskripsi' => $request->deskripsi,
             ]);
             $message = 'BTS updated successfully';
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
-            $status = "error";
+            $status = 'Error';
             $message = $th->getMessage();
             $http_code = 404;
         }

@@ -14,7 +14,7 @@ class Bts extends Model
     protected $table = 'bts';
     protected $primaryKey = 'id_bts';
     protected $fillable = [
-        'nama_bts', 'nama_pic', 'nomor_pic', 'lokasi', 'kordinat', 'pop_id', 'user_id',
+        'nama_bts', 'nama_pic', 'nomor_pic', 'lokasi', 'kordinat', 'pop_id', 'user_id','deskripsi',
     ];
     /**
      * The attributes excluded from the model's JSON form.
