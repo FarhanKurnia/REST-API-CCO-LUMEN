@@ -52,7 +52,7 @@ class AuthController extends Controller
             ];
             Mail::to($email)->send(new Verification($data));
             return response()->json([
-                'user' => $user, 
+                // 'user' => $user, 
                 'status' => 'Success',
                 'message' => 'Successfully created!'], 201);
 
@@ -112,7 +112,8 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'Success',
                 'message' => 'OTP created successfully',
-                'otp' => $token_OTP], 200);
+                // 'otp' => $token_OTP
+            ], 200);
         } catch (\Throwable $th) {
             $status = "Error";
             $message = $th->getMessage();
