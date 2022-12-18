@@ -14,6 +14,7 @@ use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
 
 
+
 class AuthController extends Controller
 {
     // Register account function
@@ -197,7 +198,8 @@ class AuthController extends Controller
         $user = User::find($id_user)->update([
             'online' => false,
         ]);
-        auth()->logout(true);
+        // auth()->logout(true);
+        Auth::guard('jwtapi')->logout();
         return response()->json([
             'status' => 'Success',
             'message' => 'User logged out successfully'

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 
 
 
@@ -91,13 +89,13 @@ class UserController extends Controller
         // Take JWT ID as ID in Database
         $token = JWTAuth::getToken();
         $jwt_id = JWTAuth::getPayload($token)->toArray();
-        $id = $jwt_id['id_user'];
-        
+        $id_user = $jwt_id['id_user'];
+        $password = $request->input('password');
         try {
-            User::find($id)->update([
-                'password' => app('hash')->make($request->get('password')),
+            User::where('id_user',$id_user)->update([
+                'password'=>app('hash')->make($password),
             ]);
-            auth()->logout(true);
+            Auth::guard('jwtapi')->logout();
             $message = 'Password updated successfully. Please re-login';
             $status = 'Success';
         } catch (\Throwable $th) {
