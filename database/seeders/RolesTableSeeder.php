@@ -29,6 +29,11 @@ class RolesTableSeeder extends Seeder
             'id_role'=> '0',
             'name'=> 'ADMIN',
             'created_at' => Carbon::now(),
+        ],
+        [
+            'id_role'=> '3',
+            'name'=> 'FOP',
+            'created_at' => Carbon::now(),
         ]]);
     }
 }
