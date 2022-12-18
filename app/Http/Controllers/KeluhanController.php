@@ -96,8 +96,7 @@ class KeluhanController extends Controller
 
     // Store keluhan function
     public function store(Request $request){
-
-
+        $kategori_pelanggan = $request->input('kategori_pelanggan');
         $id_pelanggan = $request->input('id_pelanggan');
         $nama_pelanggan = $request->input('nama_pelanggan');
         $nama_pelapor = $request->input('nama_pelapor');
@@ -115,6 +114,7 @@ class KeluhanController extends Controller
 
         try {
             $keluhan = Keluhan::create([
+                'kategori_pelanggan' => $kategori_pelanggan,
                 'id_pelanggan' => $id_pelanggan,
                 'nama_pelanggan' => $nama_pelanggan,
                 'nama_pelapor' => $nama_pelapor,

@@ -11,6 +11,7 @@ class Keluhan extends Model
     protected $fillable = [
         'id_pelanggan',
         'nama_pelanggan',
+        'kategori_pelanggan',
         'nama_pelapor',
         'nomor_pelapor',
         'nomor_keluhan',

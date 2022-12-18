@@ -103,33 +103,39 @@ class NotifikasiController extends Controller
         foreach ($user as $index => $users) {
             $list_user[$index] = $users['id_user'];
         }
-
-        $id_notfikasi_cek = Notifikasi::find($notifikasi_id);
-        if($id_notfikasi_cek != null){
-            foreach ($list_user as $index => $id_user) {
-                $notifikasi_cek = Notifikasi_Read::where([
-                    ['notifikasi_id',$notifikasi_id],
-                    ['user_id',$id_user],
-                ])->first();
-                if($notifikasi_cek == null){
-                    $notifikasi_read = Notifikasi_Read::create([
-                        'notifikasi_id' => $notifikasi_id,
-                        'is_read' => false,
-                        'user_id' => $id_user,
-                    ]);
-                    $message = 'Notification broadcasted successfully';
-                    $status = 'Success';
-                    $http_code = 200;
-                }else{
-                    $message = 'Notification broadcasted unsuccessfully';
-                    $status = 'Error';
-                    $http_code = 404;
-                }
-            }
+        $null_array[0] = [];
+        if ($list_user == $null_array) {
+            $message = 'Notification broadcasted successfully with 0 person online';
+            $status = 'Success';
+            $http_code = 200;
         }else{
-            $message = 'Notification not found';
-            $status = 'Error';
-            $http_code = 404;
+            $id_notfikasi_cek = Notifikasi::find($notifikasi_id);
+            if($id_notfikasi_cek != null){
+                foreach ($list_user as $index => $id_user) {
+                    $notifikasi_cek = Notifikasi_Read::where([
+                        ['notifikasi_id',$notifikasi_id],
+                        ['user_id',$id_user],
+                    ])->first();
+                    if($notifikasi_cek == null){
+                        $notifikasi_read = Notifikasi_Read::create([
+                            'notifikasi_id' => $notifikasi_id,
+                            'is_read' => false,
+                            'user_id' => $id_user,
+                        ]);
+                        $message = 'Notification broadcasted successfully';
+                        $status = 'Success';
+                        $http_code = 200;
+                    }else{
+                        $message = 'Notification broadcasted unsuccessfully';
+                        $status = 'Error';
+                        $http_code = 404;
+                    }
+                }
+            }else{
+                $message = 'Notification not found';
+                $status = 'Error';
+                $http_code = 404;
+            }
         }
 
         return response()->json([

@@ -95,7 +95,7 @@ class UserController extends Controller
         
         try {
             User::find($id)->update([
-                'password' => Hash::make($request->password),
+                'password' => app('hash')->make($request->get('password')),
             ]);
             auth()->logout(true);
             $message = 'Password updated successfully. Please re-login';
@@ -118,7 +118,7 @@ class UserController extends Controller
     {
         // Take JWT ID as ID in Database
         $token = JWTAuth::getToken();
-        dd($token);
+        // dd($token);
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_user = $id_jwt['id_user'];
 
@@ -137,7 +137,6 @@ class UserController extends Controller
             return response()->json([
                 'status' => $status,
                 'message' => $message,
-                'bearer_token' => $token=JWTAuth::getToken(),
                 'data' => $user], 200);
         }
     }
