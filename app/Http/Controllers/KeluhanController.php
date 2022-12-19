@@ -6,7 +6,7 @@ use DB;
 use App\Events\KeluhanEvent;
 use Illuminate\Support\Carbon;
 use App\Models\Keluhan;
-
+use App\Models\POP;
 use App\Models\RFO_Gangguan;
 use App\Models\RFO_Keluhan;
 use Illuminate\Http\Request;
@@ -112,6 +112,8 @@ class KeluhanController extends Controller
         $rfo_keluhan_id = $request->input('rfo_keluhan_id');
         $sentimen_analisis = $request->input('sentimen_analisis');
 
+        $pop = POP::where('id_pop',$pop_id)->pluck('pop');
+
         try {
             $keluhan = Keluhan::create([
                 'kategori_pelanggan' => $kategori_pelanggan,
@@ -134,10 +136,11 @@ class KeluhanController extends Controller
             $status = 'Success';
             $http_code = 200;
             $id_keluhan = $keluhan['id_keluhan'];
+
             event(new KeluhanEvent([
                 'id'=>'1',
-                'title'=>'Keluhan Baru',
-                'desc'=>'Terdapat keluhan baru',
+                'title'=> $pop[0].' | Keluhan Baru',
+                'desc'=>'Terdapat keluhan baru POP'.$pop[0],
             ]));
             $beamsClient = new \Pusher\PushNotifications\PushNotifications(array(
                 "instanceId" => "a81f4de8-8096-4cc9-a1d0-5c92138936f1",
@@ -146,8 +149,8 @@ class KeluhanController extends Controller
               $publishResponse = $beamsClient->publishToInterests(
                 array("update"),
                 array("web" => array("notification" => array(
-                  "title" => "Keluhan baru",
-                  "body" => "Terdapat keluhan baru  ".$id_pelanggan.' - '.$nama_pelanggan,
+                  "title" => $pop[0]." | Keluhan baru",
+                  "body" => "Terdapat keluhan baru  ".$id_pelanggan.' - '.$nama_pelanggan.' | POP '.$pop[0],
                   // url backend
                   // "deep_link" => url('/api/keluhan/'.$id_keluhan),
                   // url frontend
@@ -165,7 +168,7 @@ class KeluhanController extends Controller
             'status' => $status,
             'message' => $message,
             // response for differently response for keluhan or balasan
-            // 0 for keluhan and 1 for balasan 
+            // 0 for keluhan and 1 for balasan
             'id_response' => 0,
             'id_keluhan' => $keluhan,
         ], $http_code);
