@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
             'online' => false,
             'verifikasi' => true,
             'token_verifikasi' => Str::random(128),
-            'avatar' => 'http://localhost/avatar/user.png',
+            'avatar' => 'http://localhost:8000/avatar/user.png',
             'email'=> 'hdyk@citra.net.id',
             'password'=>app('hash')->make('rahasia'),
             'created_at' => Carbon::now(),

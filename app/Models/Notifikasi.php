@@ -9,8 +9,10 @@ class Notifikasi extends Model
     protected $table = 'notifikasis';
     protected $primaryKey = 'id_notifikasi';
     protected $fillable = [
-        'judul', 'detail', 'user_id_notif','keluhan_id','pop_id', 'deep_link', 
+        'judul', 'detail', 'user_id_notif','keluhan_id','pop_id', 'deep_link',
     ];
+
+    protected $with = ['notifikasi_read'];
 
     public function notifikasi_read(){
     	return $this->hasMany(Notifikasi_Read::class,'notifikasi_id');

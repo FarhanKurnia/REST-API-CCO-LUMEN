@@ -23,7 +23,7 @@ class KeluhanController extends Controller
             ['updated_at','iLIKE', "%{$today}%"],
         ])
         ->orderBy('created_at', 'DESC')
-        ->with('pop','balasan','RFO_Gangguan','RFO_Keluhan','lampirankeluhan')
+        ->with('pop','balasan','RFO_Gangguan','RFO_Keluhan','lampirankeluhan','notifikasi')
         ->get();
         if($data->isNotEmpty()){
             return response()->json([
