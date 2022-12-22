@@ -76,7 +76,7 @@ class UsersTableSeeder extends Seeder
             'online' => false,
             'verifikasi' => true,
             'token_verifikasi' => Str::random(128),
-            'avatar' => 'http://localhost:8000/avatar/user.png',
+            'avatar' => 'http://localhost:8000/avatar/1667660685_Admin_avatar.jpeg',
             'email'=> 'admin@citra.net.id',
             'password'=>app('hash')->make('rahasia'),
             'created_at' => Carbon::now(),
