@@ -228,6 +228,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->post('broadcast-notifikasi','NotifikasiController@broadcast');
             $router->post('read-notifikasi','NotifikasiController@read');
             $router->get('read-all-notifikasi','NotifikasiController@read_all');
+            $router->post('read-all-notifikasi-keluhan','NotifikasiController@read_all_one_case');
+
 
 
             // $router->post('storeall-notifikasi','NotifikasiController@store_all');

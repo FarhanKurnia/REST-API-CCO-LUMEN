@@ -219,4 +219,43 @@ class NotifikasiController extends Controller
             'message' => $message,
         ], $http_code);
     }
+
+    // Read all notification in one case by JWT Token
+    public function read_all_one_case(Request $request)
+    {
+        $token = JWTAuth::getToken();
+        $id_jwt = JWTAuth::getPayload($token)->toArray();
+        $id_user = $id_jwt['id_user'];
+        $keluhan_id = $request->input('keluhan_id');
+
+        $notifikasi = Notifikasi::where('keluhan_id',$keluhan_id)->get();
+        $list_id_notifikasi[] = [];
+
+        foreach ($notifikasi as $index => $notifikasis) {
+            $list_id_notifikasi[$index] = $notifikasis['id_notifikasi'];
+        }
+
+        if ($list_id_notifikasi[0] != null) {
+            foreach ($list_id_notifikasi as $index => $list_id_notifikasis) {
+                $notifikasi_read = Notifikasi_Read::where([
+                    ['notifikasi_id',$list_id_notifikasis],
+                    ['user_id',$id_user],
+                    ])->update([
+                    'is_read' => true,
+                ]);
+            }
+            $status = 'Success';
+            $message = 'Notification has been read succesfully';
+            $http_code = 200;
+        }else{
+            $status = 'Success';
+            $message = 'Notification has been read all';
+            $http_code = 200;
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], $http_code);
+    }
 }
