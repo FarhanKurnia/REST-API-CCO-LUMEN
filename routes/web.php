@@ -21,244 +21,220 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
   // API route group with middleware (Authorized)
     $router->group(['middleware' => 'auth'], function () use ($router) {
-        // API route group with middleware (Verifikasi)
+        // API route group with middleware (User Verified)
         $router->group(['middleware' => 'verifikasi'], function () use ($router) {
-            // API route group with middleware (Admin)
+            // API route group with middleware (Admin Only)
             $router->group(['middleware' => 'role'], function () use ($router) {
-                // ==============[Endpoint POP]==============
-                // Matches "/api/pop -> Store
+                // ==============[Endpoint SHIFT]==============
+                // Matches localhost:8000/api/shift -> Store
                 $router->post('shift','ShiftController@store');
-                // // // Matches "/api/pop -> Index
-                // $router->get('shift','ShiftController@index');
-                // Matches "/api/pop/id -> Show One
+                // Matches localhost:8000/api/shift/{id} -> Show
                 $router->get('shift/{id}','ShiftController@show');
-                // Matches "/api/pop/id -> Update
+                // Matches localhost:8000/api/shift/{id} -> Update
                 $router->put('shift/{id}','ShiftController@update');
-                // Matches "/api/pop/id -> Delete
+                // Matches localhost:8000/api/shift/{id} -> Delete
                 $router->delete('shift/{id}','ShiftController@destroy');
 
-                // ==============[Endpoint BTS Admin]==============
-                // Matches "/api/bts -> Store
+                // ==============[Endpoint BTS]==============
+                // Matches localhost:8000/api/bts -> Store
                 $router->post('bts','BtsController@store');
-                // Matches "/api/bts/1 -> Show One
+                // Matches localhost:8000/api/bts/{id} -> Delete
                 $router->delete('bts/{id}','BtsController@destroy');
-                // Matches "/api/bts/1 -> Update
+                // Matches localhost:8000/api/bts/{id} -> Update
                 $router->put('bts/{id}','BtsController@update');
 
-                // ==============[Endpoint Role]==============
-                // Matches "/api/role -> Store
+                // ==============[Endpoint ROLE]==============
+                // Matches localhost:8000/api/role -> Store
                 $router->post('role','RoleController@store');
-                // // Matches "/api/role -> Index
-                // $router->get('role','RoleController@index');
-                // Matches "/api/role/id -> Show One
+                // Matches localhost:8000/api/role/{id} -> Show
                 $router->get('role/{id}','RoleController@show');
-                // Matches "/api/role/id -> Update
+                // Matches localhost:8000/api/role/{id} -> Update
                 $router->put('role/{id}','RoleController@update');
-                // Matches "/api/role/id -> Delete
+                // Matches localhost:8000/api/role/{id} -> Delete
                 $router->delete('role/{id}','RoleController@destroy');
 
                 // ==============[Endpoint POP]==============
-                // Matches "/api/pop -> Store
+                // Matches localhost:8000/api/pop -> Store
                 $router->post('pop','POPController@store');
-                // // Matches "/api/pop -> Index
-                // $router->get('pop','POPController@index');
-                // Matches "/api/pop/id -> Show One
+                // Matches localhost:8000/api/pop/{id} -> Show
                 $router->get('pop/{id}','POPController@show');
-                // Matches "/api/pop/id -> Update
+                // Matches localhost:8000/api/pop/{id} -> Update
                 $router->put('pop/{id}','POPController@update');
-                // Matches "/api/pop/id -> Delete
+                // Matches localhost:8000/api/pop/{id} -> Delete
                 $router->delete('pop/{id}','POPController@destroy');
 
-                // ==============[Endpoint Sumber Keluhan]==============
-                // Matches "/api/pop -> Store
+                // ==============[Endpoint SUMBER KELUHAN]==============
+                // Matches localhost:8000/api/sumber-keluhan -> Store
                 $router->post('sumber-keluhan','SumberKeluhanController@store');
-                // // Matches "/api/pop -> Index
-                // $router->get('sumber-keluhan','SumberKeluhanController@index');
-                // Matches "/api/pop/id -> Show One
+                // Matches localhost:8000/api/sumber-keluhan/{id} -> Show
                 $router->get('sumber-keluhan/{id}','SumberKeluhanController@show');
-                // Matches "/api/pop/id -> Update
+                // Matches localhost:8000/api/sumber-keluhan/{id} -> Update
                 $router->put('sumber-keluhan/{id}','SumberKeluhanController@update');
-                // Matches "/api/pop/id -> Delete
+                // Matches localhost:8000/api/sumber-keluhan/{id} -> Delete
                 $router->delete('sumber-keluhan/{id}','SumberKeluhanController@destroy');
 
 
-                // ==============[Endpoint User Admin]==============
-                // Matches "/api/user
+                // ==============[Endpoint USER]==============
+                // Matches localhost:8000/api/user -> Store
                 $router->get('user', 'UserController@index');
-                // Matches "/api/user
+                // Matches localhost:8000/api/user/{id} -> Show
                 $router->get('user/{id}', 'UserController@show');
-                // Matches "/api/user
+                // Matches localhost:8000/api/user/{id} -> Update
                 $router->put('user/{id}', 'UserController@update');
-                // Matches "/api/user
+                // Matches localhost:8000/api/user/{id} -> Delete
                 $router->delete('user/{id}', 'UserController@destroy');
             });
 
 
             // API route group with middleware (All Role: Admin || Helpdesk || NOC)
-            // ==============[Endpoint Auth]==============
-            // Matches "/api/logout
+            // ==============[Endpoint AUTH]==============
+            // Matches localhost:8000/api/logout -> Log Out
             $router->get('logout', 'AuthController@logout');
 
-            // ==============[Endpoint Role]==============
-            // Matches "/api/role -> Index
+            // ==============[Endpoint ROLE]==============
+            // Matches localhost:8000/api/role -> Index
             $router->get('role','RoleController@index');
 
-            // ==============[Endpoint User]==============
-            // Matches "/api/profile
-            // $router->put('profile', 'UserController@updateProfile');
+            // ==============[Endpoint USER]==============
+            // Matches localhost:8000/api/change-password -> Update Password
             $router->put('change-password', 'UserController@changePassword');
-            // Matches "/api/profile
+            // Matches localhost:8000/api/profileAvatar -> Post Avatar Profile
             $router->post('profileAvatar', 'UserController@updateAvatar');
-            // Matches "/api/profile
+            // Matches localhost:8000/api/profile -> Profile by JWT
             $router->get('profile', 'UserController@profile');
 
             // ==============[Endpoint BTS]==============
-            // Matches "/api/bts -> Show All
+            // Matches localhost:8000/api/bts -> Index
             $router->get('bts','BtsController@index');
-            // Matches "/api/bts/1 -> Show One
+            // Matches localhost:8000/api/bts/{id} -> Show
             $router->get('bts/{id}','BtsController@show');
 
-            // // ==============[Endpoint Keluhan]==============
-            // // Matches "/api/keluhan -> Show All
-            // $router->get('keluhan','KeluhanController@index');
-            // // Matches "/api/keluhan -> Store
-            // $router->post('keluhan','KeluhanController@store');
-            // // Matches "/api/keluhan/1 -> Show One
-            // $router->get('keluhan/{id}','KeluhanController@show');
-            // // Matches "/api/keluhan/1 -> Delete
-            // $router->delete('keluhan/{id}','KeluhanController@destroy');
-            // // Matches "/api/keluhan -> Update
-            // $router->put('keluhan/{id}','KeluhanController@update');
-
-            // ==============[Endpoint Balasan]==============
-            // Matches "/api/balasan -> Index
+            // ==============[Endpoint BALASAN]==============
+            // Matches localhost:8000/api/balasan -> Index
             $router->get('balasan','BalasanController@index');
-            // Matches "/api/balasan -> Store
+            // Matches localhost:8000/api/balasan -> Store
             $router->post('balasan','BalasanController@store');
-            // Matches "/api/balasan/1 -> Show One
+            // Matches localhost:8000/api/balasan/{id} -> Show
             $router->get('balasan/{id}','BalasanController@show');
+            // Matches localhost:8000/api/lampiran-balasan -> Store
             $router->post('lampiran-balasan','LampiranBalasanController@store');
-            // Matches "/api/keluhan -> search history
+            // Matches localhost:8000/api/lampiran-balasan -> Index
             $router->get('lampiran-balasan','LampiranBalasanController@index');
 
-            // ==============[Endpoint Keluhan]==============
-            // Matches "/api/keluhan -> Show All
+            // ==============[Endpoint KELUHAN]==============
+            // Matches localhost:8000/api/keluhan -> Index
             $router->get('keluhan','KeluhanController@index');
-            // Matches "/api/keluhan -> Store
+            // Matches localhost:8000/api/keluhan -> Store
             $router->post('keluhan','KeluhanController@store');
-            // Matches "/api/keluhan/1 -> Show One
+            // Matches localhost:8000/api/keluhan/{id} -> Show
             $router->get('keluhan/{id}','KeluhanController@show');
-            // Matches "/api/keluhan/1 -> Delete
+            // Matches localhost:8000/api/keluhan/{id} -> Delete
             $router->delete('keluhan/{id}','KeluhanController@destroy');
-            // Matches "/api/keluhan -> Update
+            // Matches localhost:8000/api/keluhan/{id} -> Update
             $router->put('keluhan/{id}','KeluhanController@update');
-            // Matches "/api/keluhan -> close
+            // Matches localhost:8000/api/close/{id} -> Close
             $router->put('close/{id}','KeluhanController@close');
-            // Matches "/api/keluhan -> open
+            // Matches localhost:8000/api/open/{id} -> Open
             $router->put('open/{id}','KeluhanController@open');
-            // Matches "/api/keluhan -> history
+            // Matches localhost:8000/api/history -> Index
             $router->get('history','KeluhanController@history');
-            // Matches "/api/keluhan -> search history
+            // Matches localhost:8000/api/search-history -> Search
             $router->post('search-history','KeluhanController@search');
-            // Matches "/api/keluhan -> search history
+            // Matches localhost:8000/api/lampiran-keluhan -> Store
             $router->post('lampiran-keluhan','LampiranKeluhanController@store');
-            // Matches "/api/keluhan -> search history
+            // Matches localhost:8000/api/lampiran-keluhan -> Index
             $router->get('lampiran-keluhan','LampiranKeluhanController@index');
 
-            // ==============[Endpoint RFO Keluhan]==============
-            // Matches "/api/balasan -> Index
+            // ==============[Endpoint RFO KELUHAN]==============
+            // Matches localhost:8000/api/rfo-keluhan -> Index
             $router->get('rfo-keluhan','RFOKeluhanController@index');
-            // Matches "/api/balasan -> Store
+            // Matches localhost:8000/api/rfo-keluhan -> Store
             $router->post('rfo-keluhan','RFOKeluhanController@store');
-            // Matches "/api/balasan/1 -> Show One
+            // Matches localhost:8000/api/rfo-keluhan/{id} -> Show
             $router->get('rfo-keluhan/{id}','RFOKeluhanController@show');
-            // Matches "/api/balasan/1 -> Update
+            // Matches localhost:8000/api/rfo-keluhan/{id} -> Update
             $router->put('rfo-keluhan/{id}','RFOKeluhanController@update');
-            // Matches "/api/balasan/1 -> Delete
+            // Matches localhost:8000/api/rfo-keluhan/{id} -> Delete
             $router->delete('rfo-keluhan/{id}','RFOKeluhanController@destroy');
-            // Matches "/api/balasan/1 -> Update
+            // Matches localhost:8000/api/keluhan-rfo-keluhan/{id} -> Update RFO @ Keluhan Field
             $router->put('keluhan-rfo-keluhan/{id}','KeluhanController@updateKeluhanRFOKeluhan');
 
-            // ==============[Endpoint RFO Gangguan]==============
-            // Matches "/api/balasan -> Index
+            // ==============[Endpoint RFO GANGGUAN]==============
+            // Matches localhost:8000/api/rfo-gangguan -> Index
             $router->get('rfo-gangguan','RFOGangguanController@index');
-            // Matches "/api/balasan -> Store
+            // Matches localhost:8000/api/rfo-gangguan -> Store
             $router->post('rfo-gangguan','RFOGangguanController@store');
-            // Matches "/api/balasan/1 -> Show One
+            // Matches localhost:8000/api/rfo-gangguan/{id} -> Show
             $router->get('rfo-gangguan/{id}','RFOGangguanController@show');
-            // Matches "/api/balasan/1 -> Update
+            // Matches localhost:8000/api/rfo-gangguan/{id} -> Update
             $router->put('rfo-gangguan/{id}','RFOGangguanController@update');
-            // Matches "/api/keluhan -> search history
+            // Matches localhost:8000/api/rfo-gangguan/{id} -> Search
             $router->post('search-RFOGangguan','RFOGangguanController@search');
-            // Matches "/api/balasan/1 -> Update
-            $router->put('keluhan-rfo-gangguan/{id}','KeluhanController@updateKeluhanRFOGangguan');
-            // Matches "/api/balasan/1 -> Delete
+            // Matches localhost:8000/api/keluhan-rfo-gangguan/{id} -> Delete
             $router->delete('rfo-gangguan/{id}','RFOGangguanController@destroy');
-            // Matches "/api/keluhan -> close
+            // Matches localhost:8000/api/close-rfo-gangguan/{id} -> Close
             $router->put('close-rfo-gangguan/{id}','RFOGangguanController@close');
+            // Matches localhost:8000/api/keluhan-rfo-gangguan/{id} -> Update RFO @ Gangguan Field
+            $router->put('keluhan-rfo-gangguan/{id}','KeluhanController@updateKeluhanRFOGangguan');
 
-            // ==============[Endpoint Statistik]==============
+            // ==============[Endpoint STATISTIK]==============
+            // Matches localhost:8000/api/statistik -> Index
             $router->get('statistik','Statistik@index');
+            // Matches localhost:8000/api/statistik-range?dari=YYYY-MM-DD&sampai=YYYY-MM-DD -> Range Statistik
             $router->get('statistik-range','Statistik@statistik_range');
 
-            // ==============[Endpoint POP]==============
-            // Matches "/api/pop -> Index
+            // ==============[Endpoint SUMBER KELUHAN]==============
+            // Matches localhost:8000/api/sumber-keluhan -> Index
             $router->get('sumber-keluhan','SumberKeluhanController@index');
 
-            // ==============[Endpoint POP]==============
-            // Matches "/api/pop -> Index
+            // ==============[Endpoint SHIFT]==============
+            // Matches localhost:8000/api/shift -> Index
             $router->get('shift','ShiftController@index');
 
-
-            // ==============[Endpoint Laporan]==============
+            // ==============[Endpoint LAPORAN]==============
+            // Matches localhost:8000/api/laporan -> Index
             $router->get('laporan','LaporanController@index');
+            // Matches localhost:8000/api/laporan/{id} -> Show
             $router->get('laporan/{id}','LaporanController@show');
+            // Matches localhost:8000/api/laporan -> Store
             $router->post('laporan','LaporanController@store');
+            // Matches localhost:8000/api/laporan-keluhan -> Index Keluhan in Shift for storing to Laporan
             $router->post('laporan-keluhan','LaporanController@keluhanLaporan');
+            // Matches localhost:8000/api/laporan-user -> Index User in Shift for storing to Laporan
             $router->get('laporan-user','LaporanController@userLaporan');
 
-            // ==============[Endpoint Notifikasi]==============
-            // Sementara tidak digunakan
-            // $router->get('notifikasi','NotifikasiController@getNotifikasiAllRead');
-            // $router->get('notifikasi2','NotifikasiController@getNotifikasi');
-            // $router->post('read-notifikasi','NotifikasiController@read');
-            // $router->post('notifikasi2','NotifikasiController@store');
+            // ==============[Endpoint NOTIFIKASI]==============
+            // Matches localhost:8000/api/notifikasi -> Index
             $router->get('notifikasi','NotifikasiController@index');
+            // Matches localhost:8000/api/notifikasi -> Store
             $router->post('notifikasi','NotifikasiController@store');
+            // Matches localhost:8000/api/broadcast-notifikasi -> Broadcast Notifikasi
             $router->post('broadcast-notifikasi','NotifikasiController@broadcast');
+            // Matches localhost:8000/api/read-broadcast -> Read Broadcast Notifikasi
             $router->post('read-notifikasi','NotifikasiController@read');
+            // Matches localhost:8000/api/read-all-broadcast -> Read All Broadcast Notifikasi
             $router->get('read-all-notifikasi','NotifikasiController@read_all');
+            // Matches localhost:8000/api/read-all-broadcast-keluhan -> Read All Broadcast Notifikasi in Keluhan
             $router->post('read-all-notifikasi-keluhan','NotifikasiController@read_all_one_case');
-
-
-
-            // $router->post('storeall-notifikasi','NotifikasiController@store_all');
         });
-
-    // ==============[Endpoint Public Verified]==============
-
     });
 
-  // ==============[Endpoint Public]==============
-  // Matches "/api/register
-  $router->post('register', 'AuthController@register');
-  // Matches "/api/role -> Index
-  $router->get('role-public','RoleController@indexPublic');
-  // Matches "/api/pop -> Index
-  $router->get('pop','POPController@index');
-  // Matches "/api/login
-  $router->post('login', 'AuthController@login');
-  // kirim email
-  $router->get('/email','MailController@index');
+    // ==============[Endpoint AUTH]==============
+    // Matches localhost:8000/api/register -> Register
+    $router->post('register', 'AuthController@register');
+    // Matches localhost:8000/api/login -> Login
+    $router->post('login', 'AuthController@login');
 
+    // ==============[Endpoint PUBLIC]==============
+    // Matches localhost:8000/api/role-public -> Index Role Without Admin
+    $router->get('role-public','RoleController@indexPublic');
+    // Matches localhost:8000/api/pop -> Index
+    $router->get('pop','POPController@index');
 
-
-
-
-  // ==============[Endpoint Debug]==============
-  // Just testing route to get JWT Payload
-  $router->get('getJWT', 'UserController@getJWT');
-  $router->get('/verification','AuthController@verification');
-  $router->get('/otp','AuthController@requestOTP');
-  $router->get('/forget-password','AuthController@forgetPassword');
+    // ==============[Endpoint Debug]==============
+    // Just testing route to get JWT Payload
+    $router->get('getJWT', 'UserController@getJWT');
+    $router->get('/verification','AuthController@verification');
+    $router->get('/otp','AuthController@requestOTP');
+    $router->get('/forget-password','AuthController@forgetPassword');
 });
