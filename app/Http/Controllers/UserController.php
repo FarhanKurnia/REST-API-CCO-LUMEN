@@ -56,8 +56,8 @@ class UserController extends Controller
     }
 
     // Update Avatar function
-    public function updateAvatar(Request $request) 
-    {    
+    public function updateAvatar(Request $request)
+    {
         $this->validate($request, [
                 'avatar' => 'file',
         ]);
@@ -105,7 +105,7 @@ class UserController extends Controller
                 'status' => $status,
                 'message' => $message], 404);
         }
-        
+
         return response()->json([
             'status' => $status,
             'message' => $message,], 200);
