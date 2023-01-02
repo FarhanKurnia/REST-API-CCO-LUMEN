@@ -52,7 +52,7 @@ class AuthController extends Controller
             ];
             Mail::to($email)->send(new Verification($data));
             return response()->json([
-                // 'user' => $user, 
+                // 'user' => $user,
                 'status' => 'Success',
                 'message' => 'Successfully created!'], 201);
 
@@ -172,14 +172,14 @@ class AuthController extends Controller
                 'online' => true,
             ]);
             return response()->json([
-                'id_user' => Auth::user()->id_user,
-                'username' => Auth::user()->name,
-                'email' => Auth::user()->email,
-                'role_id' => Auth::user()->role_id,
-                'online' => $user,
-                'pop_id' => Auth::user()->pop_id,
+                // 'id_user' => Auth::user()->id_user,
+                // 'username' => Auth::user()->name,
+                // 'email' => Auth::user()->email,
+                // 'role_id' => Auth::user()->role_id,
+                // 'online' => $user,
+                // 'pop_id' => Auth::user()->pop_id,
                 'bearer_token' => $token,
-                'expires_in' => Auth::factory()->getTTL()
+                // 'expires_in' => Auth::factory()->getTTL()
             ], 200);
         }else{
             return response()->json([
@@ -204,12 +204,12 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'Success',
             'message' => 'User logged out successfully'
-        ]);
+        ],200);
       } catch (\Exception $e) {
         return response()->json([
             'status' => 'Error',
             'message' => 'Sorry, the user cannot be logged out'
-        ]);
+        ],404);
       }
     }
 }

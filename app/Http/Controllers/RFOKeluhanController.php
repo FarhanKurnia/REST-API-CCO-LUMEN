@@ -60,6 +60,7 @@ class RFOKeluhanController extends Controller
             $http_code = 404;
         }
         $RFO_Keluhan_id = $RFO_Keluhan->id_rfo_keluhan;
+        dd($RFO_Keluhan_id);
         return response([
             'status' => $status,
             'message' => $message,
