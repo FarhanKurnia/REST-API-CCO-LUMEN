@@ -172,12 +172,12 @@ class AuthController extends Controller
                 'online' => true,
             ]);
             return response()->json([
-                // 'id_user' => Auth::user()->id_user,
+                'id_user' => Auth::user()->id_user,
                 // 'username' => Auth::user()->name,
                 // 'email' => Auth::user()->email,
-                // 'role_id' => Auth::user()->role_id,
+                'role_id' => Auth::user()->role_id,
                 // 'online' => $user,
-                // 'pop_id' => Auth::user()->pop_id,
+                'pop_id' => Auth::user()->pop_id,
                 'bearer_token' => $token,
                 // 'expires_in' => Auth::factory()->getTTL()
             ], 200);
