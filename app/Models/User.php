@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'users';
     protected $primaryKey = 'id_user';
     protected $fillable = [
-        'name', 'avatar', 'email','pop_id','role_id','status','online','verifikasi','token_verifikasi','otp',
+        'name', 'avatar', 'email','pop_id','role_id','status','online',
     ];
     /**
      * The attributes excluded from the model's JSON form.
@@ -26,7 +26,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password','verifikasi','token_verifikasi','otp',
     ];
 
     protected $with = ['role','pop'];
