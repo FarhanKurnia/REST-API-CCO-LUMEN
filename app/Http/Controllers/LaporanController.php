@@ -213,4 +213,23 @@ class LaporanController extends Controller
             ], 200);
         }
     }
+
+    // Delete Laporanfunction
+    public function destroy($id)
+    {
+        try {
+            Laporan::find($id)->delete();
+            $message = 'Report deleted successfully';
+            $status = 'Success';
+            $http_code = 200;
+        } catch (\Throwable $th) {
+            $status = 'Error';
+            $message = $th->getMessage();
+            $http_code = 404;
+        }
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], $http_code);
+    }
 }
