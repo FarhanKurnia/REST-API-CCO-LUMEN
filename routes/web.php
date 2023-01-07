@@ -203,7 +203,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches localhost:8000/api/laporan-user -> Index User in Shift for storing to Laporan
             $router->get('laporan-user','LaporanController@userLaporan');
             // Matches localhost:8000/api/laporan-user -> Index User in Shift for storing to Laporan
-            $router->delete('laporan/{id}','LaporanController@delete');
+            $router->delete('laporan/{id}','LaporanController@destroy');
 
             // ==============[Endpoint NOTIFIKASI]==============
             // Matches localhost:8000/api/notifikasi -> Index
