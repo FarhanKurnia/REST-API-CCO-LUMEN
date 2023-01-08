@@ -164,17 +164,6 @@ class UserController extends Controller
     // Soft-Delete (deactivate) user
     public function deactivate()
     {
-        // try {
-        //     User::find($id)->delete();
-        //     $message = 'User deleted successfully';
-        //     $status = 'Success';
-        //     $http_code = 200;
-        // } catch (\Throwable $th) {
-        //     $status = 'Error';
-        //     $message = $th->getMessage();
-        //     $http_code = 404;
-        // }
-
         // Take JWT ID as ID in Database
         $token = JWTAuth::getToken();
         $jwt_id = JWTAuth::getPayload($token)->toArray();
