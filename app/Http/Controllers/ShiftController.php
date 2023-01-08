@@ -32,7 +32,7 @@ class ShiftController extends Controller
                 'selesai' => $selesai,
 
             ]);
-            $message = 'Data Shift updated successfully';
+            $message = 'Data Shift created successfully';
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {
