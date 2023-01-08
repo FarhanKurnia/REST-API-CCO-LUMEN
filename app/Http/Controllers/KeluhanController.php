@@ -17,7 +17,10 @@ class KeluhanController extends Controller
     // Index function for get all complaint with status open
     public function index(){
         $today = Carbon::now()->format('Y-m-d');
-        $data = Keluhan::where('status','open')
+        $data = Keluhan::where([
+            ['status','open'],
+            ['deleted_at',null],
+            ])
         ->orwhere([
             ['status','closed'],
             ['updated_at','iLIKE', "%{$today}%"],
@@ -41,7 +44,10 @@ class KeluhanController extends Controller
 
     // History function to check complaint that has been closed in that session
     public function history(){
-        $data = Keluhan::where('status','=','closed')->orderBy('created_at', 'DESC')->with('pop','balasan')->paginate(10);;
+        $data = Keluhan::where([
+            ['status','=','closed'],
+            ['deleted_at',null],
+            ])->orderBy('created_at', 'DESC')->with('pop','balasan')->paginate(10);;
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'Success',
@@ -339,7 +345,7 @@ class KeluhanController extends Controller
 
     // Delete Keluhan function
     public function destroy($id)
-    {
+    {   
         try {
             Keluhan::find($id)->update([
                 'deleted_at' => Carbon::now()]

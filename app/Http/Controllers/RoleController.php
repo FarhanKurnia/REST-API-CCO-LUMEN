@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -10,20 +11,24 @@ class RoleController extends Controller
     // Index function to get All Role except Admin (for registration user/ no admin)
     public function indexPublic()
     {
+        $role = Role::where([
+            ['role','!=',"ADMIN"],
+            ['deleted_at',null]
+            ])->get();
         return response()->json([
             'status' => 'Success',
             'message' => 'Load data role successfully',
-            'data' => Role::where('role','!=',"ADMIN")->get()], 200);
+            'data' => $role], 200);
     }
 
     // Index function to get All Role without exception
     public function index()
     {
-        $data = Role::get();
+        $role = Role::where('deleted_at',null)->get();
         return response()->json([
             'status' => 'Success',
             'message' => 'Load data role successfully',
-            'data' => $data], 200);
+            'data' => $role], 200);
     }
 
     // Store Role function

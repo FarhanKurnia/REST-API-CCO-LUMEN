@@ -16,11 +16,12 @@ class Pop extends Model
     protected $fillable = [
         'id_pop',
         'pop',
+        'deleted_at',
     ];
 
     //Soft Delete
     protected $hidden = [
-        'delated_at',
+        'created_at','updated_at'
     ];
     
 

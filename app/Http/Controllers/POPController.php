@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Pop;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class POPController extends Controller
 {
     // Index function to get All POP
     public function index()
     {
+        $pop = POP::where('delated_at',null)->get;
         return response()->json([
             'status' => 'Success',
             'message' => 'Load all data POP successfully',
-            'data' => POP::get()], 200);
+            'data' => $pop], 200);
     }
 
     // Store POP function

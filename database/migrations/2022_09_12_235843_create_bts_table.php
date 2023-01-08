@@ -24,7 +24,7 @@ class CreateBtsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('kordinat');
             $table->string('deskripsi')->nullable();
-            $table->timestamp('delated_at')->nullable()->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
 
 
 

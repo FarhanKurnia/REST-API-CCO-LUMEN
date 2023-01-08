@@ -16,13 +16,13 @@ class Role extends Model
     protected $fillable = [
         'id_role',
         'role',
-    ];
-    
-    //Soft Delete
-    protected $hidden = [
-        'delated_at',
+        'deleted_at',
     ];
 
+    //Soft Delete
+    protected $hidden = [
+        'created_at','deleted_at'
+    ];
 
 
     // Relation Role one to many User

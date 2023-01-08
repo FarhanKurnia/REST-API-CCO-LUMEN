@@ -17,12 +17,13 @@ class Laporan extends Model
         'noc',
         'helpdesk',
         'lampiran_laporan',
+        'deleted_at',
     ];
     
     //Soft Delete
-    protected $hidden = [
-        'delated_at',
-    ];
+    // protected $hidden = [
+    //     'deleted_at',
+    // ];
     
      // Relation User Many to one BTS
     public function user(){

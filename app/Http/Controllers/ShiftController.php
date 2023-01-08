@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use App\Models\Shift;
 use Illuminate\Http\Request;
@@ -10,10 +11,11 @@ class ShiftController extends Controller
     // Index function for get all shift time for daily report
     public function index()
     {
+        $shift = Shift::where('deleted_at',null)->get();
         return response()->json([
             'status' => 'success',
             'message' => 'Load data Shift successfully',
-            'data' => Shift::get()], 200);
+            'data' => $shift], 200);
     }
 
     // Store Shift function

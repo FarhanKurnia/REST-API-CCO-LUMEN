@@ -25,13 +25,14 @@ class Keluhan extends Model
         'sentimen_analisis',
         'rfo_gangguan_id',
         'rfo_keluhan_id',
+        'deleted_at',
     ];
 
     protected $with = ['sumber'];
     //Soft Delete
-    protected $hidden = [
-        'delated_at',
-    ];
+    // protected $hidden = [
+    //     'deleted_at',
+    // ];
 
     // Relation Balasan
     public function balasan(){

@@ -14,13 +14,14 @@ class RFO_Keluhan extends Model
     protected $table = 'r_f_o__keluhans';
     protected $primaryKey = 'id_rfo_keluhan';
     protected $fillable = [
-        'nomor_rfo_keluhan','nomor_tiket', 'mulai_keluhan', 'selesai_keluhan', 'problem', 'action','deskripsi','durasi', 'user_id',
+        'nomor_rfo_keluhan','nomor_tiket', 'mulai_keluhan', 'selesai_keluhan', 'problem', 'action','deskripsi','durasi', 'user_id',        'deleted_at',
     ];
+    
 
     //Soft Delete
-    protected $hidden = [
-        'delated_at',
-    ];
+    // protected $hidden = [
+    //     'deleted_at',
+    // ];
 
         
     public function keluhan(){

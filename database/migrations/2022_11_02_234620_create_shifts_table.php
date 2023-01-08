@@ -18,7 +18,7 @@ class CreateShiftsTable extends Migration
             $table->integer('shift');
             $table->time('mulai');
             $table->time('selesai');
-            $table->timestamp('delated_at')->nullable()->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
 
             $table->timestamps();
         });

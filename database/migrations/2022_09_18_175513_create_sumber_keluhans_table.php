@@ -16,7 +16,7 @@ class CreateSumberKeluhansTable extends Migration
         Schema::create('sumber_keluhans', function (Blueprint $table) {
             $table->id('id_sumber');
             $table->string('sumber');
-            $table->timestamp('delated_at')->nullable()->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
             $table->timestamps();
         });
     }

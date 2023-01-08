@@ -12,11 +12,12 @@ class Shift extends Model
         'shift',
         'mulai',
         'selesai',
+        'deleted_at',
     ];
 
     //Soft Delete
     protected $hidden = [
-        'delated_at','created_at','deleted_at'
+        'created_at','deleted_at'
     ];
 
     // Relation User one to many BTS

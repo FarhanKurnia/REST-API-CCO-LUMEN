@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Models\RFO_Gangguan;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class RFOGangguanController extends Controller
 {
     // Index function to get All RFO Gangguan
     public function index()
     {
+        $rfo_gangguan = RFO_Gangguan::where('deleted_at',false)->with('user')->get();
         return response()->json([
             'status' => 'Success',
             'message' => 'Load Data RFO Gangguan succesfully',
-            'data' => RFO_Gangguan::with('user')->get()], 200);
+            'data' => $rfo_gangguan], 200);
     }
 
     // Store RFO Gangguan function

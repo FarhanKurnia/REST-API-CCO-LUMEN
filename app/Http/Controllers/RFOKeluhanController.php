@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Models\RFO_Keluhan;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class RFOKeluhanController extends Controller
 {
     // Index function to get All RFO Keluhan
     public function index()
     {
+        $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->with('user','user.role','user.pop','keluhan')->get();
         return response()->json([
             'status' => 'success',
             'message' => 'Load data RFO Keluhan successfully',
-            'data' => RFO_Keluhan::with('user','user.role','user.pop','keluhan')->get()], 200);
+            'data' => $rfo_keluhan], 200);
     }
 
     // Store RFO Keluhan function

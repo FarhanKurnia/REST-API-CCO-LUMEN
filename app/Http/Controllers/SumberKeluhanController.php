@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use App\Models\SumberKeluhan;
 use Illuminate\Http\Request;
@@ -10,10 +11,11 @@ class SumberKeluhanController extends Controller
     // Index function for get all shift time for daily report
     public function index()
     {
+        $sumber = SumberKeluhan::where('deleted_at',null)->get();
         return response()->json([
             'status' => 'Success',
             'message' => 'Load source complaint successfully',
-            'data' => SumberKeluhan::get()], 200);
+            'data' => $sumber], 200);
     }
 
     // Store source complaint

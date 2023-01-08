@@ -19,12 +19,13 @@ class RFO_Gangguan extends Model
         'nomor_tiket',
         'durasi',
         'user_id',
+        'deleted_at',
     ];
 
     //Soft Delete
-    protected $hidden = [
-        'delated_at',
-    ];
+    // protected $hidden = [
+    //     'deleted_at',
+    // ];
 
 
     public function keluhan(){

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Bts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
 
 class BtsController extends Controller
 {
@@ -15,7 +17,7 @@ class BtsController extends Controller
     // Index function to get All BTS with POP
     public function index()
     {
-        $bts = Bts::with('pop')->get();
+        $bts = Bts::where('deleted_at',null)->with('pop')->get();
         if($bts->isNotEmpty()) {
             return response()->json([
                 'status' => 'Success',

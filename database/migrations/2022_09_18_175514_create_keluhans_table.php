@@ -30,7 +30,7 @@ class CreateKeluhansTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('rfo_gangguan_id')->nullable();
             $table->unsignedBigInteger('rfo_keluhan_id')->nullable();
-            $table->timestamp('delated_at')->nullable()->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
 
 
 

@@ -14,14 +14,14 @@ class Bts extends Model
     protected $table = 'bts';
     protected $primaryKey = 'id_bts';
     protected $fillable = [
-        'nama_bts', 'nama_pic', 'nomor_pic', 'lokasi', 'kordinat', 'pop_id', 'user_id','deskripsi',
+        'nama_bts', 'nama_pic', 'nomor_pic', 'lokasi', 'kordinat', 'pop_id', 'user_id','deskripsi','deleted_at',
     ];
 
     
     //Soft Delete
-    protected $hidden = [
-        'delated_at',
-    ];
+    // protected $hidden = [
+    //     'deleted_at',
+    // ];
 
 
     // Relation User Many to one BTS

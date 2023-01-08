@@ -16,7 +16,7 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id('id_role');
             $table->string('role');
-            $table->timestamp('delated_at')->nullable()->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
             $table->timestamps();
         });
     }

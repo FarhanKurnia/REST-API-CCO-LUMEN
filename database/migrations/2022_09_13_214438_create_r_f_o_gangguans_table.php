@@ -24,7 +24,7 @@ class CreateRFOGangguansTable extends Migration
             $table->timestamp('selesai_gangguan')->nullable();
             $table->string('nomor_tiket')->nullable();
             $table->string('durasi')->nullable();
-            $table->timestamp('delated_at')->nullable()->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
 
 
 

@@ -11,11 +11,12 @@ class SumberKeluhan extends Model
     protected $fillable = [
         'id_sumber',
         'sumber',
+        'deleted_at',
     ];
 
     //Soft Delete
     protected $hidden = [
-        'delated_at','created_at','deleted_at'
+        'created_at','deleted_at'
     ];    
 
     public function keluhan(){
