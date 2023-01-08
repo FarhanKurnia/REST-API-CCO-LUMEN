@@ -165,9 +165,10 @@ class AuthController extends Controller
         if (! $token = Auth::setTTL(480)->attempt($credentials)) {
             return response()->json(['status' => 'Unauthorized','message'=>'Invalid email or password'], 401);
         }
+        $aktif = Auth::user()->aktif;
         $verifikasi = Auth::user()->verifikasi;
         $id_user = Auth::user()->id_user;
-        if($verifikasi==true){
+        if($verifikasi==true && $aktif==true){
             $user = User::find($id_user)->update([
                 'online' => true,
             ]);
@@ -184,7 +185,7 @@ class AuthController extends Controller
         }else{
             return response()->json([
                 'status' => 'Error',
-                'message' => 'Account has not been verified, please verify your account'
+                'message' => 'Account has not been verified or not active, please verify your account'
             ],404);
         }
     }
