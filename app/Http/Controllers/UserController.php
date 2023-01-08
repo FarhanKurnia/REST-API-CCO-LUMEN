@@ -162,13 +162,8 @@ class UserController extends Controller
     }
 
     // Soft-Delete (deactivate) user
-    public function deactivate()
+    public function deactivate($id)
     {
-        // Take JWT ID as ID in Database
-        $token = JWTAuth::getToken();
-        $jwt_id = JWTAuth::getPayload($token)->toArray();
-        $id = $jwt_id['id_user'];
-
         try {
             $user = User::find($id)->update([
                 'aktif' => false,
@@ -189,13 +184,8 @@ class UserController extends Controller
     }
 
     // Activate user
-    public function activate()
+    public function activate($id)
     {
-        // Take JWT ID as ID in Database
-        $token = JWTAuth::getToken();
-        $jwt_id = JWTAuth::getPayload($token)->toArray();
-        $id = $jwt_id['id_user'];
-
         try {
             $user = User::find($id)->update([
                 'aktif' => true,
