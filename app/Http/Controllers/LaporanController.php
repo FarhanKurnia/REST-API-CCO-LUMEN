@@ -218,7 +218,9 @@ class LaporanController extends Controller
     public function destroy($id)
     {
         try {
-            Laporan::find($id)->delete();
+            Laporan::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'Report deleted successfully';
             $status = 'Success';
             $http_code = 200;

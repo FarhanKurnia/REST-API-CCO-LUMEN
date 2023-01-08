@@ -102,7 +102,9 @@ class RoleController extends Controller
     public function destroy($id)
     {
         try {
-            Role::find($id)->delete();
+            Role::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'Data Role deleted successfully';
             $status = 'Success';
             $http_code = 200;

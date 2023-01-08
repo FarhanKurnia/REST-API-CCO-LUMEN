@@ -13,6 +13,11 @@ class SumberKeluhan extends Model
         'sumber',
     ];
 
+    //Soft Delete
+    protected $hidden = [
+        'delated_at','created_at','deleted_at'
+    ];    
+
     public function keluhan(){
     	return $this->hasMany(Keluhan::class,'id_keluhan');
     }

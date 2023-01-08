@@ -17,6 +17,12 @@ class RFO_Keluhan extends Model
         'nomor_rfo_keluhan','nomor_tiket', 'mulai_keluhan', 'selesai_keluhan', 'problem', 'action','deskripsi','durasi', 'user_id',
     ];
 
+    //Soft Delete
+    protected $hidden = [
+        'delated_at',
+    ];
+
+        
     public function keluhan(){
         return $this->hasOne(Keluhan::class,'rfo_keluhan_id');
     }

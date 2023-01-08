@@ -23,6 +23,7 @@ class CreateLaporansTable extends Migration
             $table->string('helpdesk');
             $table->unsignedBigInteger('user_id');
             $table->string('lampiran_laporan');
+            $table->timestamp('delated_at')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');

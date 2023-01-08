@@ -14,6 +14,11 @@ class Shift extends Model
         'selesai',
     ];
 
+    //Soft Delete
+    protected $hidden = [
+        'delated_at','created_at','deleted_at'
+    ];
+
     // Relation User one to many BTS
     public function laporan(){
     	return $this->hasMany(Laporan::class);

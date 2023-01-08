@@ -185,7 +185,9 @@ class RFOGangguanController extends Controller
     public function destroy($id)
     {
         try {
-            RFO_Gangguan::find($id)->delete();
+            RFO_Gangguan::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'RFO Gangguan deleted successfully';
             $status = 'Success';
             $http_code = 200;

@@ -90,7 +90,9 @@ class SumberKeluhanController extends Controller
     public function destroy($id)
     {
         try {
-            SumberKeluhan::find($id)->delete();
+            SumberKeluhan::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'Deleted source complaint successfully';
             $status = 'Success';
             $http_code = 200;

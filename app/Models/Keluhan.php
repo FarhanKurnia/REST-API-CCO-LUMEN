@@ -28,6 +28,10 @@ class Keluhan extends Model
     ];
 
     protected $with = ['sumber'];
+    //Soft Delete
+    protected $hidden = [
+        'delated_at',
+    ];
 
     // Relation Balasan
     public function balasan(){

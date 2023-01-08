@@ -97,7 +97,9 @@ class ShiftController extends Controller
     public function destroy($id)
     {
         try {
-            Shift::find($id)->delete();
+            Shift::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'Data Shift deleted successfully';
             $status = 'Success';
             $http_code = 200;

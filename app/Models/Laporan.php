@@ -18,6 +18,12 @@ class Laporan extends Model
         'helpdesk',
         'lampiran_laporan',
     ];
+    
+    //Soft Delete
+    protected $hidden = [
+        'delated_at',
+    ];
+    
      // Relation User Many to one BTS
     public function user(){
     	return $this->belongsTo(User::class,'user_id');

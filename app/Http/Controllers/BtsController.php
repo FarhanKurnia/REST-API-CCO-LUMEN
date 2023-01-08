@@ -127,7 +127,9 @@ class BtsController extends Controller
     public function destroy($id)
     {
         try {
-            Bts::find($id)->delete();
+            Bts::find($id)->update([
+                'deleted_at' => Carbon::now()
+            ]);
             $message = 'BTS deleted successfully';
             $status = 'Success';
             $http_code = 200;

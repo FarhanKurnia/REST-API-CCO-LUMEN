@@ -21,6 +21,12 @@ class RFO_Gangguan extends Model
         'user_id',
     ];
 
+    //Soft Delete
+    protected $hidden = [
+        'delated_at',
+    ];
+
+
     public function keluhan(){
     	return $this->hasMany(Keluhan::class,'rfo_gangguan_id');
     }

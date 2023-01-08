@@ -92,7 +92,9 @@ class POPController extends Controller
     public function destroy($id)
     {
         try {
-            POP::find($id)->delete();
+            POP::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'POP deleted successfully';
             $status = 'Success';
             $http_code = 200;

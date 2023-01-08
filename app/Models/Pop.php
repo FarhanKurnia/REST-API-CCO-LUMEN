@@ -17,14 +17,12 @@ class Pop extends Model
         'id_pop',
         'pop',
     ];
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    // protected $hidden = [
-    //     'password',
-    // ];
+
+    //Soft Delete
+    protected $hidden = [
+        'delated_at',
+    ];
+    
 
     // Relation POP one to many User
     public function user(){

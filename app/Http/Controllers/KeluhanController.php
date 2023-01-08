@@ -341,7 +341,9 @@ class KeluhanController extends Controller
     public function destroy($id)
     {
         try {
-            Keluhan::find($id)->delete();
+            Keluhan::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'Data keluhan has been deleted';
             $status = 'Success';
             $http_code = 200;

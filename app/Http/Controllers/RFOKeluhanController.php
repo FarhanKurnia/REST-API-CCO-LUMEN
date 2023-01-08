@@ -136,7 +136,9 @@ class RFOKeluhanController extends Controller
     public function destroy($id)
     {
         try {
-            RFO_Keluhan::find($id)->delete();
+            RFO_Keluhan::find($id)->update([
+                'deleted_at' => Carbon::now()]
+            );
             $message = 'RFO Keluhan deleted successfully';
             $status = 'Success';
             $http_code = 200;

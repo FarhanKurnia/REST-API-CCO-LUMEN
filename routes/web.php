@@ -33,13 +33,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 // Matches localhost:8000/api/shift/{id} -> Update
                 $router->put('shift/{id}','ShiftController@update');
                 // Matches localhost:8000/api/shift/{id} -> Delete
-                $router->delete('shift/{id}','ShiftController@destroy');
+                $router->get('shift/{id}','ShiftController@destroy');
 
                 // ==============[Endpoint BTS]==============
                 // Matches localhost:8000/api/bts -> Store
                 $router->post('bts','BtsController@store');
                 // Matches localhost:8000/api/bts/{id} -> Delete
-                $router->delete('bts/{id}','BtsController@destroy');
+                $router->get('bts/{id}','BtsController@destroy');
                 // Matches localhost:8000/api/bts/{id} -> Update
                 $router->put('bts/{id}','BtsController@update');
 
@@ -51,7 +51,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 // Matches localhost:8000/api/role/{id} -> Update
                 $router->put('role/{id}','RoleController@update');
                 // Matches localhost:8000/api/role/{id} -> Delete
-                $router->delete('role/{id}','RoleController@destroy');
+                $router->get('role/{id}','RoleController@destroy');
 
                 // ==============[Endpoint POP]==============
                 // Matches localhost:8000/api/pop -> Store
@@ -61,7 +61,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 // Matches localhost:8000/api/pop/{id} -> Update
                 $router->put('pop/{id}','POPController@update');
                 // Matches localhost:8000/api/pop/{id} -> Delete
-                $router->delete('pop/{id}','POPController@destroy');
+                $router->get('pop/{id}','POPController@destroy');
 
                 // ==============[Endpoint SUMBER KELUHAN]==============
                 // Matches localhost:8000/api/sumber-keluhan -> Store
@@ -71,7 +71,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 // Matches localhost:8000/api/sumber-keluhan/{id} -> Update
                 $router->put('sumber-keluhan/{id}','SumberKeluhanController@update');
                 // Matches localhost:8000/api/sumber-keluhan/{id} -> Delete
-                $router->delete('sumber-keluhan/{id}','SumberKeluhanController@destroy');
+                $router->get('sumber-keluhan/{id}','SumberKeluhanController@destroy');
 
 
                 // ==============[Endpoint USER]==============
@@ -132,7 +132,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches localhost:8000/api/keluhan/{id} -> Show
             $router->get('keluhan/{id}','KeluhanController@show');
             // Matches localhost:8000/api/keluhan/{id} -> Delete
-            $router->delete('keluhan/{id}','KeluhanController@destroy');
+            $router->get('keluhan/{id}','KeluhanController@destroy');
             // Matches localhost:8000/api/keluhan/{id} -> Update
             $router->put('keluhan/{id}','KeluhanController@update');
             // Matches localhost:8000/api/close/{id} -> Close
@@ -158,7 +158,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches localhost:8000/api/rfo-keluhan/{id} -> Update
             $router->put('rfo-keluhan/{id}','RFOKeluhanController@update');
             // Matches localhost:8000/api/rfo-keluhan/{id} -> Delete
-            $router->delete('rfo-keluhan/{id}','RFOKeluhanController@destroy');
+            $router->get('rfo-keluhan/{id}','RFOKeluhanController@destroy');
             // Matches localhost:8000/api/keluhan-rfo-keluhan/{id} -> Update RFO @ Keluhan Field
             $router->put('keluhan-rfo-keluhan/{id}','KeluhanController@updateKeluhanRFOKeluhan');
 
@@ -174,7 +174,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches localhost:8000/api/rfo-gangguan/{id} -> Search
             $router->post('search-RFOGangguan','RFOGangguanController@search');
             // Matches localhost:8000/api/keluhan-rfo-gangguan/{id} -> Delete
-            $router->delete('rfo-gangguan/{id}','RFOGangguanController@destroy');
+            $router->get('rfo-gangguan/{id}','RFOGangguanController@destroy');
             // Matches localhost:8000/api/close-rfo-gangguan/{id} -> Close
             $router->put('close-rfo-gangguan/{id}','RFOGangguanController@close');
             // Matches localhost:8000/api/keluhan-rfo-gangguan/{id} -> Update RFO @ Gangguan Field
@@ -206,7 +206,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches localhost:8000/api/laporan-user -> Index User in Shift for storing to Laporan
             $router->get('laporan-user','LaporanController@userLaporan');
             // Matches localhost:8000/api/laporan-user -> Index User in Shift for storing to Laporan
-            $router->delete('laporan/{id}','LaporanController@destroy');
+            $router->get('laporan/{id}','LaporanController@destroy');
 
             // ==============[Endpoint NOTIFIKASI]==============
             // Matches localhost:8000/api/notifikasi -> Index

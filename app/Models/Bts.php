@@ -16,14 +16,13 @@ class Bts extends Model
     protected $fillable = [
         'nama_bts', 'nama_pic', 'nomor_pic', 'lokasi', 'kordinat', 'pop_id', 'user_id','deskripsi',
     ];
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    // protected $hidden = [
-    //     'password',
-    // ];
+
+    
+    //Soft Delete
+    protected $hidden = [
+        'delated_at',
+    ];
+
 
     // Relation User Many to one BTS
     public function user(){

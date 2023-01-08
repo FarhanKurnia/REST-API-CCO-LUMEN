@@ -17,14 +17,12 @@ class Role extends Model
         'id_role',
         'role',
     ];
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    // protected $hidden = [
-    //     'password',
-    // ];
+    
+    //Soft Delete
+    protected $hidden = [
+        'delated_at',
+    ];
+
 
 
     // Relation Role one to many User

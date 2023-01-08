@@ -26,6 +26,7 @@ class CreateRFOKeluhansTable extends Migration
             $table->string('problem');
             $table->string('action');
             $table->string('deskripsi');
+            $table->timestamp('delated_at')->nullable()->default(null);
 
             $table->unsignedBigInteger('user_id');
             // $table->unsignedBigInteger('role_id');
