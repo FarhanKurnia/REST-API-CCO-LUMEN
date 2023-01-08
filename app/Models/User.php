@@ -88,6 +88,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [
             'id_user' => $this->id_user,
             'name' => $this->name,
+            'aktif' => $this->aktif,
             'verifikasi' => $this->verifikasi,
             'role_id' => $this->role_id,
             'pop_id' => $this->pop_id,
