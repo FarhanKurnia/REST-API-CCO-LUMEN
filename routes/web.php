@@ -82,9 +82,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 // Matches localhost:8000/api/user/{id} -> Update
                 $router->put('user/{id}', 'UserController@update');
                 // Matches localhost:8000/api/user/{id} -> Soft Delete / Deactive
-                $router->get('deactivate-user/{id}', 'UserController@deactivate');
+                $router->get('user/deactivate-user/{id}', 'UserController@deactivate');
                 // Matches localhost:8000/api/user/{id} -> Soft Undelete / Reactivate
-                $router->get('reactivate-user/{id}', 'UserController@activate');
+                $router->get('user/reactivate-user/{id}', 'UserController@activate');
 
             });
 
