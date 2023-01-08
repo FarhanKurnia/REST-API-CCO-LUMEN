@@ -12,7 +12,7 @@ class POPController extends Controller
     // Index function to get All POP
     public function index()
     {
-        $pop = POP::where('delated_at',null)->get;
+        $pop = POP::where('delated_at',null)->get();
         return response()->json([
             'status' => 'Success',
             'message' => 'Load all data POP successfully',
