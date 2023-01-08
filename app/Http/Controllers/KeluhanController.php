@@ -34,7 +34,7 @@ class KeluhanController extends Controller
         }else{
             return response()->json([
                 'status'=>"error",
-                'mesage' =>"Data Keluhan not found"
+                'message' =>"Data Keluhan not found"
             ],404);
         }
     }
@@ -51,7 +51,7 @@ class KeluhanController extends Controller
         }else{
             return response()->json([
                 'status'=>'Error',
-                'mesage' =>'Data history keluhan not found'
+                'message' =>'Data history keluhan not found'
             ],404);
         }
     }
@@ -185,7 +185,7 @@ class KeluhanController extends Controller
                 $message = 'Data Keluhan not found';
                 return response()->json([
                     'status'=>$status,
-                    'mesage' =>$message
+                    'message' =>$message
                 ],404);
             }else{
                 $keluhan->user;

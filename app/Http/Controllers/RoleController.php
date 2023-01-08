@@ -61,7 +61,7 @@ class RoleController extends Controller
             $http_code = 404;
             return response()->json([
                 'status'=>$status,
-                'mesage' =>$message
+                'message' =>$message
             ],$http_code);
         }else{
             $message = 'Data Role has found';

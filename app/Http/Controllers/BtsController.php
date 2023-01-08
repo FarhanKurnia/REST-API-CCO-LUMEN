@@ -25,7 +25,7 @@ class BtsController extends Controller
         }else{
             return response()->json([
                 'status'=>'Failed',
-                'mesage' =>'Data BTS not found'
+                'message' =>'Data BTS not found'
             ],404);
         }
     }
@@ -77,7 +77,7 @@ class BtsController extends Controller
             $message = "BTS not found";
             return response()->json([
                 'status'=>$status,
-                'mesage' =>$message
+                'message' =>$message
             ],404);
         }else{
             $bts->user;

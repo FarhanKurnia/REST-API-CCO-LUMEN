@@ -161,12 +161,57 @@ class UserController extends Controller
         }
     }
 
-    // Delete user
-    public function destroy($id)
+    // Soft-Delete (deactivate) user
+    public function deactivate()
     {
+        // try {
+        //     User::find($id)->delete();
+        //     $message = 'User deleted successfully';
+        //     $status = 'Success';
+        //     $http_code = 200;
+        // } catch (\Throwable $th) {
+        //     $status = 'Error';
+        //     $message = $th->getMessage();
+        //     $http_code = 404;
+        // }
+
+        // Take JWT ID as ID in Database
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id = $jwt_id['id_user'];
+
         try {
-            User::find($id)->delete();
-            $message = 'User deleted successfully';
+            $user = User::find($id)->update([
+                'aktif' => false,
+            ]);
+            $message = 'Data User Unactivated successfully';
+            $status = 'Success';
+            $http_code = 200;
+        } catch (\Throwable $th) {
+            $status = 'Error';
+            $message = $th->getMessage();
+            $http_code = 404;
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], $http_code);
+    }
+
+    // Activate user
+    public function activate()
+    {
+        // Take JWT ID as ID in Database
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id = $jwt_id['id_user'];
+
+        try {
+            $user = User::find($id)->update([
+                'aktif' => true,
+            ]);
+            $message = 'Data User Activated successfully';
             $status = 'Success';
             $http_code = 200;
         } catch (\Throwable $th) {

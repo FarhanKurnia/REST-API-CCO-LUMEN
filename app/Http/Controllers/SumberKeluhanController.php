@@ -37,7 +37,7 @@ class SumberKeluhanController extends Controller
         }
         return response()->json([
             'status'=>$status,
-            'mesage' =>$message
+            'message' =>$message
         ],$http_code);
     }
 
@@ -50,7 +50,7 @@ class SumberKeluhanController extends Controller
             $message = 'Source complaint not found';
             return response()->json([
                 'status'=>$status,
-                'mesage' =>$message
+                'message' =>$message
             ],404);
         }else{
             $message = 'Source complaint has found';

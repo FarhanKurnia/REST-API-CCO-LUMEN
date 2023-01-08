@@ -35,6 +35,7 @@ class AuthController extends Controller
             $user->role_id = $request->get('role_id');
             $user->email = $request->get('email');
             $user->online = false;
+            $user->aktif = true;
             $user->token_verifikasi = Str::random(128);
             $user->password = app('hash')->make($request->get('password'));
             $user->save();
@@ -185,7 +186,7 @@ class AuthController extends Controller
         }else{
             return response()->json([
                 'status' => 'Error',
-                'message' => 'Account has not been verified or not active, please verify your account'
+                'message' => 'Account has not been verified or not active, please verify or activate your account'
             ],404);
         }
     }

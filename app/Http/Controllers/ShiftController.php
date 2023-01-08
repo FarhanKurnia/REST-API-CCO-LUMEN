@@ -56,7 +56,7 @@ class ShiftController extends Controller
             $http_code = 404;
             return response()->json([
                 'status'=>$status,
-                'mesage' =>$message
+                'message' =>$message
             ],$http_code);
         }else{
             $message = 'Data Shift has found';
@@ -107,7 +107,7 @@ class ShiftController extends Controller
             $http_code = 404;
             return response()->json([
                 'status'=>$status,
-                'mesage' =>$message
+                'message' =>$message
             ],404);
         }
 
