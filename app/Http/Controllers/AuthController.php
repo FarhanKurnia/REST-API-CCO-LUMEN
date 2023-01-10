@@ -31,7 +31,6 @@ class AuthController extends Controller
 
         $email = $request->get('email');
         $valid_email = Str::endsWith($email, '@citra.net.id');
-        // dd($valid_email);
         if ($valid_email == true) {
             try {
                 $user = new User;
