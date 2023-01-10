@@ -51,13 +51,12 @@ class AuthController extends Controller
                     'title' => 'Email Verification',
                     'name' => $name,
                     // url backend
-                    // 'url' => url('api/verification/?token='.$token),
+                    'url' => url('api/verification/?token='.$token),
                     // url frontend
-                    'url' => 'http://localhost:3000/verification/?token='.$token,
+                    // 'url' => 'http://localhost:3000/verification/?token='.$token,
                 ];
                 Mail::to($email)->send(new Verification($data));
                 return response()->json([
-                    // 'user' => $user,
                     'status' => 'Success',
                     'message' => 'Successfully created!'], 201);
     
@@ -68,12 +67,9 @@ class AuthController extends Controller
             }
         }else{
             return response()->json([
-                // 'user' => $user,
                 'status' => 'Error',
-                'message' => 'Unvalid Email!'], 409);
+                'message' => 'Invalid Email!'], 409);
         }
-        
-
    }
 
    // Forget password function
