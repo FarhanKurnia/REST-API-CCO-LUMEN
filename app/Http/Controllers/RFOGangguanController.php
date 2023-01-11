@@ -130,13 +130,16 @@ class RFOGangguanController extends Controller
     // Update RFO Gangguan function
     public function update(Request $request, $id)
     {
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
         $start = new DateTime($request->mulai_gangguan);//start time
         $end = new DateTime($request->selesai_gangguan);//end time
         $durasi = $start->diff($end);
 
         try {
             RFO_Gangguan::find($id)->update([
-                'user_id' => $request->user_id,
+                'user_id' => $id_user,
                 'nomor_tiket' => $request->nomor_tiket,
                 'mulai_gangguan' => $request->mulai_gangguan,
                 'selesai_gangguan' => $request->mulai_gangguan,
@@ -145,7 +148,6 @@ class RFOGangguanController extends Controller
                 'action' => $request->action,
                 'status' => $request->status,
                 'deskripsi' => $request->deskripsi,
-                'lampiran_rfo_gangguan' => $request->lampiran_rfo_gangguan,
             ]);
             $message = 'Data updated successfully';
             $status = 'Success';
@@ -170,7 +172,7 @@ class RFOGangguanController extends Controller
             'nomor_rfo_gangguan', $keyword)->orwhere('problem', 'iLIKE', "%{$keyword}%")->orwhere('nomor_tiket', $keyword)->paginate(10);
 
         if($data->isEmpty()){
-            $message = 'Data history keluhan not found';
+            $message = 'Data history RFO Gangguan not found';
             $status = 'Error';
             $http_code = 404;
             return response()->json([
@@ -178,7 +180,7 @@ class RFOGangguanController extends Controller
                 'message' => $message,
             ], $http_code);
         }else{
-            $message = 'Data history keluhan has found';
+            $message = 'Data history RFO Gangguan has found';
             $status = 'Success';
             $http_code = 404;
             return response()->json([
