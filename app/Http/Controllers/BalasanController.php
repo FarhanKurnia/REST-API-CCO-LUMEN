@@ -6,6 +6,8 @@ use App\Models\Balasan;
 use App\Models\Keluhan;
 use Illuminate\Http\Request;
 use App\Events\KeluhanEvent;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
+
 
 class BalasanController extends Controller
 {
@@ -21,14 +23,15 @@ class BalasanController extends Controller
     // Store balasan function
     public function store(Request $request)
     {
-
-        $user_id = $request->input('user_id');
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
         $keluhan_id = $request->input('keluhan_id');
         $balasan = $request->input('balasan');
 
         try {
             $balasan = Balasan::create([
-                'user_id' => $user_id,
+                'user_id' => $id_user,
                 'keluhan_id' => $keluhan_id,
                 'balasan' => $balasan,
             ]);
@@ -74,7 +77,7 @@ class BalasanController extends Controller
             // 0 for keluhan and 1 for balasan
             'id_response' => 1,
             'id_balasan' => $balasan->id_balasan,
-            'id_keluhan' => $keluhan,
+            'id_keluhan' => $keluhan[0]->id_keluhan,
         ], $http_code);
     }
 

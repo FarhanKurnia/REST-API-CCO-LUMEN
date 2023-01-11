@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
+
 use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
 
@@ -51,7 +52,6 @@ class AuthController extends Controller
                 // url frontend
                 'url' => 'http://localhost:3000/verification/?token='.$token,
             ];
-
             Mail::to($email)->send(new Verification($data));
             return response()->json([
                 // 'user' => $user,
@@ -61,9 +61,8 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'Error',
-                'message' => 'Failed register account!'], 409);
+                'message' => 'Invalid Email!'], 409);
         }
-
    }
 
    // Forget password function

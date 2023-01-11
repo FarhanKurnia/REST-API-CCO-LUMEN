@@ -10,6 +10,8 @@ use App\Models\POP;
 use App\Models\RFO_Gangguan;
 use App\Models\RFO_Keluhan;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
+
 
 
 class KeluhanController extends Controller
@@ -102,6 +104,9 @@ class KeluhanController extends Controller
 
     // Store keluhan function
     public function store(Request $request){
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
         $kategori_pelanggan = $request->input('kategori_pelanggan');
         $id_pelanggan = $request->input('id_pelanggan');
         $nama_pelanggan = $request->input('nama_pelanggan');
@@ -111,11 +116,7 @@ class KeluhanController extends Controller
         $sumber_id = $request->input('sumber_id');
         $detail_sumber = $request->input('detail_sumber');
         $keluhan = $request->input('keluhan');
-        $status_keluhan = $request->input('status');
         $pop_id = $request->input('pop_id');
-        $user_id = $request->input('user_id');
-        $rfo_gangguan_id = $request->input('rfo_gangguan_id');
-        $rfo_keluhan_id = $request->input('rfo_keluhan_id');
         $sentimen_analisis = $request->input('sentimen_analisis');
 
         $pop = POP::where('id_pop',$pop_id)->pluck('pop');
@@ -131,11 +132,9 @@ class KeluhanController extends Controller
                 'sumber_id' => $sumber_id,
                 'detail_sumber' => $detail_sumber,
                 'keluhan' => $keluhan,
-                'status' => $status_keluhan,
+                'status' => 'open',
                 'pop_id' => $pop_id,
-                'user_id' => $user_id,
-                'rfo_gangguan_id'=> $rfo_gangguan_id,
-                'rfo_keluhan_id'=> $rfo_keluhan_id,
+                'user_id' => $id_user,
                 'sentimen_analisis'=>$sentimen_analisis,
             ]);
             $message = 'Data keluhan added successfully';
@@ -176,7 +175,7 @@ class KeluhanController extends Controller
             // response for differently response for keluhan or balasan
             // 0 for keluhan and 1 for balasan
             'id_response' => 0,
-            'id_keluhan' => $keluhan,
+            'id_keluhan' => $id_keluhan,
         ], $http_code);
     }
 
