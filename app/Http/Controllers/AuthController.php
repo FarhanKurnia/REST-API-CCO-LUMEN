@@ -51,6 +51,7 @@ class AuthController extends Controller
                 // url frontend
                 'url' => 'http://localhost:3000/verification/?token='.$token,
             ];
+
             Mail::to($email)->send(new Verification($data));
             return response()->json([
                 // 'user' => $user,
