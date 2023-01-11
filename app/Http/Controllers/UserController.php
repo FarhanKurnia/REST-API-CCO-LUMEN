@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Str;
 
 
 use App\Models\User;
@@ -30,28 +31,34 @@ class UserController extends Controller
             'role_id' => 'required',
             'email' => 'required|email',
         ]);
-
-        try {
-            $user = User::find($id)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'role_id' => $request->role_id,
-                'pop_id' => $request->pop_id,
-            ]);
-            $message = 'Data User updated successfully';
-            $status = 'Success';
-            $http_code = 200;
+        $email = $request->get('email');
+        $valid_email = Str::endsWith($email, '@citra.net.id');
+        if ($valid_email == true) {
+            try {
+                $user = User::find($id)->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'role_id' => $request->role_id,
+                    'pop_id' => $request->pop_id,
+                ]);
+                $message = 'Data User updated successfully';
+                $status = 'Success';
+                $http_code = 200;
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message,], $http_code);
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 404;
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message], $http_code);
+            }
+        }else{
             return response()->json([
-                'status' => $status,
-                'message' => $message,
-                'data' => $user], $http_code);
-        } catch (\Throwable $th) {
-            $status = 'Error';
-            $message = $th->getMessage();
-            $http_code = 404;
-            return response()->json([
-                'status' => $status,
-                'message' => $message], $http_code);
+                'status' => 'Error',
+                'message' => 'Unvalid Email!'], 409);
         }
     }
 
