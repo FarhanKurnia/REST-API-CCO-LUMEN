@@ -5,6 +5,7 @@ use DateTime;
 use App\Models\RFO_Gangguan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
 
 class RFOGangguanController extends Controller
@@ -30,27 +31,30 @@ class RFOGangguanController extends Controller
         // date() = YYYY-MM-DD
         // Random Interger = 5 Digit
 
-        $user_id = $request->input('user_id');
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
+
         $nomor_tiket = $request->input('nomor_tiket');
         $nomor_rfo_gangguan = '#RFO-G'.date("Ymd").rand( 100 , 999 );
         $mulai_gangguan = $request->input('mulai_gangguan');
         $selesai_gangguan = $request->input('selesai_gangguan');
-        // $start = new DateTime($mulai_gangguan);//start time
-        // $end = new DateTime($selesai_gangguan);//end time
-        // $durasi = $start->diff($end);
+        $start = new DateTime($mulai_gangguan);//start time
+        $end = new DateTime($selesai_gangguan);//end time
+        $durasi = $start->diff($end);
         $problem = $request->input('problem');
         $action = $request->input('action');
         $status_RFO = $request->input('status');
         $deskripsi = $request->input('deskripsi');
 
         try {
-            RFO_Gangguan::create([
-                'user_id' => $user_id,
+            $RFO_Gangguan = RFO_Gangguan::create([
+                'user_id' => $id_user,
                 'nomor_tiket' => $nomor_tiket,
                 'mulai_gangguan' => $mulai_gangguan,
                 'selesai_gangguan' => $selesai_gangguan,
                 'problem' => $problem,
-                // 'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
+                'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
                 'action' => $action,
                 'status' => $status_RFO,
                 'deskripsi' => $deskripsi,
@@ -64,10 +68,11 @@ class RFOGangguanController extends Controller
             $message = $th->getMessage();
             $http_code = 404;
         }
-
+        $RFO_gangguan_id = $RFO_Gangguan->id_rfo_gangguan;
         return response([
             'status' => $status,
             'message' => $message,
+            'id_rfo_gangguan' => $RFO_gangguan_id
         ], $http_code);
     }
 
