@@ -139,7 +139,7 @@ class UserController extends Controller
         }
     }
 
-    // Show data user by ID JWT
+    // Show data user
     public function show($id)
     {
         $user = User::find($id);

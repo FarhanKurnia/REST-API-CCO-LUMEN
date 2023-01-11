@@ -17,10 +17,11 @@ class LaporanController extends Controller
     // Index function for get all report
     public function index()
     {
+        $laporan = Laporan::where('deleted_at',null)->with('user','pop','shift')->orderBy('created_at', 'DESC')->paginate(10);
         return response()->json([
             'status' => 'success',
             'message' => 'Load data Lampiran successfully',
-            'data' => Laporan::where('deleted_at',null)->with('user','pop','shift')->orderBy('created_at', 'DESC')->get()], 200);
+            'data' => $laporan], 200);
     }
 
     // Store daily report function

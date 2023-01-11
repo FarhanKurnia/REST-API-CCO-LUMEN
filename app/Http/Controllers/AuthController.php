@@ -29,39 +29,48 @@ class AuthController extends Controller
             'password' => 'required|confirmed',
         ]);
 
-        try {
-            $user = new User;
-            $user->name = $request->get('name');
-            $user->pop_id = $request->get('pop_id');
-            $user->role_id = $request->get('role_id');
-            $user->email = $request->get('email');
-            $user->online = false;
-            $user->aktif = true;
-            $user->token_verifikasi = Str::random(128);
-            $user->password = app('hash')->make($request->get('password'));
-            $user->save();
-
-            $name = $user->name;
-            $email = $user->email;
-            $token = $user->token_verifikasi;
-            $data = [
-                'title' => 'Email Verification',
-                'name' => $name,
-                // url backend
-                // 'url' => url('api/verification/?token='.$token),
-                // url frontend
-                'url' => 'http://localhost:3000/verification/?token='.$token,
-            ];
-            Mail::to($email)->send(new Verification($data));
+        $email = $request->get('email');
+        $valid_email = Str::endsWith($email, '@citra.net.id');
+        if ($valid_email == true) {
+            try {
+                $user = new User;
+                $user->name = $request->get('name');
+                $user->pop_id = $request->get('pop_id');
+                $user->role_id = $request->get('role_id');
+                $user->email = $email;
+                $user->online = false;
+                $user->aktif = true;
+                $user->token_verifikasi = Str::random(128);
+                $user->password = app('hash')->make($request->get('password'));
+                $user->save();
+    
+                $name = $user->name;
+                $email = $user->email;
+                $token = $user->token_verifikasi;
+                $data = [
+                    'title' => 'Email Verification',
+                    'name' => $name,
+                    // url backend
+                    // 'url' => url('api/verification/?token='.$token),
+                    // url frontend
+                    'url' => 'http://localhost:3000/verification/?token='.$token,
+                ];
+                Mail::to($email)->send(new Verification($data));
+                return response()->json([
+                    // 'user' => $user,
+                    'status' => 'Success',
+                    'message' => 'Successfully created!'], 201);
+    
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'Error',
+                    'message' => 'Failed register account!'], 409);
+            }
+        }else{
             return response()->json([
                 // 'user' => $user,
-                'status' => 'Success',
-                'message' => 'Successfully created!'], 201);
-
-        } catch (\Exception $e) {
-            return response()->json([
                 'status' => 'Error',
-                'message' => 'Invalid Email!'], 409);
+                'message' => 'Unvalid Email!'], 409);
         }
    }
 
