@@ -5,6 +5,8 @@ use DateTime;
 use App\Models\RFO_Keluhan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
+
 
 
 class RFOKeluhanController extends Controller
@@ -28,8 +30,11 @@ class RFOKeluhanController extends Controller
         // T = Trouble
         // date() = YYYY-MM-DD
         // Random Interger = 5 Digit
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
 
-        $user_id = $request->input('user_id');
+        // $user_id = $request->input('user_id');
         $nomor_tiket = $request->input('nomor_tiket');
         $nomor_rfo_keluhan = '#RFO-S'.date("Ymd").rand( 10000 , 99999 );
         $mulai_keluhan = $request->input('mulai_keluhan');
@@ -43,7 +48,7 @@ class RFOKeluhanController extends Controller
 
         try {
             $RFO_Keluhan = RFO_Keluhan::create([
-                'user_id' => $user_id,
+                'user_id' => $id_user,
                 // 'keluhan_id' => $keluhan_id,
                 'nomor_tiket' => $nomor_tiket,
                 'nomor_rfo_keluhan' => $nomor_rfo_keluhan,
@@ -63,7 +68,6 @@ class RFOKeluhanController extends Controller
             $http_code = 404;
         }
         $RFO_Keluhan_id = $RFO_Keluhan->id_rfo_keluhan;
-        // dd($RFO_Keluhan_id);
         return response([
             'status' => $status,
             'message' => $message,
@@ -102,13 +106,16 @@ class RFOKeluhanController extends Controller
     // Update RFO Keluhan function
     public function update(Request $request, $id)
     {
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
         $start = new DateTime($request->mulai_keluhan);//start time
         $end = new DateTime($request->selesai_keluhan);//end time
         $durasi = $start->diff($end);
 
         try {
             RFO_Keluhan::find($id)->update([
-                'user_id' => $request->user_id,
+                'user_id' => $id_user,
                 // 'keluhan_id' => $request->keluhan_id,
                 'nomor_tiket' => $request->nomor_tiket,
                 'mulai_keluhan' => $request->mulai_keluhan,
@@ -116,7 +123,7 @@ class RFOKeluhanController extends Controller
                 'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
                 'problem' => $request->problem,
                 'action' => $request->action,
-                'status' => $request->status,
+                // 'status' => $request->status,
                 'deskripsi' => $request->deskripsi,
                 'lampiran_rfo_keluhan' => $request->lampiran_rfo_keluhan,
             ]);
