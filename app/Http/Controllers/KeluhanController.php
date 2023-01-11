@@ -290,8 +290,6 @@ class KeluhanController extends Controller
     // Update RFO Keluhan function when keluhan has been closed
     public function updateKeluhanRFOKeluhan(Request $request, $id)
     {
-
-
         try {
             Keluhan::find($id)->update([
                 'rfo_keluhan_id' => $request->rfo_keluhan_id,

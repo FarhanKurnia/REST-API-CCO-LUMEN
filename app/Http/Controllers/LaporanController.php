@@ -20,7 +20,7 @@ class LaporanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Load data Lampiran successfully',
-            'data' => Laporan::with('user','pop','shift')->orderBy('created_at', 'DESC')->get()], 200);
+            'data' => Laporan::where('deleted_at',null)->with('user','pop','shift')->orderBy('created_at', 'DESC')->get()], 200);
     }
 
     // Store daily report function
@@ -29,13 +29,15 @@ class LaporanController extends Controller
         $this->validate($request, [
             'lampiran_laporan.*' => 'mimes:doc,pdf,docx|max:5000'
         ]);
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
 
         $tanggal = $request->input('tanggal');
         $shift_id = $request->input('shift_id');
         $pop_id = $request->input('pop_id');
         $noc = $request->input('noc');
         $helpdesk = $request->input('helpdesk');
-        $user_id = $request->input('user_id');
         // Request 1 file for attachment
         $lampiran_laporan = $request->file('lampiran_laporan');
         if($request->hasFile('lampiran_laporan')){
@@ -50,7 +52,7 @@ class LaporanController extends Controller
                     'pop_id' => $pop_id,
                     'noc' => $noc,
                     'helpdesk' => $helpdesk,
-                    'user_id' => $user_id,
+                    'user_id' => $id_user,
                     'lampiran_laporan' => url('laporan'.'/'.$new_name),
                 ]);
                 $message = 'Report added successfully';
@@ -214,7 +216,7 @@ class LaporanController extends Controller
         }
     }
 
-    // Delete Laporanfunction
+    // Delete Laporan function
     public function destroy($id)
     {
         try {
