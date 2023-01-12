@@ -73,9 +73,9 @@ class BtsController extends Controller
     // Search BTS 
     public function search(Request $request)
 	{
-        $pop = $request->get('pop');
+        $pop_id = $request->get('pop_id');
         $keyword = $request->get('keyword');
-        if ($pop == null) {
+        if ($pop_id == null) {
             $data = BTS::where([
                 ['nama_bts','iLike',$keyword],
                 ['deleted_at',null]
@@ -99,7 +99,7 @@ class BtsController extends Controller
         }else{
             $data = BTS::where([
                 ['nama_bts','iLike',$keyword],
-                ['pop_id',$pop],
+                ['pop_id',$pop_id],
                 ['deleted_at',null]
             ])->orwhere([
                 ['lokasi','iLIKE', "%{$keyword}%"],
