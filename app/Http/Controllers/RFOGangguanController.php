@@ -168,8 +168,16 @@ class RFOGangguanController extends Controller
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
-        $data = RFO_Gangguan::where(
-            'nomor_rfo_gangguan', $keyword)->orwhere('problem', 'iLIKE', "%{$keyword}%")->orwhere('nomor_tiket', $keyword)->paginate(10);
+        $data = RFO_Gangguan::where([
+                ['nomor_rfo_gangguan', $keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['problem', 'iLIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['nomor_tiket', $keyword],
+                ['deleted_at',null]
+            ])->paginate(10);
 
         if($data->isEmpty()){
             $message = 'Data history RFO Gangguan not found';

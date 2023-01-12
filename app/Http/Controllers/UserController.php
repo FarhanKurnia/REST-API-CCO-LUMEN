@@ -26,7 +26,13 @@ class UserController extends Controller
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
-        $data = User::where('name','iLike',"%{$keyword}%")->orwhere('email',$keyword)->paginate(10);
+        $data = User::where([
+                ['name','iLike',"%{$keyword}%"],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['email',$keyword],
+                ['deleted_at',null]
+            ])->paginate(10);
 
         if($data->isEmpty()){
             return response()->json([

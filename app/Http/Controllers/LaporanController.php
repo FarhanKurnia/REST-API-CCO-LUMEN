@@ -105,7 +105,10 @@ class LaporanController extends Controller
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
-        $data = Laporan::where('tanggal', $keyword)->get();
+        $data = Laporan::where([
+                ['tanggal', $keyword],
+                ['deleted_at',null]
+            ])->get();
 
         if($data->isEmpty()){
             return response()->json([

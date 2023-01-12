@@ -71,21 +71,27 @@ class KeluhanController extends Controller
         $data = Keluhan::where([
             ['status', 'closed'],
             ['id_pelanggan', 'LIKE', "%{$keyword}%"],
+            ['deleted_at',null]
         ])->orwhere([
             ['status', 'closed'],
             ['nama_pelanggan', 'iLIKE', "%{$keyword}%"],
+            ['deleted_at',null]
         ])->orwhere([
             ['status', 'closed'],
             ['nama_pelapor', 'iLIKE', "%{$keyword}%"],
+            ['deleted_at',null]
         ])->orwhere([
             ['status', 'closed'],
             ['nomor_pelapor', 'iLIKE', "%{$keyword}%"],
+            ['deleted_at',null]
         ])->orwhere([
             ['status', 'closed'],
             ['nomor_keluhan', $keyword],
+            ['deleted_at',null]
         ])->orwhere([
             ['status', 'closed'],
             ['keluhan', 'iLIKE', "%{$keyword}%"],
+            ['deleted_at',null]
         ])->paginate(10);
 
         if($data->isEmpty()){

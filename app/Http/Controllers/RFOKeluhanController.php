@@ -107,7 +107,16 @@ class RFOKeluhanController extends Controller
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
-        $data = RFO_Keluhan::where('nomor_rfo_keluhan',$keyword)->orwhere('nomor_tiket',$keyword)->orwhere('problem','iLike',"%{$keyword}%")->paginate(10);
+        $data = RFO_Keluhan::where([
+                ['nomor_rfo_keluhan',$keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['nomor_tiket',$keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['problem','iLike',"%{$keyword}%"],
+                ['deleted_at',null]
+            ])->paginate(10);
 
         if($data->isEmpty()){
             return response()->json([
