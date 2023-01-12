@@ -22,6 +22,26 @@ class UserController extends Controller
         ], 200);
     }
 
+    // Search User 
+    public function search(Request $request)
+	{
+        $keyword = $request->get('keyword');
+        $data = User::where('name','iLike',"%{$keyword}%")->orwhere('email',$keyword)->paginate(10);
+
+        if($data->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data User not found',
+            ], 404);
+        }else{
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data User has found',
+                'data' => $data
+            ], 200);
+        }
+    }  
+
     // Update user by admin
     public function update(Request $request, $id)
     {

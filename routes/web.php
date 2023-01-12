@@ -79,6 +79,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
                 $router->get('user', 'UserController@index');
                 // Matches localhost:8000/api/user/{id} -> Show
                 $router->get('user/{id}', 'UserController@show');
+                // Matches localhost:8000/api/search-user?keyword= -> search
+                $router->post('search-user','UserController@search');
                 // Matches localhost:8000/api/user/{id} -> Update
                 $router->put('user/{id}', 'UserController@update');
                 // Matches localhost:8000/api/user/{id} -> Soft Deactive
