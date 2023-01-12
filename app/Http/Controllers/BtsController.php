@@ -74,7 +74,7 @@ class BtsController extends Controller
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
-        $data = BTS::where('nama_bts','iLike',$keyword)->get();
+        $data = BTS::where('nama_bts','iLike',$keyword)->orwhere('lokasi','iLIKE', "%{$keyword}%")->get();
 
         if($data->isEmpty()){
             return response()->json([
