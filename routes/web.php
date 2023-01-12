@@ -111,7 +111,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->get('bts','BtsController@index');
             // Matches localhost:8000/api/bts/{id} -> Show
             $router->get('bts/{id}','BtsController@show');
-            // Matches localhost:8000/api/bts/{id} -> Show
+            // Matches localhost:8000/api/search-bts?keyword= -> search
             $router->post('search-bts','BtsController@search');
 
             // ==============[Endpoint BALASAN]==============
@@ -201,6 +201,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->get('laporan','LaporanController@index');
             // Matches localhost:8000/api/laporan/{id} -> Show
             $router->get('laporan/{id}','LaporanController@show');
+            // Matches localhost:8000/api/search-laporan?keyword= -> search
+            $router->post('search-laporan','LaporanController@search');
             // Matches localhost:8000/api/laporan -> Store
             $router->post('laporan','LaporanController@store');
             // Matches localhost:8000/api/laporan-keluhan -> Index Keluhan in Shift for storing to Laporan

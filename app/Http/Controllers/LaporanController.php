@@ -101,6 +101,26 @@ class LaporanController extends Controller
         ],$http_code);
     }
 
+    // Search Laporan 
+    public function search(Request $request)
+	{
+        $keyword = $request->get('keyword');
+        $data = Laporan::where('tanggal', $keyword)->get();
+
+        if($data->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data Laporan not found',
+            ], 404);
+        }else{
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data Laporan has found',
+                'data' => $data
+            ], 200);
+        }
+    }       
+    
     // Get all user for input daily report
     public function userLaporan()
     {
