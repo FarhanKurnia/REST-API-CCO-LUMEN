@@ -105,7 +105,7 @@ class BtsController extends Controller
                 ['lokasi','iLIKE', "%{$keyword}%"],
                 ['pop_id',$pop],
                 ['deleted_at',null]
-            ])->get();
+            ])->paginate();
 
             if($data->isEmpty()){
                 return response()->json([
