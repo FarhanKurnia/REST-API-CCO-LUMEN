@@ -49,7 +49,7 @@ class KeluhanController extends Controller
         $data = Keluhan::where([
             ['status','=','closed'],
             ['deleted_at',null],
-            ])->orderBy('created_at', 'DESC')->with('pop','balasan')->paginate(10);;
+            ])->orderBy('created_at', 'DESC')->with('pop','balasan')->paginate(10);
         if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'Success',
@@ -64,7 +64,7 @@ class KeluhanController extends Controller
         }
     }
 
-    // Search keluhan function that has been closed with keyword
+    // Search riwayat keluhan function that has been closed with keyword
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');

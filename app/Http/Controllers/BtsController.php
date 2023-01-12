@@ -17,7 +17,7 @@ class BtsController extends Controller
     // Index function to get All BTS with POP
     public function index()
     {
-        $bts = Bts::where('deleted_at',null)->with('pop')->get();
+        $bts = Bts::where('deleted_at',null)->with('pop')->paginate(10);
         if($bts->isNotEmpty()) {
             return response()->json([
                 'status' => 'Success',

@@ -14,7 +14,7 @@ class RFOKeluhanController extends Controller
     // Index function to get All RFO Keluhan
     public function index()
     {
-        $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->with('user','user.role','user.pop','keluhan')->get();
+        $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->with('user','user.role','user.pop','keluhan')->paginate(10);
         return response()->json([
             'status' => 'success',
             'message' => 'Load data RFO Keluhan successfully',

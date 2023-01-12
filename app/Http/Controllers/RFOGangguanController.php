@@ -13,7 +13,7 @@ class RFOGangguanController extends Controller
     // Index function to get All RFO Gangguan
     public function index()
     {
-        $rfo_gangguan = RFO_Gangguan::where('deleted_at',null)->with('user')->get();
+        $rfo_gangguan = RFO_Gangguan::where('deleted_at',null)->with('user')->paginate(10);
         return response()->json([
             'status' => 'Success',
             'message' => 'Load Data RFO Gangguan succesfully',
