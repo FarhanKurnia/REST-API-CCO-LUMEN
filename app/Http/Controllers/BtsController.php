@@ -70,6 +70,26 @@ class BtsController extends Controller
         ], $http_code);
     }
 
+    // Search BTS 
+    public function search(Request $request)
+	{
+        $keyword = $request->get('keyword');
+        $data = BTS::where('nama_bts','iLike',$keyword)->get();
+
+        if($data->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data BTS not found',
+            ], 404);
+        }else{
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data BTS has found',
+                'data' => $data
+            ], 200);
+        }
+    }    
+
     // Show BTS function
     public function show($id)
     {

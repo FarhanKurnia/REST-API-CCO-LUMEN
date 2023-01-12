@@ -111,6 +111,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->get('bts','BtsController@index');
             // Matches localhost:8000/api/bts/{id} -> Show
             $router->get('bts/{id}','BtsController@show');
+            // Matches localhost:8000/api/bts/{id} -> Show
+            $router->post('search-bts','BtsController@search');
 
             // ==============[Endpoint BALASAN]==============
             // Matches localhost:8000/api/balasan -> Index
