@@ -73,8 +73,10 @@ class BtsController extends Controller
     // Search BTS 
     public function search(Request $request)
 	{
+        $pop = $request->get('pop');
         $keyword = $request->get('keyword');
-        $data = BTS::where([
+        if ($pop == null) {
+            $data = BTS::where([
                 ['nama_bts','iLike',$keyword],
                 ['deleted_at',null]
             ])->orwhere([
@@ -82,17 +84,41 @@ class BtsController extends Controller
                 ['deleted_at',null]
             ])->get();
 
-        if($data->isEmpty()){
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Data BTS not found',
-            ], 404);
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data BTS not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data BTS has found',
+                    'data' => $data
+                ], 200);
+            }
         }else{
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Data BTS has found',
-                'data' => $data
-            ], 200);
+            $data = BTS::where([
+                ['nama_bts','iLike',$keyword],
+                ['pop_id',$pop],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['lokasi','iLIKE', "%{$keyword}%"],
+                ['pop_id',$pop],
+                ['deleted_at',null]
+            ])->get();
+
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data BTS not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data BTS has found',
+                    'data' => $data
+                ], 200);
+            }
         }
     }    
 
