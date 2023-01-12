@@ -103,6 +103,26 @@ class RFOKeluhanController extends Controller
         }
     }
 
+    // Search RFO Keluhan 
+    public function search(Request $request)
+	{
+        $keyword = $request->get('keyword');
+        $data = RFO_Keluhan::where('nomor_rfo_keluhan',$keyword)->orwhere('nomor_tiket',$keyword)->orwhere('problem','iLike',"%{$keyword}%")->paginate(10);
+
+        if($data->isEmpty()){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data RFO Keluhan not found',
+            ], 404);
+        }else{
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data RFO Keluhan has found',
+                'data' => $data
+            ], 200);
+        }
+    }  
+
     // Update RFO Keluhan function
     public function update(Request $request, $id)
     {

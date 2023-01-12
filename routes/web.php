@@ -155,6 +155,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // ==============[Endpoint RFO KELUHAN]==============
             // Matches localhost:8000/api/rfo-keluhan -> Index
             $router->get('rfo-keluhan','RFOKeluhanController@index');
+            // Matches localhost:8000/api/search-rfo-keluhan?keyword= -> search
+            $router->post('search-rfo-keluhan','RFOKeluhanController@search');
             // Matches localhost:8000/api/rfo-keluhan -> Store
             $router->post('rfo-keluhan','RFOKeluhanController@store');
             // Matches localhost:8000/api/rfo-keluhan/{id} -> Show
