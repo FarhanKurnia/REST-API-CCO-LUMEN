@@ -104,24 +104,44 @@ class LaporanController extends Controller
     // Search Laporan 
     public function search(Request $request)
 	{
-        $pop = $request->get('pop');
+        $pop_id = $request->get('pop_id');
         $keyword = $request->get('keyword');
-        $data = Laporan::where([
-                ['tanggal', $keyword],
-                ['deleted_at',null]
-            ])->get();
- 
-        if($data->isEmpty()){
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Data Laporan not found',
-            ], 404);
+        if ($pop_id == null) {
+            $data = Laporan::where([
+                    ['tanggal', $keyword],
+                    ['deleted_at',null]
+                ])->get();
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data Laporan not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data Laporan has found',
+                    'data' => $data
+                ], 200);
+            }
         }else{
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Data Laporan has found',
-                'data' => $data
-            ], 200);
+            $data = Laporan::where([
+                ['tanggal', $keyword],
+                ['deleted_at',null],
+                ['pop_id',$pop_id]
+            ])->paginate(10);
+
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data Laporan not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data Laporan has found',
+                    'data' => $data
+                ], 200);
+            }
         }
     }       
     
