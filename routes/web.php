@@ -245,8 +245,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('login', 'AuthController@login');
 
     // ==============[Endpoint PUBLIC]==============
-    // Matches localhost:8000/api/role-public -> Index Role Without Admin
-    $router->get('role-public','RoleController@indexPublic');
     // Matches localhost:8000/api/pop -> Index
     $router->get('pop','POPController@index');
 

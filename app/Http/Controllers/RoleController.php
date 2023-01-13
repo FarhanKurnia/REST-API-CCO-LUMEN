@@ -2,29 +2,34 @@
 
 namespace App\Http\Controllers;
 use Carbon\Carbon;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 
 use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    // Index function to get All Role except Admin (for registration user/ no admin)
-    public function indexPublic()
-    {
-        $role = Role::where([
-            ['role','!=',"ADMIN"],
-            ['deleted_at',null]
-            ])->get();
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Load data role successfully',
-            'data' => $role], 200);
-    }
-
-    // Index function to get All Role without exception
+    // Index role function
     public function index()
     {
-        $role = Role::where('deleted_at',null)->get();
+        $token = JWTAuth::getToken();
+        if ($token == null) {
+            $role = Role::where([
+                ['role','!=',"ADMIN"],
+                ['deleted_at',null]
+                ])->get();
+        }else{
+            $jwt_id = JWTAuth::getPayload($token)->toArray();
+            $id_role = $jwt_id['role_id'];
+            if ($id_role == 0 ) {
+                $role = Role::where('deleted_at',null)->get();
+            } else{
+                $role = Role::where([
+                    ['role','!=',"ADMIN"],
+                    ['deleted_at',null]
+                    ])->get();
+            }  
+        }      
         return response()->json([
             'status' => 'Success',
             'message' => 'Load data role successfully',

@@ -21,7 +21,7 @@ class Role extends Model
 
     //Soft Delete
     protected $hidden = [
-        'created_at','deleted_at'
+        'created_at','updated_at','deleted_at'
     ];
 
 
