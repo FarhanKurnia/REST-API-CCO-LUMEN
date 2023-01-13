@@ -67,44 +67,92 @@ class KeluhanController extends Controller
     // Search riwayat keluhan function that has been closed with keyword
     public function search(Request $request)
 	{
+        $pop_id = $request->get('pop_id');
         $keyword = $request->get('keyword');
-        $data = Keluhan::where([
-            ['status', 'closed'],
-            ['id_pelanggan', 'LIKE', "%{$keyword}%"],
-            ['deleted_at',null]
-        ])->orwhere([
-            ['status', 'closed'],
-            ['nama_pelanggan', 'iLIKE', "%{$keyword}%"],
-            ['deleted_at',null]
-        ])->orwhere([
-            ['status', 'closed'],
-            ['nama_pelapor', 'iLIKE', "%{$keyword}%"],
-            ['deleted_at',null]
-        ])->orwhere([
-            ['status', 'closed'],
-            ['nomor_pelapor', 'iLIKE', "%{$keyword}%"],
-            ['deleted_at',null]
-        ])->orwhere([
-            ['status', 'closed'],
-            ['nomor_keluhan', $keyword],
-            ['deleted_at',null]
-        ])->orwhere([
-            ['status', 'closed'],
-            ['keluhan', 'iLIKE', "%{$keyword}%"],
-            ['deleted_at',null]
-        ])->paginate(10);
+        if ($pop_id == null) {
+            $data = Keluhan::where([
+                ['status', 'closed'],
+                ['id_pelanggan', 'LIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nama_pelanggan', 'iLIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nama_pelapor', 'iLIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nomor_pelapor', 'iLIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nomor_keluhan', $keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['keluhan', 'iLIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->paginate(10);
 
-        if($data->isEmpty()){
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Data history keluhan not found',
-            ], 404);
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data history keluhan not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data history keluhan found',
+                    'data' => $data
+                ], 200);
+            }
         }else{
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Data history keluhan found',
-                'data' => $data
-            ], 200);
+            $data = Keluhan::where([
+                ['status', 'closed'],
+                ['id_pelanggan', 'LIKE', "%{$keyword}%"],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nama_pelanggan', 'iLIKE', "%{$keyword}%"],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nama_pelapor', 'iLIKE', "%{$keyword}%"],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nomor_pelapor', 'iLIKE', "%{$keyword}%"],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['nomor_keluhan', $keyword],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['status', 'closed'],
+                ['keluhan', 'iLIKE', "%{$keyword}%"],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->paginate(10);
+
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data history keluhan not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data history keluhan found',
+                    'data' => $data
+                ], 200);
+            }
         }
     }
 
