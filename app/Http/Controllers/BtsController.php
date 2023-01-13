@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Bts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Tymon\JWTAuth\Facades\JWTAuth; //use this library
+
 
 
 class BtsController extends Controller
@@ -35,13 +37,16 @@ class BtsController extends Controller
     // Store BTS function
     public function store(Request $request)
     {
+        $token = JWTAuth::getToken();
+        $jwt_id = JWTAuth::getPayload($token)->toArray();
+        $id_user = $jwt_id['id_user'];
+
         $nama_bts = $request->input('nama_bts');
         $nama_pic = $request->input('nama_pic');
         $nomor_pic = $request->input('nomor_pic');
         $lokasi = $request->input('lokasi');
         $pop_id = $request->input('pop_id');
         $kordinat = $request->input('kordinat');
-        $user_id = $request->input('user_id');
         $deskripsi = $request->input('deskripsi');
 
         try {
@@ -52,7 +57,7 @@ class BtsController extends Controller
                 'lokasi' => $lokasi,
                 'pop_id' => $pop_id,
                 'kordinat' => $kordinat,
-                'user_id' => $user_id,
+                'user_id' => $id_user,
                 'deskripsi' => $deskripsi,
             ]);
             $message = 'BTS added successfully';
@@ -82,7 +87,7 @@ class BtsController extends Controller
             ])->orwhere([
                 ['lokasi','iLIKE', "%{$keyword}%"],
                 ['deleted_at',null]
-            ])->get();
+            ])->with('pop')->get();
 
             if($data->isEmpty()){
                 return response()->json([
@@ -103,9 +108,9 @@ class BtsController extends Controller
                 ['deleted_at',null]
             ])->orwhere([
                 ['lokasi','iLIKE', "%{$keyword}%"],
-                ['pop_id',$pop],
+                ['pop_id',$pop_id],
                 ['deleted_at',null]
-            ])->paginate();
+            ])->with('pop')->paginate();
 
             if($data->isEmpty()){
                 return response()->json([
@@ -159,7 +164,6 @@ class BtsController extends Controller
                 'lokasi' => $request->lokasi,
                 'pop_id' => $request->pop_id,
                 'kordinat' => $request->kordinat,
-                'user_id' => $request->user_id,
                 'deskripsi' => $request->deskripsi,
             ]);
             $message = 'BTS updated successfully';

@@ -18,10 +18,10 @@ class RFO_Keluhan extends Model
     ];
     
 
-    //Soft Delete
-    // protected $hidden = [
-    //     'deleted_at',
-    // ];
+    // Soft Delete
+    protected $hidden = [
+        'deleted_at',
+    ];
 
         
     public function keluhan(){

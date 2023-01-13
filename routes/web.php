@@ -183,8 +183,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             $router->get('rfo-gangguan/{id}','RFOGangguanController@show');
             // Matches localhost:8000/api/rfo-gangguan/{id} -> Update
             $router->put('rfo-gangguan/{id}','RFOGangguanController@update');
-            // Matches localhost:8000/api/rfo-gangguan/{id} -> Search
-            $router->post('search-RFOGangguan','RFOGangguanController@search');
             // Matches localhost:8000/api/keluhan-rfo-gangguan/{id} -> Delete
             $router->get('delete-rfo-gangguan/{id}','RFOGangguanController@destroy');
             // Matches localhost:8000/api/close-rfo-gangguan/{id} -> Close

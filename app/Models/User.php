@@ -26,7 +26,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password','verifikasi','token_verifikasi','otp',
+        'password','verifikasi','token_verifikasi','otp','created_at','updated_at'
     ];
 
     protected $with = ['role','pop'];

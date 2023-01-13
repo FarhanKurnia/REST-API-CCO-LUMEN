@@ -57,7 +57,6 @@ class AuthController extends Controller
                 ];
                 Mail::to($email)->send(new Verification($data));
                 return response()->json([
-                    // 'user' => $user,
                     'status' => 'Success',
                     'message' => 'Successfully created!'], 201);
     
@@ -68,7 +67,6 @@ class AuthController extends Controller
             }
         }else{
             return response()->json([
-                // 'user' => $user,
                 'status' => 'Error',
                 'message' => 'Unvalid Email!'], 409);
         }

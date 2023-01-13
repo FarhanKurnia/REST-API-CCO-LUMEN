@@ -21,9 +21,9 @@ class Laporan extends Model
     ];
     
     //Soft Delete
-    // protected $hidden = [
-    //     'deleted_at',
-    // ];
+    protected $hidden = [
+        'deleted_at',
+    ];
     
      // Relation User Many to one BTS
     public function user(){

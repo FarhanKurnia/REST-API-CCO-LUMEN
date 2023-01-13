@@ -16,7 +16,7 @@ class SumberKeluhan extends Model
 
     //Soft Delete
     protected $hidden = [
-        'created_at','deleted_at'
+        'created_at','deleted_at','updated_at'
     ];    
 
     public function keluhan(){

@@ -28,10 +28,10 @@ class UserController extends Controller
         $keyword = $request->get('keyword');
         $data = User::where([
                 ['name','iLike',"%{$keyword}%"],
-                ['deleted_at',null]
+                ['aktif',true]
             ])->orwhere([
                 ['email',$keyword],
-                ['deleted_at',null]
+                ['aktif',true]
             ])->paginate(10);
 
         if($data->isEmpty()){

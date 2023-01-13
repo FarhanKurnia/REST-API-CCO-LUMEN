@@ -19,9 +19,9 @@ class Bts extends Model
 
     
     //Soft Delete
-    // protected $hidden = [
-    //     'deleted_at',
-    // ];
+    protected $hidden = [
+        'deleted_at','created_at','updated_at','user_id'
+    ];
 
 
     // Relation User Many to one BTS

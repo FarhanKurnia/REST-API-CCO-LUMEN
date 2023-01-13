@@ -19,9 +19,9 @@ class Pop extends Model
         'deleted_at',
     ];
 
-    //Soft Delete
+    
     protected $hidden = [
-        'created_at','updated_at'
+        'created_at','updated_at','deleted_at',
     ];
     
 

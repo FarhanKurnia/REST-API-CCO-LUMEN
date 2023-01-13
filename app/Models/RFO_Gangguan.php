@@ -23,9 +23,9 @@ class RFO_Gangguan extends Model
     ];
 
     //Soft Delete
-    // protected $hidden = [
-    //     'deleted_at',
-    // ];
+    protected $hidden = [
+        'deleted_at',
+    ];
 
 
     public function keluhan(){
