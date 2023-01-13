@@ -190,7 +190,7 @@ class RFOGangguanController extends Controller
         }else{
             $message = 'Data history RFO Gangguan has found';
             $status = 'Success';
-            $http_code = 404;
+            $http_code = 200;
             return response()->json([
                 'status' => $status,
                 'message' => $message,

@@ -168,6 +168,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches localhost:8000/api/keluhan-rfo-keluhan/{id} -> Update RFO @ Keluhan Field
             $router->put('keluhan-rfo-keluhan/{id}','KeluhanController@updateKeluhanRFOKeluhan');
 
+            // ==============[Endpoint RFO KELUHAN & RFO GANGGUAN]==============            
+            // Matches localhost:8000/api/search-rfo-keluhan?keyword= -> search
+            $router->post('search-rfo','RFOKeluhanController@searchRFO');
+
             // ==============[Endpoint RFO GANGGUAN]==============
             // Matches localhost:8000/api/rfo-gangguan -> Index
             $router->get('rfo-gangguan','RFOGangguanController@index');

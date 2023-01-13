@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use DateTime;
 use App\Models\RFO_Keluhan;
+use App\Models\RFO_Gangguan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Tymon\JWTAuth\Facades\JWTAuth; //use this library
@@ -129,6 +130,85 @@ class RFOKeluhanController extends Controller
                 'message' => 'Data RFO Keluhan has found',
                 'data' => $data
             ], 200);
+        }
+    }  
+
+    // Search RFO Keluhan and RFO RFO Gangguan
+    public function searchRFO(Request $request)
+	{
+        //type= single and group
+        $type = $request->get('type');
+        $keyword = $request->get('keyword');
+        // dd($type);
+        if($type == 'single' || $type == null){
+            $data = RFO_Keluhan::where([
+                ['nomor_rfo_keluhan',$keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['nomor_tiket',$keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['problem','iLike',"%{$keyword}%"],
+                ['deleted_at',null]
+            ])->paginate(10);
+
+            if($data->isEmpty()){
+                $message = 'Data history RFO Keluhan not found';
+                $status = 'Error';
+                $http_code = 404;
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message,
+                ], $http_code);
+            }else{
+                $message = 'Data history RFO Keluhan has found';
+                $status = 'Success';
+                $http_code = 200;
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message,
+                    'data' => $data,
+                ], $http_code);
+            }
+        }elseif ($type == 'group') {
+            $data = RFO_Gangguan::where([
+                ['nomor_rfo_gangguan', $keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['problem', 'iLIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['nomor_tiket', $keyword],
+                ['deleted_at',null]
+            ])->paginate(10);
+
+            if($data->isEmpty()){
+                $message = 'Data history RFO Gangguan not found';
+                $status = 'Error';
+                $http_code = 404;
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message,
+                ], $http_code);
+            }else{
+                $message = 'Data history RFO Gangguan has found';
+                $status = 'Success';
+                $http_code = 200;
+                return response()->json([
+                    'status' => $status,
+                    'message' => $message,
+                    'data' => $data,
+                ], $http_code);
+            }
+        }
+        else{
+            $message = 'Input not valid';
+            $status = 'Error';
+            $http_code = 404;
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+            ], $http_code);
         }
     }  
 
