@@ -164,7 +164,7 @@ class RFOGangguanController extends Controller
         ], $http_code);
     }
 
-    // Update RFO Gangguan function with keeyword and closed status
+    // Search RFO Gangguan function with keeyword and closed status
     public function search(Request $request)
 	{
         $keyword = $request->get('keyword');
