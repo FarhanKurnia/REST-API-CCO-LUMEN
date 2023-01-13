@@ -67,7 +67,7 @@ class ShiftController extends Controller
             return response()->json([
                 'status' => $status,
                 'message' => $message,
-                'data' =>$status
+                'data' =>$shift
             ],$http_code);
         }
     }
