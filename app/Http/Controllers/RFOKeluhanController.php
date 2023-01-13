@@ -139,7 +139,6 @@ class RFOKeluhanController extends Controller
         //type= single and group
         $type = $request->get('type');
         $keyword = $request->get('keyword');
-        // dd($type);
         if($type == 'single' || $type == null){
             $data = RFO_Keluhan::where([
                 ['nomor_rfo_keluhan',$keyword],
