@@ -96,10 +96,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             // Matches localhost:8000/api/logout -> Log Out
             $router->get('logout', 'AuthController@logout');
 
-            // ==============[Endpoint ROLE]==============
-            // Matches localhost:8000/api/role -> Index
-            $router->get('role','RoleController@index');
-
             // ==============[Endpoint USER]==============
             // Matches localhost:8000/api/change-password -> Update Password
             $router->put('change-password', 'UserController@changePassword');
@@ -245,6 +241,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     // ==============[Endpoint PUBLIC]==============
     // Matches localhost:8000/api/pop -> Index
     $router->get('pop','POPController@index');
+    // Matches localhost:8000/api/role -> Index
+    $router->get('role','RoleController@index');
 
     // ==============[Endpoint Debug]==============
     // Just testing route to get JWT Payload
