@@ -28,22 +28,22 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
         ]);
-
+        $role_id = $request->get('role_id');
         $email = $request->get('email');
         $valid_email = Str::endsWith($email, '@citra.net.id');
-        if ($valid_email == true) {
+        if ($valid_email == true && $role_id > 0) {
             try {
                 $user = new User;
                 $user->name = $request->get('name');
                 $user->pop_id = $request->get('pop_id');
-                $user->role_id = $request->get('role_id');
+                $user->role_id = $role_id;
                 $user->email = $email;
                 $user->online = false;
                 $user->aktif = true;
                 $user->token_verifikasi = Str::random(128);
                 $user->password = app('hash')->make($request->get('password'));
                 $user->save();
-    
+
                 $name = $user->name;
                 $email = $user->email;
                 $token = $user->token_verifikasi;
@@ -59,7 +59,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => 'Success',
                     'message' => 'Successfully created!'], 201);
-    
+
             } catch (\Exception $e) {
                 return response()->json([
                     'status' => 'Error',
@@ -68,7 +68,7 @@ class AuthController extends Controller
         }else{
             return response()->json([
                 'status' => 'Error',
-                'message' => 'Unvalid Email!'], 409);
+                'message' => 'Invalid Data Registration!'], 409);
         }
    }
 
