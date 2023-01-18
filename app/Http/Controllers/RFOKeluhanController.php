@@ -235,7 +235,6 @@ class RFOKeluhanController extends Controller
         $end = new DateTime($request->selesai_keluhan);//end time
         $durasi = $start->diff($end);
         $rfo_keluhan = RFO_Keluhan::find($id);
-        $rfo_keluhan = RFO_Keluhan::find($id);
         if (!$rfo_keluhan) {
             $status = 'Error';
             $message = 'Data RFO Keluhan not found';

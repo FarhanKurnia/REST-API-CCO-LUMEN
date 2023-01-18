@@ -347,13 +347,15 @@ class KeluhanController extends Controller
     // Update RFO Gangguan function when keluhan has been closed
     public function updateKeluhanRFOGangguan(Request $request, $id)
     {
+        $rfo_gangguan_id = $request->rfo_gangguan_id;
         $keluhan = Keluhan::find($id);
-        if (!empty($keluhan)){
-        try {
-            $keluhan>update([
+        $rfo_gangguan = RFO_Gangguan::where('id_rfo_gangguan',$rfo_gangguan_id)->count();        
+        if (!empty($keluhan) && $rfo_gangguan>0){
+            try {
+            $keluhan->update([
                 'rfo_gangguan_id' => $request->rfo_gangguan_id,
             ]);
-            $message = 'Data keluhan RFO Gangguan successfully updated';
+            $message = 'Data keluhan RFO Gangguan updated successfully';
             $status = "success";
             $http_code = 200;
         } catch (\Throwable $th) {
@@ -362,7 +364,7 @@ class KeluhanController extends Controller
             $http_code = 404;
         }
     }else{
-        $message = 'Data keluhan not found';
+        $message = 'Data keluhan or RFO Gangguan not found';
         $status = 'Error';
         $http_code = 404;
     }
