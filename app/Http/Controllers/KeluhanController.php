@@ -307,7 +307,7 @@ class KeluhanController extends Controller
             $message = 'Data keluhan not found';
             $status = 'Error';
             $http_code = 404;
-    }
+        }
 
         return response()->json([
             'status' => $status,
@@ -347,8 +347,10 @@ class KeluhanController extends Controller
     // Update RFO Gangguan function when keluhan has been closed
     public function updateKeluhanRFOGangguan(Request $request, $id)
     {
+        $keluhan = Keluhan::find($id);
+        if (!empty($keluhan)){
         try {
-            Keluhan::find($id)->update([
+            $keluhan>update([
                 'rfo_gangguan_id' => $request->rfo_gangguan_id,
             ]);
             $message = 'Data keluhan RFO Gangguan successfully updated';
@@ -359,6 +361,11 @@ class KeluhanController extends Controller
             $message = $th->getMessage();
             $http_code = 404;
         }
+    }else{
+        $message = 'Data keluhan not found';
+        $status = 'Error';
+        $http_code = 404;
+    }
 
         return response()->json([
             'status' => $status,
@@ -369,18 +376,28 @@ class KeluhanController extends Controller
     // Update RFO Keluhan function when keluhan has been closed
     public function updateKeluhanRFOKeluhan(Request $request, $id)
     {
-        try {
-            Keluhan::find($id)->update([
-                'rfo_keluhan_id' => $request->rfo_keluhan_id,
-            ]);
-            $message = 'Data keluhan RFO Keluhan updated successfully';
-            $status = 'Success';
-            $http_code = 200;
-        } catch (\Throwable $th) {
-            $status = 'Error';
-            $message = $th->getMessage();
-            $http_code = 200;
+        $rfo_keluhan_id = $request->rfo_keluhan_id;
+        $keluhan = Keluhan::find($id);
+        $rfo_keluhan = RFO_Keluhan::where('id_rfo_keluhan',$rfo_keluhan_id)->count();
 
+        if (!empty($keluhan) && $rfo_keluhan>0){
+            try {
+                $keluhan->update([
+                    'rfo_keluhan_id' => $request->rfo_keluhan_id,
+                ]);
+                $message = 'Data keluhan RFO Keluhan updated successfully';
+                $status = 'Success';
+                $http_code = 200;
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 200;
+
+            }
+        }else{
+            $message = 'Data keluhan or RFO Keluhan not found';
+            $status = 'Error';
+            $http_code = 404;
         }
 
         return response()->json([

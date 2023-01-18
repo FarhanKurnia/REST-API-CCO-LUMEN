@@ -16,15 +16,28 @@ class RFOKeluhanController extends Controller
     public function index()
     {
         $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->with('user','user.role','user.pop','keluhan')->paginate(10);
+        if($rfo_keluhan->isNotEmpty()){
         return response()->json([
             'status' => 'success',
             'message' => 'Load data RFO Keluhan successfully',
             'data' => $rfo_keluhan], 200);
+        }else{
+            return response()->json([
+                'status'=>"Success",
+                'message' => 'Load data RFO Keluhan successfully',
+            ],200);
+        }      
     }
 
     // Store RFO Keluhan function
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'mulai_keluhan' => 'required',
+            'selesai_keluhan' => 'required',
+            'problem' => 'required',
+            'action' => 'required',
+        ]);
         // Format:
         // #RFO-S051102212345
         // # = hashtag
@@ -82,7 +95,7 @@ class RFOKeluhanController extends Controller
         $rfo_keluhan = RFO_Keluhan::find($id);
         if (!$rfo_keluhan) {
             $status = 'Error';
-            $message = 'Data RFO Gangguan not found';
+            $message = 'Data RFO Keluhan not found';
             return response()->json([
                 'status' => $status,
                 'message' => $message], 404);
@@ -95,7 +108,7 @@ class RFOKeluhanController extends Controller
             $rfo_keluhan->keluhan->user->role;
             $rfo_keluhan->keluhan->user->pop;
             $rfo_keluhan->keluhan->balasan;
-            $message = 'Data RFO Gangguan has found';
+            $message = 'Data RFO Keluhan has found';
             $status = 'Success';
             return response()->json([
                 'status' => $status,
@@ -214,60 +227,77 @@ class RFOKeluhanController extends Controller
     // Update RFO Keluhan function
     public function update(Request $request, $id)
     {
+        
         $token = JWTAuth::getToken();
         $jwt_id = JWTAuth::getPayload($token)->toArray();
         $id_user = $jwt_id['id_user'];
         $start = new DateTime($request->mulai_keluhan);//start time
         $end = new DateTime($request->selesai_keluhan);//end time
         $durasi = $start->diff($end);
-
-        try {
-            RFO_Keluhan::find($id)->update([
-                'user_id' => $id_user,
-                // 'keluhan_id' => $request->keluhan_id,
-                'nomor_tiket' => $request->nomor_tiket,
-                'mulai_keluhan' => $request->mulai_keluhan,
-                'selesai_keluhan' => $request->selesai_keluhan,
-                'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
-                'problem' => $request->problem,
-                'action' => $request->action,
-                // 'status' => $request->status,
-                'deskripsi' => $request->deskripsi,
-                'lampiran_rfo_keluhan' => $request->lampiran_rfo_keluhan,
-            ]);
-            $message = 'Data RFO keluhan updated successfully';
-            $status = 'Success';
-            $http_code = 200;
-        } catch (\Throwable $th) {
+        $rfo_keluhan = RFO_Keluhan::find($id);
+        $rfo_keluhan = RFO_Keluhan::find($id);
+        if (!$rfo_keluhan) {
             $status = 'Error';
-            $message = $th->getMessage();
-            $http_code = 404;
-        }
+            $message = 'Data RFO Keluhan not found';
+            return response()->json([
+                'status' => $status,
+                'message' => $message], 404);
+        }else{
+            try {
+                $rfo_keluhan->update([
+                    'user_id' => $id_user,
+                    // 'keluhan_id' => $request->keluhan_id,
+                    'nomor_tiket' => $request->nomor_tiket,
+                    'mulai_keluhan' => $request->mulai_keluhan,
+                    'selesai_keluhan' => $request->selesai_keluhan,
+                    'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
+                    'problem' => $request->problem,
+                    'action' => $request->action,
+                    // 'status' => $request->status,
+                    'deskripsi' => $request->deskripsi,
+                    'lampiran_rfo_keluhan' => $request->lampiran_rfo_keluhan,
+                ]);
+                $message = 'Data RFO keluhan updated successfully';
+                $status = 'Success';
+                $http_code = 200;
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 404;
+            }
 
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
-        ], $http_code);
+            return response()->json([
+                'status' => $status,
+                'message' => $message,
+            ], $http_code);
+        }
     }
 
     // Delete RFO Gangguan function
     public function destroy($id)
     {
-        try {
-            RFO_Keluhan::find($id)->update([
-                'deleted_at' => Carbon::now()]
-            );
-            $message = 'RFO Keluhan deleted successfully';
-            $status = 'Success';
-            $http_code = 200;
-        } catch (\Throwable $th) {
+        $rfo_keluhan = RFO_Keluhan::find($id);
+        if (!empty($rfo_keluhan)){
+            try {
+                $rfo_keluhan->update([
+                    'deleted_at' => Carbon::now()]
+                );
+                $message = 'RFO Keluhan deleted successfully';
+                $status = 'Success';
+                $http_code = 200;
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 404;
+            }
+        }else{
+            $message = 'Data RFO keluhan not found';
             $status = 'Error';
-            $message = $th->getMessage();
             $http_code = 404;
-        }
+            }
         return response()->json([
             'status' => $status,
             'message' => $message,
-        ], $http_code);
-    }
+            ], $http_code);
+        }
 }
