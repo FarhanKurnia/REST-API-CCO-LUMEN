@@ -158,6 +158,18 @@ class KeluhanController extends Controller
 
     // Store keluhan function
     public function store(Request $request){
+        $this->validate($request, [
+            'id_user' => 'required',
+            'kategori_pelanggan' => 'required',
+            'id_pelanggan' => 'required',
+            'nama_pelanggan' => 'required',
+            'nama_pelapor' => 'required',
+            'nomor_pelapor' => 'required',
+            'sumber_id' => 'required',
+            'detail_sumber' => 'required',
+            'keluhan' => 'required',
+            'pop_id' => 'required',
+        ]);
         $token = JWTAuth::getToken();
         $jwt_id = JWTAuth::getPayload($token)->toArray();
         $id_user = $jwt_id['id_user'];
@@ -274,22 +286,29 @@ class KeluhanController extends Controller
     // Update keluhan function
     public function update(Request $request, $id)
     {
-        try {
-            Keluhan::find($id)->update([
-                'pop_id' => $request->pop_id,
-                'nama_pelapor' => $request->nama_pelapor,
-                'nomor_pelapor' => $request->nomor_pelapor,
-                'sumber_id' => $request->sumber_id,
-                'detail_sumber' => $request->detail_sumber,
-            ]);
-            $message = 'Data keluhan updated successfully';
-            $status = 'Success';
-            $http_code = 200;
-        } catch (\Throwable $th) {
+        $keluhan = Keluhan::find($id);
+        if (!empty($keluhan)){   
+            try {
+                $keluhan->update([
+                    'pop_id' => $request->pop_id,
+                    'nama_pelapor' => $request->nama_pelapor,
+                    'nomor_pelapor' => $request->nomor_pelapor,
+                    'sumber_id' => $request->sumber_id,
+                    'detail_sumber' => $request->detail_sumber,
+                ]);
+                $message = 'Data keluhan updated successfully';
+                $status = 'Success';
+                $http_code = 200;
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 404;
+            }
+        }else{
+            $message = 'Data keluhan not found';
             $status = 'Error';
-            $message = $th->getMessage();
             $http_code = 404;
-        }
+    }
 
         return response()->json([
             'status' => $status,
@@ -300,16 +319,23 @@ class KeluhanController extends Controller
     // Close Keluhan function
     public function close(Request $request, $id)
     {
-        try {
-            Keluhan::find($id)->update([
-                'status' => $request->status_keluhan='closed',
-            ]);
-            $message = 'Data keluhan successfully closed';
-            $status = 'Success';
-            $http_code = 200;
-        } catch (\Throwable $th) {
+        $keluhan = Keluhan::find($id);
+        if (!empty($keluhan)){
+            try {
+                $keluhan->update([
+                    'status' => $request->status_keluhan='closed',
+                ]);
+                $message = 'Data keluhan successfully closed';
+                $status = 'Success';
+                $http_code = 200;
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 404;
+            }
+        }else{
+            $message = 'Data keluhan not found';
             $status = 'Error';
-            $message = $th->getMessage();
             $http_code = 404;
         }
 
@@ -397,18 +423,25 @@ class KeluhanController extends Controller
     // Delete Keluhan function
     public function destroy($id)
     {   
-        try {
-            Keluhan::find($id)->update([
-                'deleted_at' => Carbon::now()]
-            );
-            $message = 'Data keluhan has been deleted';
-            $status = 'Success';
-            $http_code = 200;
-        } catch (\Throwable $th) {
-            $status = 'Error';
-            $message = $th->getMessage();
-            $http_code = 404;
+        $keluhan = Keluhan::find($id);
+        if (!empty($keluhan)){
+            try {
+                Keluhan::find($id)->update([
+                    'deleted_at' => Carbon::now()]
+                );
+                $message = 'Data keluhan has been deleted';
+                $status = 'Success';
+                $http_code = 200;
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 404;
 
+            }
+        }else{
+            $message = 'Data keluhan not found';
+            $status = 'Error';
+            $http_code = 404;
         }
         return response()->json([
             'status' => $status,
