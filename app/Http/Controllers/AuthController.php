@@ -75,6 +75,10 @@ class AuthController extends Controller
    // Forget password function
    public function forgetPassword(Request $request)
    {
+    $this->validate($request, [
+        'otp' => 'required',
+        'password' => 'required',
+    ]);
         $otp = $request->get('otp');
         $password = $request->get('password');
         $user = User::where('otp',$otp)->count();
