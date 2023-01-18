@@ -16,7 +16,7 @@ Verify
 
 Atau akses melalui <a href="{{$data['url']}}">link</a> berikut<br>
 
-Mohon untuk dapat menjaga kerahasian data tersebut.<br>
+Mohon untuk dapat menjaga kerahasian data tersebut. Selamat bekerja<br>
 
 Sekian, terima kasih,<br>
 Best Regards<br>

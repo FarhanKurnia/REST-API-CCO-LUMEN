@@ -9,11 +9,19 @@
 
 Hi!, <br>
 Kode OTP kamu sebagai berikut ya.<br>
-### {{$data['otp']}}
+## {{$data['otp']}}
+Kamu dapat memasukan kode OTP dan email pada halaman lupa password. <br>
 <br>
-Masukan kode OTP dan email pada halaman lupa password. <br>
-Mohon untuk dapat menjaga kerahasian data tersebut. <br>
-
+<br>
+Atau klik tombol aktivasi di bawah untuk menggunakan password default dari sistem.<br>
+@component('mail::button', ['url' => $data['url']])
+Activate
+@endcomponent
+Password default kamu adalah <strong>{{$data['random_pass']}}</strong><br>
+Harap langsung mengganti password setelah login ya.<br>
+Mohon untuk dapat menjaga kerahasian data tersebut. Selamat bekerja<br>
+<br>
+<br>
 Sekian, terima kasih,<br>
 Best Regards<br>
 Farhan Kurnia<br>

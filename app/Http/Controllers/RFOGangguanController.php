@@ -142,7 +142,7 @@ class RFOGangguanController extends Controller
                 'user_id' => $id_user,
                 'nomor_tiket' => $request->nomor_tiket,
                 'mulai_gangguan' => $request->mulai_gangguan,
-                'selesai_gangguan' => $request->mulai_gangguan,
+                'selesai_gangguan' => $request->selesai_gangguan,
                 'durasi' => $durasi->format("%d Hari - %h Jam - %i Menit"),
                 'problem' => $request->problem,
                 'action' => $request->action,

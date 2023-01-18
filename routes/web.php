@@ -249,5 +249,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('getJWT', 'UserController@getJWT');
     $router->get('/verification','AuthController@verification');
     $router->get('/otp','AuthController@requestOTP');
+    // Matches localhost:8000/api/change-password -> Update Password
+    $router->put('/forget-password', 'UserController@changePassword');
     $router->get('/forget-password','AuthController@forgetPassword');
 });

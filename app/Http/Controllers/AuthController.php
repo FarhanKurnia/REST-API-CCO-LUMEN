@@ -106,6 +106,7 @@ class AuthController extends Controller
    public function requestOTP(Request $request)
    {
     $token_OTP = Str::random(12);
+    $random_pass = Str::random(15);
     $email = $request->get('email');
     $user = User::where('email',$email)->count();
 
@@ -115,12 +116,16 @@ class AuthController extends Controller
             $data = [
                 'title' => 'Email Forget Password',
                 'otp' => $token_OTP,
+                'random_pass' => $random_pass,
+                // url backend
+                'url' => url('api/forget-password/?otp='.$token_OTP.'&password='.$random_pass),
+                // url frontend
+                // 'url' => 'http://localhost:3000/forget-password/?otp='.$token_OTP.'&password'.$random_pass,
             ];
             Mail::to($email)->send(new ForgetPassword($data));
             return response()->json([
                 'status' => 'Success',
                 'message' => 'OTP created successfully',
-                // 'otp' => $token_OTP
             ], 200);
         } catch (\Throwable $th) {
             $status = "Error";
