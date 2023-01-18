@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keluhan;
+use App\Models\Pop;
 use DB;
 use App\Models\User;
 use App\Models\Notifikasi;
@@ -18,17 +19,28 @@ class NotifikasiController extends Controller
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_user = $id_jwt['id_user'];
-
-        $notifikasi = Notifikasi_Read::where('user_id',$id_user)->with('notifikasi')->get();
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Notification loaded successfully',
-            'data' => $notifikasi
-        ], 200);
+        $notifikasi = Notifikasi_Read::where([['user_id',$id_user],['is_read',false]])->with('notifikasi')->get();
+        if($notifikasi->isNotEmpty()){
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Notification loaded successfully ',
+                'data' => $notifikasi
+            ], 200);
+        }else{
+            return response()->json([
+                'status'=>"Success",
+                'message' =>"Notification loaded successfully "
+            ],200);
+        }       
     }
 
     // Add Notification
     public function store(Request $request){
+        $this->validate($request, [
+            'keluhan_id' => 'required',
+            'pop_id' => 'required',
+            'id_response' => 'required',
+        ]);
         $token = JWTAuth::getToken();
         $id_jwt = JWTAuth::getPayload($token)->toArray();
         $id_user = $id_jwt['id_user'];
@@ -37,56 +49,68 @@ class NotifikasiController extends Controller
         $pop_id = $request->input('pop_id');
         $id_response = $request->input('id_response');
 
-        $keluhan = Keluhan::where('id_keluhan',$keluhan_id)->get();
-        $user = User::where('id_user',$id_user)->get();
-        $nama_user = $user[0]->name;
-        $id_pelanggan = $keluhan[0]->id_pelanggan;
-        $nama_pelanggan = $keluhan[0]->nama_pelanggan;
+        $keluhan_check = Keluhan::where('id_keluhan',$keluhan_id)->count();
+        $pop_check = Pop::where('id_pop',$pop_id)->count();
 
-        try {
-            // Keluhan Notification
-            if ($id_response == 0) {
-                $notifikasi = Notifikasi::create([
-                    'judul' => 'Keluhan baru '.$id_pelanggan.' - '.$nama_pelanggan,
-                    'detail' => 'Terdapat keluhan baru a.n pelanggan  '
-                    .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
-                    'keluhan_id' => $keluhan_id,
-                    'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
-                    'user_id_notif' => null,
-                    'pop_id' => $pop_id,
-                ]);
-            }
-            // Balasan Notification
-            elseif ($id_response == 1) {
-                $notifikasi = Notifikasi::create([
-                    'judul' => 'Balasan baru '.$id_pelanggan.' - '.$nama_pelanggan,
-                    'detail' => 'Terdapat balasan terbaru untuk keluhan a.n pelanggan  '
-                    .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
-                    'keluhan_id' => $keluhan_id,
-                    'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
-                    'user_id_notif' => null,
-                    'pop_id' => $pop_id,
-                ]);
-            }else{
+        
+        if ($keluhan_check>0 && $pop_check>0){   
+            $keluhan = Keluhan::where('id_keluhan',$keluhan_id)->get();
+            $user = User::where('id_user',$id_user)->get();
+            $nama_user = $user[0]->name;
+            $id_pelanggan = $keluhan[0]->id_pelanggan;
+            $nama_pelanggan = $keluhan[0]->nama_pelanggan;
+            try {
+                // Keluhan Notification
+                if ($id_response == 0) {
+                    $notifikasi = Notifikasi::create([
+                        'judul' => 'Keluhan baru '.$id_pelanggan.' - '.$nama_pelanggan,
+                        'detail' => 'Terdapat keluhan baru a.n pelanggan  '
+                        .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
+                        'keluhan_id' => $keluhan_id,
+                        'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
+                        'user_id_notif' => null,
+                        'pop_id' => $pop_id,
+                    ]);
+                }
+                // Balasan Notification
+                elseif ($id_response == 1) {
+                    $notifikasi = Notifikasi::create([
+                        'judul' => 'Balasan baru '.$id_pelanggan.' - '.$nama_pelanggan,
+                        'detail' => 'Terdapat balasan terbaru untuk keluhan a.n pelanggan  '
+                        .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
+                        'keluhan_id' => $keluhan_id,
+                        'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
+                        'user_id_notif' => null,
+                        'pop_id' => $pop_id,
+                    ]);
+                }else{
+                    return response([
+                        'status' => 'Error',
+                        'message' => 'Invalid ID response',
+                    ], 404);
+                }
+                $status = 'Success';
+                $message = 'Notification added successfully';
+                $http_code = 200;
+            } catch (\Throwable $th) {
+                $status = 'Error';
+                $message = $th->getMessage();
+                $http_code = 404;
+            } 
+            return response([
+                'status' => $status,
+                'message' => $message,
+                'notifikasi' => $notifikasi,
+            ], $http_code);
+        }else{
+                $message = 'Data keluhan or POP not found';
+                $status = 'Error';
+                $http_code = 404;
                 return response([
-                    'status' => 'Error',
-                    'message' => 'Invalid ID response',
-                ], 404);
-            }
-            $status = 'Success';
-            $message = 'Notification added successfully';
-            $http_code = 200;
-        } catch (\Throwable $th) {
-            $status = 'Error';
-            $message = $th->getMessage();
-            $http_code = 404;
+                    'status' => $status,
+                    'message' => $message,
+                ], $http_code);
         }
-
-        return response([
-            'status' => $status,
-            'message' => $message,
-            'notifikasi' => $notifikasi,
-        ], $http_code);
     }
 
     // Broadcast Notification
