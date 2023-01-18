@@ -159,7 +159,6 @@ class KeluhanController extends Controller
     // Store keluhan function
     public function store(Request $request){
         $this->validate($request, [
-            'id_user' => 'required',
             'kategori_pelanggan' => 'required',
             'id_pelanggan' => 'required',
             'nama_pelanggan' => 'required',
