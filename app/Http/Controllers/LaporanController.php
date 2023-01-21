@@ -15,9 +15,41 @@ use Illuminate\Support\Facades\Auth;
 class LaporanController extends Controller
 {
     // Index function for get all report
-    public function index()
+    public function index(Request $request)
     {
-        $laporan = Laporan::where('deleted_at',null)->with('user','pop','shift')->orderBy('created_at', 'DESC')->paginate(10);
+        $pop_id = $request->get('pop_id');
+        $keyword = $request->get('keyword');
+        if($pop_id == null && $keyword == null){
+            $laporan = Laporan::where('deleted_at',null)->with('user','pop','shift')->orderBy('created_at', 'DESC')->paginate(10);
+        }else if(!empty($pop_id) && $keyword == null){
+            $laporan = Laporan::where([
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+                ])->with('user','pop','shift')->orderBy('created_at', 'DESC')->paginate(10);
+        }else if(!empty($keyword) && $pop_id == null ){
+            $laporan = Laporan::where([
+                ['tanggal', $keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['nomor_laporan', $keyword],
+                ['deleted_at',null]
+            ])->with('user','pop','shift')->orderBy('created_at', 'DESC')->paginate(10);
+        }else if(!empty($pop_id) && !empty($keyword)){
+            $laporan = Laporan::where([
+                ['pop_id',$pop_id],
+                ['tanggal', $keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['pop_id',$pop_id],
+                ['nomor_laporan', $keyword],
+                ['deleted_at',null]
+            ])->with('user','pop','shift')->orderBy('created_at', 'DESC')->paginate(10);
+        }else{
+            return response()->json([
+                'status'=> "Error",
+                'message' => 'Invalid Request',
+            ],404);
+        }
         return response()->json([
             'status' => 'success',
             'message' => 'Load data Lampiran successfully',
