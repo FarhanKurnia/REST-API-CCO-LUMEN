@@ -39,7 +39,7 @@ class UserController extends Controller
         }else{
             return response()->json([
                 'status'=>'Error',
-                'message' => 'Load data BTS not found',
+                'message' => 'Load data User not found',
             ],404);
         }   
     }
