@@ -17,8 +17,62 @@ class BtsController extends Controller
     // }
 
     // Index function to get All BTS with POP
-    public function index()
+    public function index(Request $request)
     {
+        $pop_id = $request->get('pop_id');
+        $keyword = $request->get('keyword');
+        if($pop_id==null && $keyword==null){
+            
+        }
+
+        if ($pop_id == null) {
+            $data = BTS::where([
+                ['nama_bts','iLike',$keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['lokasi','iLIKE', "%{$keyword}%"],
+                ['deleted_at',null]
+            ])->with('pop')->get();
+
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data BTS not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data BTS has found',
+                    'data' => $data
+                ], 200);
+            }
+        }else{
+            $data = BTS::where([
+                ['nama_bts','iLike',$keyword],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['lokasi','iLIKE', "%{$keyword}%"],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->with('pop')->paginate();
+
+            if($data->isEmpty()){
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data BTS not found',
+                ], 404);
+            }else{
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data BTS has found',
+                    'data' => $data
+                ], 200);
+            }
+        }
+
+
+
         $bts = Bts::where('deleted_at',null)->with('pop')->paginate(10);
         if($bts->isNotEmpty()) {
             return response()->json([

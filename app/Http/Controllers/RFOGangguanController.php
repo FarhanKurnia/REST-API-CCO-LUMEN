@@ -43,6 +43,11 @@ class RFOGangguanController extends Controller
                 ['problem', 'iLIKE', "%{$keyword}%"],
                 ['deleted_at',null]
             ])->with('user')->paginate(10);
+        }else{
+            return response()->json([
+                'status'=> "Error",
+                'message' => 'Invalid Request',
+            ],404);
         }
         
         if($rfo_gangguan->isNotEmpty()){
