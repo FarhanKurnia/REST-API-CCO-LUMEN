@@ -13,13 +13,35 @@ use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 class UserController extends Controller
 {
     // Index function for get all user
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json([
-            'status' => 'Success',
-            'message' => 'Load data User successfully',
-            'data' => User::paginate(10)
-        ], 200);
+        $keyword = $request->get('keyword');
+        if($keyword == null){
+            $user = User::paginate(10);
+        }else if(!empty($keyword)){
+            $user = User::where([
+                ['name','iLike',"%{$keyword}%"]
+            ])->orwhere([
+                ['email',$keyword]
+            ])->paginate(10);
+        }else{
+            return response()->json([
+                'status'=> "Error",
+                'message' => 'Invalid Request',
+            ],404);
+        }
+
+        if($user->isNotEmpty()){
+            return response()->json([
+                'status' => 'Success',
+                'message' => 'Load data User successfully',
+                'data' => $user], 200);
+        }else{
+            return response()->json([
+                'status'=>'Error',
+                'message' => 'Load data BTS not found',
+            ],404);
+        }   
     }
 
     // Search User 
