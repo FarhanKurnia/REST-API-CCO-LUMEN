@@ -45,7 +45,7 @@ class RFOGangguanController extends Controller
             ])->with('user')->paginate(10);
         }else{
             return response()->json([
-                'status'=> "Error",
+                'status'=> 'Error',
                 'message' => 'Invalid Request',
             ],404);
         }
@@ -57,7 +57,7 @@ class RFOGangguanController extends Controller
                 'data' => $rfo_gangguan], 200);
         }else{
             return response()->json([
-                'status'=>"Success",
+                'status'=>'Success',
                 'message' => 'Load data RFO Gangguan Not Found',
             ],404);
         }      

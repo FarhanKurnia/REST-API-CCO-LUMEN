@@ -38,12 +38,12 @@ class RFOKeluhanController extends Controller
         
         if($rfo_keluhan->isNotEmpty()){
         return response()->json([
-            'status' => 'success',
+            'status' => 'Success',
             'message' => 'Load data RFO Keluhan successfully',
             'data' => $rfo_keluhan], 200);
         }else{
             return response()->json([
-                'status'=>"Success",
+                'status'=>'Success',
                 'message' => 'Load data RFO Keluhan Empty',
             ],404);
         }      
@@ -154,12 +154,12 @@ class RFOKeluhanController extends Controller
 
         if($data->isEmpty()){
             return response()->json([
-                'status' => 'error',
+                'status' => 'Error',
                 'message' => 'Data RFO Keluhan not found',
             ], 404);
         }else{
             return response()->json([
-                'status' => 'success',
+                'status' => 'Success',
                 'message' => 'Data RFO Keluhan has found',
                 'data' => $data
             ], 200);

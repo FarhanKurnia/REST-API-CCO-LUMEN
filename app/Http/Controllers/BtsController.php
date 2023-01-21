@@ -22,70 +22,48 @@ class BtsController extends Controller
         $pop_id = $request->get('pop_id');
         $keyword = $request->get('keyword');
         if($pop_id==null && $keyword==null){
-            
-        }
-
-        if ($pop_id == null) {
-            $data = BTS::where([
-                ['nama_bts','iLike',$keyword],
+            $bts = BTS::where('deleted_at',null)->with('pop')->paginate(10);
+        }else if (!empty($pop_id) && $keyword == null){
+            $bts = BTS::where([
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->with('pop')->paginate(10);
+        }else if(!empty($keyword) && $pop_id==null){
+            $bts = BTS::where([
+                ['nama_bts','iLIKE',$keyword],
                 ['deleted_at',null]
             ])->orwhere([
                 ['lokasi','iLIKE', "%{$keyword}%"],
                 ['deleted_at',null]
-            ])->with('pop')->get();
-
-            if($data->isEmpty()){
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Data BTS not found',
-                ], 404);
-            }else{
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Data BTS has found',
-                    'data' => $data
-                ], 200);
-            }
+            ])->with('pop')->paginate(10);
+        }else if(!empty($pop_id) && !empty($keyword)){
+            $bts = BTS::where([
+                ['nama_bts','iLIKE',$keyword],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['lokasi','iLIKE', "%{$keyword}%"],
+                ['pop_id',$pop_id],
+                ['deleted_at',null]
+            ])->with('pop')->paginate(10);
         }else{
-            $data = BTS::where([
-                ['nama_bts','iLike',$keyword],
-                ['pop_id',$pop_id],
-                ['deleted_at',null]
-            ])->orwhere([
-                ['lokasi','iLIKE', "%{$keyword}%"],
-                ['pop_id',$pop_id],
-                ['deleted_at',null]
-            ])->with('pop')->paginate();
-
-            if($data->isEmpty()){
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Data BTS not found',
-                ], 404);
-            }else{
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Data BTS has found',
-                    'data' => $data
-                ], 200);
-            }
+            return response()->json([
+                'status'=> "Error",
+                'message' => 'Invalid Request',
+            ],404);
         }
 
-
-
-        $bts = Bts::where('deleted_at',null)->with('pop')->paginate(10);
-        if($bts->isNotEmpty()) {
+        if($bts->isNotEmpty()){
             return response()->json([
                 'status' => 'Success',
                 'message' => 'Load data BTS successfully',
-                'data' => $bts
-            ], 200);
+                'data' => $bts], 200);
         }else{
             return response()->json([
-                'status'=>'Failed',
-                'message' =>'Data BTS not found'
+                'status'=>"Error",
+                'message' => 'Load data BTS not found',
             ],404);
-        }
+        }      
     }
 
     // Store BTS function
@@ -145,12 +123,12 @@ class BtsController extends Controller
 
             if($data->isEmpty()){
                 return response()->json([
-                    'status' => 'error',
+                    'status' => 'Error',
                     'message' => 'Data BTS not found',
                 ], 404);
             }else{
                 return response()->json([
-                    'status' => 'success',
+                    'status' => 'Success',
                     'message' => 'Data BTS has found',
                     'data' => $data
                 ], 200);
