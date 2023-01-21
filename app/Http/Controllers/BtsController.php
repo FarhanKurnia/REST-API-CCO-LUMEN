@@ -22,14 +22,14 @@ class BtsController extends Controller
         $pop_id = $request->get('pop_id');
         $keyword = $request->get('keyword');
         if($pop_id==null && $keyword==null){
-            $bts = BTS::where('deleted_at',null)->with('pop')->paginate(10);
+            $data = BTS::where('deleted_at',null)->with('pop')->paginate(10);
         }else if (!empty($pop_id) && $keyword == null){
-            $bts = BTS::where([
+            $data = BTS::where([
                 ['pop_id',$pop_id],
                 ['deleted_at',null]
             ])->with('pop')->paginate(10);
         }else if(!empty($keyword) && $pop_id==null){
-            $bts = BTS::where([
+            $data = BTS::where([
                 ['nama_bts','iLIKE',$keyword],
                 ['deleted_at',null]
             ])->orwhere([
@@ -37,7 +37,7 @@ class BtsController extends Controller
                 ['deleted_at',null]
             ])->with('pop')->paginate(10);
         }else if(!empty($pop_id) && !empty($keyword)){
-            $bts = BTS::where([
+            $data = BTS::where([
                 ['nama_bts','iLIKE',$keyword],
                 ['pop_id',$pop_id],
                 ['deleted_at',null]
@@ -53,11 +53,11 @@ class BtsController extends Controller
             ],404);
         }
 
-        if($bts->isNotEmpty()){
+        if($data->isNotEmpty()){
             return response()->json([
                 'status' => 'Success',
                 'message' => 'Load data BTS successfully',
-                'data' => $bts], 200);
+                'data' => $data], 200);
         }else{
             return response()->json([
                 'status'=>"Error",
