@@ -15,7 +15,6 @@ class RFOGangguanController extends Controller
     {
         $keyword = $request->get('keyword');
         $status = $request->get('status');
-        // 
         if($status==null && $keyword == null){
             $rfo_gangguan = RFO_Gangguan::where('deleted_at',null)->with('user')->paginate(10);
         }else if(!empty($status) && $keyword == null){
