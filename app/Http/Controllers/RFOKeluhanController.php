@@ -13,9 +13,29 @@ use Tymon\JWTAuth\Facades\JWTAuth; //use this library
 class RFOKeluhanController extends Controller
 {
     // Index function to get All RFO Keluhan
-    public function index()
+    public function index(Request $request)
     {
-        $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->with('user','user.role','user.pop','keluhan')->paginate(10);
+        $keyword = $request->get('keyword');
+        if($keyword == null){
+            $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->with('user','user.role','user.pop','keluhan')->paginate(10);
+        }else if(!empty($keyword)){
+            $rfo_keluhan = RFO_Keluhan::where([
+                ['nomor_rfo_keluhan',$keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['nomor_tiket',$keyword],
+                ['deleted_at',null]
+            ])->orwhere([
+                ['problem','iLike',"%{$keyword}%"],
+                ['deleted_at',null]
+            ])->with('user','user.role','user.pop','keluhan')->paginate(10);
+        }else{
+            return response()->json([
+                'status'=> "Error",
+                'message' => 'Invalid Request',
+            ],404);
+        }
+        
         if($rfo_keluhan->isNotEmpty()){
         return response()->json([
             'status' => 'success',
@@ -24,8 +44,8 @@ class RFOKeluhanController extends Controller
         }else{
             return response()->json([
                 'status'=>"Success",
-                'message' => 'Load data RFO Keluhan successfully',
-            ],200);
+                'message' => 'Load data RFO Keluhan Empty',
+            ],404);
         }      
     }
 
