@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             //main
             $table->id('id_user');
             $table->string('name');
-            $table->string('avatar')->default('http://localhost:8000/avatar/user.png');
+            $table->string('avatar')->default('https://backend-api.skripsiprjt-utdi.my.id/avatar/user.png');
             $table->string('email')->unique()->notNullable();
             $table->string('password');
             $table->boolean('aktif')->default(true);;
