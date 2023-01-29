@@ -67,7 +67,7 @@ class NotifikasiController extends Controller
                         'detail' => 'Terdapat keluhan baru a.n pelanggan  '
                         .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
                         'keluhan_id' => $keluhan_id,
-                        'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
+                        'deep_link' => 'https://app.skripsiprjt-utdi.my.id/dashboard/detail/'.$keluhan_id,
                         'user_id_notif' => null,
                         'pop_id' => $pop_id,
                     ]);
@@ -79,7 +79,7 @@ class NotifikasiController extends Controller
                         'detail' => 'Terdapat balasan terbaru untuk keluhan a.n pelanggan  '
                         .$id_pelanggan.' - '.$nama_pelanggan.'. Diupdate oleh '.$nama_user,
                         'keluhan_id' => $keluhan_id,
-                        'deep_link' => 'http://localhost/3000/dashboard/detail/'.$keluhan_id,
+                        'deep_link' => 'https://app.skripsiprjt-utdi.my.id/dashboard/detail/'.$keluhan_id,
                         'user_id_notif' => null,
                         'pop_id' => $pop_id,
                     ]);

@@ -53,7 +53,7 @@ class AuthController extends Controller
                     // url backend
                     // 'url' => url('api/verification/?token='.$token),
                     // url frontend
-                    'url' => 'http://localhost:3000/verification/?token='.$token,
+                    'url' => 'https://app.skripsiprjt-utdi.my.id/verification/?token='.$token,
                 ];
                 Mail::to($email)->send(new Verification($data));
                 return response()->json([

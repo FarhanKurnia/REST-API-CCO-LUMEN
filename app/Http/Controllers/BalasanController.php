@@ -66,7 +66,7 @@ class BalasanController extends Controller
                     "title" => $pop[0]." | Balasan baru",
                     "body" => "Terdapat balasan baru  ".$id_pelanggan.' - '.$nama_pelanggan.' | POP '.$pop[0],
                     //   "deep_link" => url('/api/keluhan/'.$id_keluhan),
-                    "deep_link" => "http://localhost:3000/dashboard/detail/".$id_keluhan,
+                    "deep_link" => "https://app.skripsiprjt-utdi.my.id/dashboard/detail/".$id_keluhan,
                     )),
                 ));
                 $message = 'Balasan created successfully';

@@ -298,7 +298,7 @@ class KeluhanController extends Controller
                   // url backend
                   // "deep_link" => url('/api/keluhan/'.$id_keluhan),
                   // url frontend
-                  "deep_link" => "http://localhost:3000/dashboard/detail/".$id_keluhan,
+                  "deep_link" => "https://app.skripsiprjt-utdi.my.id/dashboard/detail/".$id_keluhan,
                 )),
               ));
 
