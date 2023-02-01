@@ -17,7 +17,7 @@ class RFOKeluhanController extends Controller
     {
         $keyword = $request->get('keyword');
         if($keyword == null){
-            $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->with('user','user.role','user.pop','keluhan')->paginate(10);
+            $rfo_keluhan = RFO_Keluhan::where('deleted_at',null)->orderBy('created_at', 'DESC')->with('user','user.role','user.pop','keluhan')->paginate(10);
         }else if(!empty($keyword)){
             $rfo_keluhan = RFO_Keluhan::where([
                 ['nomor_rfo_keluhan',$keyword],
@@ -28,7 +28,7 @@ class RFOKeluhanController extends Controller
             ])->orwhere([
                 ['problem','iLike',"%{$keyword}%"],
                 ['deleted_at',null]
-            ])->with('user','user.role','user.pop','keluhan')->paginate(10);
+            ])->orderBy('created_at', 'DESC')->with('user','user.role','user.pop','keluhan')->paginate(10);
         }else{
             return response()->json([
                 'status'=> "Error",

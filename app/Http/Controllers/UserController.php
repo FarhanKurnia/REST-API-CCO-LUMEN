@@ -17,13 +17,13 @@ class UserController extends Controller
     {
         $keyword = $request->get('keyword');
         if($keyword == null){
-            $user = User::paginate(10);
+            $user = User::orderBy('created_at', 'DESC')->paginate(10);
         }else if(!empty($keyword)){
             $user = User::where([
                 ['name','iLike',"%{$keyword}%"]
             ])->orwhere([
                 ['email',$keyword]
-            ])->paginate(10);
+            ])->orderBy('created_at', 'DESC')->paginate(10);
         }else{
             return response()->json([
                 'status'=> "Error",
