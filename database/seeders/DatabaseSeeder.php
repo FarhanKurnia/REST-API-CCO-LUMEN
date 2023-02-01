@@ -21,15 +21,15 @@ class DatabaseSeeder extends Seeder
             PopsTableSeeder::class,
             UsersTableSeeder::class,
             // BtsTableSeeder::class,
-            // RFOKeluhanSeeder::class,
-            // RFOGangguanSeeder::class,
-            // KeluhansSeeder::class,
-            // BalasansSeeder::class,
+            RFOKeluhanSeeder::class,
+            RFOGangguanSeeder::class,
+            KeluhansSeeder::class,
+            BalasansSeeder::class,
             ShiftSeeder::class,
             // LaporanSeeder::class,
             // LampiranBalasanSeeder::class,
             // LampiranKeluhanSeeder::class,
-            // NotifikasiSeeder::class,
+            NotifikasiSeeder::class,
         ]);
     }
 }
