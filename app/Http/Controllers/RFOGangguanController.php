@@ -16,12 +16,12 @@ class RFOGangguanController extends Controller
         $keyword = $request->get('keyword');
         $status = $request->get('status');
         if($status==null && $keyword == null){
-            $rfo_gangguan = RFO_Gangguan::where('deleted_at',null)->with('user')->paginate(10);
+            $rfo_gangguan = RFO_Gangguan::where('deleted_at',null)->orderBy('created_at', 'DESC')->with('user')->paginate(10);
         }else if(!empty($status) && $keyword == null){
             $rfo_gangguan = RFO_Gangguan::where([
                 ['status', $status],
                 ['deleted_at',null]
-            ])->with('user')->paginate(10);
+            ])->orderBy('created_at', 'DESC')->with('user')->paginate(10);
         }else if(!empty($keyword) && $status == null ){
             $rfo_gangguan = RFO_Gangguan::where([
                 ['nomor_rfo_gangguan', $keyword],
@@ -32,7 +32,7 @@ class RFOGangguanController extends Controller
             ])->orwhere([
                 ['nomor_tiket', $keyword],
                 ['deleted_at',null]
-            ])->with('user')->paginate(10);
+            ])->orderBy('created_at', 'DESC')->with('user')->paginate(10);
         }else if(!empty($status) && !empty($keyword)){
             $rfo_gangguan = RFO_Gangguan::where([
                 ['status', $status],
@@ -42,7 +42,7 @@ class RFOGangguanController extends Controller
                 ['status', $status],
                 ['problem', 'iLIKE', "%{$keyword}%"],
                 ['deleted_at',null]
-            ])->with('user')->paginate(10);
+            ])->orderBy('created_at', 'DESC')->with('user')->paginate(10);
         }else{
             return response()->json([
                 'status'=> 'Error',
