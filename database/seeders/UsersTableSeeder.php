@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
             'name'=> 'Alfiano',
             'pop_id' => '2',
             'role_id' => '2',
-            'aktif' => false,
+            'aktif' => true,
             'online' => false,
             'verifikasi' => true,
             'token_verifikasi' => null,
