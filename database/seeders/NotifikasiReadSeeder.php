@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class NotifikasiReadSeeder extends Seeder
@@ -13,7 +14,7 @@ class NotifikasiReadSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('notifikasis')->insert(array(
+        DB::table('notifikasi__reads')->insert(array(
             array(
                 // "id_notifikasiread" => 1,
                 "is_read" => true,
