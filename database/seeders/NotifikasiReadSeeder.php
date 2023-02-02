@@ -15,7 +15,7 @@ class NotifikasiReadSeeder extends Seeder
     {
         DB::table('notifikasi__reads')->insert(array(
             array(
-                "id_notifikasiread" => 1,
+                // "id_notifikasiread" => 1,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 1,
@@ -23,7 +23,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T11:17:52.000Z"
             ),
             array(
-                "id_notifikasiread" => 2,
+                // "id_notifikasiread" => 2,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 2,
@@ -31,7 +31,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:12:51.000Z"
             ),
             array(
-                "id_notifikasiread" => 3,
+                // "id_notifikasiread" => 3,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 3,
@@ -39,7 +39,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T11:28:24.000Z"
             ),
             array(
-                "id_notifikasiread" => 4,
+                // "id_notifikasiread" => 4,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 4,
@@ -47,7 +47,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:00:30.000Z"
             ),
             array(
-                "id_notifikasiread" => 5,
+                // "id_notifikasiread" => 5,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 5,
@@ -55,7 +55,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T11:28:24.000Z"
             ),
             array(
-                "id_notifikasiread" => 6,
+                // "id_notifikasiread" => 6,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 6,
@@ -63,7 +63,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T11:58:22.000Z"
             ),
             array(
-                "id_notifikasiread" => 7,
+                // "id_notifikasiread" => 7,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 7,
@@ -71,7 +71,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:11:17.000Z"
             ),
             array(
-                "id_notifikasiread" => 8,
+                // "id_notifikasiread" => 8,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 8,
@@ -79,7 +79,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T11:58:22.000Z"
             ),
             array(
-                "id_notifikasiread" => 9,
+                // "id_notifikasiread" => 9,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 9,
@@ -87,7 +87,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T11:57:23.000Z"
             ),
             array(
-                "id_notifikasiread" => 10,
+                // "id_notifikasiread" => 10,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 10,
@@ -95,7 +95,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:13:30.000Z"
             ),
             array(
-                "id_notifikasiread" => 11,
+                // "id_notifikasiread" => 11,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 11,
@@ -103,7 +103,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:00:30.000Z"
             ),
             array(
-                "id_notifikasiread" => 12,
+                // "id_notifikasiread" => 12,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 12,
@@ -111,7 +111,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:57:26.000Z"
             ),
             array(
-                "id_notifikasiread" => 13,
+                // "id_notifikasiread" => 13,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 13,
@@ -119,7 +119,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:00:30.000Z"
             ),
             array(
-                "id_notifikasiread" => 14,
+                // "id_notifikasiread" => 14,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 14,
@@ -127,7 +127,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:57:26.000Z"
             ),
             array(
-                "id_notifikasiread" => 15,
+                // "id_notifikasiread" => 15,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 15,
@@ -135,7 +135,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:12:44.000Z"
             ),
             array(
-                "id_notifikasiread" => 16,
+                // "id_notifikasiread" => 16,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 16,
@@ -143,7 +143,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:09:06.000Z"
             ),
             array(
-                "id_notifikasiread" => 17,
+                // "id_notifikasiread" => 17,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 17,
@@ -151,7 +151,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:11:27.000Z"
             ),
             array(
-                "id_notifikasiread" => 18,
+                // "id_notifikasiread" => 18,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 18,
@@ -159,7 +159,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:57:26.000Z"
             ),
             array(
-                "id_notifikasiread" => 19,
+                // "id_notifikasiread" => 19,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 19,
@@ -167,7 +167,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:12:44.000Z"
             ),
             array(
-                "id_notifikasiread" => 20,
+                // "id_notifikasiread" => 20,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 20,
@@ -175,7 +175,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:12:44.000Z"
             ),
             array(
-                "id_notifikasiread" => 21,
+                // "id_notifikasiread" => 21,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 21,
@@ -183,7 +183,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:13:30.000Z"
             ),
             array(
-                "id_notifikasiread" => 22,
+                // "id_notifikasiread" => 22,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 22,
@@ -191,7 +191,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T13:05:47.000Z"
             ),
             array(
-                "id_notifikasiread" => 23,
+                // "id_notifikasiread" => 23,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 23,
@@ -199,7 +199,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:36:38.000Z"
             ),
             array(
-                "id_notifikasiread" => 24,
+                // "id_notifikasiread" => 24,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 24,
@@ -207,7 +207,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:36:27.000Z"
             ),
             array(
-                "id_notifikasiread" => 25,
+                // "id_notifikasiread" => 25,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 25,
@@ -215,7 +215,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:35:48.000Z"
             ),
             array(
-                "id_notifikasiread" => 26,
+                // "id_notifikasiread" => 26,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 26,
@@ -223,7 +223,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:39:19.000Z"
             ),
             array(
-                "id_notifikasiread" => 27,
+                // "id_notifikasiread" => 27,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 27,
@@ -231,7 +231,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:38:52.000Z"
             ),
             array(
-                "id_notifikasiread" => 28,
+                // "id_notifikasiread" => 28,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 28,
@@ -239,7 +239,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:34:45.000Z"
             ),
             array(
-                "id_notifikasiread" => 29,
+                // "id_notifikasiread" => 29,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 29,
@@ -247,7 +247,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:32:42.000Z"
             ),
             array(
-                "id_notifikasiread" => 30,
+                // "id_notifikasiread" => 30,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 30,
@@ -255,7 +255,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:36:52.000Z"
             ),
             array(
-                "id_notifikasiread" => 31,
+                // "id_notifikasiread" => 31,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 31,
@@ -263,7 +263,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:36:52.000Z"
             ),
             array(
-                "id_notifikasiread" => 32,
+                // "id_notifikasiread" => 32,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 32,
@@ -271,7 +271,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:40:01.000Z"
             ),
             array(
-                "id_notifikasiread" => 33,
+                // "id_notifikasiread" => 33,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 33,
@@ -279,7 +279,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:39:19.000Z"
             ),
             array(
-                "id_notifikasiread" => 34,
+                // "id_notifikasiread" => 34,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 34,
@@ -287,7 +287,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:38:52.000Z"
             ),
             array(
-                "id_notifikasiread" => 35,
+                // "id_notifikasiread" => 35,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 35,
@@ -295,7 +295,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T13:05:47.000Z"
             ),
             array(
-                "id_notifikasiread" => 36,
+                // "id_notifikasiread" => 36,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 36,
@@ -303,7 +303,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T13:05:47.000Z"
             ),
             array(
-                "id_notifikasiread" => 37,
+                // "id_notifikasiread" => 37,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 37,
@@ -311,7 +311,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T13:05:47.000Z"
             ),
             array(
-                "id_notifikasiread" => 38,
+                // "id_notifikasiread" => 38,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 38,
@@ -319,7 +319,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:49:10.000Z"
             ),
             array(
-                "id_notifikasiread" => 39,
+                // "id_notifikasiread" => 39,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 39,
@@ -327,7 +327,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T13:05:47.000Z"
             ),
             array(
-                "id_notifikasiread" => 40,
+                // "id_notifikasiread" => 40,
                 "is_read" => true,
                 "user_id" => 1,
                 "notifikasi_id" => 40,
@@ -335,7 +335,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T12:56:07.000Z"
             ),
             array(
-                "id_notifikasiread" => 41,
+                // "id_notifikasiread" => 41,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 41,
@@ -343,7 +343,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T13:05:47.000Z"
             ),
             array(
-                "id_notifikasiread" => 42,
+                // "id_notifikasiread" => 42,
                 "is_read" => true,
                 "user_id" => 2,
                 "notifikasi_id" => 42,
@@ -351,7 +351,7 @@ class NotifikasiReadSeeder extends Seeder
                 "updated_at" => "2023-02-01T13:05:47.000Z"
             ),
             array(
-                "id_notifikasiread" => 43,
+                // "id_notifikasiread" => 43,
                 "is_read" => false,
                 "user_id" => 2,
                 "notifikasi_id" => 43,

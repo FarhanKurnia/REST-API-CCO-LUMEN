@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             // LampiranBalasanSeeder::class,
             // LampiranKeluhanSeeder::class,
             NotifikasiSeeder::class,
+            NotifikasiReadSeeder::class,
         ]);
     }
 }
