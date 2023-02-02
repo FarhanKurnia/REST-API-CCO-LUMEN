@@ -15,7 +15,7 @@ class RFOGangguanSeeder extends Seeder
     public function run()
     {
         DB::table('r_f_o_gangguans')->insert([[
-            "id_rfo_gangguan" => 1,
+            // "id_rfo_gangguan" => 1,
             "nomor_rfo_gangguan" => "#RFO-G20230201625",
             "problem" => "Jalur Backbone High Latency",
             "action" => "Pemindahan jalur Backbone",
@@ -31,7 +31,7 @@ class RFOGangguanSeeder extends Seeder
             "updated_at" => "2023-02-01T12:59:00.000Z"
         ],
         [
-            "id_rfo_gangguan" => 2,
+            // "id_rfo_gangguan" => 2,
             "nomor_rfo_gangguan" => "#RFO-G20230201667",
             "problem" => "FO Cut Sleman Kota",
             "action" => "Splashing oleh tim di lapangan",

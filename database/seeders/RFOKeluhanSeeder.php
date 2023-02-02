@@ -15,7 +15,7 @@ class RFOKeluhanSeeder extends Seeder
     public function run()
     {
         DB::table('r_f_o__keluhans')->insert([[
-            "id_rfo_keluhan" => 1,
+            // "id_rfo_keluhan" => 1,
             "nomor_rfo_keluhan" => "#RFO-S2023020113741",
             "nomor_tiket" => "#0021213342567",
             "mulai_keluhan" => "2023-02-01T05:00:00.000Z",
@@ -30,7 +30,7 @@ class RFOKeluhanSeeder extends Seeder
             "updated_at" => "2023-02-01T11:53:58.000Z"
         ],
         [
-            "id_rfo_keluhan" => 2,
+            // "id_rfo_keluhan" => 2,
             "nomor_rfo_keluhan" => "#RFO-S2023020177054",
             "nomor_tiket" => "#0021213342567",
             "mulai_keluhan" => "2023-02-01T11:14:47.000Z",
@@ -45,7 +45,7 @@ class RFOKeluhanSeeder extends Seeder
             "updated_at" => "2023-02-01T11:55:19.000Z"
         ],
         [
-            "id_rfo_keluhan" => 3,
+            // "id_rfo_keluhan" => 3,
             "nomor_rfo_keluhan" => "#RFO-S2023020187053",
             "nomor_tiket" => "-",
             "mulai_keluhan" => "2023-02-01T11:19:47.000Z",
@@ -60,7 +60,7 @@ class RFOKeluhanSeeder extends Seeder
             "updated_at" => "2023-02-01T12:02:47.000Z"
         ],
         [
-            "id_rfo_keluhan" => 4,
+            // "id_rfo_keluhan" => 4,
             "nomor_rfo_keluhan" => "#RFO-S2023020134687",
             "nomor_tiket" => "-",
             "mulai_keluhan" => "2023-02-01T11:17:12.000Z",
@@ -75,7 +75,7 @@ class RFOKeluhanSeeder extends Seeder
             "updated_at" => "2023-02-01T12:14:57.000Z"
         ],
         [
-            "id_rfo_keluhan" => 5,
+            // "id_rfo_keluhan" => 5,
             "nomor_rfo_keluhan" => "#RFO-S2023020117628",
             "nomor_tiket" => "-",
             "mulai_keluhan" => "2023-02-01T12:47:25.000Z",
@@ -90,7 +90,7 @@ class RFOKeluhanSeeder extends Seeder
             "updated_at" => "2023-02-01T12:50:24.000Z"
         ],
         [
-            "id_rfo_keluhan" => 6,
+            // "id_rfo_keluhan" => 6,
             "nomor_rfo_keluhan" => "#RFO-S2023020149128",
             "nomor_tiket" => "-",
             "mulai_keluhan" => "2023-02-01T12:44:38.000Z",
