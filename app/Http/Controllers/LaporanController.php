@@ -268,7 +268,7 @@ class LaporanController extends Controller
         $total_keluhan_closed = Keluhan::where([['pop_id',$pop_id],['status','closed']])->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
         $keluhan = Keluhan::with('pop','rfo_keluhan')->where('pop_id',$pop_id)->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
         $keluhan_open = Keluhan::where([['pop_id',$pop_id],['status','open']])->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
-        $keluhan_close = Keluhan::where([['pop_id',$pop_id],['status','open']])->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
+        $keluhan_close = Keluhan::where([['pop_id',$pop_id],['status','closed']])->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
         $total_rfo_gangguan = RFO_Gangguan::with('keluhan')->whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->count();
         $rfo_gangguan = RFO_Gangguan::whereBetween('created_at', [$tanggal1.' '.$mulai, $tanggal2.' '.$selesai])->get();
 
