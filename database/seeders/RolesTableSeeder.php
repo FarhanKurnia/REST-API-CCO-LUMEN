@@ -22,12 +22,12 @@ class RolesTableSeeder extends Seeder
             'created_at' => Carbon::now(),
         ],
         [
-            // 'id_role'=> '1',
+            'id_role'=> '1',
             'role'=> 'HELPDESK',
             'created_at' => Carbon::now(),
         ],
         [
-            // 'id_role'=> '2',
+            'id_role'=> '2',
             'name'=> 'NOC',
             'created_at' => Carbon::now(),
         ]
