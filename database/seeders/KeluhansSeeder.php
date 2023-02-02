@@ -15,7 +15,7 @@ class KeluhansSeeder extends Seeder
     public function run()
     {
         DB::table('keluhans')->insert([[
-            "id_keluhan" => 1,
+            // "id_keluhan" => 1,
             "nomor_keluhan" => "#T2023020133761",
             "sumber_id" => 1,
             "detail_sumber" => "08888882234",
@@ -36,7 +36,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T11:55:19.000Z",
         ],
         [
-            "id_keluhan" => 2,
+            // "id_keluhan" => 2,
             "nomor_keluhan" => "#T2023020122987",
             "sumber_id" => 1,
             "detail_sumber" => "087786765667",
@@ -57,7 +57,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:14:57.000Z",
         ],
         [
-            "id_keluhan" => 3,
+            // "id_keluhan" => 3,
             "nomor_keluhan" => "#T2023020116957",
             "sumber_id" => 8,
             "detail_sumber" => "@kittendust",
@@ -78,7 +78,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:02:47.000Z",
         ],
         [
-            "id_keluhan" => 4,
+            // "id_keluhan" => 4,
             "nomor_keluhan" => "#T2023020156615",
             "sumber_id" => 3,
             "detail_sumber" => "baskara.hindia@gmail.com",
@@ -99,7 +99,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:58:37.000Z"
         ],
         [
-            "id_keluhan" => 5,
+            // "id_keluhan" => 5,
             "nomor_keluhan" => "#T2023020152261",
             "sumber_id" => 8,
             "detail_sumber" => "@ginagini",
@@ -120,7 +120,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:12:35.000Z"
         ],
         [
-            "id_keluhan" => 6,
+            // "id_keluhan" => 6,
             "nomor_keluhan" => "#T2023020156208",
             "sumber_id" => 1,
             "detail_sumber" => "089976554321",
@@ -141,7 +141,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:41:13.000Z"
         ],
         [
-            "id_keluhan" => 7,
+            // "id_keluhan" => 7,
             "nomor_keluhan" => "#T2023020158727",
             "sumber_id" => 8,
             "detail_sumber" => "@kopikopiapayangfore",
@@ -162,7 +162,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:41:06.000Z"
         ],
         [
-            "id_keluhan" => 8,
+            // "id_keluhan" => 8,
             "nomor_keluhan" => "#T2023020111790",
             "sumber_id" => 3,
             "detail_sumber" => "alex.AM@gmail.com",
@@ -183,7 +183,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:40:46.000Z"
         ],
         [
-            "id_keluhan" => 9,
+            // "id_keluhan" => 9,
             "nomor_keluhan" => "#T2023020131963",
             "sumber_id" => 9,
             "detail_sumber" => "@jajangbukanmyon",
@@ -204,7 +204,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:40:38.000Z"
         ],
         [
-            "id_keluhan" => 10,
+            // "id_keluhan" => 10,
             "nomor_keluhan" => "#T2023020151612",
             "sumber_id" => 1,
             "detail_sumber" => "087654432678",
@@ -225,7 +225,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:40:27.000Z"
         ],
         [
-            "id_keluhan" => 11,
+            // "id_keluhan" => 11,
             "nomor_keluhan" => "#T2023020151586",
             "sumber_id" => 3,
             "detail_sumber" => "your.eby@gmail.com",
@@ -246,7 +246,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:57:07.000Z"
         ],
         [
-            "id_keluhan" => 12,
+            // "id_keluhan" => 12,
             "nomor_keluhan" => "#T2023020185978",
             "sumber_id" => 2,
             "detail_sumber" => "+62 879-778-909",
@@ -267,7 +267,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T12:50:25.000Z"
         ],
         [
-            "id_keluhan" => 13,
+            // "id_keluhan" => 13,
             "nomor_keluhan" => "#T2023020180840",
             "sumber_id" => 1,
             "detail_sumber" => "089976554321",
@@ -288,7 +288,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T13:03:25.000Z"
         ],
         [
-            "id_keluhan" => 14,
+            // "id_keluhan" => 14,
             "nomor_keluhan" => "#T2023020151792",
             "sumber_id" => 1,
             "detail_sumber" => "08769859876",
@@ -309,7 +309,7 @@ class KeluhansSeeder extends Seeder
             "updated_at" => "2023-02-01T13:05:27.000Z"
         ],
         [
-            "id_keluhan" => 15,
+            // "id_keluhan" => 15,
             "nomor_keluhan" => "#T2023020174732",
             "sumber_id" => 8,
             "detail_sumber" => "@rahajengjeng",
