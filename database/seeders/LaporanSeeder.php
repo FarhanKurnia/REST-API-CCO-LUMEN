@@ -16,7 +16,7 @@ class LaporanSeeder extends Seeder
     public function run()
     {
         DB::table('laporans')->insert([[
-            'nomor_laporan'=> '1',
+            // 'nomor_laporan'=> '1',
             'tanggal'=> Carbon::today(),
             'shift_id' => 1,
             'pop_id' => 1,
@@ -26,7 +26,7 @@ class LaporanSeeder extends Seeder
             'lampiran_laporan' => "http://localhost:8000/laporan/REF-ID-2022110921631.pdf",
         ],
         [
-            'nomor_laporan'=> '2',
+            // 'nomor_laporan'=> '2',
             'tanggal'=> Carbon::today(),
             'shift_id' => 2,
             'pop_id' => 1,

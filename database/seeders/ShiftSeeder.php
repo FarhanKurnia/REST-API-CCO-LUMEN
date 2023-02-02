@@ -15,14 +15,14 @@ class ShiftSeeder extends Seeder
     public function run()
     {
         DB::table('shifts')->insert([[
-            'id_shift'=> '1',
+            // 'id_shift'=> '1',
             'shift'=> '1',
             'mulai'=>'08:00',
             'selesai' => '17:00',
             'created_at' => Carbon::now(),
         ],
         [
-            'id_shift'=> '2',
+            // 'id_shift'=> '2',
             'shift'=> '2',
             'mulai'=>'16:30',
             'selesai' => '00:30',
