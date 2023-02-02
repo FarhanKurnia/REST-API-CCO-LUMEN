@@ -13,7 +13,7 @@ class NotifikasiReadSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('notifikasis')->insert(array(
+        DB::table('notifikasi__reads')->insert(array(
             array(
                 "id_notifikasiread" => 1,
                 "is_read" => true,
