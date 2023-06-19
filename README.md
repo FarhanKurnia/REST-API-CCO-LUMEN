@@ -5,7 +5,8 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 [![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 
-This REST-API was built using Lumen Framework for Customer care application. </br>
+<p>This project was created as a thesis research topic for graduation requirements. Created using the Lumen framework by implementing the SDLC waterfall method, REST API architecture, PostgreSQL for database, JWT Token for authentication and Pusher as a third party web socket. The things that have been done during the application development period, including: gathering requirements, designing UML and tables, implementing the design (coding), integrating third-party web sockets and the result is an endpoint that is consumed by the front-end.</p>
+
 Feature:
 1. User
     - Register User
@@ -97,33 +98,8 @@ Middleware:
 
 
 ------------------------------------------------------------------------
-## Endpoints
-#### User
-</br>`POST:http://localhost:8000/api/register`
-</br>`POST:http://localhost:8000/api/login`
-</br>`GET:http://localhost:8000/api/logout`
-</br>`GET:http://localhost:8000/api/update`
-
-
-#### BTS
-</br>`GET:http://localhost:8000/api/bts`
-</br>`POST:http://localhost:8000/api/bts`
-</br>`GET:http://localhost:8000/api/bts/{id}`
-</br>`DELETE:http://localhost:8000/api/bts/{id}`
-</br>`PUT:http://localhost:8000/api/bts/{id}`
-
-#### Keluhan
-</br>`GET:http://localhost:8000/api/keluhan`
-</br>`POST:http://localhost:8000/api/keluhan`
-</br>`GET:http://localhost:8000/api/keluhan/{id}`
-</br>`DELETE:http://localhost:8000/api/keluhan/{id}`
-</br>`PUT:http://localhost:8000/api/keluhan/{id}`
-
-#### Balasan
-</br>`GET:http://localhost:8000/api/balasan`
-</br>`GET:http://localhost:8000/api/balasan/{id}`
-</br>`POST:http://localhost:8000/api/balasan`
-
+## Documentation API
+API documentation can be accessed via https://documenter.getpostman.com/view/20083017/2s84DoRi5k
 
 ------------------------------------------------------------------------
 ## Implementations
